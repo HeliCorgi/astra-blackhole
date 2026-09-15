@@ -1,0 +1,12 @@
+{
+  "einstein_components_verified": true,
+  "kretschmann_contraction_verified": true,
+  "definition": "R^a_bcd and signature (-,+,+,+); metric computed directly.",
+  "G_mixed": [
+    "((-Derivative(b(t), t)**2 - 1)*a(t) - 2*b(t)*Derivative(a(t), t)*Derivative(b(t), t))/(a(t)*b(t)**2)",
+    "(-2*b(t)*Derivative(b(t), (t, 2)) - Derivative(b(t), t)**2 - 1)/b(t)**2",
+    "(-a(t)*Derivative(b(t), (t, 2)) - b(t)*Derivative(a(t), (t, 2)) - Derivative(a(t), t)*Derivative(b(t), t))/(a(t)*b(t))",
+    "(-a(t)*Derivative(b(t), (t, 2)) - b(t)*Derivative(a(t), (t, 2)) - Derivative(a(t), t)*Derivative(b(t), t))/(a(t)*b(t))"
+  ],
+  "K": "8*Derivative(b(t), (t, 2))**2/b(t)**2 + 4*Derivative(b(t), t)**4/b(t)**4 + 8*Derivative(b(t), t)**2/b(t)**4 + 4/b(t)**4 + 4*Derivative(a(t), (t, 2))**2/a(t)**2 + 8*Derivative(a(t), t)**2*Derivative(b(t), t)**2/(a(t)**2*b(t)**2)"
+}
