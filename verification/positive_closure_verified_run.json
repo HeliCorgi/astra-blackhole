@@ -1,0 +1,65 @@
+{
+  "date": "2026-09-16",
+  "verified_commit": "b64816410380ed3cd738a2e9683350990a684335",
+  "publication": {
+    "branch": "main",
+    "push_succeeded": true,
+    "force_push": false,
+    "pull_request_created": false,
+    "permission_observed": "Repository metadata reports push=true; Git object creation and main fast-forward succeeded.",
+    "prior_failure_note": "Earlier tool unavailability and CLI DNS failure did not demonstrate a repository permission denial. The historical record is retained separately."
+  },
+  "positive_closure_ci": {
+    "run_id": 35066283675,
+    "job_id": 104697195083,
+    "url": "https://github.com/HeliCorgi/astra-blackhole/actions/runs/35066283675",
+    "conclusion": "success",
+    "unit_tests": 48,
+    "scope": "Unit tests, all 90 conditions, both quadratures, generated structure and source fingerprints, archived aggregate regression with negative fixtures, plot generation and artifact retention reported success."
+  },
+  "other_ci": [
+    {
+      "name": "Minimal-state closure audit",
+      "run_id": 35066283656,
+      "job_id": 104697195033,
+      "conclusion": "success"
+    },
+    {
+      "name": "Classical research checks",
+      "run_id": 35066283785,
+      "job_id": 104697196371,
+      "conclusion": "success"
+    }
+  ],
+  "artifact": {
+    "id": 10434890495,
+    "name": "positive-angular-closure-b64816410380ed3cd738a2e9683350990a684335",
+    "size_in_bytes": 5617771,
+    "sha256": "f1613fbe48c452876a445d3a4dd4a7d95e1cb717f6243cc549aa02e1e6456d28",
+    "downloaded_and_sha256_verified": true,
+    "retention_expires_at": "2026-09-30T07:05:30Z"
+  },
+  "independent_artifact_comparison": {
+    "baseline": "Previously delivered astra_positive_closure_update.zip; full original per-row baseline, not newly generated answers.",
+    "baseline_archive_sha256": "1772c2d7baf3048cfc2f13818bdcf76bcb8ccc308e03c0cc3170a98341671ada",
+    "per_row_check": "Unchanged check_saved function passed: 450 rows, 11250 fields. Floats use rtol=5e-5 and atol=2e-8; nonnumeric fields including acceptance flags match exactly.",
+    "cases_numeric_fields": 4050,
+    "cases_exact_fields": 7200,
+    "maximum_absolute_numeric_field_difference": 4.5421444383464404e-12,
+    "reference_quality": "All 90 records compared: 540 numeric and 180 exact fields; same floating tolerance. Maximum absolute numeric field difference 1.4419354599226608e-11.",
+    "tail_diagnostics": "All 180 records compared: 360 numeric and 540 exact fields; same floating tolerance. Maximum absolute numeric field difference 3.774758283725532e-15.",
+    "protocol_values_match": true,
+    "numerical_source_sha256_match": true,
+    "aggregate_counts_and_acceptance_match": true,
+    "full_curves": "Retained in artifact, not individually compared during this publication check.",
+    "distinction": "Routine CI compares aggregates. This publication check separately downloaded and compared every saved result row; numerical differences are not certified physical error bounds."
+  },
+  "remote_environment": {
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1"
+  },
+  "lean": "Existing sources and axiom policy unchanged. No new Lean claims or proof run is asserted for this positive-closure dynamics.",
+  "license": "Apache-2.0; Copyright 2026 HeliCorgi. Existing LICENSE and NOTICE unchanged.",
+  "record_scope": "Evidence-only commit. Does not modify scientific source, protocol, numerical values, theorem statements, workflow or license. Same previously evaluated synthetic conditions; not a new scientific finding or real-world validation."
+}
