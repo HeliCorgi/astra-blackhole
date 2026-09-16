@@ -2,9 +2,22 @@
 
 曲率の短期予測と、平均化によって捨てられる物理状態の区別を調べる、再現可能な計算記録です。
 
-**現段階の結果は、既知の古典的モデル内の合成データによる試験です。実在するブラックホール内部の観測、特異点の解消、量子重力の完成、新しい自然法則の発見を主張しません。**
+**従来の物質研究は古典的モデル内の合成データによる試験です。追加したWDW研究も、時計と内積を限定した量子幾何学模型です。実在するブラックホール内部の観測、特異点の解消、量子重力の完成、新しい自然法則の発見を主張しません。**
 
-## 最新：同じ変数で正の角分布から補う比較
+## 追加：真空幾何学のWheeler–DeWitt量子化
+
+[模型・時計・結果・限界](docs/WDW_AUDIT_ja.md) / [数値結果](research/wdw_results/summary.json)
+
+既存の古典物質コードと別に、Kantowski–Sachs真空幾何学の一つの正周波数枝を実装しました。波束・古典点軌道・同じ初期Wigner分布の古典集団を比較しています。5状態の有限区間では半径の幾何平均は減少を続け、反転を示しませんでした。波束のx方向の反射は面積半径の反転ではありません。T=log(a)は固有時間でなく、量子曲率・特異点終端・時計や順序に依存しない結論は未検証です。
+
+```sh
+python research/run_wdw_audit.py --out artifacts/wdw --check-against research/wdw_results/summary.json
+python research/plot_wdw.py --results artifacts/wdw
+```
+
+新規の独立テストは15件。古典模型とLeanの既存ソースは変更していません。CIの成功状態は実行記録で確認してください。
+
+## 前回：同じ変数で正の角分布から補う比較
 
 [導出・失敗・限界](docs/POSITIVE_CLOSURE_AUDIT_ja.md) / [全450行はCI成果物](../../actions) / [要約](research/positive_closure_results/summary.json)
 
@@ -67,7 +80,7 @@ python predict_curvature.py example_input.json --method adaptive
 python reproduce.py --out artifacts
 ```
 
-`reproduce.py` は48件の単体テスト（従来33件＋正の閉包15件）、計量からの独立した幾何学検算、径方向・角方向の二つのEinstein–Vlasov監査と、今回の衝突RTA監査を実行します。過去の全研究の再学習・再実行ではありません。`--out` を指定すると今回の主結果を保存済みベースラインとも比較します。幾何学検算だけは従来どおり `research/results/symbolic_geometry.json` に書き込みます。
+`reproduce.py` は全単体テスト（従来48件とWDW用15件）、計量からの独立した幾何学検算、径方向・角方向の二つのEinstein–Vlasov監査と、今回の衝突RTA監査を実行します。過去の全研究の再学習・再実行ではありません。`--out` を指定すると今回の主結果を保存済みベースラインとも比較します。幾何学検算だけは従来どおり `research/results/symbolic_geometry.json` に書き込みます。
 
 グラフと軌道の配列は再生成します。
 

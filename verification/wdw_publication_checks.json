@@ -1,0 +1,18 @@
+{
+  "date": "2026-09-16",
+  "base_commit": "67239751890643be7d7c537a5ed9fec3c429f8f7",
+  "new_tests": 15,
+  "local_new_tests": "passed",
+  "local_full_previous_reproduce": "not rerun; existing scientific source unchanged",
+  "local_quantum_audit": "5 states, each main/refined/expanded domain; exact point and two classical Gaussian quadratures; bad-box control; all protocol thresholds passed",
+  "commands": [
+    "python -m unittest discover -s tests -p test_wdw_geometry.py -v",
+    "python research/run_wdw_audit.py --out artifacts/wdw"
+  ],
+  "main_run_seconds": 94.25616619199991,
+  "numerical_claim": "Method differences are not certified errors against the continuum or full quantum gravity. No areal-radius bounce detected in 121 samples; no quantum curvature operator computed.",
+  "test_correction": "Bitwise comparison of complex-exponential magnitudes failed at 7.9e-18 roundoff; use rtol=2e-14 atol=2e-17. No equation or main-audit threshold changed.",
+  "lean": "Unchanged; no new formal proof claimed",
+  "license": "Apache-2.0; Copyright 2026 HeliCorgi unchanged",
+  "publication": "Local evidence only. Remote push and CI success must be verified separately."
+}

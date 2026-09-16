@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "base_commit": "67239751890643be7d7c537a5ed9fec3c429f8f7",
+  "scope": "Vacuum Kantowski-Sachs minisuperspace, flat factor ordering, intrinsic T=log(a), positive-frequency square-root branch with L2(dx) inner product",
+  "status": "Fixed after finite-grid exploratory pilots; not externally preregistered or held out",
+  "x0": 2.0,
+  "p0": -1.0,
+  "h_values": [0.4, 0.2, 0.1],
+  "width_rule": "sigma=sqrt(h), both x and p uncertainty vanish in the h->0 family",
+  "phase_pair": {"h":0.2,"sigma":0.4,"chirps":[-0.5,0.5]},
+  "time_end": 6.0,
+  "time_samples": 121,
+  "grid": {"left":-4.0,"right":16.0,"dx":0.01},
+  "refinement_dx": 0.005,
+  "expanded_box": {"left":-5.0,"right":24.0,"dx":0.01},
+  "ensemble_orders": [96,144],
+  "thresholds": {"norm":1e-10,"energy":1e-10,"discrete_constraint":1e-8,"grid_mean_x":5e-5,"box_mean_x":3e-4,"box_variance":0.005,"ensemble_mean_x":0.002},
+  "negative_control": {"left":-4.0,"right":4.0,"dx":0.01},
+  "omissions": ["matter and previous RTA closures","spatial inhomogeneity","rotation","evaporation","alternative clocks/orderings","full quantum gravity error bounds","quantum curvature operator and inverse-radius moment convergence","singularity endpoint"],
+  "interpretation": "Geometric mean radius is exp(<log r>), not <r>, sqrt(<r^2>) or a probability of singularity avoidance. h is a dimensionless quantum/classical scaling parameter, not an inferred physical value of Planck's constant. Gaussian classical Wigner controls do not make these quantum effects uniquely identifiable."
+}
