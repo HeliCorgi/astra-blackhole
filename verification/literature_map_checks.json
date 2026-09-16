@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "comparison_commit": "2d309769ca155617f95cd399b0844a382c4556d0",
+  "sympy_version": "1.14.0",
+  "passed_checks": 15,
+  "checks": [
+    {
+      "name": "LDO2009_Eq4_to_repo_WDW",
+      "passed": true,
+      "residual": "0"
+    },
+    {
+      "name": "Chiba_chain_rule",
+      "passed": true,
+      "residual": "0"
+    },
+    {
+      "name": "Chiba_mixed_derivative_coefficient",
+      "passed": true,
+      "residual": "0"
+    },
+    {
+      "name": "Chiba_Eq14_parameter_normalization",
+      "passed": true,
+      "residual": "0"
+    },
+    {
+      "name": "wrong_kappa_negative_control",
+      "passed": true,
+      "nonzero_residual": "-3/h**2"
+    },
+    {
+      "name": "areal_radius_mapping",
+      "passed": true,
+      "residual": "0"
+    },
+    {
+      "name": "radial_scale_mapping",
+      "passed": true,
+      "residual": "0"
+    },
+    {
+      "name": "minisuperspace_clock_is_boost_like",
+      "passed": true,
+      "residual": "0"
+    },
+    {
+      "name": "minisuperspace_metric_pullback",
+      "passed": true,
+      "residual": "zero 2x2 matrix"
+    },
+    {
+      "name": "same_clock_KG_to_L2_finite_modes",
+      "passed": true,
+      "residual": "0"
+    },
+    {
+      "name": "same_wavefunction_norms_not_identical",
+      "passed": true
+    },
+    {
+      "name": "CHS2023_energy_integrated_entropy_ansatz",
+      "passed": true,
+      "residual": "0"
+    },
+    {
+      "name": "thermal_ME_log_curvature",
+      "passed": true,
+      "residual": "0"
+    },
+    {
+      "name": "angular_exponential_not_thermal_ME",
+      "passed": true,
+      "difference": "d2(log I)/d(mu^2)^2 = 4*b^2/(a+b*mu^2)^2, not zero for b != 0"
+    },
+    {
+      "name": "conditional_threshold_integral_leading_term",
+      "passed": true,
+      "residual": "0"
+    }
+  ],
+  "scope": "Finite symbolic identities and negative controls only. No Lean proof, PDE simulation, spectral remainder estimate, Hilbert-space equivalence or empirical test."
+}

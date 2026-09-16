@@ -1,0 +1,107 @@
+{
+  "schema": 1,
+  "date": "2026-09-16",
+  "repository": "HeliCorgi/astra-blackhole",
+  "comparison_commit": "2d309769ca155617f95cd399b0844a382c4556d0",
+  "sources": [
+    {
+      "id": "LDO2009",
+      "identifier": "0910.4408v1",
+      "url": "https://arxiv.org/abs/0910.4408",
+      "locators": "section II, equations (3)-(4)",
+      "access": "relevant full-text equations",
+      "comparison_scope": "ordinary vacuum KS-WDW; no supersymmetric correction adopted"
+    },
+    {
+      "id": "CMM2026",
+      "identifier": "2510.13175v2",
+      "url": "https://arxiv.org/html/2510.13175v2",
+      "locators": "equations (1),(14),(27),(29)-(33)",
+      "access": "relevant full-text equations and limitations",
+      "comparison_scope": "local k=1 Lambda=0 operator correspondence, not physical Hilbert-space equivalence"
+    },
+    {
+      "id": "CS2010",
+      "identifier": "1006.3837v3",
+      "url": "https://arxiv.org/html/1006.3837v3",
+      "locators": "equations (42),(50),(78f),(81); section V.4",
+      "access": "relevant full-text definitions",
+      "comparison_scope": "FLRW scalar-clock model; one-time and history probabilities differ"
+    },
+    {
+      "id": "SN2024",
+      "identifier": "10.1016/j.aop.2024.169719",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0003491624001271",
+      "locators": "publisher abstract and public overview only",
+      "access": "abstract-only; detailed operator not obtained",
+      "comparison_scope": "no full-equation or curvature-operator match claimed"
+    },
+    {
+      "id": "H1998",
+      "identifier": "quant-ph/9809030v1",
+      "url": "https://arxiv.org/html/quant-ph/9809030v1",
+      "locators": "sections 2-3, theorems 1-2",
+      "access": "relevant full-text theorem statements",
+      "comparison_scope": "no specific power tail or curvature-divergence conclusion follows"
+    },
+    {
+      "id": "B2014",
+      "identifier": "1410.5776v2",
+      "url": "https://arxiv.org/html/1410.5776v2",
+      "locators": "section II.2-II.3; equations (17)-(32)",
+      "access": "relevant full-text equations and comparison proposal",
+      "comparison_scope": "classical-point/classical-ensemble/quantum comparison already proposed"
+    },
+    {
+      "id": "CHS2023",
+      "identifier": "2307.10769v2",
+      "url": "https://arxiv.org/html/2307.10769v2",
+      "locators": "section II.4 equations (27)-(29); appendix A",
+      "access": "relevant full-text equations and appendix discussion",
+      "comparison_scope": "full momentum entropy differs from our angular entropy"
+    },
+    {
+      "id": "GMP2020",
+      "identifier": "2005.05357v3",
+      "url": "https://arxiv.org/abs/2005.05357",
+      "locators": "abstract only",
+      "access": "supplemental abstract-only",
+      "comparison_scope": "background on clock dependence, not a proof about this repository"
+    }
+  ],
+  "claims": [
+    {
+      "id": "WDW-local-operator",
+      "status": "algebra_checked",
+      "statement": "Our constraint equals the CMM2026 k=1 Lambda=0 differential operator multiplied by h^2 exp(-2x)/4 under U=-exp(-x-tau)/4, V=exp(-x+tau)/4, kappa=h/2 in matched coordinate units."
+    },
+    {
+      "id": "WDW-physical-equivalence",
+      "status": "not_established",
+      "statement": "Clock, positive-frequency selection, inner product, state data, global domain and observables are not identified by the operator transformation alone."
+    },
+    {
+      "id": "curvature-domain",
+      "status": "scope_correction",
+      "statement": "Current main computes inverse-radius and intrinsic-sphere diagnostics, not a full 4D Kretschmann operator. Continuum divergence depends on asymptotic assumptions; the uniform remainder bound is absent."
+    },
+    {
+      "id": "entropy-ansatz",
+      "status": "algebra_checked",
+      "statement": "Classical massless specialization of CHS2023 full-momentum ansatz integrates to I proportional to (a+b mu^2)^-4, unlike our exponential angular ansatz."
+    },
+    {
+      "id": "prior-known-question",
+      "status": "prior_work_found",
+      "statement": "CHS2023 appendix A matches initial macroscopic quantities while varying distribution shape; Brizuela2014 explicitly proposes the same three-way classical/quantum comparison strategy."
+    },
+    {
+      "id": "novelty",
+      "status": "unestablished",
+      "statement": "Failure to find an exactly identical threshold coefficient and regulator audit is not evidence of originality."
+    }
+  ],
+  "numerical_reexecution": "No old dynamics simulation rerun in this audit.",
+  "formal_verification": "15 SymPy algebra checks only; no new Lean proof.",
+  "scope": "Source and convention concordance, not independent peer review or empirical validation."
+}

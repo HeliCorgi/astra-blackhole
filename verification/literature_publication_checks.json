@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "date": "2026-09-16",
+  "comparison_commit": "2d309769ca155617f95cd399b0844a382c4556d0",
+  "operation": "Literature-definition audit; no scientific model or earlier numerical results changed.",
+  "executed": [
+    {
+      "command": "python tools/check_literature_maps.py --out artifacts/literature_maps.json",
+      "exit_code": 0,
+      "checks_passed": 15
+    },
+    {
+      "command": "python -m py_compile tools/check_literature_maps.py",
+      "exit_code": 0
+    }
+  ],
+  "not_executed": [
+    "Historical dynamics simulations",
+    "Full numerical regression suite",
+    "Lean build",
+    "Independent peer review"
+  ],
+  "source_review": "Six main papers inspected at relevant full-text equations/sections; one close paper only abstract/overview; one supplementary clock paper only abstract.",
+  "known_access_gap": "Annals of Physics 468 (2024) 169719: no full curvature-operator comparison available.",
+  "initial_checker_failure": "Equivalent hyperbolic/exponential expressions were not simplified to zero. Canonicalized to exponential form without altering the claimed identities, then all checks passed.",
+  "sha256": {
+    "docs/LITERATURE_CONCORDANCE_ja.md": "245492aba90b4c78acb01b5d491ad9eb21ba88e6ece09d5d9b39e54d9fd387ef",
+    "docs/literature_sources.json": "3b016216a821acee12b17b7b4f75b6bcef728e7249d32e00570973c9ecd573cb",
+    "tools/check_literature_maps.py": "9edab289c2607126a82eeaa2588dd770231fc56332763cbb176cccdf9a0b9b1a",
+    "verification/literature_map_checks.json": "469441e0e407f8bb8429bfdbc6a4f118dba571a810ef42f5e5175d9c59cfc960"
+  },
+  "ci_status": "This is a local check record, not a GitHub Actions success claim."
+}
