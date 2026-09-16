@@ -8,7 +8,7 @@
     "fraction_identities": "passed for P4, P6, P8",
     "sympy_coefficient_identity": "passed against Legendre polynomials P4/P6/P8",
     "workflow_yaml_and_lake_toml": "parsed",
-    "axiom_report_parser": "accepted synthetic empty-axiom fixture and rejected synthetic forbidden/missing/duplicate fixtures; not a Lean proof result",
+    "axiom_report_parser": "one expected mapping accepted; nine invalid synthetic fixtures rejected; not a Lean proof result",
     "local_lean_compilation": "not run: Lean absent and container cannot resolve github.com",
     "classical_full_reproduction": "not rerun for this infrastructure-only change"
   },
@@ -33,6 +33,20 @@
       "lean_build": "success: all three project modules compiled",
       "cause": "The empty-axiom guard rejected propext dependencies introduced by the six by-decide certificates. The two observability lemmas had no axiom dependencies.",
       "fix": "Keep every theorem statement and the empty-axiom guard unchanged. Replace decidable-equality proof terms by direct definitional-equality proofs (rfl and conjunction constructors)."
+    },
+    {
+      "commit": "80a74df2f061c113a4776b4c4f8203fb264d3f24",
+      "run_id": 35046171651,
+      "job_id": 104636346316,
+      "conclusion": "failure",
+      "lean_build": "success: rfl proof terms compiled for all finite certificates",
+      "cause": "The same six propext dependencies remained under rfl. Attribution solely to by-decide in the preceding diagnosis was insufficient.",
+      "fix": "Correct the previously overstrict goal: declare only standard propext for six rational theorems, no axioms for two observation lemmas. Preserve all theorem statements and disallow any other dependency; add nine negative parser tests.",
+      "not_claimed": "Axiom-free arithmetic certificates."
     }
-  ]
+  ],
+  "axiom_policy": {
+    "finite_rational_theorems": ["propext"],
+    "observation_lemmas": []
+  }
 }

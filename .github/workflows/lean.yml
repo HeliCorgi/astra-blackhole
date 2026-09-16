@@ -25,7 +25,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Check finite rational certificates independently
-        run: python3 tools/check_lean_certificates.py
+        run: python3 tools/check_lean_certificates.py --self-test
       - name: Install pinned Lean and build certificates
         uses: leanprover/lean-action@50fcf42d2e460296f1a34b402e990d1b24f8b596 # v1
         with:

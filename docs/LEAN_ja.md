@@ -13,7 +13,7 @@ lake build
 lake env lean -DwarningAsError=true Audit.lean
 ```
 
-`lake build` の標準ターゲットは `AstraBlackhole`。`lean-toolchain` からバージョンが選ばれる。`Audit.lean` は8定理の依存公理を出力する。CIはその出力が全件、公理依存なしであることを確認する。証明穴、独自の公理、`native_decide` は使用しない。
+`lake build` の標準ターゲットは `AstraBlackhole`。`lean-toolchain` からバージョンが選ばれる。`Audit.lean` は8定理の依存公理を出力する。CIは6件の有限演算定理には標準公理 `propext` のみ、2件の観測補題には公理依存なし、という明示的な依存表を検査する。証明穴、独自の公理、`native_decide` は使用しない。
 
 ## 追加した証明ソース
 
@@ -53,3 +53,11 @@ PythonのFractionによる独立検算、Leanビルド、依存公理検査を�
 - 固定したLean Action: https://github.com/leanprover/lean-action/tree/50fcf42d2e460296f1a34b402e990d1b24f8b596
 
 数値計算の再現性、有限数学の証明、自然界での妥当性は別々の主張である。
+
+## 初期CIで見つかった設定の訂正
+
+最初のCIはマニフェスト不足でビルド前に停止した。マニフェスト追加後、8定理はコンパイルされたが、6定理について `propext` への依存が報告された。証明項を `by decide` から `rfl` に変更してもこの依存は残った。そのため、先の記録にある「by-decideが原因」という推定は不十分だった。定理の型・定義の推移的な依存も対象になるため、反射律を使うだけでは公理非依存とは言えない。
+
+完全な公理非依存という当初の目標を訂正し、6件だけにLean標準の命題外延性 `propext` を明示的に許可する。これは論理的に同値な命題を等しいと扱う標準の基礎公理であり、物理仮説ではない。ただし公理依存なしとは呼ばない。任意の新公理、証明穴、native実行を信頼する公理を許可したものではない。依存表が変わればCIは失敗する。欠落・重複・禁止公理を含む合成ログを使った9つの負例も検査する。
+
+公式説明: https://lean-lang.org/theorem_proving_in_lean4/Axioms-and-Computation/
