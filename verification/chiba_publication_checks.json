@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "base_commit": "7bb964af4a798278c8b98804322bb7361c1bfb31",
+  "scope": "Published-equation reproduction of k=1, Lambda=0, not raw-author-data validation or new quantum model.",
+  "local_tests": 15,
+  "local_tests_passed": true,
+  "full_four_parameter_audit_passed": true,
+  "selected_observable_regression_passed": true,
+  "not_rerun_locally": [
+    "historical full classical suites",
+    "Lean"
+  ],
+  "first_run_failure": "Two fixed accuracy thresholds failed; refined grids and equivalent integration-by-parts derivative, without loosening thresholds.",
+  "first_run_summary_sha256": "3d148f04a59bfee32068bfa66bdeac84a572817b6b0816950a5a3ce73d36d5ea",
+  "execution_note": "An attempt to run the main and repetition commands in one 45-second tool invocation timed out during the second run. The repetition was then restarted alone and completed with exit code 0.",
+  "ci": "Not yet run for this new commit at record creation. No CI success claimed.",
+  "sources": {
+    ".github/workflows/chiba-reproduction.yml": "599aec19b69dab90afdac704de124e2bf29956debff126b17744b367d7559755",
+    "README.md": "40f91e84e75af60888d2149f2d6811e2517ad2443e6fb9657c8b0c6b96eb04c4",
+    "docs/CHIBA_REPRODUCTION_ja.md": "d623c50c601c712401d2946dc237bb97c3ce64aacf4f2f9e9ffcc6f02bf6dd86",
+    "docs/ROADMAP_ja.md": "3952824a200cc63b43faef0102116d7607028ea393a5d328006d2cd633d27663",
+    "research/chiba_model.py": "11026a299fb67bec45f8fae4d8d2886237bb3b6f88522efd053c5217b0e8a517",
+    "research/chiba_protocol.json": "9a76435b1f5c51eb6470c8de5219aaab163371af29062478ed100f434a5e1654",
+    "research/chiba_results/summary.json": "be935ed950b9955f4137a5dbf6ae29f10191ba00ce714e7030c9d27bef2f4e15",
+    "research/plot_chiba_reproduction.py": "1733da276b140d92e53f45efeab1d23f6d05cedc15d65dac3e620e115ff1a64c",
+    "research/run_chiba_reproduction.py": "0880a1f0442b9b1ac549a4d398ac39c0ed867e5b3496962414697ffce3ec4aec",
+    "tests/test_chiba_reproduction.py": "aa9b097d5d1bb8055e48bf61856c688f4e838b747ff9137cd006f5fb0bf7c08b"
+  }
+}

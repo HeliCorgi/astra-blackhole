@@ -4,6 +4,15 @@
 
 **従来の物質研究は古典的モデル内の合成データによる試験です。追加したWDW研究も、時計と内積を限定した量子幾何学模型です。実在するブラックホール内部の観測、特異点の解消、量子重力の完成、新しい自然法則の発見を主張しません。**
 
+## 文献再現：同じ初期状態・時計・内積で比較
+
+[ChibaらのSchwarzschildセクターを再計算](docs/CHIBA_REPRODUCTION_ja.md)。同じGaussian境界データとKG期待値で、κ=.01,.05,.1,1の四条件を二つの数値法で照合しました。同じ解・同じ切片を以前の座標へ移すとKG流束と期待値は一致します。一方、スカラー解を以前のL2(dx)状態と同一視できない定数の裾を確認しました。原著の数値列との点ごとの再現、特異点回避の証明ではありません。
+
+```sh
+python research/run_chiba_reproduction.py --out artifacts/chiba --check-against research/chiba_results/summary.json
+python research/plot_chiba_reproduction.py --results artifacts/chiba
+```
+
 ## 最新：波束の裾と曲率関連量の期待値
 
 [導出と4次元曲率との区別](docs/WDW_TAIL_AUDIT_ja.md) / [数値要約](research/wdw_tail_results/summary.json)
