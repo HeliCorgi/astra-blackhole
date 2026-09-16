@@ -24,6 +24,15 @@
       "lean_installation": "success: Lean 4.19.0 and Lake 5.0.0 installed",
       "cause": "Lean Action configuration requires lake-manifest.json even with auto-config=false; no theorem was compiled.",
       "fix": "Track an empty-package Lake manifest using the 1.1.0 schema supported by the pinned toolchain; remove the manifest ignore rule."
+    },
+    {
+      "commit": "9bd404e8ad7bc672523a70cd39cfa61e9a3ee59d",
+      "run_id": 35045919729,
+      "job_id": 104635583517,
+      "conclusion": "failure",
+      "lean_build": "success: all three project modules compiled",
+      "cause": "The empty-axiom guard rejected propext dependencies introduced by the six by-decide certificates. The two observability lemmas had no axiom dependencies.",
+      "fix": "Keep every theorem statement and the empty-axiom guard unchanged. Replace decidable-equality proof terms by direct definitional-equality proofs (rfl and conjunction constructors)."
     }
   ]
 }
