@@ -26,10 +26,12 @@ jobs:
           cache: pip
       - name: Install numerical dependencies
         run: python -m pip install -r requirements.txt
-      - name: Unit tests, exact algebra, geometry, and both state audits
+      - name: Unit tests, exact algebra, geometry, and all three state audits
         run: python reproduce.py --out artifacts
       - name: Regenerate angular plots
-        run: python research/plot_angular.py --results artifacts/angular
+        run: |
+          python research/plot_angular.py --results artifacts/angular
+          python research/plot_collision.py --results artifacts/collision
       - name: Retain results, including failures when available
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

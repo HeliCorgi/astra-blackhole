@@ -15,11 +15,13 @@ def main():
               [sys.executable,'research/verify_geometry.py']]
     radial=[sys.executable,'research/run_research.py']
     angular=[sys.executable,'research/run_angular_audit.py']
+    collision=[sys.executable,'research/run_collision_audit.py']
     if args.out:
         out=args.out.resolve()
         radial+=['--out',str(out/'radial')]
         angular+=['--out',str(out/'angular'),'--check-against',str(root/'research/angular_results/results.json')]
-    commands += [radial,angular]
+        collision+=['--out',str(out/'collision'),'--check-against',str(root/'research/collision_results/results.json')]
+    commands += [radial,angular,collision]
     if args.with_legacy:commands.append([sys.executable,'verify_predictors.py'])
     for command in commands:subprocess.run(command,cwd=root,env=env,check=True)
     print('Requested checks completed. Historical full suites were not rerun.')

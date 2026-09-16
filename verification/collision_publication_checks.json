@@ -1,0 +1,33 @@
+{
+  "date": "2026-09-16",
+  "base_commit": "09535b1429ca5f301da53300d2a565cd12dad8be",
+  "local_reproduction": {
+    "command": "python reproduce.py --out /mnt/data/astra_collision_artifacts",
+    "status": "passed",
+    "unit_tests": 21,
+    "new_unit_tests": 10,
+    "scope": "Geometry, original radial and angular audits, new 42-trajectory RTA audit with 84 numerical comparisons, 6 collisionless reference comparisons, exact algebra and saved-baseline checks. Historical neural training not rerun."
+  },
+  "max_numerical_comparison_K_relative": 2.9364166653778057e-10,
+  "max_sampled_brightness_difference_over_rho": 5.5680734687913405e-06,
+  "min_sampled_brightness_over_rho": 0.0025194204289981405,
+  "negative_result": "lmax=32/48 could yield negative angular brightness despite converged K. Main resolution raised to 128. Three tiny pair gaps are below empirical resolution and not counted as detections.",
+  "lean": "Existing Lean sources, theorem statements and axiom policy are unchanged. New collision dynamics and exact SymPy identities are NOT formally verified in Lean.",
+  "ci": "Local record written before publication. Remote CI result must be checked separately.",
+  "license": "Apache-2.0; Copyright 2026 HeliCorgi; existing LICENSE and NOTICE unchanged",
+  "limits": "Massless, classical, spatially homogeneous, constant momentum-independent RTA. No binary collision integral, two-particle correlations, quantum effects, rotation, evaporation, exterior matching, or endpoint solution.",
+  "files_sha256": {
+    "research/collision_model.py": "44508264bdfcd77e84f0f57c0feaecc2629ba573337727c316c93414bf706af9",
+    "research/run_collision_audit.py": "37eaa5c2969d98419a7c41efb107c5c8cdf5059c2ec6d57fd8d6212b548db1cf",
+    "research/collision_protocol.json": "c65e676ad2b41969786c26d6f6e49bd9542c68d375d10f977d3b82e083c24ff6",
+    "research/plot_collision.py": "eebc208e64e249af20ccce401a36cd18e119ddc76425c0053841a270be61317f",
+    "research/collision_results/results.json": "dac50bb040c593c6b73454ffb20bad2e24ff7b2d0c7a384103ac3c7fb8125d10",
+    "tests/test_collision_states.py": "9907c60f45e7281fe4fa3db19d62be1d0c68332a6d4c812af298c9b760c51fed",
+    "docs/COLLISION_AUDIT_ja.md": "749d2752f1dd211784c29a69c57e0dd614d6c1bd8c14ddcc4c4daf04f1c0c2ae",
+    "README.md": "33b2f156d6f233f38b64a3fbaf92a9f904008e271a19737a1333faedb4618b9c",
+    "docs/ROADMAP_ja.md": "0ed494532bd8abe17f7358bba68a47b43c2d19c78898a507123cd914cf8e843f",
+    "reproduce.py": "d4569f54d0d88b0c000e933e2655e78a6eff109f7f4cddb9080d82b580d4f457",
+    ".github/workflows/research.yml": "3e6cd07bc584455f1d36f0adddf03eac821f7c414ee8f7c20aee99db1f7c25b6"
+  },
+  "result_storage": "Committed JSON summarizes all 21 settings and both endpoints; full per-sign observations/diagnostics and sampled curves are regenerated and retained in CI artifacts."
+}
