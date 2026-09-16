@@ -1,0 +1,31 @@
+{
+  "date": "2026-09-16",
+  "verified_commit": "eda334ac4e50868027ff807b2b17b4840d21d336",
+  "lean": {
+    "run_id": 35046453118,
+    "job_id": 104637201975,
+    "url": "https://github.com/HeliCorgi/astra-blackhole/actions/runs/35046453118",
+    "conclusion": "success",
+    "version": "Lean 4.19.0, x86_64-unknown-linux-gnu, commit 6caaee842e94, Release",
+    "build": "All project modules compiled successfully on GitHub Actions.",
+    "declarations": 8,
+    "axiom_policy": "Six finite rational theorems depend only on standard propext; two observation lemmas have no axiom dependencies. These are not all axiom-free.",
+    "guard_tests": "Independent Fraction checks and nine negative axiom-parser fixtures passed.",
+    "artifact_id": 10426913448,
+    "artifact_sha256": "3d02d371dd3302598fb82252d1cee09fbe2b69eaf22cf9940985830a5e0b2f0d",
+    "artifact_check": "Downloaded through the GitHub connector, verified ZIP SHA-256, read version.txt and axioms.txt, and reran the axiom-policy checker locally.",
+    "preserved_axiom_report": "lean_verified_axioms.txt"
+  },
+  "classical_ci": {
+    "run_id": 35046453129,
+    "job_id": 104637202156,
+    "url": "https://github.com/HeliCorgi/astra-blackhole/actions/runs/35046453129",
+    "conclusion": "success",
+    "steps": "Tests, exact algebra, geometry, both state audits, angular plots, and artifact retention all reported success."
+  },
+  "license": "Apache-2.0",
+  "copyright": "Copyright 2026 HeliCorgi",
+  "scope": "Finite rational certificates and generic deterministic-observation lemmas. Real integrals, Legendre theory in general, curvature evolution, gravity equations and physical validity are not formalized.",
+  "history": "Earlier failed CI attempts and corrected diagnoses are preserved in license_lean_setup.json and docs/LEAN_ja.md.",
+  "record_commit": "This documentation-only record does not change the verified source, workflow, theorem statements, dependency policy or numerical results."
+}

@@ -1,0 +1,8 @@
+'AstraBlackhole.p4_low_moments' depends on axioms: [propext]
+'AstraBlackhole.p4_first_visible' depends on axioms: [propext]
+'AstraBlackhole.p6_low_moments' depends on axioms: [propext]
+'AstraBlackhole.p6_first_visible' depends on axioms: [propext]
+'AstraBlackhole.p8_low_moments' depends on axioms: [propext]
+'AstraBlackhole.p8_first_visible' depends on axioms: [propext]
+'AstraBlackhole.equal_observations_equal_predictions' does not depend on any axioms
+'AstraBlackhole.no_exact_forecast_for_distinct_futures' does not depend on any axioms
