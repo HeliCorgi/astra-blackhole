@@ -14,3 +14,9 @@ venv/
 verification/local_*
 artifacts/
 research/angular_results/curves.json
+
+# Lean generated build output
+.lake/
+*.olean
+*.ilean
+lean/lake-manifest.json

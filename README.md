@@ -16,6 +16,7 @@
 - [初回公開の検証範囲](verification/publication_checks.json) / [今回](verification/angular_publication_checks.json)
 - [研究段階と次の課題](docs/ROADMAP_ja.md)
 - [GitHub Actions](../../actions)
+- [Lean環境・証明の範囲](docs/LEAN_ja.md)
 
 ## 最短の実行
 
@@ -65,7 +66,7 @@ python research/plot_angular.py
 
 **各行は別の状態対です。最後の列は予測誤差ではありません。** 指定した低次の初期情報では当て分けられない反例であり、精密な過去履歴を含む全観測が同じという主張ではありません。
 
-両監査は一様なKantowski–Sachs Einstein–Vlasov系です。量子相関・衝突・蒸発・回転・外部接続は含みません。GitHub Actionsは再現性を検査するもので、自然界での正しさの保証ではありません。Leanは未使用です。
+両監査は一様なKantowski–Sachs Einstein–Vlasov系です。量子相関・衝突・蒸発・回転・外部接続は含みません。GitHub Actionsは再現性を検査するもので、自然界での正しさの保証ではありません。Leanの小規模な証明ソースと独立CIを追加しました。対象は有限有理数恒等式と観測の区別に関する補題であり、重力モデル全体の形式証明ではありません。実際のビルド状況はActionsで確認してください。
 
 ## 過去の保存版とニューラル予測器
 
@@ -82,4 +83,21 @@ python verify_predictors.py
 
 復元ツールは元ZIPのSHA-256を照合し、変更済みファイルを上書きしません。ニューラル版は元のLTBモデル単位で過去[-0.30,0]の41点を要求し、未来[0.10,0.20,0.30,0.40]を出力します。現在の対数曲率の微分も必要です。別のモデルや実測への有効性は未検証です。
 
-詳しい来歴と初回公開時の変更点は [PROVENANCE.json](PROVENANCE.json) に記録しています。MITライセンスは初期リポジトリのものを保持しています。
+詳しい来歴と初回公開時の変更点は [PROVENANCE.json](PROVENANCE.json) に記録しています。初回公開時のMIT表記は歴史的な記録です。現行ライセンスは次のとおりです。
+
+## ライセンス
+
+**Apache License 2.0 — Copyright 2026 HeliCorgi**
+
+[LICENSE](LICENSE) / [NOTICE](NOTICE) / [変更記録](docs/LICENSE_HISTORY_ja.md)
+
+## Leanによる小規模な証明検査
+
+```sh
+python3 tools/check_lean_certificates.py
+cd lean
+lake build
+lake env lean -DwarningAsError=true Audit.lean
+```
+
+Lean 4.19.0に固定し、Mathlibはまだ使いません。Pythonの有理数検算だけではLeanのビルド成功を意味しません。証明対象と未形式化部分は[Leanノート](docs/LEAN_ja.md)を参照してください。

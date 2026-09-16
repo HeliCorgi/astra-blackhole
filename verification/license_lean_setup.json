@@ -1,0 +1,18 @@
+{
+  "date": "2026-09-16",
+  "base_commit": "b667c848611ba56b9b4bf7e341d81e18f5082ab4",
+  "license": "Apache-2.0",
+  "copyright": "Copyright 2026 HeliCorgi",
+  "scope": "License/documentation and separate Lean verification infrastructure. Scientific simulation sources and results unchanged.",
+  "local_checks": {
+    "fraction_identities": "passed for P4, P6, P8",
+    "sympy_coefficient_identity": "passed against Legendre polynomials P4/P6/P8",
+    "workflow_yaml_and_lake_toml": "parsed",
+    "axiom_report_parser": "accepted synthetic empty-axiom fixture and rejected synthetic forbidden/missing/duplicate fixtures; not a Lean proof result",
+    "local_lean_compilation": "not run: Lean absent and container cannot resolve github.com",
+    "classical_full_reproduction": "not rerun for this infrastructure-only change"
+  },
+  "lean_toolchain": "leanprover/lean4:v4.19.0",
+  "ci": "Configured to build and audit all eight declarations; actual status must be read from GitHub Actions.",
+  "formal_scope": "Finite rational arithmetic plus deterministic-observation lemmas only. Real integration, curvature evolution, model validity are not formalized."
+}

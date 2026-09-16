@@ -1,0 +1,7 @@
+name = "astra_blackhole"
+version = "0.1.0"
+defaultTargets = ["AstraBlackhole"]
+
+[[lean_lib]]
+name = "AstraBlackhole"
+moreLeanArgs = ["-DwarningAsError=true"]
