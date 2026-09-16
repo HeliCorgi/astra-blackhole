@@ -1,0 +1,44 @@
+{
+  "date": "2026-09-16",
+  "verified_commit": "60815861123a8645bb6cfe7e8121a668857ca904",
+  "closure_ci": {
+    "run_id": 35058583643,
+    "job_id": 104673863814,
+    "conclusion": "success",
+    "url": "https://github.com/HeliCorgi/astra-blackhole/actions/runs/35058583643"
+  },
+  "classical_ci": {
+    "run_id": 35058583640,
+    "job_id": 104673863784,
+    "conclusion": "success",
+    "url": "https://github.com/HeliCorgi/astra-blackhole/actions/runs/35058583640",
+    "scope": "Full unit-test discovery and all three previous audits, plots and artifacts succeeded."
+  },
+  "artifact": {
+    "id": 10431323391,
+    "sha256": "e60c13c9b9976e81d242a92e541f3d8a0501da063906a2ba559759f2f8abd379",
+    "scope": "Downloaded through connector; ZIP integrity, all 270 detailed closure rows, decision flags, 90 reference validations, protocol and scientific source hashes checked locally."
+  },
+  "new_unit_tests": 12,
+  "total_unit_tests": 33,
+  "fixed_cases": 90,
+  "reference_trajectories": 180,
+  "reduced_trajectories": 270,
+  "all_per_case_decisions_equal": true,
+  "all_recorded_csv_fields_equal": true,
+  "maximum_absolute_difference_by_field": {},
+  "comparison_tolerances": {
+    "rtol": 2e-05,
+    "atol": 2e-09
+  },
+  "remote_environment": {
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1"
+  },
+  "regression_scope": "This publication check compares individual rows as well. The recurring CI baseline check compares only stored aggregates; detailed rows are retained in artifacts.",
+  "lean": "Existing sources, toolchain and axiom policy unchanged. New closure dynamics are not Lean formalized.",
+  "license": "Apache-2.0; Copyright 2026 HeliCorgi; owner LICENSE edit preserved.",
+  "limitations": "Finite-interval homogeneous massless constant-rate classical RTA benchmark. No observed black-hole validation, universal minimum number of states, or proof of continuum positivity.",
+  "record_scope": "Evidence only; no changes to scientific code, protocol, results, workflows or licenses."
+}
