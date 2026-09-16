@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "base_commit": "ebca47606af7a808179ae802760ebc5db1af6511",
+  "status": "Exploratory protocol fixed after a small h=0.2 pilot, before the full comparison; not preregistered or held-out validation.",
+  "model": "Unchanged vacuum KS WDW positive-frequency branch, intrinsic T=log(a), L2(dx) inner product",
+  "observable": "Pr(r/r_ref < eta) = Pr(x > x0-T-log(eta)); sphere scalar S=2/r^2. NOT full 4D Kretschmann.",
+  "packets": [
+    {"id":"h04","h":0.4,"sigma":0.6324555320336759,"chirp":0.0},
+    {"id":"h02","h":0.2,"sigma":0.4472135954999579,"chirp":0.0},
+    {"id":"h01","h":0.1,"sigma":0.31622776601683794,"chirp":0.0},
+    {"id":"chirp_plus","h":0.2,"sigma":0.4,"chirp":0.5},
+    {"id":"chirp_minus","h":0.2,"sigma":0.4,"chirp":-0.5}
+  ],
+  "grids": [
+    {"id":"main","left":-4.0,"right":64.0,"dx":0.025},
+    {"id":"refined","left":-4.0,"right":64.0,"dx":0.0125},
+    {"id":"expanded","left":-4.0,"right":128.0,"dx":0.025},
+    {"id":"left_shift","left":-5.0,"right":64.0,"dx":0.025}
+  ],
+  "times":[0,0.001,0.5,1,2,4,6],
+  "radius_ratios":[1,0.1,0.01,0.001,0.0001,0.000001,0.00000001],
+  "radius_quantile_probabilities":[0.01,0.05,0.5,0.95,0.99],
+  "tail_probe_x":[8,12,16,24,32,48],
+  "probability_absolute_tolerance":0.0001,
+  "rare_relative_tolerance":0.02,
+  "probability_floor":1e-12,
+  "quantile_log_tolerance":0.001,
+  "negative_control":{"left":-4.0,"right":4.0,"dx":0.025,"packet":"h02"},
+  "interpolation":"Piecewise-linear nonnegative density with zero wall values; exact subcell integrals; no renormalization",
+  "classical_control":"Independent 1D conditional-Gaussian adaptive integral of same initial positive Wigner ensemble; refinement epsabs and epsrel",
+  "scope":"Finite set of states, clock times and thresholds. Empirical regulator comparison, not a certified continuum error bound or prediction for nature.",
+  "no_changes":["Hamiltonian","clock","initial packets","wavefunction tails","existing scientific files","Lean","license files"]
+}
