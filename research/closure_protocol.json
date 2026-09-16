@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "status": "Fixed before this audit was run; not externally preregistered.",
+  "base_commit": "41895e830831b9a285d49b77e0833469d271e2bb",
+  "model": "Homogeneous massless classical Kantowski-Sachs constant-rate RTA; c=8*pi*G=1",
+  "closures": {"A": 0, "B": 2, "C": 4},
+  "closure_rule": "Project the same transport operator onto retained even Legendre modes; set all higher coefficients to zero. No fitted parameters.",
+  "horizon": 0.30,
+  "linear_time_samples": 121,
+  "early_time_samples": 40,
+  "reference_lmax": 128,
+  "verification_lmax": 160,
+  "reference_method": "Radau",
+  "verification_method": "DOP853",
+  "rtol": 2e-10,
+  "atol": 2e-12,
+  "verification_rtol": 2e-12,
+  "verification_atol": 2e-14,
+  "reference_mu_samples": 321,
+  "rates": [0, 4, 16, 64, 256],
+  "geometries": [
+    {"id": "development", "split": "development", "density": 0.8, "Hb": -1.0},
+    {"id": "heldout_low", "split": "heldout", "density": 0.5, "Hb": -0.85},
+    {"id": "heldout_high", "split": "heldout", "density": 1.1, "Hb": -1.15}
+  ],
+  "distributions": [
+    {"id": "P4_plus", "coefficients": {"4": 0.6}},
+    {"id": "P4_minus", "coefficients": {"4": -0.6}},
+    {"id": "P6_plus", "coefficients": {"6": 0.6}},
+    {"id": "P6_minus", "coefficients": {"6": -0.6}},
+    {"id": "mixed_plus", "coefficients": {"4": 0.25, "6": -0.2, "8": 0.15}},
+    {"id": "mixed_minus", "coefficients": {"4": -0.25, "6": 0.2, "8": -0.15}}
+  ],
+  "thresholds": {
+    "curvature_relative_error": 0.01,
+    "pressure_gap_error_over_reference_density": 0.01,
+    "scaled_constraint": 1e-7,
+    "comoving_number_relative_drift": 1e-7,
+    "realizability_roundoff_tolerance": 1e-9,
+    "reference_relative_curvature_agreement": 1e-6,
+    "reference_pressure_agreement_over_density": 1e-6,
+    "reference_brightness_agreement_over_density": 1e-4
+  },
+  "error_scope": "Maximum over the SAME sampled interval [0,0.30], including initial transients. Reference denominator throughout. Not an AI forecast error or a state-pair separation.",
+  "admissibility": "Report finite-moment positive-measure feasibility and the minimum of the literal truncated polynomial separately. Conservative acceptance requires both.",
+  "independence": "Heldout geometries do not enter any coefficient fitting or threshold tuning; there is no learning. Not a statistically representative population.",
+  "limitations": ["Only three zero-tail closures, not the minimum over all closure laws", "No quantum effects, two-particle correlations, spin, evaporation, exterior matching, or singularity endpoint", "Finite grids and method comparisons are not rigorous global error bounds", "No automatic validity-warning classifier is trained in this stage"]
+}

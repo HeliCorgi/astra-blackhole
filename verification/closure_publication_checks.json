@@ -1,0 +1,24 @@
+{
+  "scope": "New closure comparison; fixed before calculation, not externally preregistered.",
+  "base_commit": "41895e830831b9a285d49b77e0833469d271e2bb",
+  "local_new_unit_tests": 12,
+  "local_unit_tests": "passed",
+  "local_full_90_case_audit": "passed; final source rerun; stored aggregate regression passed",
+  "local_old_suites": "Not all rerun in this environment. Existing classical CI is retained and must be checked independently.",
+  "reference_trajectories": 180,
+  "reduced_trajectories": 270,
+  "protocol_sha256": "bd9aeff5cd5f67493cc8c6b53d97bd121080b1d3dcd4026cd8bd8c369b8d519a",
+  "source_hashes": {
+    "research/collision_model.py": "44508264bdfcd77e84f0f57c0feaecc2629ba573337727c316c93414bf706af9",
+    "research/closure_model.py": "f227659d7bd9b9d1a781ececd9ac8ef093bd80c60c9ceafe265b1d4f274eaa2a",
+    "research/run_closure_audit.py": "ef5eb767c5b3e1f536e0d51b1fb953b9401f975a6ff15289989aac8bc3f1fde6"
+  },
+  "new_test_sha256": "bc51e1380b5f15010f3ff970aeaa9dacc3d728a51dfeaf182599583b9760b8e0",
+  "local_log_sha256": "5848df5a67f4962c1d1e539b993d15c9d80abd3f92eedaca36d6f7e7ec7cb8c2",
+  "raw_outcomes": "All 270 detailed rows, reference checks and selected curves are generated and retained in CI artifacts. Only the summary is committed.",
+  "regression_scope": "Aggregate counts and extrema; not a per-row stored-baseline comparison.",
+  "lean": "No source, theorem, toolchain or axiom-policy changes. New dynamics are not Lean-formalized.",
+  "license": "Apache-2.0; Copyright 2026 HeliCorgi. Preserve owner LICENSE edit in base commit.",
+  "publication_transport": "One malformed binary blob payload did not match the local hash and was not attached to any tree/commit. Detailed CSV is delivered by reproducible CI artifacts instead.",
+  "ci": "This record describes local tests only. Consult the workflow run for remote status."
+}

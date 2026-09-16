@@ -4,7 +4,22 @@
 
 **現段階の結果は、既知の古典的モデル内の合成データによる試験です。実在するブラックホール内部の観測、特異点の解消、量子重力の完成、新しい自然法則の発見を主張しません。**
 
-## 最新：衝突と反応時間
+## 最新：最小状態変数と近似の適用範囲
+
+[三者比較の導出・結果・限界](docs/CLOSURE_AUDIT_ja.md) / [結果要約](research/closure_results/summary.json) / [全270件の詳細はCI成果物](../../actions)
+
+完全流体A、密度と圧力差を進めるB、高次方向成分も進めるCを、90条件・同じ固有時間幅[0,.30]で比較しました。別幾何学60条件での最小合格候補はA=12、B=30、C=11、三候補とも不合格=7。合格には曲率・圧力差の精度だけでなく、保存則と分布の妥当性も要求しています。自然界での最小変数数を決めたものではありません。
+
+**残したモーメントが正の分布と両立することと、上位成分をゼロにした再構成が正であることは別でした。** 全270低次軌道中38件は前者を満たしても後者に失敗しました。次は変数を増やす前に、同じ変数で正値性を保つ閉じ方を比較します。
+
+```sh
+python research/run_closure_audit.py --out artifacts/closure --check-against research/closure_results
+python research/plot_closure.py --results artifacts/closure
+```
+
+この第四の監査は専用の `Minimal-state closure audit` CIで実行します。既存の `reproduce.py` は三つの従来監査と全単体テストを実行し、新しい全90条件の監査は上の別コマンドで実行します。新しいLean命題は追加していません。
+
+## 前回：衝突と反応時間
 
 [導出・対照・失敗・限界](docs/COLLISION_AUDIT_ja.md) / [全設定の結果要約](research/collision_results/results.json)
 
@@ -37,7 +52,7 @@ python predict_curvature.py example_input.json --method adaptive
 python reproduce.py --out artifacts
 ```
 
-`reproduce.py` は21件の単体テスト、計量からの独立した幾何学検算、径方向・角方向の二つのEinstein–Vlasov監査と、今回の衝突RTA監査を実行します。過去の全研究の再学習・再実行ではありません。`--out` を指定すると今回の主結果を保存済みベースラインとも比較します。幾何学検算だけは従来どおり `research/results/symbolic_geometry.json` に書き込みます。
+`reproduce.py` は33件の単体テスト（既存21件＋三者比較12件）、計量からの独立した幾何学検算、径方向・角方向の二つのEinstein–Vlasov監査と、今回の衝突RTA監査を実行します。過去の全研究の再学習・再実行ではありません。`--out` を指定すると今回の主結果を保存済みベースラインとも比較します。幾何学検算だけは従来どおり `research/results/symbolic_geometry.json` に書き込みます。
 
 グラフと軌道の配列は再生成します。
 
