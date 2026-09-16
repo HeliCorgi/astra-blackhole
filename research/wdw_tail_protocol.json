@@ -1,0 +1,33 @@
+{
+ "schema":1,
+ "base_commit":"469db70d62839994028c013381fd0e2ec99e0a0a",
+ "status":"Fixed after exploratory domain/asymptotic pilots; not held out or preregistered.",
+ "scope":"Existing vacuum KS WDW square-root branch and L2(dx) clock representation; no dynamics changed",
+ "observables":{"J2":"intrinsic 2-sphere scalar curvature / its reference value","J4":"square of that intrinsic curvature / reference squared","J6":"quantization of classical normalized K/(48 M^2)=r^-6; NOT full 4D quantum K or ratio of quantum expectations"},
+ "powers":[2,4,6],
+ "times":[0,0.001,0.5,2,6],
+ "packets":[
+ {"id":"h0.4","h":0.4,"sigma":0.6324555320336759,"chirp":0},
+ {"id":"h0.2","h":0.2,"sigma":0.4472135954999579,"chirp":0},
+ {"id":"h0.1","h":0.1,"sigma":0.31622776601683794,"chirp":0},
+ {"id":"chirp_minus","h":0.2,"sigma":0.4,"chirp":-0.5},
+ {"id":"chirp_plus","h":0.2,"sigma":0.4,"chirp":0.5}],
+ "grids":[
+ {"id":"R12","left":-4,"right":12,"dx":0.02},
+ {"id":"R16","left":-4,"right":16,"dx":0.02},
+ {"id":"R24","left":-4,"right":24,"dx":0.02},
+ {"id":"R32","left":-4,"right":32,"dx":0.02},
+ {"id":"R32_fine","left":-4,"right":32,"dx":0.01},
+ {"id":"R32_left","left":-5,"right":32,"dx":0.02},
+ {"id":"R128","left":-4,"right":128,"dx":0.04}],
+ "extra_grids_h02_only":[
+ {"id":"R128_fine","left":-4,"right":128,"dx":0.025},
+ {"id":"R256","left":-4,"right":256,"dx":0.05}],
+ "cutoffs":[8,12,16,24,32,40,48],
+ "tail_points":[12,16,24,32,40,48],
+ "tail_fit_interval":[24,48],
+ "bounded_tail_thresholds":[8,12],
+ "checks":{"norm":1e-10,"direct_state_l2":1e-10,"initial_log_moment":1e-10,"threshold_overlap_absolute":1e-10,"tail_grid_relative":0.001},
+ "interpretation":"Full-box exponential moments are regulated numbers, not converged expectations. Separate fixed-cutoff domain convergence, large-cutoff growth, initial spectral roundtrip pollution, and conditional analytic large-x asymptotics. No extrapolated numeric value is accepted as finite full curvature.",
+ "exclusions":["full quantum mass operator and 4D Kretschmann ordering","physical inner-product/clock independence","spacetime geodesic completeness","T=infinity endpoint","matter/evaporation","quantum gravity completion","Lean proof of spectral asymptotics"]
+}

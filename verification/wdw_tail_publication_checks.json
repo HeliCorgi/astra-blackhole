@@ -1,0 +1,34 @@
+{
+  "date": "2026-09-16",
+  "base_commit": "469db70d62839994028c013381fd0e2ec99e0a0a",
+  "new_tests": 15,
+  "previous_WDW_tests_rerun": 15,
+  "local_tests_total": 30,
+  "local_test_result": "passed",
+  "local_execution": "core, wide, fine, large phases computed all 37 grid/state cases; assemble passed; selected baseline regression repeated. One core tool invocation timed out after all its output parts had been written; no missing phases are used.",
+  "numerical_implementation_checks": {
+    "max_norm_error": 2.220446049250313e-14,
+    "max_direct_state_l2_difference": 8.406359912877308e-15,
+    "initial_log_moment_max_error": 1.0225531945602588e-15,
+    "tail_density_grid_relative_difference_h02": 2.8309693256289847e-08,
+    "threshold_overlap_max_refinement_difference": 5.933464366067994e-16
+  },
+  "scientific_result": "Finite-limit convergence FAIL for J2,J4,J6; large-x threshold asymptotic predicts divergent positive moments under explicit spectral regularity assumptions.",
+  "not_done": [
+    "full 4D curvature operator",
+    "proof of mass-operator ordering",
+    "uniform continuum error bounds",
+    "Lean formalization",
+    "local rerun of all classical suites"
+  ],
+  "prior_WDW_source_unchanged": true,
+  "source_sha256": {
+    "research/wdw_tail_model.py": "fdb05131e8b58ca1005b28dac4f016974fb2bcac62d32263599e8ed6795ea1dd",
+    "research/run_wdw_tail_audit.py": "635cdf7f429e701caaeeaa19cc98a5e4ab90364048a4336b6fa6d952bea21a9b",
+    "research/wdw_tail_protocol.json": "24cf2b979c392aaf8c17e818a076429684df1811e68f646f3c9e8347bf35f8df",
+    "tests/test_wdw_tails.py": "3fb9d81d0c95e163df1f23d2af6beb8549bd6cb4f221123618ecb5c51fb39702",
+    "docs/WDW_TAIL_AUDIT_ja.md": "bd296686c5a0b166960da8d651028844406983e4c487f024f7cf630bec88ab33"
+  },
+  "CI": "not run at creation of this record; a workflow file is not a successful execution",
+  "license": "Apache-2.0; Copyright 2026 HeliCorgi"
+}

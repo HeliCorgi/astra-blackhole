@@ -4,6 +4,19 @@
 
 **従来の物質研究は古典的モデル内の合成データによる試験です。追加したWDW研究も、時計と内積を限定した量子幾何学模型です。実在するブラックホール内部の観測、特異点の解消、量子重力の完成、新しい自然法則の発見を主張しません。**
 
+## 最新：波束の裾と曲率関連量の期待値
+
+[導出と4次元曲率との区別](docs/WDW_TAIL_AUDIT_ja.md) / [数値要約](research/wdw_tail_results/summary.json)
+
+既存WDWの5波束を37格子・状態組で再計算しました。半径の幾何平均が安定しても、逆半径2/4/6乗の期待値には有限値への収束が見られません。低エネルギー展開は約x^-6の確率密度の裾を予測し、数値解と一致しました。初期丸め誤差、計算領域、観測量の上限を別々に検査しています。
+
+**球面固有曲率と、古典的な曲率／質量二乗を先に規格化した量の監査です。4次元Kretschmann演算子や自然界の特異点の証明ではありません。** 漸近導出の条件と未証明の残差評価を明示し、有限箱の巨大値を収束した曲率として扱いません。
+
+```sh
+python research/run_wdw_tail_audit.py --out artifacts/wdw-tails --check-against research/wdw_tail_results/summary.json
+python research/plot_wdw_tails.py --results artifacts/wdw-tails
+```
+
 ## 追加：真空幾何学のWheeler–DeWitt量子化
 
 [模型・時計・結果・限界](docs/WDW_AUDIT_ja.md) / [数値結果](research/wdw_results/summary.json)
