@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "verified_commit": "f2737e2131704d641bc460e0c000a17433dd751d",
+  "ci": {
+    "name": "Published WDW sector reproduction",
+    "run_id": 35115385885,
+    "job_id": 104859367295,
+    "conclusion": "success",
+    "scope": "15 tests; all four parameters at three resolutions; independent Green comparison; same-slice coordinate checks; saved per-clock regression; plotting and artifact retention."
+  },
+  "classical_ci": {
+    "run_id": 35115386062,
+    "job_id": 104859368641,
+    "conclusion": "success",
+    "scope": "Reported success for all tests, exact algebra, geometry and three existing classical audits."
+  },
+  "artifact": {
+    "id": 10454382336,
+    "sha256": "e8ccbd9078de8cee20281f94779fa11a374ed84a588e4d0c2ae746cede5ee7be",
+    "downloaded_and_hash_verified": true
+  },
+  "comparison": {
+    "files": ["summary.json", "curves.json", "fields.json", "plateau.json", "clock_slices.csv"],
+    "csv_rows": 108,
+    "numeric_fields": 102525,
+    "exact_fields": 23,
+    "rtol": 1e-6,
+    "atol": 2e-8,
+    "maximum_absolute_numeric_difference": 1.8118839761882555e-13,
+    "location_of_maximum": "clock_slices.csv/17/norm",
+    "excluded": "Elapsed time and environment only. PNG pixels not compared; scientific arrays are compared.",
+    "source_hashes": "Generated protocol and all three numerical source hashes match the published baseline."
+  },
+  "remote_environment": {"python": "3.12.14", "numpy": "2.5.3", "scipy": "1.18.1"},
+  "scope": "Evidence-only update; not raw author-data agreement, physical validation, full inner-product equivalence, or new Lean proof."
+}
