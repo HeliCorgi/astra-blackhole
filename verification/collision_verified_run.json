@@ -1,0 +1,24 @@
+{
+  "date": "2026-09-16",
+  "verified_commit": "e4333b248d49514f3cb7754df66f49f51443c062",
+  "workflow_run_id": 35050469612,
+  "job_id": 104649509918,
+  "url": "https://github.com/HeliCorgi/astra-blackhole/actions/runs/35050469612",
+  "conclusion": "success",
+  "unit_tests": 21,
+  "scope": "All three classical audits, geometry and exact-algebra checks, saved-baseline comparison, angular/collision plots and artifact retention passed on GitHub Actions.",
+  "artifact_id": 10428244647,
+  "artifact_sha256": "edfe429d58e66488054d9a2bfd961be5b7c5e74bd8289457a02acaa805b7eb29",
+  "artifact_verification": "Downloaded through GitHub connector, checked ZIP hash, compared all 21 collision cases and 42 endpoints, exact identities, protocol and source SHA-256 against locally reproduced output.",
+  "cross_environment_max_endpoint_relative_difference": 3.7969627442180354e-14,
+  "remote_environment": {
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "sympy": "1.14.0"
+  },
+  "lean": "Existing Lean sources, declarations and dependency policy unchanged; this commit did not trigger the path-filtered Lean workflow. New collision dynamics are not formalized.",
+  "license": "Apache-2.0; Copyright 2026 HeliCorgi",
+  "limitations": "Massless homogeneous classical constant-rate RTA benchmark, not a binary collision integral, two-particle correlation calculation, singularity solution or observation.",
+  "record_scope": "Evidence only. Does not change scientific source, protocol, results or workflows."
+}
