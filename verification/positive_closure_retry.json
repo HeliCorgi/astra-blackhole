@@ -1,0 +1,22 @@
+{
+  "date": "2026-09-16",
+  "base_commit": "f6d8d40b4490eb13bab666726707331fcc938cc8",
+  "purpose": "Retry publication of the previously computed positive angular closure audit at the owner request.",
+  "permissions_observed": {"push": true, "admin": true},
+  "connector_writes": "create_tree succeeded during this retry; branch update is recorded separately after execution.",
+  "previous_failure": "The previous turn did not establish a repository permission denial. Tool availability and CLI DNS failure were separate limitations.",
+  "local_checks_this_retry": {
+    "new_unit_tests_rerun": 15,
+    "result": "passed",
+    "full_90_case_calculation_rerun_locally": false,
+    "original_archive_members": "All SHA256SUMS.json entries verified against archive bytes.",
+    "structural_checks": "450 unique rows, 90 reference checks, summary values, protocol and source SHA-256 verified.",
+    "new_aggregate_checker": "Identical summary accepted and three corrupted summaries rejected."
+  },
+  "unchanged": "Scientific model, runner, protocol, 15 new numerical tests and plotting source are byte-identical to the delivered archive. Existing numerical/Lean files and Apache-2.0 LICENSE/NOTICE are preserved.",
+  "publication_format": "Source, protocol, documentation and numerical summary in Git. Detailed cases, reference diagnostics, tail diagnostics and curves are regenerated and retained as GitHub Actions ZIP artifacts, not Git blobs. Original delivered ZIP remains the prepublication full per-row baseline.",
+  "ci_policy": "Read-only workflow; compute all 90 cases, test 48 cases in unittest suite, verify structure/source hashes and summary aggregates. This is not per-row CI regression. Downloaded artifact rows may be checked separately using the unchanged check_saved function.",
+  "source_archive_sha256": "1772c2d7baf3048cfc2f13818bdcf76bcb8ccc308e03c0cc3170a98341671ada",
+  "run_status_at_record_creation": "not yet dispatched; no CI success claimed here",
+  "limitations": "Previously evaluated synthetic conditions, not a new scientific result or independent validation."
+}

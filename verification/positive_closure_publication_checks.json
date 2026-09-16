@@ -1,0 +1,66 @@
+{
+  "date": "2026-09-16",
+  "base_commit": "f6d8d40b4490eb13bab666726707331fcc938cc8",
+  "github_publication": {
+    "state": "not_published",
+    "reason": "Current connector exposes reads, but neither commit/push nor PR creation. Installed GitHub plugin searched; same integration. Git CLI clone attempt failed DNS resolution for github.com.",
+    "new_CI_run": false
+  },
+  "model": "Homogeneous massless classical constant-rate RTA; same 90 earlier cases reused. Not a new heldout test.",
+  "protocol_sha256": "930aadca2328d7c2849cee14065a9c52527ca5e5d9246e2e8dfaa7d722963e76",
+  "source_sha256": {
+    "research/collision_model.py": "44508264bdfcd77e84f0f57c0feaecc2629ba573337727c316c93414bf706af9",
+    "research/closure_model.py": "f227659d7bd9b9d1a781ececd9ac8ef093bd80c60c9ceafe265b1d4f274eaa2a",
+    "research/positive_closure_model.py": "9c51d3f8354c85ccb2cb36f568823ec0bbad899d344f0d08fbc3414f3fbfef8b",
+    "research/run_positive_closure_audit.py": "a9d28f7cf10118f1662d6a58ce7626589c328384bf9b916b458c96c14745e5ba"
+  },
+  "local_checks": {
+    "unit_tests": 48,
+    "new_tests": 15,
+    "reproduce_command": "python reproduce.py",
+    "reproduce_exit_code": 0,
+    "reproduce_scope": "Source-restored local workspace. All tests, symbolic geometry and the three previous classical audits completed. The final run uses repository-matching predictors.py. Historical neural suites not rerun.",
+    "comparison": "90 fixed conditions, 180 high-order reference trajectories, 450 reduced trajectories, 180 additional tight positive-closure trajectories.",
+    "all_reference_checks": true,
+    "all_reduced_succeeded": true,
+    "all_positive_checks": true,
+    "source_verification": "Current collision_model.py, closure_model.py and the numerical/test dependencies were matched to fetched Git blob hashes. Numerical result source SHA-256 fields match executed files.",
+    "old_270_rows": "Compared 1350 numeric fields and acceptance booleans to supplied closure_verified_6081586.zip; max absolute numeric difference 0.",
+    "regression_guard_negative_fixtures": [
+      "bad_boolean",
+      "bad_numeric",
+      "missing_row"
+    ],
+    "new_full_run_count": 1,
+    "independent_positive_refinement_runs": 180
+  },
+  "maximum_positive_checks": {
+    "moment_residual": 1.3518630659348219e-12,
+    "tail_quadrature_residual": 1.2887607647726895e-13,
+    "evolution_K_agreement": 9.137757217558828e-11,
+    "evolution_Pi_agreement": 2.8727001495437923e-11,
+    "constraint": 6.5056034647853216e-12,
+    "number_drift": 1.4739320874923578e-11
+  },
+  "minimum_positive_brightness_over_density": 0.020088462120634143,
+  "previous_artifact_sha256": "e60c13c9b9976e81d242a92e541f3d8a0501da063906a2ba559759f2f8abd379",
+  "lean": "Unchanged; new angular max-entropy closure and dynamics have NOT been formalized or newly built in Lean.",
+  "license": "Apache-2.0; Copyright 2026 HeliCorgi. Existing LICENSE/NOTICE not changed.",
+  "limitations": [
+    "Same previously evaluated cases, not independent generalization evidence.",
+    "Angular Shannon entropy is not full thermodynamic entropy of f(q,mu).",
+    "Positive reconstruction is an ansatz, not a reconstruction of unknown true higher moments.",
+    "Finite numerical comparisons and sampled-time checks are not global error bounds.",
+    "No singularity endpoint, quantum correlations, exterior matching, or observations."
+  ],
+  "logs_sha256": {
+    "structure_check.txt": "32498f308c96ed271fe9c62a6216d722ef82091890465c5b6bb5b935efc48f0a",
+    "new_tests.txt": "0aa16a860c33391ad770159147ab11194bd6b9f8b032bfb56269b6d40e43e05e",
+    "old_baseline_comparison.json": "5f41978b49bd8b2b88d0439ebbd9496743f20817815a3e317024a649b1b2d566",
+    "main_run.txt": "aff8c29483d724d67c13095a0ec38280abbee8a4686e144ad18035765e696245",
+    "reproduce_final.txt": "a4659b8e24fcb2a1b70cd56c3b0975f427847fcd5b914c48fd53fb5d11fd9db5",
+    "regression_guard.json": "639f4ba260fd303f75bc20b9fc66988afea9a784023820eef681f137c7d4513c",
+    "all_tests.txt": "ba4bf50fd19ff88900568a93f7f96028db847e5bc6a20a11a297ffdc81fdaa91",
+    "reproduce.txt": "ac2425f5225767517e09b233f5c996cdced0b20cc2f44b256ae5b15da6f59159"
+  }
+}

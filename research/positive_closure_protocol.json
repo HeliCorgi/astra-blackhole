@@ -1,0 +1,130 @@
+{
+  "schema": 1,
+  "status": "Fixed for this follow-up before numerical comparison; previously evaluated cases, NOT a new held-out test.",
+  "base_commit": "f6d8d40b4490eb13bab666726707331fcc938cc8",
+  "model": "Homogeneous massless classical Kantowski-Sachs constant-rate RTA; c=8*pi*G=1",
+  "closures": {
+    "A": 0,
+    "B": 2,
+    "C": 4
+  },
+  "closure_rule": "Compare previous zero-tail against angular exponential closure at identical retained variable count.",
+  "horizon": 0.3,
+  "linear_time_samples": 121,
+  "early_time_samples": 40,
+  "reference_lmax": 128,
+  "verification_lmax": 160,
+  "reference_method": "Radau",
+  "verification_method": "DOP853",
+  "rtol": 2e-10,
+  "atol": 2e-12,
+  "verification_rtol": 2e-12,
+  "verification_atol": 2e-14,
+  "reference_mu_samples": 321,
+  "rates": [
+    0,
+    4,
+    16,
+    64,
+    256
+  ],
+  "geometries": [
+    {
+      "id": "development",
+      "split": "development",
+      "density": 0.8,
+      "Hb": -1.0
+    },
+    {
+      "id": "heldout_low",
+      "split": "heldout",
+      "density": 0.5,
+      "Hb": -0.85
+    },
+    {
+      "id": "heldout_high",
+      "split": "heldout",
+      "density": 1.1,
+      "Hb": -1.15
+    }
+  ],
+  "distributions": [
+    {
+      "id": "P4_plus",
+      "coefficients": {
+        "4": 0.6
+      }
+    },
+    {
+      "id": "P4_minus",
+      "coefficients": {
+        "4": -0.6
+      }
+    },
+    {
+      "id": "P6_plus",
+      "coefficients": {
+        "6": 0.6
+      }
+    },
+    {
+      "id": "P6_minus",
+      "coefficients": {
+        "6": -0.6
+      }
+    },
+    {
+      "id": "mixed_plus",
+      "coefficients": {
+        "4": 0.25,
+        "6": -0.2,
+        "8": 0.15
+      }
+    },
+    {
+      "id": "mixed_minus",
+      "coefficients": {
+        "4": -0.25,
+        "6": 0.2,
+        "8": -0.15
+      }
+    }
+  ],
+  "thresholds": {
+    "curvature_relative_error": 0.01,
+    "pressure_gap_error_over_reference_density": 0.01,
+    "scaled_constraint": 1e-07,
+    "comoving_number_relative_drift": 1e-07,
+    "realizability_roundoff_tolerance": 1e-09,
+    "reference_relative_curvature_agreement": 1e-06,
+    "reference_pressure_agreement_over_density": 1e-06,
+    "reference_brightness_agreement_over_density": 0.0001,
+    "positive_moment_residual": 1e-09,
+    "positive_quadrature_tail_agreement": 1e-09,
+    "positive_evolution_agreement": 1e-06
+  },
+  "error_scope": "Maximum over the SAME sampled interval [0,0.30], including initial transients. Reference denominator throughout. Not an AI forecast error or a state-pair separation.",
+  "admissibility": "Report finite-moment positive-measure feasibility and the minimum of the literal truncated polynomial separately. Conservative acceptance requires both.",
+  "independence": "Reuse all 90 prior cases unchanged. Original heldout label is retained for comparability, NOT independent validation of this new closure. No data fitting or tuning to future.",
+  "limitations": [
+    "Only three zero-tail closures, not the minimum over all closure laws",
+    "No quantum effects, two-particle correlations, spin, evaporation, exterior matching, or singularity endpoint",
+    "Finite grids and method comparisons are not rigorous global error bounds",
+    "No automatic validity-warning classifier is trained in this stage",
+    "Angular entropy is not full f(q,mu) thermodynamic entropy.",
+    "Positive reconstruction is a closure ansatz, not proof of physical accuracy or global ODE realizability."
+  ],
+  "base_protocol_sha256": "e7e9c9b65a92e3169f01acc4702397f9e0982fcb5a0e50f89a2ae9870aed3033",
+  "methods": {
+    "A_zero": 0,
+    "B_zero": 2,
+    "C_zero": 4,
+    "B_positive": 2,
+    "C_positive": 4
+  },
+  "positive_rule": "Normalized exponential angular brightness; minimize logZ-lambda.m with dmu/2. Retained moments unchanged; tail algebraically reconstructed, not fitted.",
+  "positive_quadrature": 80,
+  "positive_verification_quadrature": 160,
+  "positive_tolerance": 2e-13,
+  "positive_verification_tolerance": 2e-14
+}

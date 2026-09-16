@@ -4,13 +4,28 @@
 
 **現段階の結果は、既知の古典的モデル内の合成データによる試験です。実在するブラックホール内部の観測、特異点の解消、量子重力の完成、新しい自然法則の発見を主張しません。**
 
-## 最新：最小状態変数と近似の適用範囲
+## 最新：同じ変数で正の角分布から補う比較
+
+[導出・失敗・限界](docs/POSITIVE_CLOSURE_AUDIT_ja.md) / [全450行はCI成果物](../../actions) / [要約](research/positive_closure_results/summary.json)
+
+前回と同じ90条件・同じ時間区間[0,.30]で、ρ・ΠのB、ρ・Π・c4のCを保ち、上位係数をゼロにする方法と、角エントロピーに基づく正の指数分布から補う方法を比較しました。総合合格はBで60→87/90、Cで82→90/90。変数を追加せずに旧Cの不合格8条件を解消しました。一方、K誤差はBの24条件、Cの31条件で増えています。正値性と精度は別の判定です。
+
+**前回の条件を再使用した比較であり、新しい未使用データでの検証ではありません。** これは角度別エネルギーのエントロピーを使う近似で、全粒子分布の熱力学エントロピーを最大化したものでも、特異点の解消でもありません。独立に進める変数は増やしませんが、各時点で代数方程式を解くコストは増えます。
+
+```sh
+python research/run_positive_closure_audit.py --out artifacts/positive
+python research/plot_positive_closure.py --results artifacts/positive
+```
+
+前回のローカル実行は [配布時の記録](verification/positive_closure_publication_checks.json)、今回の公開再試行は [再試行記録](verification/positive_closure_retry.json) を参照してください。CI設定の存在とGitHub上の実行成功を混同しないでください。
+
+## 前回：最小状態変数と近似の適用範囲
 
 [三者比較の導出・結果・限界](docs/CLOSURE_AUDIT_ja.md) / [結果要約](research/closure_results/summary.json) / [全270件の詳細はCI成果物](../../actions)
 
 完全流体A、密度と圧力差を進めるB、高次方向成分も進めるCを、90条件・同じ固有時間幅[0,.30]で比較しました。別幾何学60条件での最小合格候補はA=12、B=30、C=11、三候補とも不合格=7。合格には曲率・圧力差の精度だけでなく、保存則と分布の妥当性も要求しています。自然界での最小変数数を決めたものではありません。
 
-**残したモーメントが正の分布と両立することと、上位成分をゼロにした再構成が正であることは別でした。** 全270低次軌道中38件は前者を満たしても後者に失敗しました。次は変数を増やす前に、同じ変数で正値性を保つ閉じ方を比較します。
+**残したモーメントが正の分布と両立することと、上位成分をゼロにした再構成が正であることは別でした。** 全270低次軌道中38件は前者を満たしても後者に失敗しました。その後、同じ変数で正値性を保つ閉じ方を比較しました（上記）。
 
 ```sh
 python research/run_closure_audit.py --out artifacts/closure --check-against research/closure_results
@@ -52,7 +67,7 @@ python predict_curvature.py example_input.json --method adaptive
 python reproduce.py --out artifacts
 ```
 
-`reproduce.py` は33件の単体テスト（既存21件＋三者比較12件）、計量からの独立した幾何学検算、径方向・角方向の二つのEinstein–Vlasov監査と、今回の衝突RTA監査を実行します。過去の全研究の再学習・再実行ではありません。`--out` を指定すると今回の主結果を保存済みベースラインとも比較します。幾何学検算だけは従来どおり `research/results/symbolic_geometry.json` に書き込みます。
+`reproduce.py` は48件の単体テスト（従来33件＋正の閉包15件）、計量からの独立した幾何学検算、径方向・角方向の二つのEinstein–Vlasov監査と、今回の衝突RTA監査を実行します。過去の全研究の再学習・再実行ではありません。`--out` を指定すると今回の主結果を保存済みベースラインとも比較します。幾何学検算だけは従来どおり `research/results/symbolic_geometry.json` に書き込みます。
 
 グラフと軌道の配列は再生成します。
 
@@ -124,3 +139,14 @@ lake env lean -DwarningAsError=true Audit.lean
 ```
 
 Lean 4.19.0に固定し、Mathlibはまだ使いません。Pythonの有理数検算だけではLeanのビルド成功を意味しません。証明対象と未形式化部分は[Leanノート](docs/LEAN_ja.md)を参照してください。
+
+### Git公開時の保存形式（2026-09-16）
+
+計算ソース・プロトコル・検証記録と `research/positive_closure_results/summary.json` をGitに保存する。全450行、90基準解の診断、事後診断と全時系列は再生成してGitHub ActionsのZIP成果物に保存する。元の配布ZIPの内容は変更せず保管しており、Gitへの公開はその全ファイルのミラーではない。
+
+```sh
+python tools/verify_positive_closure_artifact.py artifacts/positive
+python tools/check_positive_summary.py artifacts/positive/summary.json research/positive_closure_results/summary.json --self-test
+```
+
+後者は集計値の回帰検査で、450行を個別に照合したことを意味しない。公開時の詳細照合とCIの成功は別の検証記録で報告する。新しい物理計算や未使用条件での検証を追加した公開ではない。
