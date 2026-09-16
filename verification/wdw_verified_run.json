@@ -1,0 +1,52 @@
+{
+  "date": "2026-09-16",
+  "verified_commit": "4577151f245f32da527290b6018e3495b183741e",
+  "quantum_ci": {
+    "run_id": 35074450949,
+    "job_id": 104723387936,
+    "conclusion": "success",
+    "new_tests": 15,
+    "url": "https://github.com/HeliCorgi/astra-blackhole/actions/runs/35074450949"
+  },
+  "classical_ci": {
+    "run_id": 35074450830,
+    "job_id": 104723387218,
+    "conclusion": "success",
+    "scope": "All discovered unit tests, geometry and all three existing classical audits passed on Actions."
+  },
+  "artifact": {
+    "id": 10436839368,
+    "sha256": "319bfbc9f5efde8d7ab10f008ec45846c3c4d776a11243f2f2b53279d502456a",
+    "downloaded": true,
+    "size": 2012758
+  },
+  "comparison": {
+    "numeric_tolerance": {
+      "rtol": 2e-05,
+      "atol": 2e-08
+    },
+    "summary_fields": {
+      "numeric": 184,
+      "exact": 48
+    },
+    "summary_max_abs_difference": 1.6558754367679285e-11,
+    "curve_fields": {
+      "numeric": 3872,
+      "exact": 0
+    },
+    "curves_max_abs_difference": 6.924238959982176e-12,
+    "wave_density_max_abs_difference": 1.3300471835009375e-12,
+    "source_and_protocol_match": true,
+    "all_acceptance_flags_match": true,
+    "note": "All summary fields except runtime/environment and all time-series values compared; wave density and axes also compared. Numerical matching is not a full-theory or continuum error bound."
+  },
+  "remote_environment": {
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1"
+  },
+  "scope": "Restricted vacuum KS WDW branch, intrinsic clock and selected inner product. No quantum curvature operator, singularity endpoint or clock/order independence proved.",
+  "license": "Apache-2.0; Copyright 2026 HeliCorgi unchanged",
+  "lean": "Unchanged; no new Lean proof asserted",
+  "record_scope": "Evidence only. No scientific sources, protocol, results or workflows modified."
+}
