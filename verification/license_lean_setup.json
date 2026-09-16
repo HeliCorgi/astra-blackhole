@@ -14,5 +14,16 @@
   },
   "lean_toolchain": "leanprover/lean4:v4.19.0",
   "ci": "Configured to build and audit all eight declarations; actual status must be read from GitHub Actions.",
-  "formal_scope": "Finite rational arithmetic plus deterministic-observation lemmas only. Real integration, curvature evolution, model validity are not formalized."
+  "formal_scope": "Finite rational arithmetic plus deterministic-observation lemmas only. Real integration, curvature evolution, model validity are not formalized.",
+  "ci_attempts": [
+    {
+      "commit": "17776cd13bd4c6977271858bac6f55e1e3a1c9a0",
+      "run_id": 35045782431,
+      "job_id": 104635178377,
+      "conclusion": "failure",
+      "lean_installation": "success: Lean 4.19.0 and Lake 5.0.0 installed",
+      "cause": "Lean Action configuration requires lake-manifest.json even with auto-config=false; no theorem was compiled.",
+      "fix": "Track an empty-package Lake manifest using the 1.1.0 schema supported by the pinned toolchain; remove the manifest ignore rule."
+    }
+  ]
 }
