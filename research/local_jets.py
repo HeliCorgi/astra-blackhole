@@ -22,6 +22,7 @@ class CurvatureJets:
         expr=[K]
         for _ in range(maximum):
             expr.append(s.expand(sum(s.diff(expr[-1],v)*flow[v] for v in expr[-1].free_symbols)))
+        self.expressions=tuple(expr)  # Exact-algebra audits may substitute rational moments.
         self.symbols=[ha,hb,B]+list(self.C.values())
         self.functions=[s.lambdify(self.symbols,e,modules='numpy',cse=True) for e in expr]
         if export:

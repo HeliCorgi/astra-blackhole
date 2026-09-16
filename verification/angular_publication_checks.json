@@ -1,0 +1,59 @@
+{
+  "date": "2026-09-16",
+  "parent_commit": "08d708ff0ada45d66c2b658c2d92ce86d490ff48",
+  "scope": "Angular-distribution classical model audit; no Lean formalization or observational validation",
+  "rerun_command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python reproduce.py --out /mnt/data/astra_reproduced_final",
+  "unit_tests_passed": 11,
+  "previous_radial_audit_rerun": true,
+  "independent_metric_geometry_check_passed": true,
+  "angular_audit_primary_pairs": 6,
+  "additional_amplitude_pairs": 12,
+  "integration_and_quadrature_comparisons": 36,
+  "saved_baseline_comparison": "passed (rtol=1e-7, atol=1e-9; protocol and exact identities equal)",
+  "maximum_relative_K_numerical_difference": 3.523157543483535e-09,
+  "negative_controls": {
+    "zero_amplitude_max_separation_percent": 0.0,
+    "imposed_isotropic_scaling_max_stress_response_gap": 5.551115123125783e-15,
+    "complex_step_moment_hierarchy_max_scaled_residual": 3.8030707336481194e-16,
+    "massless_radial_spectrum_max_separation_percent": 2.2362393627720828e-13
+  },
+  "environment": {
+    "python": "3.13.5",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "sympy": "1.14.0"
+  },
+  "ci_note": "Workflow file prepared only. Not published or run on GitHub. Local checks passed.",
+  "historical_neural_training_rerun": false,
+  "changed_files_sha256": {
+    "research/angular_model.py": "8c7d758bd69e6b1046de1466886053b2590103c03f57078efde8a6679001450a",
+    "research/run_angular_audit.py": "8065e20686245ef84a75f458f8ee30e43ff461bfabc8a5f27a8cd368deff9302",
+    "research/angular_protocol.json": "1e1d2c0a26e3c815e06e5eae16e6a11b35155b93baf86e59b1a0a2bcacd0c2bd",
+    "research/local_jets.py": "16b101b91e806c4c165cdce8fddbef3237fcae98c886960f51bdc6ba04f244fc",
+    "research/plot_angular.py": "137b2b7084fecf976f9ec82d231ce012c5ac003f7a60942f6f7fcf438b9554ac",
+    "tests/test_angular_states.py": "c8546ced1bd27746d7493ed2fc42092f20b5ea7effd9952ca249e01a8441e113",
+    "reproduce.py": "33830ce74880fc6ba93675c30089c4ba11352d3c27b7c98793219f6a8509ed37",
+    ".github/workflows/research.yml": "0ddd9138a57405aeb6b6ef702fb3af6165bccca84f1c1c01aa45433b7d2bcb3d",
+    "docs/ANGULAR_AUDIT_ja.md": "a1f5c03f7c8be32a4c7036d88d81f254008f1c7bb8953bc128dbe1b714f239d0",
+    "docs/ROADMAP_ja.md": "8476756758ed93cb44e1b8a5650b9943d371a51a0ce9d569c2c52241a81769c5",
+    "README.md": "6d00b75af53392972f00bb86fa50010173614eb4a3af4c046e0b20d081b807c7",
+    "research/angular_results/results.json": "8b7804ee0eaf3713fbc0f87e2075fa0e0b497cf2b5b082d2aeb02b43be34d524",
+    ".gitignore": "54b57abe08c08827798e887a8035c549504dde221cd004dd6409c05e990c2e99"
+  },
+  "github_write_status": "Blocked by OpenAI safety verification at create_tree. No further write route attempted.",
+  "confirmed_remote_main": "08d708ff0ada45d66c2b658c2d92ce86d490ff48",
+  "record_context": "The original publication fields above describe the earlier blocked attempt, not the current repository status. The retry validation below was recorded before updating the Git ref; consult the commit and GitHub Actions runs for publication and remote CI status.",
+  "retry_validation": {
+    "date": "2026-09-16",
+    "parent_commit": "08d708ff0ada45d66c2b658c2d92ce86d490ff48",
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MPLBACKEND=Agg python reproduce.py --out /mnt/data/github_retry/generated",
+    "exit_code": 0,
+    "unit_tests_passed": 11,
+    "radial_and_angular_audits_rerun": true,
+    "angular_saved_baseline_comparison": "passed",
+    "scientific_files_match_original_archive_sha256": true,
+    "reproduce_log_sha256": "80b54ede9bf51a94abdf8a4b92eeb645154026375a49e47bb726f665f9906fa8",
+    "lean_used": false,
+    "github_actions_result": "Not asserted here; inspect the remote run attached to the published commit."
+  }
+}

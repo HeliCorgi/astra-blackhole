@@ -6,13 +6,16 @@
 
 ## 入口
 
-- [研究の導出・結果・限界](research/REPORT_ja.md)
+- [今回：方向分布の省略、導出・結果・限界](docs/ANGULAR_AUDIT_ja.md)
+- [今回の全ケース・数値検査・厳密式](research/angular_results/results.json)
+- [前回：径方向分布の研究の導出・結果・限界](research/REPORT_ja.md)
 - [曲率予測器の対応表](docs/PREDICTOR_MAP_ja.md)
-- [保存した主結果・全係数](research/results/results.json)
-- [追加24対の結果](research/results/cohort.json)
+- [前回の主結果・全係数](research/results/results.json)
+- [前回の追加24対](research/results/cohort.json)
 - [旧予測器の24窓での採点](research/results/legacy_predictor_on_new_model.json)
-- [公開時の検証範囲](verification/publication_checks.json)
-- [次の未実施課題](docs/ROADMAP_ja.md)
+- [初回公開の検証範囲](verification/publication_checks.json) / [今回](verification/angular_publication_checks.json)
+- [研究段階と次の課題](docs/ROADMAP_ja.md)
+- [GitHub Actions](../../actions)
 
 ## 最短の実行
 
@@ -22,21 +25,35 @@ Python 3.10以降を使います。仮想環境の利用を推奨します。
 python -m pip install -r requirements.txt
 python predict_curvature.py example_input.json --method polynomial --horizon 0.1
 python predict_curvature.py example_input.json --method adaptive
-python reproduce.py
+python reproduce.py --out artifacts
 ```
 
-`reproduce.py` は3件の単体テスト、計量からの独立した幾何学検算、最新のEinstein–Vlasov研究を実行します。過去の全研究の再学習・再実行ではありません。曲率履歴の入力例にも未来の答えは入っていません。
+`reproduce.py` は11件の単体テスト、計量からの独立した幾何学検算、径方向と角方向の二つのEinstein–Vlasov監査を実行します。過去の全研究の再学習・再実行ではありません。`--out` を指定すると今回の主結果を保存済みベースラインとも比較します。幾何学検算だけは従来どおり `research/results/symbolic_geometry.json` に書き込みます。
 
-グラフと主6軌道の配列は再生成します。
+グラフと軌道の配列は再生成します。
 
 ```sh
 python research/run_research.py
 python research/plot_results.py
+python research/run_angular_audit.py
+python research/plot_angular.py
 ```
 
-ヘッドレス環境では `MPLBACKEND=Agg` を指定してください。再実行するとJSONの実行時間・環境欄なども更新されます。独立した出力先には `python research/run_research.py --out /path/to/output` を使えます。
+ヘッドレス環境では `MPLBACKEND=Agg` を指定してください。再実行するとJSONの実行時間・環境欄なども更新されます。独立した出力先には各監査の `--out /path/to/output` を使えます。方向監査の曲線配列・PNGは生成物で、コミットにはソースと数値結果JSONを収録しています。
 
-## 現在の結果
+## 今回：方向分布は平均圧力に見えないことがある
+
+粒子数・全径方向スペクトル・初期密度・圧力・幾何学を一致させ、方向成分 `P4/P6/P8` だけを変えました。**初期圧力が等方的でも、粒子分布が等方的とは限りません。**
+
+|方向分布の差|最初に異なる曲率の時間微分|質量1：t=.45の曲率差|質量0：t=.45の曲率差|
+|---|---:|---:|---:|
+|P4|1階|0.741751%|2.173775%|
+|P6|2階|0.142426%|0.461370%|
+|P8|3階|0.042004%|0.146659%|
+
+**差は対称相対差であり、予測誤差ではありません。各行は別の状態対です。** 質量ゼロでも方向情報の影響は残りました。前回の「径方向スペクトルだけなら差が消える」対照は、方向分布固定という条件のもとで維持されています。詳しくは[今回の導出](docs/ANGULAR_AUDIT_ja.md)を参照してください。
+
+## 前回：運動量の大きさの分布
 
 同じ初期密度・圧力・幾何学を持つが、高次の運動量分布が異なる正の粒子分布を構成しました。圧力の時間変化に最初の省略が入り、曲率の時間微分へ伝わります。
 
@@ -48,11 +65,11 @@ python research/plot_results.py
 
 **各行は別の状態対です。最後の列は予測誤差ではありません。** 指定した低次の初期情報では当て分けられない反例であり、精密な過去履歴を含む全観測が同じという主張ではありません。
 
-モデルは一様なKantowski–Sachs Einstein–Vlasov系です。質量ゼロの対照では、今回の初期等方分布に限りスペクトルの差が幾何学へ影響しない結果も保存しています。量子相関・衝突・蒸発・回転・外部接続はこの研究には含みません。
+両監査は一様なKantowski–Sachs Einstein–Vlasov系です。量子相関・衝突・蒸発・回転・外部接続は含みません。GitHub Actionsは再現性を検査するもので、自然界での正しさの保証ではありません。Leanは未使用です。
 
 ## 過去の保存版とニューラル予測器
 
-このGit初回公開は、最新研究を再実行できるソース・数値結果と、解析的／多項式／適応幅の予測器を収録しています。**会話で配布したZIP全体のミラーではありません。過去の学習済み重み・全履歴・生成画像は、このコミットには含めていません。**
+Git初回公開は、最新研究を再実行できるソース・数値結果と、解析的／多項式／適応幅の予測器を収録しました。**会話で配布したZIP全体のミラーではありません。過去の学習済み重み・全履歴・生成画像は含めていません。**
 
 元の `curvature_predictors_and_state_audit.zip` を会話から保存したうえで、次の操作により歴史的な `legacy/` 一式をローカルへ復元できます。外部から自動ダウンロードはしません。
 
@@ -65,4 +82,4 @@ python verify_predictors.py
 
 復元ツールは元ZIPのSHA-256を照合し、変更済みファイルを上書きしません。ニューラル版は元のLTBモデル単位で過去[-0.30,0]の41点を要求し、未来[0.10,0.20,0.30,0.40]を出力します。現在の対数曲率の微分も必要です。別のモデルや実測への有効性は未検証です。
 
-詳しい来歴と公開時の変更点は [PROVENANCE.json](PROVENANCE.json) に記録しています。MITライセンスは初期リポジトリのものを保持しています。
+詳しい来歴と初回公開時の変更点は [PROVENANCE.json](PROVENANCE.json) に記録しています。MITライセンスは初期リポジトリのものを保持しています。

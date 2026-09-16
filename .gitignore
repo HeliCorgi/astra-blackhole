@@ -12,3 +12,5 @@ venv/
 *.png
 *.zip
 verification/local_*
+artifacts/
+research/angular_results/curves.json

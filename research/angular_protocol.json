@@ -1,0 +1,19 @@
+{
+  "date": "2026-09-16",
+  "status": "Exploratory fixed-protocol extension, not registered externally",
+  "parent_commit": "08d708ff0ada45d66c2b658c2d92ce86d490ff48",
+  "model": "Homogeneous Kantowski-Sachs Einstein-Vlasov, c=8*pi*G=1, Lambda=0",
+  "initial_geometry": {"a": 1, "b": 1, "Ha": 0.6, "Hb": -1, "rho": 0.8},
+  "radial_spectrum": "Identical 10-component lognormal mixture in each pair; centers geomspace(.05,8,10), log-width .10",
+  "angular_density": "[1 +/- alpha P_ell(mu)]/2; mu=initial radial direction cosine",
+  "primary_ell": [4, 6, 8],
+  "primary_mass": [1, 0],
+  "primary_alpha": 0.8,
+  "amplitude_scan": [0.2, 0.5, 0.8],
+  "time_interval": [0, 0.45],
+  "initial_equal": "N, entire radial spectrum, rho, pr, pt, geometry, extrinsic curvature; all C_ij with 2(i+j)<ell",
+  "output": "Pair separation, first different curvature derivative, pressure response, constraint residual, quadrature/integration controls",
+  "controls": ["zero angular amplitude", "isotropic prescribed scaling (kinematic, not an Einstein solution)", "massless radial-spectrum invariance from previous model", "tighter tolerance and RK45", "higher quadrature order"],
+  "not_included": ["collisions", "two-particle correlations", "quantum effects", "exterior matching", "rotation", "evaporation", "singularity endpoint"],
+  "interpretation": "No observational validation or literature novelty claim. Different ell rows are different pairs; separation is not forecast error."
+}
