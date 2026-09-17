@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "date": "2026-09-17",
+  "scope": "Local model-internal trajectory/chaos audit; not a statement that a physical Schwarzschild interior is chaotic or stochastic.",
+  "executed": [
+    {"command": "python research/run_trajectory_chaos_audit.py --out /tmp/results", "exit_code": 0},
+    {"command": "python -m unittest discover -s tests -p 'test_trajectory_chaos.py' -v", "exit_code": 0, "tests": 7}
+  ],
+  "key_checks": {
+    "ks_exact_energy_relative_drift_max": 2.220446049250313e-16,
+    "ks_ftle_p_perturbation_T10000": 7.919834488479558e-05,
+    "gauss_invariant_measure_lyapunov": 2.37424938359625,
+    "gauss_exact_lyapunov": 2.373138220831251,
+    "gauss_relative_difference": 0.0004682250512193509,
+    "nearby_gauss_orbit_first_difference_gt_1e-6": 4
+  },
+  "not_executed": ["Full historical repository test suite", "Lean build", "Bianchi IX Einstein evolution", "Independent peer review"],
+  "interpretation": "Current KS reduction is integrable and cannot diagnose Mixmaster chaos. The Gauss/BKL map is a known deterministic-chaos control, not evidence for randomness in the current black-hole model."
+}

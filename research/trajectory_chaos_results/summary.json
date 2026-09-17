@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "scope": "Model-internal determinism/chaos audit. Not evidence that a physical Schwarzschild interior is random.",
+  "reduced_ks": {
+    "hamiltonian": "H=sqrt(p^2+exp(-2x))",
+    "degrees_of_freedom": 1,
+    "analytic_solution_used": true,
+    "finite_time_lyapunov": [
+      {"perturbation": [1e-08, 0.0], "lambda_at_10": -0.002721884478871544, "lambda_at_100": -0.00027217510471580665, "lambda_at_1000": -2.7220430557928286e-05, "lambda_at_10000": -2.740733381618985e-06, "max_abs_energy_relative_drift": 2.220446049250313e-16, "separation_at_10000": 9.729648393147888e-09},
+      {"perturbation": [0.0, 1e-08], "lambda_at_10": 0.07920246347759141, "lambda_at_100": 0.007920254371128348, "lambda_at_1000": 0.0007920294633155464, "lambda_at_10000": 7.919834488479558e-05, "max_abs_energy_relative_drift": 2.220446049250313e-16, "separation_at_10000": 2.2077710873832856e-08},
+      {"perturbation": [1e-08, 1e-08], "lambda_at_10": 0.0004557662830379595, "lambda_at_100": 4.558470050419563e-05, "lambda_at_1000": 4.5584700504195626e-06, "lambda_at_10000": 4.507775251403673e-07, "max_abs_energy_relative_drift": 2.220446049250313e-16, "separation_at_10000": 1.4206029093204704e-08}
+    ],
+    "interpretation": "The tested asymptotic finite-time exponents tend toward zero; this reduced autonomous one-degree-of-freedom model is integrable, so it cannot test Mixmaster chaos."
+  },
+  "bkl_gauss_control": {
+    "map": "x -> frac(1/x)",
+    "initial": 0.14159265358979312,
+    "finite_time": [
+      {"steps": 10, "finite_lyapunov": 2.869366905297869},
+      {"steps": 100, "finite_lyapunov": 2.3702921529983088},
+      {"steps": 1000, "finite_lyapunov": 2.4714877633012438},
+      {"steps": 10000, "finite_lyapunov": 2.376543967669742}
+    ],
+    "invariant_measure_ensemble": 2.37424938359625,
+    "exact_invariant_measure_value": 2.373138220831251,
+    "ensemble_relative_error": 0.0004682250512193509,
+    "nearby_orbit_first_difference_gt_1e-6": 4,
+    "identical_input_bitwise_repeat": true,
+    "interpretation": "Positive Lyapunov exponent is deterministic chaos, not fundamental randomness."
+  },
+  "quantum_interpretation": {"statement": "The WDW wavefunction evolves linearly/deterministically after clock, branch, inner product and initial state are chosen. A single classical trajectory is not part of that state description; probabilities or signed KG currents are different objects. This is distinct from deterministic chaos."},
+  "next_model_requirement": "To test the user hypothesis inside gravity rather than as a control, relax the KS symmetry to at least two anisotropy degrees of freedom (e.g. Bianchi IX / cosmological billiard) or an inhomogeneous black-hole interior known to support BKL-like dynamics."
+}
