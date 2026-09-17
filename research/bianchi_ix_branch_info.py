@@ -53,6 +53,20 @@ def sector_metrics(p):
     }
 
 
+def _interference_block(data, base):
+    table=data['interference']
+    for key in (base, base+'_k60'):
+        if key in table:
+            return table[key]
+    raise KeyError(f'missing interference block {base!r} (or _k60 variant)')
+
+
+def _field(block, published, local):
+    if published in block: return block[published]
+    if local in block: return block[local]
+    raise KeyError(f'missing {published!r}/{local!r}')
+
+
 def audit(data):
     rows={float(r['s']):r for r in data['selected_comparisons']}
     selected=[]
@@ -68,10 +82,14 @@ def audit(data):
     third_controls=data['numerical_controls']['third_wall_local_controls']
     third_num=max(float(x['wall_sector_tv']) for x in third_controls)
     second_num=float(data['numerical_controls']['second_wall_grid_refinement']['wall_sector_tv'])
-    inter2=data['interference']['second_wall_split_9p5_to_11_k60']
-    inter3=data['interference']['third_wall_split_30_to_34_k60']
+    inter2=_interference_block(data,'second_wall_split_9p5_to_11')
+    inter3=_interference_block(data,'third_wall_split_30_to_34')
     second=next(x for x in selected if x['s']==10.385)
     third=next(x for x in selected if x['s']==32.46)
+    inter2_tv=float(_field(inter2,'channel_total_variation','channel_tv'))
+    inter3_tv=float(_field(inter3,'channel_total_variation','channel_tv'))
+    inter2_l1=float(_field(inter2,'interference_density_L1_half','l1'))
+    inter3_l1=float(_field(inter3,'interference_density_L1_half','l1'))
     return {
         'schema':1,
         'scope':'Derived information audit of saved A/B+/B- one-time wall-sector masses; no new dynamics.',
@@ -80,27 +98,27 @@ def audit(data):
             'second_wall':{
                 'coherent':sector_metrics(inter2['coherent_channels']),
                 'incoherent':sector_metrics(inter2['incoherent_channels']),
-                'sector_tv':float(inter2['channel_tv']),
-                'full_density_l1_half':float(inter2['l1']),
+                'sector_tv':inter2_tv,
+                'full_density_l1_half':inter2_l1,
             },
             'third_wall':{
                 'coherent':sector_metrics(inter3['coherent_channels']),
                 'incoherent':sector_metrics(inter3['incoherent_channels']),
-                'sector_tv':float(inter3['channel_tv']),
-                'full_density_l1_half':float(inter3['l1']),
+                'sector_tv':inter3_tv,
+                'full_density_l1_half':inter3_l1,
             },
         },
         'numerical_scale_comparison':{
             'second_wall_quantum_classical_tv':second['quantum_classical_tv'],
             'second_wall_grid_control_tv':second_num,
             'second_wall_ratio_to_grid_control':float(second['quantum_classical_tv']/second_num),
-            'second_wall_interference_sector_tv':float(inter2['channel_tv']),
-            'second_wall_interference_ratio_to_grid_control':float(inter2['channel_tv']/second_num),
+            'second_wall_interference_sector_tv':inter2_tv,
+            'second_wall_interference_ratio_to_grid_control':float(inter2_tv/second_num),
             'third_wall_quantum_classical_tv':third['quantum_classical_tv'],
             'third_wall_max_local_control_tv':third_num,
             'third_wall_ratio_to_max_local_control':float(third['quantum_classical_tv']/third_num),
-            'third_wall_interference_sector_tv':float(inter3['channel_tv']),
-            'third_wall_interference_ratio_to_max_local_control':float(inter3['channel_tv']/third_num),
+            'third_wall_interference_sector_tv':inter3_tv,
+            'third_wall_interference_ratio_to_max_local_control':float(inter3_tv/third_num),
             'note':'Ratios are scale comparisons, not statistical significance or certified error bars.'
         },
         'limitations':[
