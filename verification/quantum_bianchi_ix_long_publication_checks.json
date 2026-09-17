@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "base_commit": "12e9387d360581eb99a48ceddde59481b608b19b",
+  "date": "2026-09-18",
+  "scope": "Staged local validation of the same-Hamiltonian quantum Bianchi IX calculation through the third central classical wall encounter.",
+  "executed": [
+    {"check":"main segment s=2..6","status":"passed"},
+    {"check":"expanded segment s=6..12","status":"passed"},
+    {"check":"expanded segment s=12..20","status":"passed"},
+    {"check":"expanded segment s=20..36","status":"passed"},
+    {"check":"classical Wigner ensemble n=4096 through s=36","status":"passed"},
+    {"check":"second- and third-wall coherent/incoherent split tests","status":"passed"},
+    {"check":"third-wall timestep, Krylov, cap and grid sensitivity","status":"passed"},
+    {"check":"five lightweight unit tests","status":"passed"},
+    {"check":"baseline plotting","status":"passed"}
+  ],
+  "important_numerical_facts": {
+    "regrid_roundtrip_fidelity_product": 0.9998218106585662,
+    "maximum_saved_edge_mass_within_one_beta_unit": 0.0001969691168954079,
+    "maximum_saved_probability_in_half_cap_region": 4.156971264153637e-06,
+    "second_wall_sector_total_variation_quantum_vs_classical_ensemble": 0.004549170757415677,
+    "third_wall_sector_total_variation_quantum_vs_classical_ensemble": 0.0814393845048833,
+    "second_wall_interference_half_L1": 0.09094050339531724,
+    "third_wall_interference_half_L1": 0.14082397105755184
+  },
+  "failed_or_deferred": [
+    "A monolithic full regeneration exceeded the current local tool-call timeout even though its individual segments and controls completed; the repository therefore provides a manual-dispatch full GitHub Actions job with a 15-minute limit.",
+    "No claim of a unique Wheeler-DeWitt inner product, long-time quantum chaos, singularity resolution, or black-hole observation is made."
+  ],
+  "license_files_changed": false,
+  "lean_changed": false
+}
