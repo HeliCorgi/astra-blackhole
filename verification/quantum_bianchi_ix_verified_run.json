@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "verified_commit": "f77ec6d2698dd69ddd1280e50586be271179653b",
+  "ci": {
+    "name": "Quantum Bianchi IX first-wall audit",
+    "run_id": 35196292524,
+    "job_id": 105120205875,
+    "conclusion": "success",
+    "scope": "Five tests; same-principal-symbol 2D quantum propagation, classical Wigner ensemble, compact baseline regression, regulator diagnostics, plot generation and artifact retention."
+  },
+  "artifact": {
+    "id": 10485504930,
+    "name": "quantum-bianchi-ix-f77ec6d2698dd69ddd1280e50586be271179653b",
+    "sha256": "1b31bcac0032787e2e85d46cbeaf80347d62bb5dc2f9d5247a25c03bf80f7fdc",
+    "expires_at": "2026-10-01T07:48:06Z"
+  },
+  "headline": {
+    "s4p6_quantum_to_single_trajectory": 0.33997353718980333,
+    "s4p6_quantum_to_classical_ensemble_mean": 0.037477739902593746,
+    "s6_quantum_to_single_trajectory": 0.6732791364280278,
+    "s6_quantum_to_classical_ensemble_mean": 0.28562843802337756,
+    "main_max_edge_mass": 2.7605989379899826e-6,
+    "main_max_capped_region_mass": 1.1883185553507176e-6
+  },
+  "scope_note": "Accepted only for s=2..6 through the first resolved wall encounter. This is one square-root quantization of the reduced Bianchi IX principal symbol; not a long-time quantum-chaos result, unique WDW physical Hilbert space, black-hole observation or singularity-resolution proof."
+}
