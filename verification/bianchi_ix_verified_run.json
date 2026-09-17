@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "verified_commit": "f2eb64927d5d94264d009a293012c425218889d5",
+  "ci": {
+    "name": "Bianchi IX bridge audit",
+    "run_id": 35193066552,
+    "job_id": 105109802174,
+    "conclusion": "success",
+    "scope": "Five tests; continuous Bianchi IX integration, Kasner/BKL transition checks, solver refinement, plot generation and artifact retention."
+  },
+  "key_results": {
+    "continuous_u_sequence": [1.7112429032939538, 1.405655264783013, 2.4651062536170265],
+    "bkl_relative_errors": [0.00023766844529848896, 0.000016669970724025873],
+    "detected_bounce_s": [4.615, 10.385],
+    "bkl_initial_delta": 1e-12,
+    "bkl_gap_threshold": 0.1,
+    "bkl_first_threshold_crossing_step": 35
+  },
+  "scope_note": "The finite continuous two-bounce segment is not by itself a proof of chaos. The long sensitivity test uses the asymptotic BKL map. No stochastic force or same-Hamiltonian quantum Bianchi IX solver is included.",
+  "license_files_changed": false,
+  "lean_changed": false
+}
