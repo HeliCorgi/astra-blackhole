@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "scope": "Same reduced vacuum Bianchi IX classical principal symbol and the same direct 2D square-root quantization as the first-wall audit. Piecewise enlarged finite boxes extend the numerical comparison through the third central classical wall encounter at s≈32.46.",
+  "wall_sector_definition": "A/B+/B- sector is the pointwise largest of the three positive asymptotic Bianchi IX wall exponentials. Sector mass is a one-time position probability, not a consistent-histories next-wall probability.",
+  "grids": [
+    {"s_interval":[2,6],"bp":[-5,5],"bm":[-8,5],"nx":100,"ny":130,"ds":0.05,"krylov":48},
+    {"s_interval":[6,12],"bp":[-12,12],"bm":[-18,10],"nx":144,"ny":168,"ds":0.1,"krylov":52},
+    {"s_interval":[12,20],"bp":[-18,18],"bm":[-24,24],"nx":144,"ny":192,"ds":0.15,"krylov":52},
+    {"s_interval":[20,36],"bp":[-32,32],"bm":[-36,36],"nx":214,"ny":240,"ds":0.2,"krylov":52}
+  ],
+  "regrids": [
+    {"s":6.0,"raw_forward_norm":0.9999661961307656,"roundtrip_fidelity":0.9999928535944279},
+    {"s":12.0,"raw_forward_norm":0.9999163287965622,"roundtrip_fidelity":0.9999459686958894},
+    {"s":20.0,"raw_forward_norm":0.9995213870729476,"roundtrip_fidelity":0.9998829808231994}
+  ],
+  "regrid_cumulative_roundtrip_fidelity_product": 0.9998218106585662,
+  "central_bounces": [
+    {"bounce_number":2,"s":10.385,"central_wall":"B-","quantum_sector_mass":[0.10086482682844439,0.17297145330397173,0.7261637198675848],"classical_ensemble_sector_mass":[0.097900390625,0.17138671875,0.730712890625],"sector_total_variation":0.004549170757415677},
+    {"bounce_number":3,"s":32.46,"central_wall":"B+","quantum_sector_mass":[0.30409563450488575,0.3669818077152941,0.32892255777982504],"classical_ensemble_sector_mass":[0.22265625,0.42431640625,0.35302734375],"sector_total_variation":0.0814393845048833}
+  ],
+  "selected_comparisons": [
+    {"s":4.6,"quantum_to_single_trajectory":0.3399735371898104,"quantum_to_classical_ensemble_mean":0.03747773790376457,"quantum_rms_width":0.9282891715422148,"classical_ensemble_rms_width":1.0054150972534446,"quantum_wall_sector_mass":[0.9797417699472122,0.002550641703890766,0.017707588348898788],"classical_ensemble_wall_sector_mass":[0.960693359375,0.00537109375,0.033935546875],"wall_sector_total_variation":0.019048410572211315},
+    {"s":10.385,"quantum_to_single_trajectory":2.0787877241554606,"quantum_to_classical_ensemble_mean":0.27358592779554863,"quantum_rms_width":4.255697205222735,"classical_ensemble_rms_width":4.407213740256916,"quantum_wall_sector_mass":[0.10086482682844439,0.17297145330397173,0.7261637198675848],"classical_ensemble_wall_sector_mass":[0.097900390625,0.17138671875,0.730712890625],"wall_sector_total_variation":0.004549170757415677},
+    {"s":11.0,"quantum_to_single_trajectory":1.5098533354435237,"quantum_to_classical_ensemble_mean":0.24475952809445853,"quantum_rms_width":4.587076789780816,"classical_ensemble_rms_width":4.750287931957115,"quantum_wall_sector_mass":[0.0882171634769568,0.17280000017809033,0.7389828363449513],"classical_ensemble_wall_sector_mass":[0.1064453125,0.172119140625,0.721435546875],"wall_sector_total_variation":0.018228149023042428},
+    {"s":14.0,"quantum_to_single_trajectory":2.582242423028764,"quantum_to_classical_ensemble_mean":0.5764292225261372,"quantum_rms_width":6.194158449426102,"classical_ensemble_rms_width":6.555600245441707,"quantum_wall_sector_mass":[0.14412525518202496,0.1685055124097546,0.6873692324082271],"classical_ensemble_wall_sector_mass":[0.256103515625,0.186279296875,0.5576171875],"wall_sector_total_variation":0.12975204490822378},
+    {"s":20.0,"quantum_to_single_trajectory":7.798058036538073,"quantum_to_classical_ensemble_mean":0.9537432294803507,"quantum_rms_width":10.212388961346807,"classical_ensemble_rms_width":10.768790306951173,"quantum_wall_sector_mass":[0.3741073190405851,0.2594275517264265,0.3664651292330008],"classical_ensemble_wall_sector_mass":[0.367919921875,0.316162109375,0.31591796875],"wall_sector_total_variation":0.05673455764857968},
+    {"s":24.0,"quantum_to_single_trajectory":11.117173779171342,"quantum_to_classical_ensemble_mean":1.3449325727842625,"quantum_rms_width":13.046986795450088,"classical_ensemble_rms_width":13.454070941680083,"quantum_wall_sector_mass":[0.38058637192230227,0.32455192724705817,0.29486170083064067],"classical_ensemble_wall_sector_mass":[0.3076171875,0.365234375,0.3271484375],"wall_sector_total_variation":0.07296918442230171},
+    {"s":30.0,"quantum_to_single_trajectory":16.254967368228517,"quantum_to_classical_ensemble_mean":1.7107100649873364,"quantum_rms_width":17.08672428430543,"classical_ensemble_rms_width":17.25774741697059,"quantum_wall_sector_mass":[0.327257200729059,0.35819972171596975,0.3145430775549723],"classical_ensemble_wall_sector_mass":[0.23095703125,0.41357421875,0.35546875],"wall_sector_total_variation":0.09630016947905848},
+    {"s":32.46,"quantum_to_single_trajectory":18.32841776333121,"quantum_to_classical_ensemble_mean":1.7301568062618422,"quantum_rms_width":18.619632187413757,"classical_ensemble_rms_width":18.755418183694275,"quantum_wall_sector_mass":[0.30409563450488575,0.3669818077152941,0.32892255777982504],"classical_ensemble_wall_sector_mass":[0.22265625,0.42431640625,0.35302734375],"wall_sector_total_variation":0.0814393845048833},
+    {"s":34.0,"quantum_to_single_trajectory":18.804329089785668,"quantum_to_classical_ensemble_mean":1.7102810757348643,"quantum_rms_width":19.61532366918457,"classical_ensemble_rms_width":19.690831060590707,"quantum_wall_sector_mass":[0.28926407895394235,0.37234748611294244,0.3383884349331204],"classical_ensemble_wall_sector_mass":[0.21923828125,0.42724609375,0.353515625],"wall_sector_total_variation":0.07002579770393977},
+    {"s":36.0,"quantum_to_single_trajectory":19.60900774599882,"quantum_to_classical_ensemble_mean":1.7287980477425398,"quantum_rms_width":20.833940252277525,"classical_ensemble_rms_width":20.922737230798756,"quantum_wall_sector_mass":[0.27383131140800365,0.37896910411202317,0.34719958447997823],"classical_ensemble_wall_sector_mass":[0.21728515625,0.4296875,0.35302734375],"wall_sector_total_variation":0.05654615515800113}
+  ],
+  "interference": {
+    "second_wall_split_9p5_to_11": {"split_weights":[0.13670869410486064,0.17177751520150072,0.6915137906936443],"recombination_fidelity":0.9999932577459223,"interference_density_L1_half":0.09094050339531724,"coherent_channels":[0.08851048335079613,0.1727168647175317,0.7387726519316816],"incoherent_channels":[0.11543081292884937,0.17303397970692286,0.711535207364234],"channel_total_variation":0.027237444567445993},
+    "third_wall_split_30_to_34": {"split_weights":[0.327257200729059,0.35819972171596964,0.3145430775549723],"recombination_fidelity":0.9995953856826103,"interference_density_L1_half":0.14082397105755184,"coherent_channels":[0.2883677748652994,0.3725519344470531,0.33908029068765333],"incoherent_channels":[0.3036217938161812,0.36658836291393804,0.3297898432698791],"channel_total_variation":0.015254018950885545}
+  },
+  "numerical_controls": {
+    "second_wall_grid_refinement": {"start_regrid_fidelity":0.9999975976491853,"mean_distance":0.00399091590218542,"wall_sector_tv":0.0015541466806529083,"rms_abs_difference":0.004353414669127531},
+    "third_wall_local_controls": [
+      {"case":"dt01","mean_distance":0.01739850887425158,"wall_sector_tv":0.00030991903055116454,"rms_abs_difference":0.0061635425301282964},
+      {"case":"k60","mean_distance":0.02168042889285511,"wall_sector_tv":0.0008963040886432738,"rms_abs_difference":0.008999588075958798},
+      {"case":"cap50","mean_distance":0.05361181278432099,"wall_sector_tv":0.00130410719963725,"rms_abs_difference":0.027306133723666193},
+      {"case":"grid_240x270","start_regrid_fidelity":0.999927597980514,"mean_distance":0.025098154379649337,"wall_sector_tv":0.0010385633099380953,"rms_abs_difference":0.005570192202526414}
+    ],
+    "max_saved_edge_mass_w1": 0.0001969691168954079,
+    "max_saved_capped_region_mass": 4.156971264153637e-06
+  },
+  "kasner_sequence": {"sample_s":[2.0,6.0,15.0,36.0],"u":[1.7112429032939538,1.4056552647830145,2.4651062536169994,1.4651062539982975],"bkl_checks":[{"from_u":1.7112429032939538,"predicted":1.4059894241035458,"observed_next":1.4056552647830145,"relative_error":0.0002377249450154847},{"from_u":1.4056552647830145,"predicted":2.4651473475511314,"observed_next":2.4651062536169994,"relative_error":1.667024862384319e-05},{"from_u":2.4651062536169994,"predicted":1.4651062536169994,"observed_next":1.4651062539982975,"relative_error":2.602528677774491e-10}]},
+  "limitations": [
+    "Three cubic regrids are nonunitary numerical interventions; round-trip fidelities and raw norms are recorded.",
+    "Wall-sector masses are one-time configuration-space probabilities, not unique quantum histories of which wall is hit next.",
+    "The interference diagnostic depends on the chosen sector projectors and short split/recombine intervals.",
+    "The classical Wigner ensemble controls finite initial spread only; it is not a hidden-variable interpretation.",
+    "The calculation ends at s=36 just after the third central classical wall encounter. It does not establish long-time quantum chaos, singularity resolution, or a prediction for a physical black-hole interior."
+  ]
+}
