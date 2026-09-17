@@ -1,0 +1,57 @@
+{
+  "scope": "Vacuum homogeneous Bianchi IX, same reduced classical principal symbol and a chosen direct square-root quantization. First resolved wall encounter only; no long-time quantum-chaos claim.",
+  "quantization": {
+    "generator": "G(s)=-sqrt(-hbar^2 Delta_beta + W(s,beta))",
+    "hbar": 0.2,
+    "sigma": 0.3,
+    "initial_center": [0, 0],
+    "initial_momentum": [1, 0.31],
+    "ordering": "flat beta-plane finite-difference Laplacian plus multiplicative W",
+    "boundary": "finite Dirichlet box",
+    "potential_cap": "numerical regulator only; accepted runs require small capped-region mass"
+  },
+  "headline": {
+    "at_s_4p6": {
+      "s": 4.6,
+      "quantum_to_single_trajectory": 0.33997353718980333,
+      "quantum_to_classical_ensemble_mean": 0.037477739902593746,
+      "quantum_rms_width": 0.9282891715422177,
+      "classical_ensemble_rms_width": 1.0054150978663932,
+      "width_ratio_quantum_over_ensemble": 0.9232894687101422
+    },
+    "at_s_6": {
+      "s": 6.0,
+      "quantum_to_single_trajectory": 0.6732791364280278,
+      "quantum_to_classical_ensemble_mean": 0.28562843802337756,
+      "quantum_rms_width": 1.6689520384742587,
+      "classical_ensemble_rms_width": 1.7860353731899548,
+      "width_ratio_quantum_over_ensemble": 0.9344451199157501
+    },
+    "main_max_edge_mass": 2.7605989379899826e-06,
+    "main_max_capped_region_mass": 1.1883185553507176e-06
+  },
+  "selected_comparisons": [
+    {"s":2.0,"quantum_to_single_trajectory":1.5642749424385749e-16,"quantum_to_classical_ensemble_mean":2.3220807791403126e-05,"quantum_rms_width":0.42426406871192845,"classical_ensemble_rms_width":0.42430146929863916,"width_ratio_quantum_over_ensemble":0.9999118537421694},
+    {"s":4.6,"quantum_to_single_trajectory":0.33997353718980333,"quantum_to_classical_ensemble_mean":0.037477739902593746,"quantum_rms_width":0.9282891715422177,"classical_ensemble_rms_width":1.0054150978663932,"width_ratio_quantum_over_ensemble":0.9232894687101422},
+    {"s":6.0,"quantum_to_single_trajectory":0.6732791364280278,"quantum_to_classical_ensemble_mean":0.28562843802337756,"quantum_rms_width":1.6689520384742587,"classical_ensemble_rms_width":1.7860353731899548,"width_ratio_quantum_over_ensemble":0.9344451199157501}
+  ],
+  "numerical_check_maxima": [
+    {"case":"main","max_mean_distance":0.000769649618721739,"max_rms_width_abs_difference":0.0007675704430831765},
+    {"case":"cap50_first_bounce","max_mean_distance":0.00013204586817299984,"max_rms_width_abs_difference":0.00029104737532748004},
+    {"case":"dt04_first_bounce","max_mean_distance":0.01810421704935717,"max_rms_width_abs_difference":0.006503687607027131},
+    {"case":"coarse_grid_first_bounce","max_mean_distance":0.023761248585544154,"max_rms_width_abs_difference":0.010060905763730976}
+  ],
+  "environment": {"python":"3.13.5","numpy":"2.3.5","scipy":"1.17.0"},
+  "sources": {
+    "bianchi_ix_model.py": "92e4a56259d18ff58e5f18eaa93a621b0809ad0249f3b5ffcb117b6ce5535a30",
+    "quantum_bianchi_ix_model.py": "e18d5347b4428c28d8942aa5e25c04fb27b8a997e982dc30cf5d62103e257519",
+    "run_quantum_bianchi_ix_audit.py": "bc2fa9089eb4422f351bad3229e1020fab3280bbfdbe239ba9e96e71958221dc"
+  },
+  "limitations": [
+    "This is a quantization choice, not a unique Wheeler-DeWitt physical Hilbert space.",
+    "Only s=2..6, covering the first wall reflection, is accepted.",
+    "The classical Wigner ensemble is a control for finite initial spread, not a hidden-variable interpretation.",
+    "Grid Shannon entropy is diagnostic only.",
+    "No claim that a wave-packet centroid is a physical trajectory."
+  ]
+}

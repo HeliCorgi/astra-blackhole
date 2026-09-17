@@ -1,0 +1,19 @@
+{
+  "scope": "Same-principal-symbol Bianchi IX quantum/classical first-wall audit; local publication check.",
+  "commands": [
+    "python -m unittest discover -s tests -p 'test_quantum_bianchi_ix.py' -v",
+    "python research/run_quantum_bianchi_ix_audit.py --out research/quantum_bianchi_ix_results",
+    "python research/plot_quantum_bianchi_ix.py --results research/quantum_bianchi_ix_results --out artifacts/quantum-bix"
+  ],
+  "tests": 5,
+  "accepted_interval": [2.0, 6.0],
+  "headline": {
+    "s4p6_quantum_to_single": 0.3399735371898081,
+    "s4p6_quantum_to_classical_ensemble": 0.03747773990259054,
+    "s6_quantum_to_single": 0.6732791364280271,
+    "s6_quantum_to_classical_ensemble": 0.2856284380233646,
+    "max_main_edge_mass": 2.760598937989695e-6,
+    "max_main_capped_region_mass": 1.1883185553507172e-6
+  },
+  "claim_limits": "Not a long-time quantum-chaos result, unique quantization, black-hole observation, or singularity-resolution claim."
+}
