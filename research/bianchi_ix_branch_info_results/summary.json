@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "scope": "Derived information audit of saved A/B+/B- one-time wall-sector masses; no new dynamics.",
+  "selected": [
+    {
+      "s": 4.6,
+      "quantum": {"probability": [0.9797417699472104,0.002550641703890762,0.017707588348898757],"entropy_bits": 0.15395108078570893,"effective_branch_count": 1.1126123932444494,"dominant_sector_probability": 0.9797417699472104,"maximum_entropy_fraction": 0.09713231746218688},
+      "classical_ensemble": {"probability": [0.960693359375,0.00537109375,0.033935546875],"entropy_bits": 0.26172061243351613,"effective_branch_count": 1.1989077147919551,"dominant_sector_probability": 0.960693359375,"maximum_entropy_fraction": 0.16512732150724926},
+      "quantum_classical_tv": 0.019048410572210444,
+      "quantum_classical_js_bits": 0.0023084320797203397
+    },
+    {
+      "s": 10.385,
+      "quantum": {"probability": [0.1008648268284443,0.17297145330397157,0.7261637198675841],"entropy_bits": 1.1068928756969727,"effective_branch_count": 2.153812819581971,"dominant_sector_probability": 0.7261637198675841,"maximum_entropy_fraction": 0.6983716492934929},
+      "classical_ensemble": {"probability": [0.097900390625,0.17138671875,0.730712890625],"entropy_bits": 1.0950760272919822,"effective_branch_count": 2.1362433891038144,"dominant_sector_probability": 0.730712890625,"maximum_entropy_fraction": 0.690916048041341},
+      "quantum_classical_tv": 0.004549170757415885,
+      "quantum_classical_js_bits": 2.370060028670227e-05
+    },
+    {
+      "s": 32.46,
+      "quantum": {"probability": [0.30409563450488425,0.3669818077152923,0.32892255777982343],"entropy_bits": 1.5806420513973158,"effective_branch_count": 2.991029317186085,"dominant_sector_probability": 0.3669818077152923,"maximum_entropy_fraction": 0.9972740999727915},
+      "classical_ensemble": {"probability": [0.22265625,0.42431640625,0.35302734375],"entropy_bits": 1.5376092425114773,"effective_branch_count": 2.9031301333963206,"dominant_sector_probability": 0.42431640625,"maximum_entropy_fraction": 0.9701234204669618},
+      "quantum_classical_tv": 0.08143938450488425,
+      "quantum_classical_js_bits": 0.006366551653639972
+    }
+  ],
+  "interference": {
+    "second_wall": {"coherent":{"probability":[0.08851048335079531,0.1727168647175301,0.7387726519316747],"entropy_bits":1.06988599332179,"effective_branch_count":2.099267469422488,"dominant_sector_probability":0.7387726519316747,"maximum_entropy_fraction":0.6750229061160709},"incoherent":{"probability":[0.11543081292884864,0.17303397970692178,0.7115352073642296],"entropy_bits":1.1468411551151916,"effective_branch_count":2.214285356342734,"dominant_sector_probability":0.7115352073642296,"maximum_entropy_fraction":0.7235762073824334},"sector_tv":0.027237444567445993,"full_density_l1_half":0.09094050339531724},
+    "third_wall": {"coherent":{"probability":[0.28836777486529774,0.3725519344470509,0.3390802906876514],"entropy_bits":1.5770996091467149,"effective_branch_count":2.983694051844391,"dominant_sector_probability":0.3725519344470509,"maximum_entropy_fraction":0.9950390677565787},"incoherent":{"probability":[0.3036217938161817,0.3665883629139386,0.3297898432698796],"entropy_bits":1.5806480651824986,"effective_branch_count":2.9910417851330653,"dominant_sector_probability":0.3665883629139386,"maximum_entropy_fraction":0.9972778942487949},"sector_tv":0.015254018950885545,"full_density_l1_half":0.14082397105755184}
+  },
+  "numerical_scale_comparison": {"second_wall_quantum_classical_tv":0.004549170757415885,"second_wall_grid_control_tv":0.0015541466806529083,"second_wall_ratio_to_grid_control":2.927118021771758,"second_wall_interference_sector_tv":0.027237444567445993,"second_wall_interference_ratio_to_grid_control":17.525658875392214,"third_wall_quantum_classical_tv":0.08143938450488425,"third_wall_max_local_control_tv":0.00130410719963725,"third_wall_ratio_to_max_local_control":62.448381948613886,"third_wall_interference_sector_tv":0.015254018950885545,"third_wall_interference_ratio_to_max_local_control":11.696905710764113,"note":"Ratios are scale comparisons, not statistical significance or certified error bars."},
+  "limitations": ["Sector entropy is not entropy of the full quantum state.","One-time sector mass is not a consistent-histories probability of which wall is hit next.","The three sector projectors are a chosen asymptotic partition of beta-space.","Classical-ensemble spread and quantum coherence are distinct; low-order similarity does not make the states equivalent.","Numerical-control ratios compare observed scales only and are not sigma levels or rigorous continuum error bounds."]
+}
