@@ -1,81 +1,111 @@
 # Bianchi IX GR reduction audit.
-# Executed by pinned Cadabra 2.5.14. Cadabra's scalar backend is SymPy;
-# the Euler-angle metric is constructed independently of repository code and
-# Christoffel/Ricci components are computed in this Cadabra process.
+# Executed by pinned Cadabra 2.5.14.
+#
+# Runtime-stable curvature path:
+#   SU(2) left-invariant orthonormal frame -> structure constants
+#   -> Levi-Civita connection from the Koszul formula
+#   -> Riemann contraction -> scalar curvature.
+#
+# This avoids the expensive generic Euler-angle coordinate-metric inversion and
+# trigonometric simplification that timed out nondeterministically in CI.
+# The closed Bianchi IX curvature formula is NOT assumed; it is checked only
+# after the frame curvature has been constructed.
 
 import json
 from pathlib import Path
 import sympy as sp
 
-# Probe the Cadabra scalar backend explicitly.
-{th}::Coordinate;
-probe := \sin(th)**2 + \cos(th)**2;
+# Probe Cadabra's scalar bridge explicitly so this remains an executed Cadabra
+# evidence path rather than a standalone Python script.
+{q}::Coordinate;
+probe := \sin(q)**2 + \cos(q)**2;
 map_sympy(probe, "simplify");
 probe_sym = sp.simplify(SympyBridge(probe).to_sympy())
 if probe_sym != 1:
     raise RuntimeError("Cadabra SymPy bridge probe failed: %s" % probe_sym)
 
-th,ph,ps=sp.symbols("th ph ps", real=True)
+# Spatial diagonal scale factors in h=a^2 omega_1^2+b^2 omega_2^2+c^2 omega_3^2,
+# with omega_i=sigma_i/2.  For the dual invariant frame e_i,
+# [e_2,e_3]=2e_1 and cyclic permutations (orientation sign does not affect R).
 a,b,c=sp.symbols("a b c", positive=True, nonzero=True)
-coords=(th,ph,ps)
-
-# SU(2) left-invariant one-forms sigma_i, with omega_i=sigma_i/2.
-# The corresponding coordinate metric h = sum_i a_i^2 omega_i^2.
-h=sp.Matrix([
- [
-  (a**2*sp.cos(ps)**2+b**2*sp.sin(ps)**2)/4,
-  (a**2-b**2)*sp.cos(ps)*sp.sin(ps)*sp.sin(th)/4,
-  0
- ],
- [
-  (a**2-b**2)*sp.cos(ps)*sp.sin(ps)*sp.sin(th)/4,
-  ((a**2*sp.sin(ps)**2+b**2*sp.cos(ps)**2)*sp.sin(th)**2+c**2*sp.cos(th)**2)/4,
-  c**2*sp.cos(th)/4
- ],
- [0,c**2*sp.cos(th)/4,c**2/4]
-])
-hi=sp.simplify(h.inv())
+lam=[
+    2*a/(b*c),
+    2*b/(c*a),
+    2*c/(a*b),
+]
 
 n=3
-Gamma=[[[sp.Integer(0) for _ in range(n)] for _ in range(n)] for _ in range(n)]
+structure=[[[sp.Integer(0) for _ in range(n)] for _ in range(n)] for _ in range(n)]
+# [E_2,E_3]=lambda_1 E_1, cyclic, in the orthonormal frame E_i.
+structure[1][2][0]=lam[0]
+structure[2][1][0]=-lam[0]
+structure[2][0][1]=lam[1]
+structure[0][2][1]=-lam[1]
+structure[0][1][2]=lam[2]
+structure[1][0][2]=-lam[2]
+
+# Koszul formula in an orthonormal left-invariant frame:
+# 2 Gamma_{ij}^k = c_{ij}^k - c_{jk}^i + c_{ki}^j.
+Gamma=[
+    [
+        [
+            sp.cancel(
+                (structure[i][j][k]-structure[j][k][i]+structure[k][i][j])/2
+            )
+            for k in range(n)
+        ]
+        for j in range(n)
+    ]
+    for i in range(n)
+]
+
+# R(E_i,E_j)E_k =
+#   nabla_i nabla_j E_k - nabla_j nabla_i E_k - nabla_[E_i,E_j] E_k.
+R=[
+    [
+        [
+            [sp.Integer(0) for _ in range(n)]
+            for _ in range(n)
+        ]
+        for _ in range(n)
+    ]
+    for _ in range(n)
+]
 for i in range(n):
     for j in range(n):
         for k in range(n):
-            val=sp.Integer(0)
-            for l in range(n):
-                val += hi[i,l]*(
-                    sp.diff(h[l,j],coords[k])+
-                    sp.diff(h[l,k],coords[j])-
-                    sp.diff(h[j,k],coords[l])
-                )/2
-            Gamma[i][j][k]=sp.trigsimp(sp.simplify(val))
+            for out_index in range(n):
+                value=sp.Integer(0)
+                for m in range(n):
+                    value += Gamma[j][k][m]*Gamma[i][m][out_index]
+                    value -= Gamma[i][k][m]*Gamma[j][m][out_index]
+                    value -= structure[i][j][m]*Gamma[m][k][out_index]
+                R[i][j][k][out_index]=sp.cancel(value)
 
-Ric=sp.MutableDenseMatrix(n,n,[0]*(n*n))
-for j in range(n):
-    for l in range(n):
-        val=sp.Integer(0)
-        for i in range(n):
-            val += sp.diff(Gamma[i][j][l],coords[i])
-            val -= sp.diff(Gamma[i][j][i],coords[l])
-            for m in range(n):
-                val += Gamma[i][i][m]*Gamma[m][j][l]
-                val -= Gamma[i][l][m]*Gamma[m][j][i]
-        Ric[j,l]=sp.trigsimp(sp.simplify(val))
-
+# Scalar curvature in the orthonormal frame:
+# R3 = sum_{i,j} <R(E_i,E_j)E_j,E_i>.
 r3=sp.Integer(0)
-for j in range(n):
-    for l in range(n):
-        r3 += hi[j,l]*Ric[j,l]
-r3=sp.factor(sp.trigsimp(sp.simplify(r3)))
+for i in range(n):
+    for j in range(n):
+        r3 += R[i][j][j][i]
+r3=sp.factor(sp.cancel(r3))
 
+# Negative control on the normalization: isotropic a=b=c=r must give 6/r^2.
+r=sp.symbols("r", positive=True, nonzero=True)
+isotropic_delta=sp.simplify(r3.subs({a:r,b:r,c:r})-6/r**2)
+if isotropic_delta != 0:
+    raise RuntimeError("isotropic curvature normalization mismatch: %s" % isotropic_delta)
+
+# Only now compare with the standard diagonal Bianchi IX closed form.
 closed=sp.factor(
-  2*(-a**4-b**4-c**4+2*(a**2*b**2+b**2*c**2+c**2*a**2))/(a**2*b**2*c**2)
+    2*(-a**4-b**4-c**4+2*(a**2*b**2+b**2*c**2+c**2*a**2))
+    /(a**2*b**2*c**2)
 )
-curvature_closed_delta=sp.simplify(r3-closed)
+curvature_closed_delta=sp.factor(sp.cancel(r3-closed))
 if curvature_closed_delta != 0:
     raise RuntimeError(
-      "spatial Ricci scalar did not reduce to the diagonal Bianchi IX closed form: %s"
-      % curvature_closed_delta
+        "frame Ricci scalar did not reduce to the diagonal Bianchi IX closed form: %s"
+        % curvature_closed_delta
     )
 
 alpha,bp,bm=sp.symbols("alpha beta_plus beta_minus", real=True)
@@ -83,14 +113,14 @@ sq3=sp.sqrt(3)
 aa=sp.exp(alpha+bp+sq3*bm)
 bb=sp.exp(alpha+bp-sq3*bm)
 cc=sp.exp(alpha-2*bp)
-rmis=sp.simplify(closed.subs({a:aa,b:bb,c:cc}))
+rmis=sp.factor(closed.subs({a:aa,b:bb,c:cc}))
 V=(
- sp.exp(-8*bp)
- +2*sp.exp(4*bp)*(sp.cosh(4*sq3*bm)-1)
- -4*sp.exp(-2*bp)*sp.cosh(2*sq3*bm)
+    sp.exp(-8*bp)
+    +2*sp.exp(4*bp)*(sp.cosh(4*sq3*bm)-1)
+    -4*sp.exp(-2*bp)*sp.cosh(2*sq3*bm)
 )/6
 curvature_misner_delta=sp.simplify(
- sp.expand((rmis+12*sp.exp(-2*alpha)*V).rewrite(sp.exp))
+    sp.expand((rmis+12*sp.exp(-2*alpha)*V).rewrite(sp.exp))
 )
 if curvature_misner_delta != 0:
     raise RuntimeError("R3 != -12 exp(-2 alpha) V: %s" % curvature_misner_delta)
@@ -115,14 +145,14 @@ if kinetic_delta != 0:
 L=sp.exp(3*alpha)/(2*N)*(-ad**2+bpd**2+bmd**2)-N*sp.exp(alpha)*V
 pa,pp,pm=sp.symbols("p_alpha p_plus p_minus", real=True)
 momenta={
- "p_alpha":sp.diff(L,ad),
- "p_plus":sp.diff(L,bpd),
- "p_minus":sp.diff(L,bmd),
+    "p_alpha":sp.diff(L,ad),
+    "p_plus":sp.diff(L,bpd),
+    "p_minus":sp.diff(L,bmd),
 }
 vel={
- ad:-N*sp.exp(-3*alpha)*pa,
- bpd:N*sp.exp(-3*alpha)*pp,
- bmd:N*sp.exp(-3*alpha)*pm,
+    ad:-N*sp.exp(-3*alpha)*pa,
+    bpd:N*sp.exp(-3*alpha)*pp,
+    bmd:N*sp.exp(-3*alpha)*pm,
 }
 H=sp.simplify((pa*ad+pp*bpd+pm*bmd-L).subs(vel))
 C=sp.simplify(H/N)
@@ -134,52 +164,54 @@ if constraint_delta != 0:
 s=sp.symbols("s", real=True)
 W=sp.simplify(2*sp.exp(-4*s)*V)
 wall_terms=[
- ("1/3",-4,-8,0),
- ("1/3",-4,4,4),
- ("1/3",-4,4,-4),
- ("-2/3",-4,4,0),
- ("-2/3",-4,-2,2),
- ("-2/3",-4,-2,-2),
+    ("1/3",-4,-8,0),
+    ("1/3",-4,4,4),
+    ("1/3",-4,4,-4),
+    ("-2/3",-4,4,0),
+    ("-2/3",-4,-2,2),
+    ("-2/3",-4,-2,-2),
 ]
 
 result={
- "schema":1,
- "backend":{
-   "name":"Cadabra",
-   "version":"2.5.14",
-   "mode":"cadabra2-cli with Cadabra SymPy scalar backend; explicit Euler-angle component GR calculation"
- },
- "checks":{
-   "cadabra_sympy_bridge_probe":str(sp.simplify(probe_sym-1)),
-   "spatial_curvature_closed_form_zero":str(curvature_closed_delta),
-   "spatial_curvature_misner_zero":str(curvature_misner_delta),
-   "adm_kinetic_zero":str(kinetic_delta),
-   "constraint_zero":str(constraint_delta),
- },
- "derived":{
-   "spatial_curvature_closed":sp.sstr(closed),
-   "spatial_curvature_relation":"R3=-12*exp(-2*alpha)*V",
-   "adm_kinetic_invariant":"6/N**2*(-alpha_dot**2+beta_plus_dot**2+beta_minus_dot**2)",
-   "normalized_lagrangian":sp.sstr(L),
-   "momenta":{k:sp.sstr(v) for k,v in momenta.items()},
-   "constraint":sp.sstr(C),
-   "reduced_s_generator":"-sqrt(p_plus**2+p_minus**2+W)",
-   "W":sp.sstr(W),
-   "wall_terms":[
-      {"coefficient":coef,"s":se,"beta_plus":pe,"sqrt3_beta_minus":me}
-      for coef,se,pe,me in wall_terms
-   ]
- },
- "conventions":{
-   "omega_normalization":"omega_i=sigma_i/2",
-   "misner_scale_factors":[
-      "exp(alpha+beta_plus+sqrt(3)*beta_minus)",
-      "exp(alpha+beta_plus-sqrt(3)*beta_minus)",
-      "exp(alpha-2*beta_plus)"
-   ],
-   "extrinsic_curvature_sign":"K_ij=+(1/(2N))*dot(h_ij); quadratic invariant insensitive to global sign",
-   "normalized_adm_factor":"1/12 after dropping the common spatial-volume/(2 kappa) factor"
- }
+    "schema":1,
+    "backend":{
+        "name":"Cadabra",
+        "version":"2.5.14",
+        "mode":"cadabra2-cli with Cadabra SymPy scalar bridge; SU(2) invariant-frame Koszul/Riemann reduction"
+    },
+    "checks":{
+        "cadabra_sympy_bridge_probe":str(sp.simplify(probe_sym-1)),
+        "isotropic_curvature_zero":str(isotropic_delta),
+        "spatial_curvature_closed_form_zero":str(curvature_closed_delta),
+        "spatial_curvature_misner_zero":str(curvature_misner_delta),
+        "adm_kinetic_zero":str(kinetic_delta),
+        "constraint_zero":str(constraint_delta),
+    },
+    "derived":{
+        "spatial_curvature_closed":sp.sstr(closed),
+        "spatial_curvature_relation":"R3=-12*exp(-2*alpha)*V",
+        "adm_kinetic_invariant":"6/N**2*(-alpha_dot**2+beta_plus_dot**2+beta_minus_dot**2)",
+        "normalized_lagrangian":sp.sstr(L),
+        "momenta":{k:sp.sstr(v) for k,v in momenta.items()},
+        "constraint":sp.sstr(C),
+        "reduced_s_generator":"-sqrt(p_plus**2+p_minus**2+W)",
+        "W":sp.sstr(W),
+        "wall_terms":[
+            {"coefficient":coef,"s":se,"beta_plus":pe,"sqrt3_beta_minus":me}
+            for coef,se,pe,me in wall_terms
+        ]
+    },
+    "conventions":{
+        "omega_normalization":"omega_i=sigma_i/2",
+        "su2_frame_brackets":"[e_2,e_3]=2 e_1 and cyclic permutations up to global orientation sign",
+        "misner_scale_factors":[
+            "exp(alpha+beta_plus+sqrt(3)*beta_minus)",
+            "exp(alpha+beta_plus-sqrt(3)*beta_minus)",
+            "exp(alpha-2*beta_plus)"
+        ],
+        "extrinsic_curvature_sign":"K_ij=+(1/(2N))*dot(h_ij); quadratic invariant insensitive to global sign",
+        "normalized_adm_factor":"1/12 after dropping the common spatial-volume/(2 kappa) factor"
+    }
 }
 out=Path("artifacts/gr-reduction")
 out.mkdir(parents=True,exist_ok=True)
