@@ -261,6 +261,15 @@ python verify_predictors.py
 
 ## Physics audit gates
 
+### GR reduction checker：Cadabra実行済み、xAct未実行
+
+[Bianchi IX CAS縮約監査](docs/BIANCHI_IX_GR_REDUCTION_CAS_ja.md) / [Cadabra結果](cas/results/bianchi_ix_cadabra_result.json) / [実装比較](cas/results/bianchi_ix_comparison.json)
+
+SU(2) Euler角のBianchi IX空間metricから独立に3-curvatureを再計算し、ADM kinetic termとLegendre変換までCadabra 2.5.14で実行した。(^{(3)}R=-12e^{-2\alpha}V)、repoのHamiltonian constraint、(W=2e^{-4s}V)、`s=-alpha`後のgenerator符号が一致した。現行classical/quantum実装とのwall relation差は最大約2.22e-21、gradientとreduced Hamilton方程式の照合点差は0。
+
+ただし実行済みbackendはCadabra 1系統だけ。xAct/xCoba用Wolfram sourceは保存したがCIにlicensed Wolfram runtimeがないため未実行で、`GR_REDUCTION` gateは **PARTIAL**。量子化やfactor orderingの正しさまで確認したものではない。
+
+
 [物理監査スタック](PHYSICS_AUDIT.md) / [machine-readable obligations](audit/physics_obligations.json)
 
 Bianchi IX timeless class-operator系列について、GR reduction/CAS、Lean semantics、clock、inner product/domain、factor ordering、regulator、known limits、claim compilerを別gateとして管理する。未実施gateはPASSにせず、blocking gateにPENDING/PARTIAL/FAILが残れば `PHYSICAL INTERPRETATION NOT IDENTIFIED` を自動付与する。
