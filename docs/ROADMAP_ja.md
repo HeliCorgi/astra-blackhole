@@ -185,3 +185,38 @@ Leanには3つの抽象意味論定理を追加するが、continuous operator�
 Cadabra backendはPASS。一方、xAct/xCoba sourceは用意したがlicensed Wolfram runtimeがCIにないため未実行。したがって physics audit のGR_REDUCTIONはPENDINGからPARTIALへ進めるが、完全PASSにはしない。
 
 次はxActを実際に走らせる実行環境を接続するか、同等に独立した第二CAS/解析certificateを追加する。その後もclock/domain/ordering/regulatorの各gateは別に残る。
+
+
+### 6j. 第二独立CAS backend：Maxima/ctensorでGR_REDUCTIONをPASS
+
+Cadabra実行が内部でSymPy scalar backendを使うため、第二backendに同じSymPy系を重ねず、
+Ubuntu 24.04のMaxima 5.46.0 + ctensorを採用した。
+
+同じSU(2) Euler角metricからMaxima ctensorで `cmetric` / `christof` / `ricci` /
+`scurvature` を実行し、Misner変数代入、ADM kinetic、canonical momenta、
+Legendre transformもMaxima自身で計算した。
+
+symbolic deltaは全項0。repo実装比較でもwall relation差は最大約2.33e-21、
+classical/quantum wall gradient差0、reduced Hamilton rhs差0。
+Cadabra 2.5.14とMaxima/ctensor 5.46.0の二独立実行が同じconstraintへ到達したため、
+Bianchi IXの `GR_REDUCTION` gateをPASSへ昇格する。xActは任意の第三cross-checkとして
+sourceのみ保持し、未実行であることを明示する。
+
+### 6k. ブラックホール本筋へ戻すblocking gate
+
+Bianchi IXはSchwarzschild内部そのものではなく、異方性を増やしたsingularity stress test。
+この系列だけを続けてBH特異点の主張へすり替えないため、
+`known_limits.schwarzschild_ks_bridge` をblocking obligationとして追加した。
+
+次は [BLACK_HOLE_RETURN_GATE_ja.md](BLACK_HOLE_RETURN_GATE_ja.md) に従い、
+
+1. Schwarzschild interior → Kantowski–Sachs の古典写像を独立CASで導出
+2. 既存KS WDW `C=p_T^2-p_x^2-e^{-2x}=0` への正準変換・規格化を照合
+3. L2 positive-frequency branch とKG/induced-inner-product sectorで同じ物理状態を対応付け
+4. 質量を含む4次元曲率observableとdomainを固定
+5. clock / ordering / regulator gateをKS側でも通す
+
+の順で本来のBH singularity questionへ戻る。
+
+Bianchi IXのtimeless scattering regulator gateがFAILである事実は保持し、
+BH側で同じ数値設計を無条件に移植しない。
