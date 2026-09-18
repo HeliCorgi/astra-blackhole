@@ -34,6 +34,14 @@ python -m unittest discover -s tests -p 'test_bianchi_ix_history_coarse.py' -v
 python research/bianchi_ix_history_coarse.py --input research/bianchi_ix_history_coarse_input.json --out artifacts/bianchi-ix-history-coarse/summary.json --check-against research/bianchi_ix_history_coarse_results/summary.json
 ```
 
+### 固定時刻を外した ever-entered pilot
+
+[finite-clock CAP監査](docs/BIANCHI_IX_EVER_ENTERED_AUDIT_ja.md) / [scan結果](research/bianchi_ix_ever_entered_results/summary.json)
+
+第一壁Aに条件付けた後、「B+またはB-領域へ一度でも入った」対「入らなかった」を複素吸収ポテンシャルで構成した。古典Wigner対照では99.8729%が第三壁時刻までにBへ入る。一方、量子CAPのstrict干渉はV0=.075付近で最小になるものの、.085/.10で再増加し広いregulator plateauを作らない。width変更でもweak/real干渉はゼロを横切る。したがって対角branch重みをever-B確率として採用しない。
+
+これはHalliwellのtimeless/constraint-compatible S-matrix class operatorそのものではなく、現行内部時計での有限区間pilot。次はこの失敗を負の対照としてtimeless構成へ進む。
+
 ## 文献再現：同じ初期状態・時計・内積で比較
 
 [ChibaらのSchwarzschildセクターを再計算](docs/CHIBA_REPRODUCTION_ja.md)。同じGaussian境界データとKG期待値で、κ=.01,.05,.1,1の四条件を二つの数値法で照合しました。同じ解・同じ切片を以前の座標へ移すとKG流束と期待値は一致します。一方、スカラー解を以前のL2(dx)状態と同一視できない定数の裾を確認しました。原著の数値列との点ごとの再現、特異点回避の証明ではありません。

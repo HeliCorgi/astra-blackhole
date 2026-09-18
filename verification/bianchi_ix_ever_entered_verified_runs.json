@@ -1,0 +1,114 @@
+{
+  "schema": 1,
+  "scope": "GitHub Actions records for the finite-clock Bianchi IX ever-entered-B CAP pilot.",
+  "runs": [
+    {
+      "run_id": 35364455277,
+      "head_sha": "2e5b212d9cad22dc6b351dfb898b91033b6248be",
+      "conclusion": "success",
+      "artifacts": [
+        {
+          "id": 10556360673,
+          "name": "bianchi-ix-ever-entered-classical",
+          "sha256": "736f53407dd3ee2659e8b67a8f1a588a9ef9a2c58586b9cc8c78cd0a5917c883"
+        },
+        {
+          "id": 10556221169,
+          "name": "bianchi-ix-ever-entered-strong",
+          "sha256": "a3034fc2a9a02f75fef1eb1a197659ddb8bd9ce9dc4e46930457b37bea80fd3c"
+        },
+        {
+          "id": 10555826473,
+          "name": "bianchi-ix-ever-entered-weak",
+          "sha256": "251c6f31ddb438dbefaf4fbe139ac9b839af86f3620f317df7b4f39903af7ada"
+        },
+        {
+          "id": 10555796732,
+          "name": "bianchi-ix-ever-entered-krylov",
+          "sha256": "70c6daaacc451c234dd847316a410b8778c11890c4fd3b60421015d77e2e71c4"
+        },
+        {
+          "id": 10555604137,
+          "name": "bianchi-ix-ever-entered-main",
+          "sha256": "362caa88ebbb7af6cf6ed5c474dc6c1a73282d2d511c7801c005ae96ee9f4b84"
+        }
+      ]
+    },
+    {
+      "run_id": 35364996074,
+      "head_sha": "e43494adf96ea86e7e6115585a67f746fb1085ec",
+      "conclusion": "success",
+      "artifacts": [
+        {
+          "id": 10556750088,
+          "name": "bianchi-ix-ever-entered-narrow",
+          "sha256": "6157a31399e6502dce52b9b56046766abd61d09b27a735a6f8c99bf91b8c1d99"
+        },
+        {
+          "id": 10556675213,
+          "name": "bianchi-ix-ever-entered-v0075",
+          "sha256": "00e5d31217926a890d7fbb7fb25dbdae76b1713d52da378c2b878dcfd1095a13"
+        },
+        {
+          "id": 10556620151,
+          "name": "bianchi-ix-ever-entered-v006",
+          "sha256": "58be2846f939752779fe316d77f63302053dd678eb1c9c88845f77a4298f2335"
+        },
+        {
+          "id": 10556237461,
+          "name": "bianchi-ix-ever-entered-broad",
+          "sha256": "db292294d7c728d7445dbef3ad5d49ab78b4ff818a66ca2656e51417812bb42b"
+        },
+        {
+          "id": 10556057676,
+          "name": "bianchi-ix-ever-entered-v004",
+          "sha256": "b6801a07554e12b7a2b06ecc0ec4b473d44731bdc0e892771964e99b9b8bf30b"
+        }
+      ]
+    },
+    {
+      "run_id": 35365597586,
+      "head_sha": "870155efe6327b0491e9b52f140243cc7206d42e",
+      "conclusion": "success",
+      "artifacts": [
+        {
+          "id": 10556536057,
+          "name": "bianchi-ix-ever-entered-v010_k78",
+          "sha256": "278bc582c22ea33f4e1a509f09cc316070ace08999a14a53c74f4cf2ed33e4ad"
+        },
+        {
+          "id": 10556461149,
+          "name": "bianchi-ix-ever-entered-v0075_k90",
+          "sha256": "62cbe56f559c33c21645fa9929f59f54197adc580a1c4e150c7366b76a3c85dd"
+        },
+        {
+          "id": 10556323310,
+          "name": "bianchi-ix-ever-entered-v0075_narrow",
+          "sha256": "7a2dbb949f4bd50dc788cd8431849865b1c2fb527b3f98e35972881986b94f1a"
+        },
+        {
+          "id": 10555738902,
+          "name": "bianchi-ix-ever-entered-v0085",
+          "sha256": "0e5bc2da06aa8c62122b28907161c49196c31eeeff00b0577aca6bf890d933b0"
+        },
+        {
+          "id": 10555708915,
+          "name": "bianchi-ix-ever-entered-v0075_broad",
+          "sha256": "6a49627e87782558010861932236ad5c9d29db27061195606edb1dd1c0b6cb9c"
+        }
+      ]
+    }
+  ],
+  "key_results": {
+    "classical_everB_given_A": 0.9987293519695044,
+    "lowest_scanned_strict_offdiag_abs": 0.005779173059132837,
+    "lowest_case": "V0=0.075,width=0.30,maxdim=90",
+    "V0_0p085_offdiag_abs": 0.013613635464115495,
+    "V0_0p100_maxdim78_offdiag_abs": 0.023229272880997402,
+    "probability_interpretation_accepted": false
+  },
+  "license_files_changed": false,
+  "lean_changed": false,
+  "publication_commit": "5c8d594a08b1f4072b60103386858a6e8a440ea5",
+  "publication_note": "Published summary consolidates three successful pilot/sensitivity workflow runs; no additional quantum time evolution is performed by the publication check."
+}

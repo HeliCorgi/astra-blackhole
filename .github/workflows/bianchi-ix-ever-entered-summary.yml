@@ -1,0 +1,35 @@
+name: Bianchi IX ever-entered publication check
+on:
+  push:
+    paths:
+      - 'research/bianchi_ix_ever_entered_results/**'
+      - 'research/check_bianchi_ix_ever_entered_results.py'
+      - 'verification/bianchi_ix_ever_entered_verified_runs.json'
+      - 'docs/BIANCHI_IX_EVER_ENTERED_AUDIT_ja.md'
+      - 'README.md'
+      - 'docs/ROADMAP_ja.md'
+      - '.github/workflows/bianchi-ix-ever-entered-summary.yml'
+  pull_request:
+    paths:
+      - 'research/bianchi_ix_ever_entered_results/**'
+      - 'research/check_bianchi_ix_ever_entered_results.py'
+      - 'verification/bianchi_ix_ever_entered_verified_runs.json'
+      - 'docs/BIANCHI_IX_EVER_ENTERED_AUDIT_ja.md'
+      - 'README.md'
+      - 'docs/ROADMAP_ja.md'
+      - '.github/workflows/bianchi-ix-ever-entered-summary.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - run: python research/check_bianchi_ix_ever_entered_results.py
