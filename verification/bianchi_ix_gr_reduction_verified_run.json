@@ -82,7 +82,7 @@
     "artifact_id": 10563268270,
     "artifact_sha256": "ed67bfb97a55a327a2b730e41405f5b99f9020952228de32eeafd4b4b3f0b3c9"
   },
-  "note": "Cadabra and Maxima independently reproduce the Bianchi IX reduction. The Cadabra coordinate-metric path later exhibited nondeterministic symbolic-runtime failure on main; it was replaced by an equivalent SU(2) invariant-frame Koszul/Riemann derivation that completed in 5.07 s on PR #12 while preserving all algebraic and implementation comparisons. xAct remains an optional unexecuted third backend.",
+  "note": "Cadabra and Maxima independently reproduce the Bianchi IX reduction. After a prior Cadabra coordinate-metric run was cancelled after ~20 minutes, the Cadabra derivation was reformulated in an SU(2) invariant orthonormal frame using the Koszul formula and algebraic Riemann contraction. The replacement completed in 5.07 s and 3.72 s on PR runners and 4.92 s on main, with all symbolic residuals and repository comparisons passing. xAct remains an optional unexecuted third backend.",
   "maxima": {
     "status": "PASS",
     "backend": "Maxima/ctensor 5.46.0",
@@ -109,6 +109,37 @@
       "job_id": 105736275544,
       "artifact_id": 10564665571,
       "artifact_sha256": "0dbe0f4ff34b614b027d9a99ebcd16741b0c62e031a7d2ab3015d811bb9736ef"
+    }
+  },
+  "runtime_fix_merge": {
+    "pull_request": 12,
+    "merge_commit": "e141e556633fc58e06b492d610453ae4ece66361",
+    "main_run": {
+      "run_id": 35391485495,
+      "conclusion": "success",
+      "cadabra": {
+        "job_id": 105750607355,
+        "runtime_seconds": 4.92,
+        "artifact_id": 10565958301,
+        "artifact_sha256": "e53c9dbedda928dd8953634db87b33b0579984f8901feeb44f7cf7b1b16fb5de"
+      },
+      "maxima": {
+        "job_id": 105750607012,
+        "artifact_id": 10566083366,
+        "artifact_sha256": "e18c27742a815757923e6a4cc952615df76ef8ceb9690e8022685e00bab2b2f6"
+      }
+    },
+    "physics_audit_run": {
+      "run_id": 35391485513,
+      "conclusion": "success"
+    },
+    "classical_reproduce_run": {
+      "run_id": 35391485507,
+      "conclusion": "success"
+    },
+    "runtime_policy": {
+      "external_timeout_seconds": 180,
+      "pipeline_failure_propagation": "set -euo pipefail"
     }
   }
 }
