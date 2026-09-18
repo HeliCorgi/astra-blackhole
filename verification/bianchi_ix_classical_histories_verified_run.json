@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "verified_commit": "21ad1313708eedd3776526c898d8bad3d8b3e012",
+  "ci": {
+    "name": "Bianchi IX classical history control",
+    "run_id": 35328749788,
+    "job_id": 105547911142,
+    "conclusion": "success"
+  },
+  "artifact": {
+    "id": 10539747843,
+    "name": "bianchi-ix-classical-histories",
+    "sha256": "94b300610c3e522ea90615cd895c717c3f70a38e167efb99d09f3b109ddc34c5",
+    "expires_at": "2026-10-02T09:18:04Z"
+  },
+  "key_results": {
+    "sample_count": 4096,
+    "first_A_frequency": 0.960693359375,
+    "A_to_Bminus_to_Bplus_conditional_frequency": 0.3537484116899619,
+    "refined_max_abs_difference": 0,
+    "label_change_fraction": 0
+  },
+  "scope_note": "Deterministic classical Wigner-ensemble fixed-time sector histories; empirical control only.",
+  "license_files_changed": false,
+  "lean_changed": false
+}

@@ -4,6 +4,25 @@
 
 **従来の物質研究は古典的モデル内の合成データによる試験です。追加したWDW研究も、時計と内積を限定した量子幾何学模型です。実在するブラックホール内部の観測、特異点の解消、量子重力の完成、新しい自然法則の発見を主張しません。**
 
+## 最新：Bianchi IX の複数時刻履歴とデコヒーレンス
+
+[三時刻履歴・デコヒーレンス監査](docs/BIANCHI_IX_HISTORIES_AUDIT_ja.md) / [量子結果要約](research/bianchi_ix_histories_results/summary.json) / [古典履歴対照](research/bianchi_ix_classical_history_results/summary.json)
+
+同じ縮約 Bianchi IX Hamiltonian と同じ2次元平方根量子化で、s=4.6, 10.385, 32.46 の A/B+/B- 射影から class operator を構成した。第一壁で A にある量子重みは 0.979742 なので、主解析は A に条件付けた9履歴。完全27履歴ではない。
+
+共通 block-Krylov で branch を同じ線形近似作用素に通し、102次元を主値、114次元を数値対照とした。最大非対角 |D| は 0.019418、規格化 pair coherence は 0.179989。102→114 の最大非対角差は 0.001905 なので、この細分履歴集合について厳密なデコヒーレンスは採用しない。実部だけの弱い整合性は cubic regrid の系統（branch Gram 相対変化約0.00638）と同程度のため、成立／不成立を強く判定しない。
+
+A→B-→B+ の量子対角重みは 0.324336（A条件付き）だが、**通常の履歴確率とは呼ばない**。同じ初期 Wigner 集団の4096本の古典軌道では、同じ固定三時刻ラベルの条件付き頻度は 0.353748。古典側は各標本に一本の軌道がある対照であり、量子対角重みとの差をそのまま確率差とは解釈しない。
+
+最初の独立 single-vector Lanczos 試作は branch 再結合が相対ノルムで約2.39%ずれたため棄却した。公開版では共通 block-Krylov により最終射影の再結合誤差は数値上0。有限箱、potential cap、三回の非ユニタリ cubic regrid、選んだ内部時計と壁分割に依存する模型内結果であり、現実のブラックホールの履歴や量子重力の検証ではない。
+
+```sh
+python -m unittest discover -s tests -p 'test_bianchi_ix_histories.py' -v
+python research/run_bianchi_ix_histories.py --out artifacts/bianchi-ix-histories --main-maxdim 102 --control-maxdim 114
+python -m unittest discover -s tests -p 'test_bianchi_ix_classical_histories.py' -v
+python research/run_bianchi_ix_classical_histories.py --out artifacts/bianchi-ix-classical-histories
+```
+
 ## 文献再現：同じ初期状態・時計・内積で比較
 
 [ChibaらのSchwarzschildセクターを再計算](docs/CHIBA_REPRODUCTION_ja.md)。同じGaussian境界データとKG期待値で、κ=.01,.05,.1,1の四条件を二つの数値法で照合しました。同じ解・同じ切片を以前の座標へ移すとKG流束と期待値は一致します。一方、スカラー解を以前のL2(dx)状態と同一視できない定数の裾を確認しました。原著の数値列との点ごとの再現、特異点回避の証明ではありません。
