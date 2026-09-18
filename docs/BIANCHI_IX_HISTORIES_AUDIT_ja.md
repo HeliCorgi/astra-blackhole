@@ -1,86 +1,73 @@
 # Bianchi IX 複数時刻履歴・デコヒーレンス監査
 
-## 目的
+## 問い
 
-第三壁までの監査では、各時刻の A/B+/B- セクター確率質量を計算した。しかし一時刻の確率から
-「どの壁を順に選んだか」の確率を作ることはできない。
+一時刻の A/B+/B- 質量ではなく、第一・第二・第三壁をまたぐ有限時計の class operator
 
-今回は同じ縮約 Bianchi IX Hamiltonian と同じ2次元平方根量子化を変えず、三つの時計時刻
+C_(A,j,k)=P_k(s3) U(s3,s2) P_j(s2) U(s2,s1) P_A(s1) U(s1,s0)
 
-- s1 = 4.6（第一壁）
-- s2 = 10.385（第二壁）
-- s3 = 32.46（第三壁）
+を作り、branch state |psi_alpha>=C_alpha|psi0> と
 
-で壁セクター射影 P_A, P_B+, P_B- を挿入する。
+D(alpha,beta)=<psi_beta|psi_alpha>
 
-第一壁では既存計算で A セクターが約98%なので、主解析は A に条件付けた9履歴
+を直接計算する。時刻は s1=4.6, s2=10.385, s3=32.46。
 
-C_(A,j,k) = P_k(s3) U(s3,s2) P_j(s2) U(s2,s1) P_A(s1) U(s1,s0)
+既存第一壁計算で A の一時刻質量が約98%なので、主解析は A に条件付けた9履歴を扱う。
+第一壁の残り約2%は除外質量として別に報告し、完全27履歴を計算したとはしない。
 
-を扱う。第一壁の非A成分は捨てたことを隠さず、別の欠落質量として報告する。完全な27履歴は今回の主計算ではない。
+## 確率と呼ぶ条件
 
-## デコヒーレンス汎関数
-
-各クラス演算子の branch state を
-
-|psi_alpha> = C_alpha |psi0>
-
-として
-
-D(alpha,beta) = <psi_beta|psi_alpha>
-
-を直接計算する。
-
-D の対角要素は「履歴重み」だが、非対角要素が無視できないとき通常の加法的確率として解釈しない。
-特に最終壁 k だけを指定した粗視化事象について、
+D の対角成分は履歴重みであり、非対角成分が無視できない限り通常の加法的確率とは呼ばない。
+最終壁 k の粗視化確率
 
 || sum_j |psi_(A,j,k)> ||^2
 
-と
+と細分履歴の対角和
 
 sum_j ||psi_(A,j,k)||^2
 
-の差を additivity defect として保存する。差があれば、第二壁を細かく区別した履歴の干渉が残る。
+の差も additivity defect として保存する。
 
-## 数値上の重要点
+## 数値上の修正：独立Lanczosを棄却
 
-長時間版は s=6,12,20 で有限箱を拡大する。従来の regrid_state は全波束を再正規化するが、
-これを各 branch に適用すると branch の相対振幅を破壊する。
+最初の試作では第二壁の3 branchを別々の単一ベクトルLanczosで第三壁まで進めた。
+各Lanczos空間が入力branchに依存するため、数値時間発展が厳密には同じ線形演算子にならない。
 
-この監査では同じ cubic interpolation を使うが、再格子化は線形・非正規化のまま適用する。
-全9 branch を最後に足し戻した状態と、中間射影を入れずに A branch を進めた状態の fidelity を検査する。
+試作では全branchを足し戻した状態と未射影状態の相対ノルム差が約2.39%になり、
+調べたい干渉量と同程度だった。この試作結果は科学的判定から棄却する。
 
-主設定は従来の長時間版と同じ grid / potential cap / time step / Krylov 次数を用いる。
-第三区間について Krylov 次数60の対照も取り、デコヒーレンス行列の数値依存を記録する。
+本版では、3 branch全体から共通の block-Krylov 空間を各時間刻みで構成する。
+投影された Hermitian 行列 H=Q^* A Q の同じ matrix function
+
+Q exp(+i ds sqrt(H)/hbar) Q^*
+
+を全branchへ作用させる。これにより、表現されたbranch span内で同一の線形近似時間発展を使う。
+
+s=6,12,20 の再格子化も branch ごとに再正規化せず、同じ cubic interpolation を線形に適用する。
+main block dimension と大きい control dimension を比較し、D行列の差を保存する。
 
 ## 先行研究との区別
 
-decoherent / consistent histories では、複数時刻の class operator と decoherence functional を使い、
-履歴に確率を割り当てられる条件を調べる。量子宇宙論では Wheeler-DeWitt 型模型に対する class operator
-の構成も研究されている（例: Halliwell, arXiv:1108.5991; arXiv:0909.2597）。
+decoherent / consistent histories では class operator と decoherence functional によって履歴確率が成立する条件を調べる。
+量子宇宙論への応用として Halliwell, arXiv:1108.5991 および arXiv:0909.2597 などがある。
 
-今回の有限時計 s と逐次射影によるクラス演算子は、選んだ時間発展を持つ縮約模型に対する直接的な有限時間監査である。
-timeless WDW 制約と可換な不変 class operator を構成したものではない。
+今回の構成は選んだ内部時計 s と時間依存平方根Hamiltonianを持つ有限時間模型での逐次射影。
+timeless Wheeler-DeWitt制約と可換な不変class operatorを構成したものではない。
 
-## 判定
+## 判定項目
 
-CIで実計算した summary.json を成果物として保存する。次を分離して報告する。
-
-1. branch の対角重み
-2. decoherence functional の最大非対角要素
-3. 正規化 pair coherence
-4. coarse/fine additivity defect
-5. branch 再結合 closure
-6. Krylov 次数対照
-7. 第一壁で条件付けにより除外した非A質量
-
-数値的に非対角成分が十分小さくない場合、P(A→B-→B+) のような量を通常の履歴確率と呼ばない。
+- 9履歴の対角重み
+- max |D(alpha,beta)|, alpha!=beta
+- max |Re D(alpha,beta)|
+- sqrt(Daa Dbb) で規格化したpair coherence
+- coarse/fine additivity defect
+- 最終射影の再結合closure
+- branch Gram matrixの変化（主に非ユニタリな数値regridの影響）
+- block-Krylov dimension control
+- 第一壁で条件付けから除外した非A質量
 
 ## 限界
 
-- 一様真空 Bianchi IX minisuperspace の限定模型。
-- 一つの平方根量子化・L2表現・内部時計 s=-alpha。
-- A/B+/B- は beta 平面の選んだ漸近壁分割。
-- 有限箱、potential cap、三回の再格子化を含む。
-- 第一壁Aに条件付けた9履歴であり、完全な27履歴ではない。
-- 現実のブラックホール観測、特異点解消、量子重力の検証ではない。
+一様真空 Bianchi IX minisuperspace、一つの平方根量子化、L2表現、内部時計 s=-alpha に限定。
+A/B+/B- は選んだbeta平面分割。有限箱、potential cap、cubic regridを含む。
+現実のブラックホール観測、特異点解消、量子重力の検証ではない。
