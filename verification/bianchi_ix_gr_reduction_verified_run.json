@@ -6,7 +6,7 @@
   "cadabra": {
     "status": "PASS",
     "backend": "Cadabra 2.5.14",
-    "mode": "cadabra2-cli with Cadabra SymPy scalar backend; Euler-angle metric -> Christoffel/Ricci -> ADM/Legendre derivation",
+    "mode": "cadabra2-cli with Cadabra SymPy scalar bridge; SU(2) invariant-frame Koszul/Riemann reduction",
     "run_id": 35384482998,
     "job_id": 105728047567,
     "artifact_id": 10563541351,
@@ -18,7 +18,30 @@
     "comparison": "PASS",
     "max_wall_relation_abs": 2.2234614865425384e-21,
     "max_classical_quantum_wall_gradient_abs": 0,
-    "max_reduced_hamilton_rhs_abs": 0
+    "max_reduced_hamilton_rhs_abs": 0,
+    "runtime_stability": {
+      "failed_main_run": {
+        "run_id": 35388086412,
+        "job_id": 105739644306,
+        "conclusion": "cancelled",
+        "stage": "Run independent Cadabra Bianchi IX reduction",
+        "observed_runtime_before_cancel_seconds": 1165,
+        "cause_classification": "symbolic-runtime instability in the generic Euler-angle coordinate Christoffel/Ricci simplification path; no algebraic mismatch was emitted"
+      },
+      "replacement_method": "SU(2) left-invariant orthonormal frame; Koszul connection from structure constants; algebraic Riemann contraction; isotropic R3=6/r^2 negative control",
+      "pull_request_run": {
+        "run_id": 35390816083,
+        "job_id": 105748498197,
+        "conclusion": "success",
+        "cadabra_reduction_wall_seconds": 5.07,
+        "external_timeout_seconds": 180,
+        "artifact_id": 10565872378,
+        "artifact_sha256": "66560b90507f5eb1cbc14040ab9d46f5cf6eaa77576373946087db00f3660658"
+      }
+    },
+    "checks_added": [
+      "isotropic_curvature_zero"
+    ]
   },
   "xact": {
     "status": "PENDING_OPTIONAL_THIRD_BACKEND",
@@ -59,7 +82,7 @@
     "artifact_id": 10563268270,
     "artifact_sha256": "ed67bfb97a55a327a2b730e41405f5b99f9020952228de32eeafd4b4b3f0b3c9"
   },
-  "note": "Cadabra and Maxima independently reproduce the Bianchi IX spatial-curvature, ADM kinetic, Hamiltonian-constraint and reduced-generator relations and agree with the implementation. xAct remains unexecuted as an optional third backend.",
+  "note": "Cadabra and Maxima independently reproduce the Bianchi IX reduction. The Cadabra coordinate-metric path later exhibited nondeterministic symbolic-runtime failure on main; it was replaced by an equivalent SU(2) invariant-frame Koszul/Riemann derivation that completed in 5.07 s on PR #12 while preserving all algebraic and implementation comparisons. xAct remains an optional unexecuted third backend.",
   "maxima": {
     "status": "PASS",
     "backend": "Maxima/ctensor 5.46.0",
