@@ -1,29 +1,25 @@
 """Small-grid timeless Bianchi IX complex-potential S-matrix pilot.
 
 This is a NEW second-order constraint quantization motivated by Halliwell's
-complex-potential class operators.  It is deliberately separated from the
-existing internal-clock square-root branch, whose non-equivalence to the naive
-second-order constraint is recorded in bianchi_ix_timeless_bridge.py.
+complex-potential class operators. It is deliberately separated from the
+existing internal-clock square-root branch.
 
 Constraint on a finite Dirichlet (s,beta+,beta-) box:
 
     C = P_s^2 - A(s)
-      = hbar^2 L_s - hbar^2(L_+ + L_-) - W(s,beta),
+      = hbar^2 L_s - hbar^2(L_+ + L_-) - W(s,beta).
 
-where L=-d^2 is the positive 1D Dirichlet Laplacian.  An absolute potential cap
-is used only to keep this first scattering pilot numerically finite.
-
-For B={B+,B-}, define V=V0 F_B >=0.  The finite-window interaction-picture
-approximation to the no-entry scattering class operator is
+For B={B+,B-}, V=V0 F_B >= 0. The finite-window interaction-picture
+approximation to the no-entry scattering operator is
 
     S_T = exp(+i C T/hbar)
           exp[-i (C - i V) (2T)/hbar]
           exp(+i C T/hbar).
 
-The exact infinite-window S-matrix is expected to commute with C.  This module
-only tests whether finite-window commutator leakage and window dependence show
-a convergent regime on a small regulated grid.  It does NOT assign physical
-probabilities or implement the induced inner product.
+The exact infinite-window S-matrix is expected to commute with C. This module
+tests only whether a finite-box approximation trends toward that behavior.
+It does not assign physical probabilities or implement the induced inner
+product.
 """
 from __future__ import annotations
 
@@ -55,9 +51,9 @@ def _interior(bounds,n):
 
 
 def positive_laplacian_1d(n,dx):
-    main=np.full(int(n),2.0/dx**2)
-    off=np.full(int(n)-1,-1.0/dx**2)
-    return sparse.diags((off,main,off),(-1,0,1),format="csr")
+    return sparse.diags(
+        (np.full(int(n)-1,-1.0/dx**2),np.full(int(n),2.0/dx**2),np.full(int(n)-1,-1.0/dx**2)),
+        (-1,0,1),format="csr")
 
 
 def build_constraint(spec=WDWGridSpec()):
@@ -67,9 +63,7 @@ def build_constraint(spec=WDWGridSpec()):
     Ls=positive_laplacian_1d(spec.ns,ds)
     Lp=positive_laplacian_1d(spec.nx,dx)
     Lm=positive_laplacian_1d(spec.ny,dy)
-    Is=sparse.eye(spec.ns,format="csr")
-    Ip=sparse.eye(spec.nx,format="csr")
-    Im=sparse.eye(spec.ny,format="csr")
+    Is=sparse.eye(spec.ns,format="csr");Ip=sparse.eye(spec.nx,format="csr");Im=sparse.eye(spec.ny,format="csr")
     Ipm=sparse.kron(Ip,Im,format="csr")
     Lbeta=sparse.kron(Lp,Im,format="csr")+sparse.kron(Ip,Lm,format="csr")
     kinetic=(spec.hbar**2)*(sparse.kron(Ls,Ipm,format="csr")-sparse.kron(Is,Lbeta,format="csr"))
@@ -83,89 +77,88 @@ def build_constraint(spec=WDWGridSpec()):
     if width==0:
         F=(d>0).astype(float)
     else:
-        x=np.clip(.5+d/width,0.,1.)
-        F=x*x*(3.-2.*x)
-    return {
-        "spec":spec,"s":s,"bp":bp,"bm":bm,"S":S,"BP":BP,"BM":BM,
-        "W":W,"Wreg":Wreg,"F_B":F,"C":C,
-        "shape":(spec.ns,spec.nx,spec.ny),
-        "spacing":(ds,dx,dy),
-    }
+        x=np.clip(.5+d/width,0.,1.);F=x*x*(3.-2.*x)
+    return {"spec":spec,"s":s,"bp":bp,"bm":bm,"S":S,"BP":BP,"BM":BM,"W":W,"Wreg":Wreg,
+            "F_B":F,"C":C,"shape":(spec.ns,spec.nx,spec.ny),"spacing":(ds,dx,dy)}
 
 
 def near_zero_modes(C,k=4):
-    n=C.shape[0]
-    k=min(int(k),n-2)
+    n=C.shape[0];k=min(int(k),n-2)
     vals,vecs=eigsh(C,k=k,sigma=0.0,which="LM")
-    order=np.argsort(np.abs(vals))
-    vals=vals[order];vecs=vecs[:,order]
-    for j in range(vecs.shape[1]):
-        vecs[:,j]/=np.linalg.norm(vecs[:,j])
+    order=np.argsort(np.abs(vals));vals=vals[order];vecs=vecs[:,order]
+    vecs/=np.linalg.norm(vecs,axis=0,keepdims=True)
     return vals,vecs
 
 
+def edge_mask(grid,width_cells=1):
+    m=np.zeros(grid["shape"],bool);w=int(width_cells)
+    m[:w,:,:]=True;m[-w:,:,:]=True;m[:,:w,:]=True;m[:,-w:,:]=True;m[:,:,:w]=True;m[:,:,-w:]=True
+    return m.ravel()
+
+
+def constraint_moments(C,psi):
+    psi=np.asarray(psi,complex);n=float(np.vdot(psi,psi).real)
+    mean=float(np.vdot(psi,C@psi).real/n)
+    spread=float(np.linalg.norm(C@psi-mean*psi)/np.sqrt(n))
+    return mean,spread
+
+
+def edge_mass(grid,psi,width_cells=1):
+    p=np.abs(np.asarray(psi))**2;m=edge_mask(grid,width_cells)
+    return float(p[m].sum()/p.sum())
+
+
+def capped_mass(grid,psi):
+    p=np.abs(np.asarray(psi))**2
+    m=(np.abs(grid["W"]).ravel()>=.999*grid["spec"].potential_abs_cap)
+    return float(p[m].sum()/p.sum())
+
+
+def low_energy_edge_min_packet(grid,k=20):
+    """Choose a near-zero spectral superposition minimizing one-cell edge mass."""
+    vals,U=near_zero_modes(grid["C"],k)
+    e=edge_mask(grid,1).astype(float)
+    E=U.conj().T@(e[:,None]*U);E=(E+E.conj().T)/2
+    ev,V=np.linalg.eigh(E)
+    coeff=V[:,0]
+    psi=U@coeff;psi/=np.linalg.norm(psi)
+    mean,spread=constraint_moments(grid["C"],psi)
+    return vals,psi,{"edge_subspace_minimum":float(ev[0]),"energy_mean":mean,"energy_spread":spread,
+                     "edge_mass_one_cell":edge_mass(grid,psi,1),"capped_region_mass":capped_mass(grid,psi)}
+
+
 def smatrix_action(C,F_B,v,T,v0,hbar):
-    """Finite-window complex-potential S_T action."""
-    v=np.asarray(v,complex)
-    T=float(T);v0=float(v0)
+    v=np.asarray(v,complex);T=float(T);v0=float(v0)
     if T<0 or v0<0: raise ValueError("nonnegative T and v0 required")
     if T==0: return v.copy()
     V=sparse.diags(v0*np.asarray(F_B,float).ravel(),0,format="csr")
     x=expm_multiply((1j*T/hbar)*C,v)
     x=expm_multiply((-1j*(2*T)/hbar)*(C-1j*V),x)
-    x=expm_multiply((1j*T/hbar)*C,x)
-    return x
+    return expm_multiply((1j*T/hbar)*C,x)
 
 
-def commutator_relative(C,F_B,v,T,v0,hbar):
+def commutator_metrics(C,F_B,v,T,v0,hbar):
     Sv=smatrix_action(C,F_B,v,T,v0,hbar)
     SCv=smatrix_action(C,F_B,C@v,T,v0,hbar)
     CSv=C@Sv
-    num=float(np.linalg.norm(CSv-SCv))
+    diff=CSv-SCv
     den=float(np.linalg.norm(CSv)+np.linalg.norm(SCv))
-    return num/den if den else 0.0
-
-
-def energy_leakage(C,psi,lam):
-    psi=np.asarray(psi,complex)
-    return float(np.linalg.norm(C@psi-lam*psi)/max(np.linalg.norm(psi),1e-30))
-
-
-def edge_mass(grid,psi,width_cells=1):
-    p=np.abs(np.asarray(psi).reshape(grid["shape"]))**2
-    m=np.zeros(grid["shape"],bool)
-    w=int(width_cells)
-    m[:w,:,:]=True;m[-w:,:,:]=True;m[:,:w,:]=True;m[:,-w:,:]=True;m[:,:,:w]=True;m[:,:,-w:]=True
-    return float(p[m].sum()/p.sum())
-
-
-def capped_mass(grid,psi):
-    p=np.abs(np.asarray(psi).reshape(grid["shape"]))**2
-    m=np.abs(grid["W"])>=.999*grid["spec"].potential_abs_cap
-    return float(p[m].sum()/p.sum())
+    return {"absolute":float(np.linalg.norm(diff)),"relative":float(np.linalg.norm(diff)/den) if den else 0.0}
 
 
 def run_pilot(spec=WDWGridSpec()):
     g=build_constraint(spec);C=g["C"];F=g["F_B"]
     herm=float(sparse.linalg.norm(C-C.getH()))
-    vals,U=near_zero_modes(C,4)
-    lam=float(vals[0]);psi=U[:,0]
-    combo=U[:,0]+(.45j)*U[:,1]-.25*U[:,2]
-    combo/=np.linalg.norm(combo)
-    Ts=(.25,.5,1.0)
-    v0s=(0.0,.025,.05,.10)
-    rows=[]
-    states={}
+    vals,psi,packet=low_energy_edge_min_packet(g,20)
+    Ts=(.25,.5,1.0);v0s=(0.0,.025,.05,.10)
+    rows=[];states={}
     for v0 in v0s:
         for T in Ts:
-            y=smatrix_action(C,F,psi,T,v0,spec.hbar)
-            states[(v0,T)]=y
-            rows.append({
-                "v0":v0,"T":T,
-                "norm2":float(np.vdot(y,y).real),
-                "constraint_energy_leakage":energy_leakage(C,y,lam),
-                "low_energy_commutator_relative":commutator_relative(C,F,combo,T,v0,spec.hbar),
-            })
+            y=smatrix_action(C,F,psi,T,v0,spec.hbar);states[(v0,T)]=y
+            em,es=constraint_moments(C,y);cm=commutator_metrics(C,F,psi,T,v0,spec.hbar)
+            rows.append({"v0":v0,"T":T,"norm2":float(np.vdot(y,y).real),
+                         "constraint_energy_mean":em,"constraint_energy_spread":es,
+                         "commutator_absolute":cm["absolute"],"commutator_relative":cm["relative"]})
     window=[]
     for v0 in (.025,.05,.10):
         prev=None
@@ -175,23 +168,23 @@ def run_pilot(spec=WDWGridSpec()):
                 window.append({"v0":v0,"from_T":prev[0],"to_T":T,
                     "relative_state_change":float(np.linalg.norm(y-prev[1])/max(np.linalg.norm(y),1e-30))})
             prev=(T,y)
-    zero=max(r["low_energy_commutator_relative"] for r in rows if r["v0"]==0.0)
+    zero=max(r["commutator_relative"] for r in rows if r["v0"]==0.0)
     zero_id=max(float(np.linalg.norm(states[(0.0,T)]-psi)) for T in Ts)
     return {
-      "schema":1,
+      "schema":2,
       "constraint":"C=hbar^2 L_s-hbar^2(L_++L_-)-W_reg on a finite Dirichlet 3D minisuperspace box.",
       "grid":{"s_bounds":spec.s_bounds,"bp_bounds":spec.bp_bounds,"bm_bounds":spec.bm_bounds,
               "ns":spec.ns,"nx":spec.nx,"ny":spec.ny,"hbar":spec.hbar,
               "potential_abs_cap":spec.potential_abs_cap,"absorber_width":spec.absorber_width},
       "matrix":{"dimension":int(C.shape[0]),"hermiticity_residual":herm,
-                "near_zero_eigenvalues":[float(x) for x in vals]},
-      "reference_mode":{"lambda":lam,"constraint_residual":energy_leakage(C,psi,lam),
-                        "edge_mass_one_cell":edge_mass(g,psi,1),"capped_region_mass":capped_mass(g,psi)},
+                "near_zero_eigenvalues":[float(x) for x in vals[:8]]},
+      "reference_packet":packet,
       "rows":rows,"window_increment":window,
       "negative_control":{"v0_zero_max_commutator_relative":zero,"v0_zero_max_identity_error":zero_id},
-      "interpretation_rule":"Do not call C_no or 1-C_no probabilities. First require a finite-window regime where commutator leakage and S_T changes decrease and numerical box/cap dependence is controlled.",
+      "decision_rule":"A usable finite-window scattering pilot needs decreasing commutator leakage and decreasing successive S_T changes as T grows, plus controlled edge/cap dependence.",
       "limitations":[
         "This is a new naive second-order WDW constraint quantization, not the existing finite-clock square-root model.",
+        "The reference is a near-zero spectral packet chosen to reduce finite-box edge mass; this selection is a numerical diagnostic, not a physical state prescription.",
         "Ordinary Euclidean grid norms are numerical diagnostics only; the induced physical inner product is not implemented.",
         "The scattering window is finite and the minisuperspace box has Dirichlet boundaries and an absolute potential cap.",
         "No claim of a converged infinite-window S-matrix, physical history probability, black-hole observation, or singularity resolution."
