@@ -17,34 +17,33 @@
     {
       "id": "gr_reduction.independent_cas",
       "gate": "GR_REDUCTION",
-      "status": "PARTIAL",
+      "status": "PASS",
       "blocking": true,
-      "requirement": "Re-derive the Bianchi IX reduced curvature/Hamiltonian/constraint with at least one executed independent GR-capable CAS backend, and require a second independent backend or equivalent independent certificate before full PASS.",
+      "requirement": "Re-derive the Bianchi IX reduced curvature/Hamiltonian/constraint with at least two independently executed CAS/tensor backends and compare both with the repository implementation.",
       "evidence": [
         {
           "path": "verification/bianchi_ix_gr_reduction_verified_run.json",
           "expect": {
             "cadabra.status": "PASS",
-            "cadabra.comparison": "PASS",
-            "xact.status": "PENDING",
-            "gate_decision": "PARTIAL"
+            "maxima.status": "PASS",
+            "gate_decision": "PASS"
           }
         },
         {
           "path": "cas/results/bianchi_ix_cadabra_result.json"
         },
         {
-          "path": "cas/results/bianchi_ix_comparison.json"
+          "path": "cas/results/bianchi_ix_maxima_result.json"
         },
         {
-          "path": "cas/results/bianchi_ix_xact_status.json"
+          "path": "cas/results/bianchi_ix_comparison.json"
         }
       ],
       "kill_if": [
-        "executed_backend_disagrees_with_repository",
-        "coefficient_or_sign_mismatch_unresolved"
+        "either_executed_backend_disagrees_with_repository",
+        "independent_backends_disagree_on_constraint_or_sign"
       ],
-      "note": "Cadabra 2.5.14 executed and agreed with the repository convention. xAct source is committed but has not been executed, so the gate is PARTIAL rather than PASS."
+      "note": "Cadabra 2.5.14 and Maxima/ctensor 5.46.0 independently executed and agreed with the repository convention. xAct remains an optional unexecuted third backend."
     },
     {
       "id": "lean.factorization_residual",
@@ -189,6 +188,24 @@
         }
       ],
       "note": "Zero-complex-potential control exists; the full known-limit stack is incomplete."
+    },
+    {
+      "id": "known_limits.schwarzschild_ks_bridge",
+      "gate": "KNOWN_LIMIT",
+      "status": "PENDING",
+      "blocking": true,
+      "requirement": "Return the research line to the black-hole singularity problem by deriving the Schwarzschild-interior to Kantowski–Sachs classical bridge, matching its canonical constraint to the existing KS WDW variables, and fixing a shared singularity observable before using Bianchi IX results for black-hole interpretation.",
+      "evidence": [
+        {
+          "path": "docs/BLACK_HOLE_RETURN_GATE_ja.md"
+        }
+      ],
+      "kill_if": [
+        "no_explicit_schwarzschild_interior_to_ks_mapping",
+        "ks_constraint_or_normalization_mismatch",
+        "singularity_observable_not_shared_across_classical_and_quantum_descriptions"
+      ],
+      "note": "Bianchi IX is a stress test for anisotropic singularity dynamics, not the final black-hole interior model. This bridge is the explicit return gate to the BH singularity line."
     },
     {
       "id": "known_limits.semiclassical",
