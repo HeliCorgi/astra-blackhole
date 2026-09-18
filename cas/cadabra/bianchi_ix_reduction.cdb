@@ -9,10 +9,10 @@ from pathlib import Path
 import sympy as sp
 
 {th,ph,ps}::Coordinate;
-{i,j,k,l,m,n}::Indices(values={th,ph,ps}, position=fixed);
+{\mu,\nu,\rho,\sigma,\lambda,\kappa}::Indices(values={th,ph,ps}, position=fixed);
 \partial{#}::PartialDerivative;
-h_{i j}::Metric.
-h^{i j}::InverseMetric.
+h_{\mu\nu}::Metric.
+h^{\mu\nu}::InverseMetric.
 
 metric := {
  h_{th th} = 1/4*(a**2*\cos(ps)**2 + b**2*\sin(ps)**2),
@@ -27,23 +27,23 @@ metric := {
 };
 complete(metric, $h^{i j}$);
 
-ch := \Gamma^{i}_{j k} = 1/2 h^{i l}(
-       \partial_{k}{h_{j l}} + \partial_{j}{h_{k l}} - \partial_{l}{h_{j k}}
+ch := \Gamma^{\mu}_{\nu\rho} = 1/2 h^{\mu\sigma}(
+       \partial_{\rho}{h_{\nu\sigma}} + \partial_{\nu}{h_{\rho\sigma}} - \partial_{\sigma}{h_{\nu\rho}}
       );
 evaluate(ch, metric, rhsonly=True);
 
-rm := R^{i}_{j k l} =
-      \partial_{k}{\Gamma^{i}_{l j}} - \partial_{l}{\Gamma^{i}_{k j}}
-      + \Gamma^{i}_{k m}\Gamma^{m}_{l j}
-      - \Gamma^{i}_{l m}\Gamma^{m}_{k j};
+rm := R^{\rho}_{\sigma\mu\nu} =
+      \partial_{\mu}{\Gamma^{\rho}_{\nu\sigma}} - \partial_{\nu}{\Gamma^{\rho}_{\mu\sigma}}
+      + \Gamma^{\rho}_{\mu\lambda}\Gamma^{\lambda}_{\nu\sigma}
+      - \Gamma^{\rho}_{\nu\lambda}\Gamma^{\lambda}_{\mu\sigma};
 substitute(rm, ch);
 evaluate(rm, metric, rhsonly=True);
 
-ricci := R_{j l} = R^{i}_{j i l};
+ricci := R_{\sigma\nu} = R^{\rho}_{\sigma\rho\nu};
 substitute(ricci, rm);
 evaluate(ricci, metric, rhsonly=True);
 
-R3 := R_{j l} h^{j l};
+R3 := R_{\sigma\nu} h^{\sigma\nu};
 substitute(R3, ricci);
 evaluate(R3, metric);
 map_sympy(R3, "simplify");
