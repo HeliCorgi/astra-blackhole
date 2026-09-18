@@ -42,6 +42,20 @@ python research/bianchi_ix_history_coarse.py --input research/bianchi_ix_history
 
 これはHalliwellのtimeless/constraint-compatible S-matrix class operatorそのものではなく、現行内部時計での有限区間pilot。次はこの失敗を負の対照としてtimeless構成へ進む。
 
+
+### timeless化の前に：平方根枝とWDW constraintは同じではない
+
+[factorization監査](docs/BIANCHI_IX_TIMELESS_BRIDGE_ja.md) / [結果](research/bianchi_ix_timeless_bridge_results/summary.json)
+
+現行量子Bianchi IXは `i hbar d_s psi=G(s)psi`, `G=-sqrt(A(s))` を直接発展させる。これを素朴な二階constraint `[(i hbar d_s)^2-A(s)]psi=0` と同一視すると、時間依存する平方根のため `i hbar (d_s G)psi` が残る。既存packetでこの項を `||A psi||` に対して測ると s=3.0/4.6/5.5 で約 **2.11% / 7.57% / 9.04%**。delta scanの最大相対幅は4.33e-4、Krylov scanは2.77e-5で、数値揺らぎより十分大きい。
+
+したがって次のHalliwell型timeless WDWは、既存finite-clock平方根模型の単なる座標・表現変換ではなく**新しいconstraint量子化**として実装する。
+
+```sh
+python -m unittest discover -s tests -p 'test_bianchi_ix_timeless_bridge.py' -v
+python research/run_bianchi_ix_timeless_bridge.py --out artifacts/timeless-bridge --check-against research/bianchi_ix_timeless_bridge_results/summary.json
+```
+
 ## 文献再現：同じ初期状態・時計・内積で比較
 
 [ChibaらのSchwarzschildセクターを再計算](docs/CHIBA_REPRODUCTION_ja.md)。同じGaussian境界データとKG期待値で、κ=.01,.05,.1,1の四条件を二つの数値法で照合しました。同じ解・同じ切片を以前の座標へ移すとKG流束と期待値は一致します。一方、スカラー解を以前のL2(dx)状態と同一視できない定数の裾を確認しました。原著の数値列との点ごとの再現、特異点回避の証明ではありません。

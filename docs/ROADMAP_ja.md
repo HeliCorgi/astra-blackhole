@@ -103,3 +103,9 @@ V0=.025→.075でstrict off-diagonalは.1105→.0073へ低下するが、.085で
 古典Wigner 4096軌道ではA条件付きever-B頻度0.998729、ds=.01/.005一致。量子対角重みと確率比較しない。
 
 次はfinite-clock CAPを負の対照として固定し、timeless WDW constraintと可換なcomplex-potential S-matrix class operatorを実装する。必要ならCAP reflectionをfluxで独立診断する。
+
+### 6d. timeless前段：平方根branchと二階WDW constraintの非同値性
+
+現行branch `i hbar d_s psi=G(s)psi`, `G=-sqrt(A(s))` について、naive constraint `C=(i hbar d_s)^2-A(s)` を作用させると `C psi=i hbar(d_s G)psi` が残る。既存packetで相対mismatchは s=3.0で0.02105、s=4.6で0.07566、s=5.5で0.09042。delta=.02/.01/.005とKrylov 60/72/84で安定した。
+
+よってHalliwell型の二階timeless WDW constraintへ進む場合、それは現行finite-clock平方根量子化の単なる表現変更ではなく新しい量子化選択として扱う。次は小さい3D minisuperspace格子で二階constraintとcomplex-potential S-matrixを構成し、まずclass operatorのconstraint commutatorとfinite-window収束を監査する。physical induced inner product上の確率はその後。

@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "validated_source_commit": "c7ae1b298925cf8e89d0f4209545bbc02696043e",
+  "model": "Existing reduced vacuum Bianchi IX square-root branch on the first finite beta box.",
+  "identity": "For i*hbar*d_s psi=G(s)psi and G^2=A, [(i*hbar*d_s)^2-A]psi=i*hbar*(d_s G)psi.",
+  "rows": [
+    {"s":3.0,"delta":0.01,"krylov_dim":72,"Apsi_norm":1.4408735163249549,"ihbar_dotG_norm":0.030334484904297947,"relative_naive_constraint_mismatch":0.021052843681705038},
+    {"s":4.6,"delta":0.01,"krylov_dim":72,"Apsi_norm":1.1528015184456375,"ihbar_dotG_norm":0.08722662353064066,"relative_naive_constraint_mismatch":0.07566491033794903},
+    {"s":5.5,"delta":0.01,"krylov_dim":72,"Apsi_norm":0.8320182989432444,"ihbar_dotG_norm":0.07523232536956079,"relative_naive_constraint_mismatch":0.09042147926928312}
+  ],
+  "control_summary": {
+    "max_delta_scan_fractional_spread": 0.0004328493817433756,
+    "max_krylov_scan_fractional_spread": 0.00002774502271587118,
+    "delta_scan": [0.02,0.01,0.005],
+    "krylov_scan": [60,72,84]
+  },
+  "decision": {
+    "naive_second_order_equivalence_accepted": false,
+    "structural_factorization_mismatch_accepted": true,
+    "reason": "The nonzero i*hbar*d_s G term is algebraic and the measured scale is stable under finite-difference and Krylov refinement."
+  },
+  "next": [
+    "Treat a Halliwell-style second-order timeless WDW constraint as a new explicitly declared quantization, not a representation rewrite of the finite-clock square-root branch.",
+    "Construct a small-grid second-order constraint pilot and test complex-potential S-matrix commutation with the constraint before assigning probabilities.",
+    "Keep the finite-clock ever-entered CAP scan as a negative control."
+  ],
+  "limitations": [
+    "Only the first beta box and three packet times are sampled.",
+    "No timeless class operator, zero-constraint spectral state, or induced physical inner product is constructed here.",
+    "No black-hole observation, singularity-resolution result, or unique quantum-gravity claim."
+  ]
+}

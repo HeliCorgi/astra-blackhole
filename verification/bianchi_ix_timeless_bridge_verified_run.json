@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "verified_commit": "c7ae1b298925cf8e89d0f4209545bbc02696043e",
+  "ci": {
+    "name": "Bianchi IX timeless factorization bridge",
+    "run_id": 35373740598,
+    "job_id": 105693484750,
+    "conclusion": "success"
+  },
+  "artifact": {
+    "id": 10559656044,
+    "name": "bianchi-ix-timeless-bridge",
+    "sha256": "05f2ea4fcd16e6c0ad035e0033746708c9f7c8afa8a042a49c4931dd80b42cec",
+    "expires_at": "2026-10-02T17:21:18Z"
+  },
+  "key_results": {
+    "mismatch_s3": 0.021052843681705038,
+    "mismatch_s4p6": 0.07566491033794903,
+    "mismatch_s5p5": 0.09042147926928312,
+    "max_delta_scan_fractional_spread": 0.0004328493817433756,
+    "max_krylov_scan_fractional_spread": 0.00002774502271587118
+  },
+  "scope_note": "Factorization bridge only. It establishes that the existing time-dependent square-root branch is not exactly the naive second-order WDW constraint branch; it does not choose the physical timeless quantization.",
+  "license_files_changed": false,
+  "lean_changed": false
+}
