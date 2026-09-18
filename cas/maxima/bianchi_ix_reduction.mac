@@ -1,0 +1,95 @@
+/* Bianchi IX GR reduction audit: independent Maxima/ctensor backend.
+   This script does not import repository formulas for curvature.
+   It builds the SU(2) Euler-angle 3-metric, computes the scalar curvature
+   with Maxima ctensor, then performs ADM/Legendre algebra independently. */
+
+display2d:false$
+ratfac:true$
+load(ctensor)$
+
+dim:3$
+ct_coords:[th,ph,ps]$
+
+/* omega_i = sigma_i/2 convention, so isotropic a=b=c=R gives R3=6/R^2. */
+lg:matrix(
+ [(a^2*cos(ps)^2+b^2*sin(ps)^2)/4,
+  (a^2-b^2)*cos(ps)*sin(ps)*sin(th)/4,
+  0],
+ [(a^2-b^2)*cos(ps)*sin(ps)*sin(th)/4,
+  ((a^2*sin(ps)^2+b^2*cos(ps)^2)*sin(th)^2+c^2*cos(th)^2)/4,
+  c^2*cos(th)/4],
+ [0,c^2*cos(th)/4,c^2/4]
+)$
+
+cmetric()$
+christof(false)$
+ricci(false)$
+r3:radcan(trigsimp(scurvature()))$
+
+closed:2*(-a^4-b^4-c^4+2*(a^2*b^2+b^2*c^2+c^2*a^2))/(a^2*b^2*c^2)$
+d_closed:radcan(trigsimp(r3-closed))$
+printf(true,"ASTRA_MAXIMA_R3_CLOSED_DELTA=~a~%",d_closed)$
+if d_closed # 0 then quit(2)$
+
+sq3:sqrt(3)$
+aa:exp(alpha+bp+sq3*bm)$
+bb:exp(alpha+bp-sq3*bm)$
+cc:exp(alpha-2*bp)$
+rmis:subst(aa,a,closed)$
+rmis:subst(bb,b,rmis)$
+rmis:subst(cc,c,rmis)$
+
+V:(exp(-8*bp)
+   +2*exp(4*bp)*(cosh(4*sq3*bm)-1)
+   -4*exp(-2*bp)*cosh(2*sq3*bm))/6$
+
+d_misner:radcan(ratsimp(exponentialize(rmis+12*exp(-2*alpha)*V)))$
+printf(true,"ASTRA_MAXIMA_R3_MISNER_DELTA=~a~%",d_misner)$
+if d_misner # 0 then quit(3)$
+
+db1:bpd+sq3*bmd$
+db2:bpd-sq3*bmd$
+db3:-2*bpd$
+k1:(ad+db1)/N$
+k2:(ad+db2)/N$
+k3:(ad+db3)/N$
+kin:ratsimp(k1^2+k2^2+k3^2-(k1+k2+k3)^2)$
+kin_expected:6*(-ad^2+bpd^2+bmd^2)/N^2$
+d_kin:ratsimp(kin-kin_expected)$
+printf(true,"ASTRA_MAXIMA_KINETIC_DELTA=~a~%",d_kin)$
+if d_kin # 0 then quit(4)$
+
+/* Use a symbolic VV here: the curvature-to-potential relation was already
+   checked above, while this isolates the Legendre transform algebra. */
+L:exp(3*alpha)/(2*N)*(-ad^2+bpd^2+bmd^2)-N*exp(alpha)*VV$
+pa_def:diff(L,ad)$
+pp_def:diff(L,bpd)$
+pm_def:diff(L,bmd)$
+
+d_pa:ratsimp(pa_def+exp(3*alpha)*ad/N)$
+d_pp:ratsimp(pp_def-exp(3*alpha)*bpd/N)$
+d_pm:ratsimp(pm_def-exp(3*alpha)*bmd/N)$
+printf(true,"ASTRA_MAXIMA_PA_DELTA=~a~%",d_pa)$
+printf(true,"ASTRA_MAXIMA_PP_DELTA=~a~%",d_pp)$
+printf(true,"ASTRA_MAXIMA_PM_DELTA=~a~%",d_pm)$
+if d_pa # 0 or d_pp # 0 or d_pm # 0 then quit(5)$
+
+H:pa*ad+pp*bpd+pm*bmd-L$
+H:subst(-N*exp(-3*alpha)*pa,ad,H)$
+H:subst(N*exp(-3*alpha)*pp,bpd,H)$
+H:subst(N*exp(-3*alpha)*pm,bmd,H)$
+C:ratsimp(H/N)$
+C_expected:exp(-3*alpha)*(-pa^2+pp^2+pm^2)/2+exp(alpha)*VV$
+d_constraint:ratsimp(C-C_expected)$
+printf(true,"ASTRA_MAXIMA_CONSTRAINT_DELTA=~a~%",d_constraint)$
+if d_constraint # 0 then quit(6)$
+
+/* s=-alpha and p_s=-p_alpha. Solving C=0 on the same branch gives
+   p_s = -sqrt(p_+^2+p_-^2+2*exp(-4s)*V). The sign is recorded explicitly. */
+printf(true,"ASTRA_MAXIMA_SPATIAL_CURVATURE_RELATION=R3=-12*exp(-2*alpha)*V~%")$
+printf(true,"ASTRA_MAXIMA_KINETIC_RELATION=6/N^2*(-ad^2+bpd^2+bmd^2)~%")$
+printf(true,"ASTRA_MAXIMA_CONSTRAINT_RELATION=1/2*exp(-3*alpha)*(-pa^2+pp^2+pm^2)+exp(alpha)*V~%")$
+printf(true,"ASTRA_MAXIMA_W_RELATION=W=2*exp(-4*s)*V~%")$
+printf(true,"ASTRA_MAXIMA_REDUCED_GENERATOR=-sqrt(pp^2+pm^2+W)~%")$
+printf(true,"ASTRA_MAXIMA_BIANCHI_IX_OK~%")$
+quit()$
