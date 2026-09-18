@@ -46,6 +46,7 @@ jobs:
         env:
           CADABRA_NO_UNICODE: '1'
         run: |
+          set -euo pipefail
           mkdir -p artifacts/gr-reduction
           /usr/bin/time -p timeout 180s cadabra2-cli cas/cadabra/bianchi_ix_reduction.cdb 2>&1 | tee artifacts/gr-reduction/cadabra.log
           test -s artifacts/gr-reduction/cadabra_result.json
