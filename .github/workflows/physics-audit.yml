@@ -7,6 +7,10 @@ on:
       - 'cas/**'
       - 'tools/check_physics_audit.py'
       - 'verification/bianchi_ix_timeless_*'
+      - 'verification/physics_audit_*.json'
+      - 'lean/AstraBlackhole/PhysicsAudit.lean'
+      - 'verification/physics_audit_*.json'
+      - 'lean/AstraBlackhole/PhysicsAudit.lean'
       - 'research/bianchi_ix_timeless_outer_cap_results/summary.json'
       - 'research/check_bianchi_ix_timeless_outer_cap_results.py'
       - 'research/run_bianchi_ix_timeless_outer_cap.py'
@@ -51,7 +55,7 @@ jobs:
         run: python research/check_bianchi_ix_ever_entered_results.py
       - name: Validate obligations and compile scoped claim labels
         run: |
-          python tools/check_physics_audit.py --self-test --obligations audit/physics_obligations.json --claims-out artifacts/physics-audit/claims.json
+          python tools/check_physics_audit.py --self-test --obligations audit/physics_obligations.json --claims-out artifacts/physics-audit/claims.json --check-against verification/physics_audit_claims.json
           cat artifacts/physics-audit/claims.json
       - name: Retain audit outputs
         if: always()
