@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "validated_source_commit": "21ad1313708eedd3776526c898d8bad3d8b3e012",
+  "sample_count": 4096,
+  "times": [
+    4.6,
+    10.385,
+    32.46
+  ],
+  "main_ds": 0.01,
+  "refined_ds": 0.005,
+  "first_A_frequency": 0.960693359375,
+  "refined_max_A_conditioned_abs_difference": 0,
+  "label_change_fraction": 0,
+  "A_conditioned_9": [
+    {
+      "history": "A->A->A",
+      "frequency": 0.03227445997458704
+    },
+    {
+      "history": "A->A->B+",
+      "frequency": 0.011944091486658195
+    },
+    {
+      "history": "A->A->B-",
+      "frequency": 0.04371029224904702
+    },
+    {
+      "history": "A->B+->A",
+      "frequency": 0.01397712833545108
+    },
+    {
+      "history": "A->B+->B+",
+      "frequency": 0.06810673443456162
+    },
+    {
+      "history": "A->B+->B-",
+      "frequency": 0.09097839898348158
+    },
+    {
+      "history": "A->B-->A",
+      "frequency": 0.17179161372299873
+    },
+    {
+      "history": "A->B-->B+",
+      "frequency": 0.3537484116899619
+    },
+    {
+      "history": "A->B-->B-",
+      "frequency": 0.21346886912325286
+    }
+  ],
+  "interpretation": "Ordinary empirical frequencies of deterministic classical trajectories. Kept separate from non-decohered quantum diagonal branch weights.",
+  "limitations": [
+    "fixed 4096 Sobol Wigner samples",
+    "fixed-time sector labels rather than continuous first-hit times",
+    "same reduced Bianchi IX positive branch; not an observation"
+  ]
+}

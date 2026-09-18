@@ -1,0 +1,106 @@
+{
+  "schema": 1,
+  "validated_source_commit": "ded30cb6e903a60e5f660591860180306461c7d6",
+  "history_times": [
+    4.6,
+    10.385,
+    32.46
+  ],
+  "conditioning": {
+    "first_sector": "A",
+    "A_weight": 0.9797417699472133,
+    "non_A_weight": 0.02025823005278952,
+    "family_size": 9,
+    "full_27_computed": false
+  },
+  "block_krylov": {
+    "main_maxdim": 102,
+    "control_maxdim": 114,
+    "max_matrix_abs_difference": 0.005013235015038031,
+    "max_offdiagonal_abs_difference": 0.0019045426282578413
+  },
+  "decoherence": {
+    "trace_diagonal": 0.9952675576717005,
+    "max_offdiagonal_abs": 0.019418109072940764,
+    "max_offdiagonal_real_abs": 0.004343196169850332,
+    "max_normalized_pair_coherence": 0.1799891719414375,
+    "max_normalized_real_pair": 0.0896561300325691
+  },
+  "closure": {
+    "projection_recombination_relative_norm": 0,
+    "coherent_final_norm2": 0.9775419536080903,
+    "second_branch_gram_relative_change": 0.006379631956335465
+  },
+  "third_wall_coarse_graining": [
+    {
+      "sector": "A",
+      "coarse_probability": 0.3259154994705562,
+      "sum_fine_diagonal_weights": 0.3258649614256901,
+      "additivity_defect": 0.000050538044866099696
+    },
+    {
+      "sector": "B+",
+      "coarse_probability": 0.36009065381357286,
+      "sum_fine_diagonal_weights": 0.3674578086654664,
+      "additivity_defect": -0.007367154851893543
+    },
+    {
+      "sector": "B-",
+      "coarse_probability": 0.3139938467158706,
+      "sum_fine_diagonal_weights": 0.301944787580544,
+      "additivity_defect": 0.012049059135326612
+    }
+  ],
+  "A_conditioned_diagonal_weights": [
+    {
+      "history": "A->A->A",
+      "weight": 0.03689019537267907
+    },
+    {
+      "history": "A->A->B+",
+      "weight": 0.007235412119574926
+    },
+    {
+      "history": "A->A->B-",
+      "weight": 0.03625683964437309
+    },
+    {
+      "history": "A->B+->A",
+      "weight": 0.023622737167305716
+    },
+    {
+      "history": "A->B+->B+",
+      "weight": 0.0358860347915521
+    },
+    {
+      "history": "A->B+->B-",
+      "weight": 0.11499708266967237
+    },
+    {
+      "history": "A->B-->A",
+      "weight": 0.2653520288857053
+    },
+    {
+      "history": "A->B-->B+",
+      "weight": 0.3243363617543394
+    },
+    {
+      "history": "A->B-->B-",
+      "weight": 0.15069086526649855
+    }
+  ],
+  "interpretation": "Strict decoherence is not accepted for this chosen fine-grained family. Diagonal branch weights are not reported as ordinary history probabilities. Weak/real consistency is left unresolved because remaining real interference is comparable to the recorded regrid systematic scale.",
+  "rejected_prototype": {
+    "method": "independent single-vector Lanczos per branch",
+    "branch_sum_minus_direct_relative_norm": 0.023884798136052206,
+    "reason": "did not define one common linear numerical propagator"
+  },
+  "limitations": [
+    "finite-time sequential projectors, not a timeless constraint-commuting class operator",
+    "chosen A/B+/B- beta-space partition",
+    "finite boxes and potential cap",
+    "three unnormalized cubic numerical regrids",
+    "one reduced square-root quantization and internal clock",
+    "not a black-hole observation or singularity-resolution result"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "verified_commit": "ded30cb6e903a60e5f660591860180306461c7d6",
+  "ci": {
+    "name": "Bianchi IX history decoherence audit",
+    "run_id": 35328641671,
+    "job_id": 105547563375,
+    "conclusion": "success"
+  },
+  "artifact": {
+    "id": 10540865207,
+    "name": "bianchi-ix-histories",
+    "sha256": "a10faa9839ea2574d908031f011e8e21abd468db08e471df20be05d686bccd87",
+    "expires_at": "2026-10-02T09:23:17Z"
+  },
+  "key_results": {
+    "max_offdiagonal_abs": 0.019418109072940764,
+    "max_normalized_pair_coherence": 0.1799891719414375,
+    "max_offdiagonal_control_difference": 0.0019045426282578413,
+    "A_to_Bminus_to_Bplus_diagonal_weight": 0.3243363617543394,
+    "first_A_weight": 0.9797417699472133
+  },
+  "scope_note": "Nine A-conditioned fixed-time sector histories only. Strict decoherence not accepted; diagonal weights are not ordinary probabilities. Weak consistency remains numerically unresolved relative to regrid systematics.",
+  "license_files_changed": false,
+  "lean_changed": false
+}
