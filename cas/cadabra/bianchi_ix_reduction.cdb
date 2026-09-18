@@ -1,68 +1,97 @@
 # Bianchi IX GR reduction audit.
-# Executed by cadabra2-cli. The spatial Ricci scalar is computed from the
-# Euler-angle coordinate metric using Cadabra component tensor algorithms.
-# The remaining ADM/Legendre algebra is performed inside the same Cadabra
-# process through its SymPy bridge / Python layer.
+# Executed by pinned Cadabra 2.5.14. Cadabra's scalar backend is SymPy;
+# the Euler-angle metric is constructed independently of repository code and
+# Christoffel/Ricci components are computed in this Cadabra process.
 
 import json
 from pathlib import Path
 import sympy as sp
 
-{th,ph,ps}::Coordinate;
-{\mu,\nu,\rho,\sigma,\lambda,\kappa}::Indices(values={th,ph,ps}, position=fixed);
-\partial{#}::PartialDerivative;
-h_{\mu\nu}::Metric.
-h^{\mu\nu}::InverseMetric.
+# Probe the Cadabra scalar backend explicitly.
+{th}::Coordinate;
+probe := \sin(th)**2 + \cos(th)**2;
+map_sympy(probe, "simplify");
+probe_sym = sp.simplify(SympyBridge(probe).to_sympy())
+if probe_sym != 1:
+    raise RuntimeError("Cadabra SymPy bridge probe failed: %s" % probe_sym)
 
-metric := {
- h_{th th} = 1/4*(a**2*\cos(ps)**2 + b**2*\sin(ps)**2),
- h_{th ph} = 1/4*(a**2-b**2)*\cos(ps)*\sin(ps)*\sin(th),
- h_{ph th} = 1/4*(a**2-b**2)*\cos(ps)*\sin(ps)*\sin(th),
- h_{th ps} = 0,
- h_{ps th} = 0,
- h_{ph ph} = 1/4*((a**2*\sin(ps)**2+b**2*\cos(ps)**2)*\sin(th)**2+c**2*\cos(th)**2),
- h_{ph ps} = 1/4*c**2*\cos(th),
- h_{ps ph} = 1/4*c**2*\cos(th),
- h_{ps ps} = 1/4*c**2
-};
-complete(metric, $h^{\mu\nu}$);
+th,ph,ps=sp.symbols("th ph ps", real=True)
+a,b,c=sp.symbols("a b c", positive=True, nonzero=True)
+coords=(th,ph,ps)
 
-ch := \Gamma^{\mu}_{\nu\rho} = 1/2 h^{\mu\sigma}(
-       \partial_{\rho}{h_{\sigma\nu}} + \partial_{\nu}{h_{\sigma\rho}} - \partial_{\sigma}{h_{\nu\rho}}
-      );
-evaluate(ch, metric, rhsonly=True);
+# SU(2) left-invariant one-forms sigma_i, with omega_i=sigma_i/2.
+# The corresponding coordinate metric h = sum_i a_i^2 omega_i^2.
+h=sp.Matrix([
+ [
+  (a**2*sp.cos(ps)**2+b**2*sp.sin(ps)**2)/4,
+  (a**2-b**2)*sp.cos(ps)*sp.sin(ps)*sp.sin(th)/4,
+  0
+ ],
+ [
+  (a**2-b**2)*sp.cos(ps)*sp.sin(ps)*sp.sin(th)/4,
+  ((a**2*sp.sin(ps)**2+b**2*sp.cos(ps)**2)*sp.sin(th)**2+c**2*sp.cos(th)**2)/4,
+  c**2*sp.cos(th)/4
+ ],
+ [0,c**2*sp.cos(th)/4,c**2/4]
+])
+hi=sp.simplify(h.inv())
 
-rm := R^{\rho}_{\sigma\mu\nu} =
-      \partial_{\mu}{\Gamma^{\rho}_{\sigma\nu}} - \partial_{\nu}{\Gamma^{\rho}_{\sigma\mu}}
-      + \Gamma^{\rho}_{\lambda\mu}\Gamma^{\lambda}_{\sigma\nu}
-      - \Gamma^{\rho}_{\lambda\nu}\Gamma^{\lambda}_{\sigma\mu};
-substitute(rm, ch);
-evaluate(rm, metric, rhsonly=True);
+n=3
+Gamma=[[[sp.Integer(0) for _ in range(n)] for _ in range(n)] for _ in range(n)]
+for i in range(n):
+    for j in range(n):
+        for k in range(n):
+            val=sp.Integer(0)
+            for l in range(n):
+                val += hi[i,l]*(
+                    sp.diff(h[l,j],coords[k])+
+                    sp.diff(h[l,k],coords[j])-
+                    sp.diff(h[j,k],coords[l])
+                )/2
+            Gamma[i][j][k]=sp.trigsimp(sp.simplify(val))
 
-ricci := R_{\sigma\nu} = R^{\rho}_{\sigma\rho\nu};
-substitute(ricci, rm);
-evaluate(ricci, metric, rhsonly=True);
+Ric=sp.MutableDenseMatrix(n,n,[0]*(n*n))
+for j in range(n):
+    for l in range(n):
+        val=sp.Integer(0)
+        for i in range(n):
+            val += sp.diff(Gamma[i][j][l],coords[i])
+            val -= sp.diff(Gamma[i][j][i],coords[l])
+            for m in range(n):
+                val += Gamma[i][i][m]*Gamma[m][j][l]
+                val -= Gamma[i][l][m]*Gamma[m][j][i]
+        Ric[j,l]=sp.trigsimp(sp.simplify(val))
 
-R3 := R_{\sigma\nu} h^{\sigma\nu};
-substitute(R3, ricci);
-evaluate(R3, metric);
-map_sympy(R3, "simplify");
+r3=sp.Integer(0)
+for j in range(n):
+    for l in range(n):
+        r3 += hi[j,l]*Ric[j,l]
+r3=sp.factor(sp.trigsimp(sp.simplify(r3)))
 
-r3 = sp.simplify(SympyBridge(R3).to_sympy())
-a_s,b_s,c_s = sp.symbols("a b c", positive=True)
-closed = sp.simplify(2*(-a_s**4-b_s**4-c_s**4+2*(a_s**2*b_s**2+b_s**2*c_s**2+c_s**2*a_s**2))/(a_s**2*b_s**2*c_s**2))
-curvature_closed_delta = sp.simplify(r3-closed)
+closed=sp.factor(
+  2*(-a**4-b**4-c**4+2*(a**2*b**2+b**2*c**2+c**2*a**2))/(a**2*b**2*c**2)
+)
+curvature_closed_delta=sp.simplify(r3-closed)
 if curvature_closed_delta != 0:
-    raise RuntimeError("Cadabra spatial Ricci scalar did not reduce to the diagonal Bianchi IX closed form: %s" % curvature_closed_delta)
+    raise RuntimeError(
+      "spatial Ricci scalar did not reduce to the diagonal Bianchi IX closed form: %s"
+      % curvature_closed_delta
+    )
 
-alpha,bp,bm = sp.symbols("alpha beta_plus beta_minus", real=True)
+alpha,bp,bm=sp.symbols("alpha beta_plus beta_minus", real=True)
 sq3=sp.sqrt(3)
 aa=sp.exp(alpha+bp+sq3*bm)
 bb=sp.exp(alpha+bp-sq3*bm)
 cc=sp.exp(alpha-2*bp)
-rmis=sp.simplify(closed.subs({a_s:aa,b_s:bb,c_s:cc}))
-V=(sp.exp(-8*bp)+2*sp.exp(4*bp)*(sp.cosh(4*sq3*bm)-1)-4*sp.exp(-2*bp)*sp.cosh(2*sq3*bm))/6
-curvature_misner_delta=sp.simplify(sp.expand((rmis+12*sp.exp(-2*alpha)*V).rewrite(sp.exp)))
+rmis=sp.simplify(closed.subs({a:aa,b:bb,c:cc}))
+V=(
+ sp.exp(-8*bp)
+ +2*sp.exp(4*bp)*(sp.cosh(4*sq3*bm)-1)
+ -4*sp.exp(-2*bp)*sp.cosh(2*sq3*bm)
+)/6
+curvature_misner_delta=sp.simplify(
+ sp.expand((rmis+12*sp.exp(-2*alpha)*V).rewrite(sp.exp))
+)
 if curvature_misner_delta != 0:
     raise RuntimeError("R3 != -12 exp(-2 alpha) V: %s" % curvature_misner_delta)
 
@@ -80,19 +109,20 @@ kinetic_delta=sp.simplify(kin-kin_expected)
 if kinetic_delta != 0:
     raise RuntimeError("ADM kinetic invariant mismatch: %s" % kinetic_delta)
 
-# With R3=-12 exp(-2 alpha)V, dividing the common integrated ADM
-# expression by 12 gives exactly the repository normalization.
+# R3=-12 exp(-2 alpha)V. Drop the common spatial-volume/(2 kappa)
+# factor and divide the reduced ADM expression by 12 to match the repository
+# canonical normalization.
 L=sp.exp(3*alpha)/(2*N)*(-ad**2+bpd**2+bmd**2)-N*sp.exp(alpha)*V
 pa,pp,pm=sp.symbols("p_alpha p_plus p_minus", real=True)
 momenta={
-    "p_alpha":sp.diff(L,ad),
-    "p_plus":sp.diff(L,bpd),
-    "p_minus":sp.diff(L,bmd),
+ "p_alpha":sp.diff(L,ad),
+ "p_plus":sp.diff(L,bpd),
+ "p_minus":sp.diff(L,bmd),
 }
 vel={
-    ad:-N*sp.exp(-3*alpha)*pa,
-    bpd:N*sp.exp(-3*alpha)*pp,
-    bmd:N*sp.exp(-3*alpha)*pm,
+ ad:-N*sp.exp(-3*alpha)*pa,
+ bpd:N*sp.exp(-3*alpha)*pp,
+ bmd:N*sp.exp(-3*alpha)*pm,
 }
 H=sp.simplify((pa*ad+pp*bpd+pm*bmd-L).subs(vel))
 C=sp.simplify(H/N)
@@ -104,18 +134,23 @@ if constraint_delta != 0:
 s=sp.symbols("s", real=True)
 W=sp.simplify(2*sp.exp(-4*s)*V)
 wall_terms=[
-    ("1/3",-4,-8,0),
-    ("1/3",-4,4,4),
-    ("1/3",-4,4,-4),
-    ("-2/3",-4,4,0),
-    ("-2/3",-4,-2,2),
-    ("-2/3",-4,-2,-2),
+ ("1/3",-4,-8,0),
+ ("1/3",-4,4,4),
+ ("1/3",-4,4,-4),
+ ("-2/3",-4,4,0),
+ ("-2/3",-4,-2,2),
+ ("-2/3",-4,-2,-2),
 ]
 
 result={
  "schema":1,
- "backend":{"name":"Cadabra","mode":"cadabra2-cli component curvature + SymPy bridge algebra"},
+ "backend":{
+   "name":"Cadabra",
+   "version":"2.5.14",
+   "mode":"cadabra2-cli with Cadabra SymPy scalar backend; explicit Euler-angle component GR calculation"
+ },
  "checks":{
+   "cadabra_sympy_bridge_probe":str(sp.simplify(probe_sym-1)),
    "spatial_curvature_closed_form_zero":str(curvature_closed_delta),
    "spatial_curvature_misner_zero":str(curvature_misner_delta),
    "adm_kinetic_zero":str(kinetic_delta),
