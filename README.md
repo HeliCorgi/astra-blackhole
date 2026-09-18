@@ -259,6 +259,18 @@ python verify_predictors.py
 
 [LICENSE](LICENSE) / [NOTICE](NOTICE) / [変更記録](docs/LICENSE_HISTORY_ja.md)
 
+## Physics audit gates
+
+[物理監査スタック](PHYSICS_AUDIT.md) / [machine-readable obligations](audit/physics_obligations.json)
+
+Bianchi IX timeless class-operator系列について、GR reduction/CAS、Lean semantics、clock、inner product/domain、factor ordering、regulator、known limits、claim compilerを別gateとして管理する。未実施gateはPASSにせず、blocking gateにPENDING/PARTIAL/FAILが残れば `PHYSICAL INTERPRETATION NOT IDENTIFIED` を自動付与する。
+
+現在のtimeless scatteringはouter absorptionで数値的に改善するがregulator-independent limit未確認のため `REGULATOR-UNSTABLE`。Leanにはfactorization residual、共通operatorによるbranch recombination、constraint-kernel preservationの3意味論補題を追加するが、これを量子化の正しさとは呼ばない。
+
+```sh
+python tools/check_physics_audit.py --self-test --obligations audit/physics_obligations.json --claims-out artifacts/physics-audit/claims.json
+```
+
 ## Leanによる小規模な証明検査
 
 ```sh
