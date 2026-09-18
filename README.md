@@ -51,6 +51,15 @@ python research/bianchi_ix_history_coarse.py --input research/bianchi_ix_history
 
 したがって次のHalliwell型timeless WDWは、既存finite-clock平方根模型の単なる座標・表現変換ではなく**新しいconstraint量子化**として実装する。
 
+
+### timeless S-matrix small-grid pilot：Dirichlet scatteringは不合格
+
+[timeless S-matrix pilot](docs/BIANCHI_IX_TIMELESS_SMATRIX_ja.md) / [結果](research/bianchi_ix_timeless_smatrix_results/summary.json)
+
+新しい二階constraint `C=P_s^2-A(s)` を2352次元の小3D格子に置き、Halliwell型のfinite-window complex-potential S-matrixを実装した。near-zero 20 modeからedge mass最小packetを作りedgeを7.65%まで下げても、V0=.025のcommutator relativeは T=.25/.5/1.0 で **0.280→0.356→0.434**、successive S_T差も **0.0467→0.0906** と悪化した。V0=0はS=I/commutatorが1e-12級で通る。
+
+したがって有限Dirichlet箱のままT→∞ scattering limitを取る設計は不採用。次はoutgoing/absorbing outer boundaryまたはresolvent法へ進む。physical induced inner productや履歴確率はまだ計算しない。
+
 ```sh
 python -m unittest discover -s tests -p 'test_bianchi_ix_timeless_bridge.py' -v
 python research/run_bianchi_ix_timeless_bridge.py --out artifacts/timeless-bridge --check-against research/bianchi_ix_timeless_bridge_results/summary.json

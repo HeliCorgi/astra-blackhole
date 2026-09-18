@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "verified_commit": "a821d058721bdcbc354a2648b7126a0714436c9a",
+  "ci": {"name":"Bianchi IX timeless S-matrix pilot","run_id":35374939204,"job_id":105697300437,"conclusion":"success"},
+  "artifact": {"id":10559484027,"name":"bianchi-ix-timeless-smatrix","sha256":"fa24a84cf285bdd5927f1743adb08a346469b0bf755ebeec757a21182e5e67d4","expires_at":"2026-10-02T17:32:52Z"},
+  "key_results": {"reference_edge_mass":0.07652060863199817,"v0_0p025_commutator_T0p25":0.2799273117927013,"v0_0p025_commutator_T1":0.4336336100646787,"v0_0p025_window_change_0p25_0p5":0.04668239568873559,"v0_0p025_window_change_0p5_1":0.0905553490036381,"v0_zero_max_commutator_relative":1.1153387206812638e-12},
+  "scope_note": "Small regulated finite-Dirichlet 3D WDW constraint pilot only. The finite-window S-matrix does not approach a constraint-commuting/window-stable regime on this setup; no physical probabilities are assigned.",
+  "license_files_changed": false,
+  "lean_changed": false
+}

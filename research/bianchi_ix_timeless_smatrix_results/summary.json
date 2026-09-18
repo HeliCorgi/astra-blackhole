@@ -1,0 +1,33 @@
+{
+  "schema": 2,
+  "constraint": "C=hbar^2 L_s-hbar^2(L_++L_-)-W_reg on a finite Dirichlet 3D minisuperspace box.",
+  "grid": {"s_bounds":[2.0,6.0],"bp_bounds":[-3.5,3.5],"bm_bounds":[-4.0,4.0],"ns":12,"nx":14,"ny":14,"hbar":0.2,"potential_abs_cap":8.0,"absorber_width":0.3},
+  "matrix": {"dimension":2352,"hermiticity_residual":0.0,"near_zero_eigenvalues":[1.3234826385792293e-05,0.0017550093222734487,-0.0022301621228301787,-0.00343099419736994,0.003520778279269211,0.00535633568273876,0.0069904192817045255,0.007630133138490866]},
+  "reference_packet": {"edge_subspace_minimum":0.07652060863199793,"energy_mean":-0.010485494124512206,"energy_spread":0.005810476937164805,"edge_mass_one_cell":0.07652060863199817,"capped_region_mass":1.776929649081729e-05},
+  "rows": [
+    {"v0":0.0,"T":0.25,"norm2":0.9999999999999915,"constraint_energy_mean":-0.010485494124512211,"constraint_energy_spread":0.005810476937164805,"commutator_absolute":3.924548669617083e-15,"commutator_relative":1.636893467638381e-13},
+    {"v0":0.0,"T":0.5,"norm2":0.9999999999999843,"constraint_energy_mean":-0.010485494124512206,"constraint_energy_spread":0.005810476937164809,"commutator_absolute":1.3652088531560447e-14,"commutator_relative":5.694161652252525e-13},
+    {"v0":0.0,"T":1.0,"norm2":0.9999999999999647,"constraint_energy_mean":-0.01048549412451222,"constraint_energy_spread":0.0058104769371648095,"commutator_absolute":2.6740903907064845e-14,"commutator_relative":1.1153387206812638e-12},
+    {"v0":0.025,"T":0.25,"norm2":0.9259338857491831,"constraint_energy_mean":-0.010602069275580368,"constraint_energy_spread":0.009346713821831255,"commutator_absolute":0.007040292483993724,"commutator_relative":0.2799273117927013},
+    {"v0":0.025,"T":0.5,"norm2":0.8597112147539984,"constraint_energy_mean":-0.010810014551809365,"constraint_energy_spread":0.011468168270224654,"commutator_absolute":0.009174531462103752,"commutator_relative":0.35619710369145036},
+    {"v0":0.025,"T":1.0,"norm2":0.745810715787774,"constraint_energy_mean":-0.011349221581544099,"constraint_energy_spread":0.01434112549415805,"commutator_absolute":0.011362034285006345,"commutator_relative":0.4336336100646787},
+    {"v0":0.05,"T":0.25,"norm2":0.8601493865517987,"constraint_energy_mean":-0.010955285513391354,"constraint_energy_spread":0.01579140267512669,"commutator_absolute":0.013628929661903743,"commutator_relative":0.470419202758561},
+    {"v0":0.05,"T":0.5,"norm2":0.7481909839821184,"constraint_energy_mean":-0.011800008020569266,"constraint_energy_spread":0.02068180703736947,"commutator_absolute":0.017230683102794197,"commutator_relative":0.5554464385050408},
+    {"v0":0.05,"T":1.0,"norm2":0.5809084064764323,"constraint_energy_mean":-0.013987353095598449,"constraint_energy_spread":0.02695253231365363,"commutator_absolute":0.020289544591648747,"commutator_relative":0.6265864610016824},
+    {"v0":0.1,"T":0.25,"norm2":0.7497304492892536,"constraint_energy_mean":-0.01238252600870772,"constraint_energy_spread":0.030005751897545462,"commutator_absolute":0.02556326946057178,"commutator_relative":0.6632599531078832},
+    {"v0":0.1,"T":0.5,"norm2":0.5883525730278675,"constraint_energy_mean":-0.015738895167920645,"constraint_energy_spread":0.03983241422867719,"commutator_absolute":0.03055596789720351,"commutator_relative":0.7249419264407105},
+    {"v0":0.1,"T":1.0,"norm2":0.40041021182568887,"constraint_energy_mean":-0.023712257990493694,"constraint_energy_spread":0.05097471345749486,"commutator_absolute":0.03322871466087977,"commutator_relative":0.766983183300129}
+  ],
+  "window_increment": [
+    {"v0":0.025,"from_T":0.25,"to_T":0.5,"relative_state_change":0.04668239568873559},
+    {"v0":0.025,"from_T":0.5,"to_T":1.0,"relative_state_change":0.0905553490036381},
+    {"v0":0.05,"from_T":0.25,"to_T":0.5,"relative_state_change":0.09159684825861161},
+    {"v0":0.05,"from_T":0.5,"to_T":1.0,"relative_state_change":0.17372649198648094},
+    {"v0":0.1,"from_T":0.25,"to_T":0.5,"relative_state_change":0.1734756521262109},
+    {"v0":0.1,"from_T":0.5,"to_T":1.0,"relative_state_change":0.3045465632028925}
+  ],
+  "negative_control": {"v0_zero_max_commutator_relative":1.1153387206812638e-12,"v0_zero_max_identity_error":4.3745849195972416e-14},
+  "decision": {"finite_window_smatrix_convergence_accepted":false,"constraint_commutation_accepted":false,"reason":"For all nonzero V0 tested, commutator leakage and successive finite-window state changes grow rather than decrease as T is increased from 0.25 to 1.0. The V0=0 identity/commutator control passes."},
+  "next": ["Keep this finite-Dirichlet scattering construction as a negative control.","Replace reflecting Dirichlet scattering boundaries with an outgoing/absorbing treatment or a direct resolvent/scattering formulation before revisiting the T->infinity Halliwell limit.","Only after constraint-compatible scattering convergence should the induced physical inner product and decoherence functional be evaluated."],
+  "limitations": ["New naive second-order WDW constraint quantization, not the existing finite-clock square-root model.","The reference packet is selected numerically to minimize edge mass within a near-zero spectral subspace.","Euclidean grid norms are diagnostics, not the induced physical inner product.","No physical history probability or singularity-resolution claim."]
+}

@@ -109,3 +109,12 @@ V0=.025→.075でstrict off-diagonalは.1105→.0073へ低下するが、.085で
 現行branch `i hbar d_s psi=G(s)psi`, `G=-sqrt(A(s))` について、naive constraint `C=(i hbar d_s)^2-A(s)` を作用させると `C psi=i hbar(d_s G)psi` が残る。既存packetで相対mismatchは s=3.0で0.02105、s=4.6で0.07566、s=5.5で0.09042。delta=.02/.01/.005とKrylov 60/72/84で安定した。
 
 よってHalliwell型の二階timeless WDW constraintへ進む場合、それは現行finite-clock平方根量子化の単なる表現変更ではなく新しい量子化選択として扱う。次は小さい3D minisuperspace格子で二階constraintとcomplex-potential S-matrixを構成し、まずclass operatorのconstraint commutatorとfinite-window収束を監査する。physical induced inner product上の確率はその後。
+
+
+### 6e. timeless S-matrix small-grid pilot：有限Dirichlet箱は不合格
+
+新しい二階constraint C=P_s^2-A(s) を有限3D minisuperspace格子へ置き、B領域のcomplex potentialについて finite-window interaction-picture S_T を計算した。V0=0ではS_T=Iと[C,S_T]=0の負の対照が1e-12級で通る。
+
+near-zero固有modeの境界依存を下げるため、20個のnear-zero modeからedge mass最小packetを作成し、edge massを0.0765まで下げた。それでもV0=.025でcommutator relativeはT=.25/.5/1.0に対し0.280/0.356/0.434と増加し、successive S_T差も0.0467→0.0906へ増加。V0=.05/.10ではさらに悪化。
+
+よってこの有限Dirichlet scattering設計をHalliwellのT→∞ class operator近似として採用しない。次は外側境界をoutgoing/absorbing化するか、Green/resolventによるscattering operatorへ切り替える。induced physical inner productとdecoherence functionalはconstraint-compatibleなscattering収束を確認した後に実装する。
