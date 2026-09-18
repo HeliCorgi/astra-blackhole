@@ -49,5 +49,28 @@
   "scientific_rule": "No physical history probability or unique quantum-gravity interpretation is promoted while blocking gates remain pending/partial/failed.",
   "cas_gate": "PENDING: xAct/Cadabra execution and result manifests are not yet committed.",
   "license_files_changed": false,
-  "note": "CI success verifies reproducibility and scoped formal obligations only; it does not establish physical validity."
+  "note": "Post-merge main reran Lean build/axiom audit, physics-audit gates, finite-clock publication checks, and the repository reproduce workflow successfully. These checks establish reproducibility/scoped formal validity, not physical correctness.",
+  "merge_commit": "e1c4a745ef5bb25b77f2e38daf9ca256232d8bb3",
+  "post_merge": {
+    "lean": {
+      "run_id": 35382353188,
+      "conclusion": "success",
+      "artifact_id": 10562502644,
+      "artifact_sha256": "624fd20017e06778c4f0c54358b93f2d76d185bdc9358ce56721d83fb1a130d6"
+    },
+    "physics_audit": {
+      "run_id": 35382353337,
+      "conclusion": "success",
+      "artifact_id": 10562707507,
+      "artifact_sha256": "0da6cdb1101f9ef73ad622edc73e12e50c78c0a4b531a14968cd32b7b5b14e4b"
+    },
+    "ever_entered_publication_check": {
+      "run_id": 35382353247,
+      "conclusion": "success"
+    },
+    "classical_reproduce": {
+      "run_id": 35382353395,
+      "conclusion": "success"
+    }
+  }
 }
