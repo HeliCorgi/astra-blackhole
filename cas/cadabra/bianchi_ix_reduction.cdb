@@ -28,14 +28,14 @@ metric := {
 complete(metric, $h^{\mu\nu}$);
 
 ch := \Gamma^{\mu}_{\nu\rho} = 1/2 h^{\mu\sigma}(
-       \partial_{\rho}{h_{\nu\sigma}} + \partial_{\nu}{h_{\rho\sigma}} - \partial_{\sigma}{h_{\nu\rho}}
+       \partial_{\rho}{h_{\sigma\nu}} + \partial_{\nu}{h_{\sigma\rho}} - \partial_{\sigma}{h_{\nu\rho}}
       );
 evaluate(ch, metric, rhsonly=True);
 
 rm := R^{\rho}_{\sigma\mu\nu} =
-      \partial_{\mu}{\Gamma^{\rho}_{\nu\sigma}} - \partial_{\nu}{\Gamma^{\rho}_{\mu\sigma}}
-      + \Gamma^{\rho}_{\mu\lambda}\Gamma^{\lambda}_{\nu\sigma}
-      - \Gamma^{\rho}_{\nu\lambda}\Gamma^{\lambda}_{\mu\sigma};
+      \partial_{\mu}{\Gamma^{\rho}_{\sigma\nu}} - \partial_{\nu}{\Gamma^{\rho}_{\sigma\mu}}
+      + \Gamma^{\rho}_{\lambda\mu}\Gamma^{\lambda}_{\sigma\nu}
+      - \Gamma^{\rho}_{\lambda\nu}\Gamma^{\lambda}_{\sigma\mu};
 substitute(rm, ch);
 evaluate(rm, metric, rhsonly=True);
 
