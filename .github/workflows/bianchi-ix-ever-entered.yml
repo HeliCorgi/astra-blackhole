@@ -40,10 +40,11 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - {name: weak, v0: '0.025', width: '0.30', maxdim: '66'}
-          - {name: main, v0: '0.050', width: '0.30', maxdim: '66'}
-          - {name: strong, v0: '0.100', width: '0.30', maxdim: '66'}
-          - {name: krylov, v0: '0.050', width: '0.30', maxdim: '78'}
+          - {name: v004, v0: '0.040', width: '0.30', maxdim: '78'}
+          - {name: v006, v0: '0.060', width: '0.30', maxdim: '78'}
+          - {name: v0075, v0: '0.075', width: '0.30', maxdim: '78'}
+          - {name: narrow, v0: '0.050', width: '0.20', maxdim: '78'}
+          - {name: broad, v0: '0.050', width: '0.45', maxdim: '78'}
     env:
       OPENBLAS_NUM_THREADS: '1'
       OMP_NUM_THREADS: '1'
