@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "verified_commit": "866bb279cb80464776d32ec46593a5cc881bd19f",
+  "ci": {
+    "name": "Bianchi IX history coarse-graining audit",
+    "run_id": 35330718167,
+    "job_id": 105554182959,
+    "conclusion": "success",
+    "scope": "Five lightweight tests; exact block-sum coarse graining of the validated 9x9 history decoherence matrix; saved-baseline regression; artifact retention."
+  },
+  "artifact": {
+    "id": 10540663309,
+    "name": "bianchi-ix-history-coarse-866bb279cb80464776d32ec46593a5cc881bd19f",
+    "sha256": "f73322a0bc7f0a12c67aac26e1a16e6e315df6ad3bea723401a6366ebe0d3321",
+    "expires_at": "2026-10-02T09:40:28Z"
+  },
+  "key_results": {
+    "fine_max_offdiagonal_abs": 0.019418109072940764,
+    "A_vs_Bs_max_offdiagonal_abs": 0.004798716626201447,
+    "A_vs_Bs_signal_to_control_bound": 1.259808143698789,
+    "Bplus_vs_rest_signal_to_control_bound": 5.056760155113743,
+    "Bminus_vs_rest_signal_to_control_bound": 5.260019831034541
+  },
+  "scope_note": "Derived from the validated fine history D matrix; no new time evolution. A-vs-{B+,B-} improves strict decoherence to the scale of the two-resolution numerical control but does not establish it. Fully ignoring the second time is diagonal by construction.",
+  "license_files_changed": false,
+  "lean_changed": false
+}
