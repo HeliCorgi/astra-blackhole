@@ -1,0 +1,60 @@
+name: Bianchi IX GR reduction CAS
+on:
+  push:
+    branches:
+      - audit/bianchi-ix-gr-reduction
+    paths:
+      - 'cas/bianchi_ix_reference.json'
+      - 'cas/cadabra/bianchi_ix_reduction.cdb'
+      - 'cas/xact/bianchi_ix_reduction.wl'
+      - 'tools/check_bianchi_ix_gr_reduction.py'
+      - '.github/workflows/bianchi-ix-gr-reduction.yml'
+  pull_request:
+    paths:
+      - 'cas/bianchi_ix_reference.json'
+      - 'cas/cadabra/bianchi_ix_reduction.cdb'
+      - 'cas/xact/bianchi_ix_reduction.wl'
+      - 'tools/check_bianchi_ix_gr_reduction.py'
+      - '.github/workflows/bianchi-ix-gr-reduction.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  cadabra:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Install Cadabra from Ubuntu repository
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cadabra2
+          cadabra2-cli --version || cadabra2 --version
+      - name: Run independent Cadabra Bianchi IX reduction
+        env:
+          CADABRA_NO_UNICODE: '1'
+        run: |
+          mkdir -p artifacts/gr-reduction
+          cadabra2-cli cas/cadabra/bianchi_ix_reduction.cdb | tee artifacts/gr-reduction/cadabra.log
+          test -s artifacts/gr-reduction/cadabra_result.json
+          grep -q ASTRA_CADABRA_BIANCHI_IX_OK artifacts/gr-reduction/cadabra.log
+      - name: Compare CAS coefficients with repository implementation
+        run: |
+          python tools/check_bianchi_ix_gr_reduction.py \
+            --reference cas/bianchi_ix_reference.json \
+            --cadabra-result artifacts/gr-reduction/cadabra_result.json \
+            --out artifacts/gr-reduction/comparison.json
+      - name: Record xAct execution availability
+        run: |
+          printf '%s\n' '{"status":"PENDING","reason":"No licensed Wolfram Engine/xAct runner is configured in repository CI.","source":"cas/xact/bianchi_ix_reduction.wl"}' > artifacts/gr-reduction/xact_status.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: bianchi-ix-gr-reduction
+          path: artifacts/gr-reduction/
+          retention-days: 14
