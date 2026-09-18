@@ -72,5 +72,20 @@
     "max_classical_quantum_wall_gradient_abs": 0,
     "max_reduced_hamilton_rhs_abs": 0,
     "independence_note": "Maxima ctensor is independent of the Cadabra 2.5.14 path, whose scalar component backend used SymPy."
+  },
+  "two_backend_branch_run": {
+    "head_sha": "2b6c063cc02302266a84c2c1dc59e22c92463984",
+    "run_id": 35387048247,
+    "conclusion": "success",
+    "cadabra": {
+      "job_id": 105736275531,
+      "artifact_id": 10564945661,
+      "artifact_sha256": "9dde00d15aab277019795652d7359d54a7ed6a7ac0dc80f3391cbcf201fedac6"
+    },
+    "maxima": {
+      "job_id": 105736275544,
+      "artifact_id": 10564665571,
+      "artifact_sha256": "0dbe0f4ff34b614b027d9a99ebcd16741b0c62e031a7d2ab3015d811bb9736ef"
+    }
   }
 }
