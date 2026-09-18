@@ -21,11 +21,11 @@
     "max_reduced_hamilton_rhs_abs": 0
   },
   "xact": {
-    "status": "PENDING",
+    "status": "PENDING_OPTIONAL_THIRD_BACKEND",
     "source": "cas/xact/bianchi_ix_reduction.wl",
-    "reason": "Source is committed, but no licensed Wolfram Engine/xAct execution environment is configured."
+    "reason": "Cadabra and Maxima now satisfy the two-executed-backend gate. xAct remains an optional third cross-check because no licensed Wolfram/xAct CI runtime is configured."
   },
-  "gate_decision": "PARTIAL",
+  "gate_decision": "PASS",
   "verified_relations": [
     "R3=-12 exp(-2 alpha) V",
     "KijKij-K^2=6/N^2(-alpha_dot^2+beta_plus_dot^2+beta_minus_dot^2)",
@@ -33,7 +33,7 @@
     "W=2 exp(-4s)V",
     "G_s=-sqrt(p_plus^2+p_minus^2+W)"
   ],
-  "scope_note": "One executed independent CAS backend agrees with the repository reduction convention. The second xAct backend remains unexecuted, so GR_REDUCTION is PARTIAL rather than PASS. This does not validate the quantum clock, inner product, operator domain, factor ordering, regulator removal, or physical interpretation.",
+  "scope_note": "Two independently executed CAS backends, Cadabra 2.5.14 and Maxima/ctensor 5.46.0, agree with the repository's stated Bianchi IX classical reduction convention. This closes GR_REDUCTION only; it does not validate clock choice, inner product, operator domain, factor ordering, regulator removal, or black-hole singularity resolution.",
   "license_files_changed": false,
   "lean_changed": false,
   "pull_request": {
@@ -59,5 +59,18 @@
     "artifact_id": 10563268270,
     "artifact_sha256": "ed67bfb97a55a327a2b730e41405f5b99f9020952228de32eeafd4b4b3f0b3c9"
   },
-  "note": "Cadabra re-derived and compared the Bianchi IX reduction successfully on the research branch, PR head, and main. xAct remains unexecuted, so GR_REDUCTION stays PARTIAL. Reproducibility of the stated reduction convention is not a proof of unique physical quantization."
+  "note": "Cadabra and Maxima independently reproduce the Bianchi IX spatial-curvature, ADM kinetic, Hamiltonian-constraint and reduced-generator relations and agree with the implementation. xAct remains unexecuted as an optional third backend.",
+  "maxima": {
+    "status": "PASS",
+    "backend": "Maxima/ctensor 5.46.0",
+    "run_id": 35387048247,
+    "job_id": 105736275544,
+    "artifact_id": 10564665571,
+    "artifact_sha256": "0dbe0f4ff34b614b027d9a99ebcd16741b0c62e031a7d2ab3015d811bb9736ef",
+    "comparison": "PASS",
+    "max_wall_relation_abs": 2.329340604949326e-21,
+    "max_classical_quantum_wall_gradient_abs": 0,
+    "max_reduced_hamilton_rhs_abs": 0,
+    "independence_note": "Maxima ctensor is independent of the Cadabra 2.5.14 path, whose scalar component backend used SymPy."
+  }
 }
