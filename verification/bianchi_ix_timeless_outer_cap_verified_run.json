@@ -1,0 +1,97 @@
+{
+  "schema": 1,
+  "date": "2026-09-19",
+  "repository": "HeliCorgi/astra-blackhole",
+  "pull_request": 7,
+  "merge_commit": "dd61b6af8e8fccdff6abe7596c42c227f0aef600",
+  "scope": "Timeless Bianchi IX stationary resolvent with a separate numerical outer absorbing layer and 1/2/3-cell layer-width controls.",
+  "model": {
+    "constraint": "C=P_s^2-A(s)",
+    "retained_variables": [
+      "s",
+      "beta_plus",
+      "beta_minus"
+    ],
+    "omitted_variables": [
+      "matter",
+      "environment",
+      "spatial inhomogeneity"
+    ],
+    "units": "existing dimensionless model conventions; no SI black-hole identification",
+    "grid": {
+      "interior_shape": [
+        12,
+        14,
+        14
+      ],
+      "dimension": 2352,
+      "s_bounds": [
+        2,
+        6
+      ],
+      "beta_plus_bounds": [
+        -3.5,
+        3.5
+      ],
+      "beta_minus_bounds": [
+        -4,
+        4
+      ],
+      "hbar": 0.2,
+      "potential_abs_cap": 8,
+      "b_boundary_width": 0.3
+    }
+  },
+  "exact_commands": [
+    "python -m unittest discover -s tests -p 'test_bianchi_ix_timeless_outer_cap.py' -v",
+    "python research/run_bianchi_ix_timeless_outer_cap.py --out artifacts/timeless-outer-cap",
+    "python research/run_bianchi_ix_timeless_outer_cap_layer_scan.py --out artifacts/timeless-outer-cap",
+    "python research/check_bianchi_ix_timeless_outer_cap_results.py --artifact-dir artifacts/timeless-outer-cap --baseline research/bianchi_ix_timeless_outer_cap_results/summary.json"
+  ],
+  "publication_branch_run": {
+    "run_id": 35378672773,
+    "head_sha": "49aea4e7d7a10c971d631013fa323e0a1ebde59d",
+    "conclusion": "success",
+    "artifact_id": 10560957177,
+    "artifact_sha256": "9953391504586e237815e53bb4bd4199116f616ba637405d3129d3ffb44d16fc",
+    "regression": {
+      "checked_numeric_values": 75,
+      "max_abs_difference": 7.815970093361102e-14,
+      "status": "ok"
+    }
+  },
+  "pull_request_run": {
+    "run_id": 35378782962,
+    "job_id": 105709743487,
+    "conclusion": "success",
+    "artifact_id": 10561217024,
+    "artifact_sha256": "93bce8aa0b1c7fae6e8fc7cbc0bf9a2f851820482c4a462adcf37df5391e0a84",
+    "steps": [
+      "4 outer-cap unit tests",
+      "primary outer-strength scan",
+      "1/2/3-cell layer-width scan",
+      "75-value saved-baseline regression check",
+      "artifact upload"
+    ]
+  },
+  "relevant_existing_checks": [
+    {
+      "name": "Bianchi IX bridge audit",
+      "run_id": 35378782909,
+      "conclusion": "success"
+    },
+    {
+      "name": "Bianchi IX ever-entered publication check",
+      "run_id": 35378782898,
+      "conclusion": "success"
+    }
+  ],
+  "scientific_decision": "Outer numerical absorption reduces edge support and eta sensitivity but retains substantial strength/layer regulator dependence. Do not adopt a regulator-independent on-shell Halliwell class operator or history probability from this pilot.",
+  "next": "Use true PML/exterior complex scaling or continuum-spectrum scattering and independently measure reflection/flux before induced physical inner product or decoherence-functional calculations.",
+  "unchanged": [
+    "LICENSE",
+    "NOTICE",
+    "Lean sources"
+  ],
+  "caveat": "CI success records numerical reproducibility for the selected model and regulators; it is not evidence of physical validity, singularity resolution, or verified quantum gravity."
+}
