@@ -1,0 +1,135 @@
+version: "0.4"
+model:
+  id: astra-bianchi-ix-ever-entered
+  title: "Astra Bianchi IX ever-entered history-probability audit"
+  choices:
+    internal_clock: "s = -alpha"
+    quantization: "finite-clock square-root Hamiltonian"
+    history_construction: "complex absorbing potential; no-B vs ever-entered-B"
+    model_inner_product: "L2(beta+, beta-)"
+    boundary: "finite boxes with cubic regrids"
+    scope: "uniform vacuum Bianchi IX minisuperspace; not a black-hole observation"
+
+obligations:
+  - id: FINITE_CLOCK_CAP_CLASS_OPERATOR_DEFINED
+    title: "Finite-clock CAP history operators are explicitly defined"
+    kind: formal
+    description: "The no-B operator and complementary ever-B operator are explicitly defined at the finite-clock model scope."
+
+  - id: HISTORY_PARTITION_DEFINED
+    title: "No-B versus ever-B exhaustive history partition is defined"
+    kind: formal
+    description: "The audited history alternatives are the complementary finite-clock no-B and ever-entered-B branches."
+
+  - id: PHYSICAL_INNER_PRODUCT
+    title: "Physical inner product for history probabilities is identified"
+    kind: physical
+    description: "A physical/induced inner product, not only the chosen L2 representation, must be identified before ordinary history probabilities are promoted."
+
+  - id: DECOHERENCE
+    title: "No-B and ever-B alternatives decohere at the audited scope"
+    kind: numerical
+    description: "Off-diagonal interference must be small for a non-tuned regulator regime; the published finite-clock CAP scan does not satisfy this."
+
+  - id: REGULATOR_STABILITY
+    title: "CAP-strength result is stable without tuning the regulator"
+    kind: robustness
+    description: "The V0 scan must approach a stable regime rather than a narrow optimum selected because it gives the desired conclusion."
+
+  - id: BOUNDARY_ROBUSTNESS
+    title: "History diagnostics are robust to absorber-boundary smoothing"
+    kind: robustness
+    description: "The smoothing-width dependence must be quantified under a predeclared tolerance before this obligation can pass."
+
+  - id: CLOCK_ROBUSTNESS
+    title: "History interpretation is robust across admissible internal clocks"
+    kind: robustness
+    description: "This canonical-gravity application requires a multi-clock comparison before physical promotion."
+
+  - id: ORDERING_ROBUSTNESS
+    title: "History interpretation is robust across admissible factor orderings"
+    kind: robustness
+    description: "The finite-clock quantization has not yet been shown insensitive to an allowed ordering family."
+
+  - id: LEAN_HISTORY_ALGEBRA
+    title: "Scoped history/factorization algebra is formally checked"
+    kind: formal
+    description: "Lean verifies only the abstract equalities used by the history audit; it does not validate the physical clock or quantization."
+
+  - id: REDUCED_DYNAMICS_ALGEBRA
+    title: "Reduced Bianchi IX wall algebra is symbolically checked"
+    kind: symbolic
+    description: "SymPy independently checks the declared exponential wall decomposition and constraint rescaling identity."
+
+evidence:
+  - id: finite-clock-cap-definition
+    obligation: FINITE_CLOCK_CAP_CLASS_OPERATOR_DEFINED
+    status: PASS
+    engine: numerical-audit
+    artifact: docs/BIANCHI_IX_EVER_ENTERED_AUDIT_ja.md
+    note: "C_noB is the CAP evolution and C_everB = U - C_noB at the finite-clock model scope; this is not a timeless physical class operator."
+
+  - id: finite-clock-history-partition
+    obligation: HISTORY_PARTITION_DEFINED
+    status: PASS
+    engine: numerical-audit
+    artifact: research/bianchi_ix_ever_entered_results/summary.json
+    note: "The two complementary branches close by construction to machine precision."
+
+  - id: physical-inner-product-open
+    obligation: PHYSICAL_INNER_PRODUCT
+    status: OPEN
+    engine: model-spec
+    artifact: PHYSICS_AUDIT.md
+    note: "The L2 representation is a model choice; an induced/physical inner product for the timeless problem has not been identified."
+
+  - id: finite-clock-decoherence-negative-result
+    obligation: DECOHERENCE
+    status: FAIL
+    engine: numerical-audit
+    artifact: research/bianchi_ix_ever_entered_results/summary.json
+    note: "The published audit explicitly rejects strict decoherence and probability interpretation; the apparent optimum near V0=.075 is regulator-tuned."
+
+  - id: clock-robustness-open
+    obligation: CLOCK_ROBUSTNESS
+    status: OPEN
+    engine: model-spec
+    artifact: audit/physics_obligations.json
+    note: "No multi-clock history-probability comparison has discharged the clock obligation."
+
+  - id: ordering-robustness-open
+    obligation: ORDERING_ROBUSTNESS
+    status: OPEN
+    engine: model-spec
+    artifact: audit/physics_obligations.json
+    note: "No allowed factor-ordering family scan has discharged the ordering obligation."
+
+claims:
+  - id: MODEL_INTERNAL_EVER_ENTERED_WEIGHT
+    title: "Model-internal ever-entered branch weight"
+    rank: 10
+    statement: "The finite-clock CAP construction defines and computes a model-internal no-B / ever-B branch decomposition with audited algebra."
+    requires:
+      - FINITE_CLOCK_CAP_CLASS_OPERATOR_DEFINED
+      - HISTORY_PARTITION_DEFINED
+      - LEAN_HISTORY_ALGEBRA
+      - REDUCED_DYNAMICS_ALGEBRA
+
+  - id: HISTORY_PROBABILITY
+    title: "Ordinary additive ever-entered history probability"
+    rank: 50
+    statement: "The no-B and ever-B diagonal weights may be interpreted as ordinary additive history probabilities at the audited scope."
+    requires:
+      - FINITE_CLOCK_CAP_CLASS_OPERATOR_DEFINED
+      - HISTORY_PARTITION_DEFINED
+      - PHYSICAL_INNER_PRODUCT
+      - DECOHERENCE
+      - REGULATOR_STABILITY
+      - BOUNDARY_ROBUSTNESS
+      - CLOCK_ROBUSTNESS
+      - ORDERING_ROBUSTNESS
+
+template_metadata:
+  name: HISTORY_PROBABILITY
+  source: "TheoryGate v0.4 starter template, rewritten for the astra-blackhole finite-clock ever-entered history problem"
+  warning: "The built-in template is scaffolding. Clock and factor-ordering robustness were added because they are blocking choices in this canonical-gravity model."
