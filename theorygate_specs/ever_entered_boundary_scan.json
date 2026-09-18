@@ -1,0 +1,24 @@
+{
+  "kind": "boundary",
+  "observable": "finite-clock CAP offdiag_abs at V0=.075,maxdim78",
+  "comparison": "pairwise",
+  "minimum_cases": 3,
+  "cases": [
+    {
+      "label": "width=.20",
+      "setting": 0.2,
+      "value": 0.007477275603310419
+    },
+    {
+      "label": "width=.30",
+      "setting": 0.3,
+      "value": 0.007325433992383949
+    },
+    {
+      "label": "width=.45",
+      "setting": 0.45,
+      "value": 0.007106896502736835
+    }
+  ],
+  "protocol_note": "No preregistered tolerance exists for the smoothing-width scan, so TheoryGate should report diagnostic PARTIAL rather than PASS."
+}
