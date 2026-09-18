@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "status": "PASS",
+  "backend": "Cadabra",
+  "comparison": "PASS",
+  "max_classical_quantum_wall_gradient_abs": 0,
+  "max_reduced_hamilton_rhs_abs": 0,
+  "max_wall_relation_abs": 2.2234614865425384e-21,
+  "source_sha256": {
+    "research/bianchi_ix_model.py": "92e4a56259d18ff58e5f18eaa93a621b0809ad0249f3b5ffcb117b6ce5535a30",
+    "research/quantum_bianchi_ix_model.py": "e18d5347b4428c28d8942aa5e25c04fb27b8a997e982dc30cf5d62103e257519"
+  },
+  "verified_relations": [
+    "R3=-12 exp(-2 alpha) V",
+    "KijKij-K^2=6/N^2(-alpha_dot^2+beta_plus_dot^2+beta_minus_dot^2)",
+    "C=1/2 exp(-3 alpha)(-p_alpha^2+p_plus^2+p_minus^2)+exp(alpha)V",
+    "W=2 exp(-4s)V",
+    "G_s=-sqrt(p_plus^2+p_minus^2+W)"
+  ],
+  "scope_note": "Agreement verifies the repository's stated classical reduction convention against one executed independent CAS backend. It does not establish uniqueness of the convention or validity of the subsequent quantization."
+}
