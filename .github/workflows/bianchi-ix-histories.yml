@@ -3,6 +3,7 @@ name: Bianchi IX history decoherence audit
 on:
   push:
     branches:
+      - main
       - research/bianchi-ix-histories
     paths:
       - 'research/bianchi_ix_histories.py'
