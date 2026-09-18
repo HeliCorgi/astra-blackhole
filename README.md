@@ -71,10 +71,10 @@ finite-window の反射問題を避けるため、同じ2352次元二階constrai
 
 次は outer boundary を outgoing/PML 型にするか、continuum spectral density を扱う scattering discretizationへ進む。physical induced inner product、decoherence functional、履歴確率は引き続き保留する。
 
-\`\`\`sh
+```sh
 python -m unittest discover -s tests -p 'test_bianchi_ix_timeless_resolvent.py' -v
 python research/run_bianchi_ix_timeless_resolvent.py --out artifacts/timeless-resolvent --check-against research/bianchi_ix_timeless_resolvent_results/summary.json
-\`\`\`
+```
 
 ```sh
 python -m unittest discover -s tests -p 'test_bianchi_ix_timeless_bridge.py' -v
