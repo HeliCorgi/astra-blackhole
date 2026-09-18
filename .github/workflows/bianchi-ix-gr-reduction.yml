@@ -47,7 +47,7 @@ jobs:
           CADABRA_NO_UNICODE: '1'
         run: |
           mkdir -p artifacts/gr-reduction
-          cadabra2-cli cas/cadabra/bianchi_ix_reduction.cdb | tee artifacts/gr-reduction/cadabra.log
+          /usr/bin/time -p timeout 180s cadabra2-cli cas/cadabra/bianchi_ix_reduction.cdb 2>&1 | tee artifacts/gr-reduction/cadabra.log
           test -s artifacts/gr-reduction/cadabra_result.json
           grep -q ASTRA_CADABRA_BIANCHI_IX_OK artifacts/gr-reduction/cadabra.log
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
