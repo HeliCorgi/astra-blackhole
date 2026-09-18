@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "date": "2026-09-19",
+  "branch_head": "a108fef787dd798708cbe2d58ebca82a9727448a",
+  "target": "Bianchi IX vacuum Misner-variable GR reduction",
+  "cadabra": {
+    "status": "PASS",
+    "backend": "Cadabra 2.5.14",
+    "mode": "cadabra2-cli with Cadabra SymPy scalar backend; Euler-angle metric -> Christoffel/Ricci -> ADM/Legendre derivation",
+    "run_id": 35384482998,
+    "job_id": 105728047567,
+    "artifact_id": 10563541351,
+    "artifact_sha256": "521a576583e5cc831d5758b36409c3fc35a015fe9555c7bc92416caf72f37183",
+    "package": {
+      "asset": "cadabra2-2.5.14-ubuntu-24.04-noble-x86_64.deb",
+      "sha256": "b9dc00c94eda9bff5d5e2f9793f6640c0c507d6ef2fc00401273e9b8659887ad"
+    },
+    "comparison": "PASS",
+    "max_wall_relation_abs": 2.2234614865425384e-21,
+    "max_classical_quantum_wall_gradient_abs": 0,
+    "max_reduced_hamilton_rhs_abs": 0
+  },
+  "xact": {
+    "status": "PENDING",
+    "source": "cas/xact/bianchi_ix_reduction.wl",
+    "reason": "Source is committed, but no licensed Wolfram Engine/xAct execution environment is configured."
+  },
+  "gate_decision": "PARTIAL",
+  "verified_relations": [
+    "R3=-12 exp(-2 alpha) V",
+    "KijKij-K^2=6/N^2(-alpha_dot^2+beta_plus_dot^2+beta_minus_dot^2)",
+    "C=1/2 exp(-3 alpha)(-p_alpha^2+p_plus^2+p_minus^2)+exp(alpha)V",
+    "W=2 exp(-4s)V",
+    "G_s=-sqrt(p_plus^2+p_minus^2+W)"
+  ],
+  "scope_note": "One executed independent CAS backend agrees with the repository reduction convention. The second xAct backend remains unexecuted, so GR_REDUCTION is PARTIAL rather than PASS. This does not validate the quantum clock, inner product, operator domain, factor ordering, regulator removal, or physical interpretation.",
+  "license_files_changed": false,
+  "lean_changed": false
+}
