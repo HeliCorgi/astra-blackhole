@@ -75,36 +75,82 @@ c=e^{\alpha-2\beta_+}
 
 ## Backend 1: Cadabra 2.5.14
 
-Cadabra 2.5.14 の `cadabra2-cli` 内でEuler角座標metricを直接構成した。
-Cadabraプロセス内のSymPy scalar backendを用いた明示的3×3 component calculationで
-Christoffel、Ricci tensor、Ricci scalarを再計算した。
+Cadabra 2.5.14 の `cadabra2-cli` 内で、SU(2)左不変frameから空間曲率を再導出する。
 
-得られた閉形式は
+初期実装は一般 (a,b,c) のEuler角座標metricを直接逆行列化し、全Christoffel/Ricci成分を三角関数込みで簡約していた。複数runでは成功したが、main run 35388086412 で `Run independent Cadabra Bianchi IX reduction` が約20分間完了せずworkflow timeoutでcancelされた。数式のFAILではなく、generic symbolic simplificationの実行時間不安定性だった。
 
-\[
-{}^{(3)}R=
-\frac{2[-a^4-b^4-c^4+2(a^2b^2+b^2c^2+c^2a^2)]}
-{a^2b^2c^2}.
-\]
+そこで同じ3-geometryを座標展開せず、直交左不変frameで計算する。規格化 (omega_i=sigma_i/2) のdual frameを (e_i) とすると、向きの全体符号を除いて
 
-Misner変数へ代入すると厳密に
+[
+[e_2,e_3]=2e_1,qquad
+[e_3,e_1]=2e_2,qquad
+[e_1,e_2]=2e_3.
+]
 
-\[
-{}^{(3)}R+12e^{-2\alpha}V=0
-\]
+metric
 
-となった。
+[
+h=a^2omega_1^2+b^2omega_2^2+c^2omega_3^2
+]
 
-さらに
+のorthonormal frame (E_1=e_1/a, E_2=e_2/b, E_3=e_3/c) では
 
-\[
-K_{ij}K^{ij}-K^2
+[
+[E_2,E_3]=rac{2a}{bc}E_1,
+]
+
+およびcyclic permutationとなる。
+
+Cadabraプロセス内のscalar bridgeを使い、structure constantsからKoszul公式
+
+[
+2Gamma_{ij}{}^k
 =
-\frac{6}{N^2}
-\left(-\dot\alpha^2+\dot\beta_+^2+\dot\beta_-^2\right)
-\]
+c_{ij}{}^k-c_{jk}{}^i+c_{ki}{}^j
+]
 
-とLegendre transformを確認した。
+でLevi-Civita接続を構成し、
+
+[
+R(E_i,E_j)E_k
+=
+
+abla_i
+abla_jE_k
+-
+abla_j
+abla_iE_k
+-
+abla_{[E_i,E_j]}E_k
+]
+
+を代数的に縮約する。
+
+閉形式を入力として使わずに得たscalar curvatureを、最後に
+
+[
+{}^{(3)}R=
+rac{2[-a^4-b^4-c^4+2(a^2b^2+b^2c^2+c^2a^2)]}
+{a^2b^2c^2}
+]
+
+と比較する。追加negative controlとして等方極限 (a=b=c=r) が
+
+[
+{}^{(3)}R=6/r^2
+]
+
+になることも厳密に確認する。
+
+Misner変数へ代入後は従来どおり
+
+[
+{}^{(3)}R+12e^{-2alpha}V=0
+]
+
+を検査し、ADM kinetic termとLegendre transformへ進む。
+
+このframe pathは、座標Christoffelの三角関数簡約を避けるため、CIの実行時間を物理式とは無関係なCAS simplification heuristicに依存させにくい。workflowではCadabra実行自体に180秒の外部timeoutも置き、予期しないhangを20分後まで待たない。
 
 ## Backend 2: Maxima / ctensor 5.46.0
 
@@ -261,7 +307,7 @@ Bianchi IXは特定のSchwarzschild内部そのものではない。
 
 ## 限界
 
-1. CadabraはCadabra 2.5.14プロセス内のSymPy scalar backendを使うcomponent計算。
+1. CadabraはCadabra 2.5.14プロセス内のscalar bridgeを使い、SU(2)左不変frameのstructure constantsからKoszul/Riemannを代数的に構成する。
 2. Maximaは別CASの`ctensor`を使うため第二backendとして独立扱いした。
 3. xActはsourceのみで未実行。
 4. one-form規格化、ADM sign convention、overall canonical normalizationは明示的に固定した規約であり、規約の一意性を証明していない。

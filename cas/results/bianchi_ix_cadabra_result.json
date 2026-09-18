@@ -3,14 +3,15 @@
   "backend": {
     "name": "Cadabra",
     "version": "2.5.14",
-    "mode": "cadabra2-cli with Cadabra SymPy scalar backend; explicit Euler-angle component GR calculation"
+    "mode": "cadabra2-cli with Cadabra SymPy scalar bridge; SU(2) invariant-frame Koszul/Riemann reduction"
   },
   "checks": {
     "cadabra_sympy_bridge_probe": "0",
     "spatial_curvature_closed_form_zero": "0",
     "spatial_curvature_misner_zero": "0",
     "adm_kinetic_zero": "0",
-    "constraint_zero": "0"
+    "constraint_zero": "0",
+    "isotropic_curvature_zero": "0"
   },
   "conventions": {
     "omega_normalization": "omega_i=sigma_i/2",
@@ -20,7 +21,8 @@
       "exp(alpha-2*beta_plus)"
     ],
     "extrinsic_curvature_sign": "K_ij=+(1/(2N))*dot(h_ij); quadratic invariant insensitive to global sign",
-    "normalized_adm_factor": "1/12 after dropping the common spatial-volume/(2 kappa) factor"
+    "normalized_adm_factor": "1/12 after dropping the common spatial-volume/(2 kappa) factor",
+    "su2_frame_brackets": "[e_2,e_3]=2 e_1 and cyclic permutations up to global orientation sign"
   },
   "derived": {
     "spatial_curvature_closed": "-2*(a - b - c)*(a - b + c)*(a + b - c)*(a + b + c)/(a**2*b**2*c**2)",
