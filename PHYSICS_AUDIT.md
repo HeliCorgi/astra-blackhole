@@ -17,7 +17,7 @@ Lean が証明するのは、採用した定義・仮定から結論が論理的
 | gate | 現在 | promotion rule | kill / downgrade rule |
 |---|---|---|---|
 | GR reduction / CAS | PENDING | 独立CASで縮約Hamiltonian・constraint・符号・係数を再導出 | 未実行なら physical interpretation を昇格しない |
-| Lean semantics | PENDING_CI | factorization residual / branch recombination / constraint-kernel preservationをLean build | build/axiom audit不合格なら ALGEBRAICALLY VERIFIED を出さない |
+| Lean semantics | PASS | factorization residual / branch recombination / constraint-kernel preservationをLean build | build/axiom audit不合格なら ALGEBRAICALLY VERIFIED を出さない |
 | clock | PENDING | {T,C}、単調性、branch一意性、複数clock比較 | 結論がclockで変われば CLOCK-DEPENDENT |
 | inner product / domain | PENDING | 保存則、対称性、domain、extensionを明示 | 有限格子Hermiticityだけでは通さない |
 | factor ordering | PENDING | principal symbol、symmetry、formal symmetry、semiclassical limit、ordering scan | 結論がorderingで変われば ORDERING-SENSITIVE |
@@ -44,6 +44,9 @@ claim compiler が扱うラベル:
 `PHYSICAL INTERPRETATION NOT IDENTIFIED` は、blocking obligation に PENDING / PARTIAL / FAIL が一つでも残れば自動付与する。
 
 ## Lean semantic checker
+
+Lean 4.19.0 のCI run 35381665961で `lake build` と `Audit.lean` が完了し、新規3定理はいずれも公理依存なしと確認した。これは以下の抽象定理だけに対する `ALGEBRAICALLY VERIFIED` である。
+
 
 `lean/AstraBlackhole/PhysicsAudit.lean` は次の3点だけを証明する。
 
