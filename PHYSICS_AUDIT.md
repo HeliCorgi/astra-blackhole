@@ -22,7 +22,7 @@ Lean が証明するのは、採用した定義・仮定から結論が論理的
 | inner product / domain | PENDING | 保存則、対称性、domain、extensionを明示 | 有限格子Hermiticityだけでは通さない |
 | factor ordering | PENDING | principal symbol、symmetry、formal symmetry、semiclassical limit、ordering scan | 結論がorderingで変われば ORDERING-SENSITIVE |
 | regulator | FAIL | box/cap/grid/eta/CAP/PML/Krylovを物理量から分離し安定域を確認 | 現在のtimeless scatteringは regulator-independent limit 未確認 |
-| known limits | PARTIAL | WKB/HJ、Schwarzschild/KS、current、free case、soluble toy model | 一部だけでは SEMICLASSICAL LIMIT PASSED を出さない |
+| known limits | PENDING（一部PARTIAL） | WKB/HJ、Schwarzschild/KS、current、free case、soluble toy model | 一部だけでは SEMICLASSICAL LIMIT PASSED を出さない |
 | claim compiler | IMPLEMENTED | obligations JSONのみからclaim labelを生成 | 人手で上位claim labelを上書きしない |
 
 現在の regulator gate は、finite-window Dirichlet S-matrix、stationary resolvent、outer absorbing-layer control の三段階を経ても strength / layer / eta dependence が残るため FAIL。これは Halliwell formalism の否定ではなく、現在の数値散乱設計の不採用を意味する。
