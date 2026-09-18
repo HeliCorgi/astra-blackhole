@@ -7,14 +7,12 @@ on:
       - 'research/bianchi_ix_ever_entered.py'
       - 'research/run_bianchi_ix_ever_entered.py'
       - 'tests/test_bianchi_ix_ever_entered.py'
-      - 'docs/BIANCHI_IX_EVER_ENTERED_AUDIT_ja.md'
       - '.github/workflows/bianchi-ix-ever-entered.yml'
   pull_request:
     paths:
       - 'research/bianchi_ix_ever_entered.py'
       - 'research/run_bianchi_ix_ever_entered.py'
       - 'tests/test_bianchi_ix_ever_entered.py'
-      - 'docs/BIANCHI_IX_EVER_ENTERED_AUDIT_ja.md'
       - '.github/workflows/bianchi-ix-ever-entered.yml'
   workflow_dispatch:
 permissions:

@@ -92,3 +92,14 @@ WDW用15件のテストと専用CIを追加。量子計算の再現性と、採�
 検証済み9×9 D 行列を再利用し、第二壁 A/B+/B- の全5集合分割をblock和で評価した。A / {B+,B-} の二分割では max |D_off| が0.004799まで下がるが、102→114差を二項和へ伝播した対照尺度0.003809の1.26倍にとどまるため厳密デコヒーレンスは保留。B+単独・B-単独の二分割は対照尺度の5倍以上の複素干渉が残る。第二壁を完全に捨てた最終時刻だけの三分岐は直交射影なので自明に対角であり、動的デコヒーレンスとは数えない。
 
 次は cubic regrid の系統を下げて A/{B±} 二分割を再判定し、その後に固定時刻射影から「領域へ入る」constraint-compatible class operatorへ進む。
+
+
+### 6c. ever-entered region：finite-clock CAP pilot
+
+固定三時刻の射影から離れ、第一壁A条件付け後にB={B+,B-}領域へ一度でも入ったかを、G_eff=G-iV0 F_B の複素吸収ポテンシャルで監査した。unrestricted/no-entryは各時間刻みで同じblock-Krylov作用素を共有し、regridは線形・非正規化とした。
+
+V0=.025→.075でstrict off-diagonalは.1105→.0073へ低下するが、.085で.0136、.10で.0232へ再増大する。V0=.075,maxdim90でも|Doff|=.00578が残る。width=.20/.30/.45でstrict量は近いがRe Doffは符号を変える。広いregulator plateauがないためstrict decoherenceもweak consistencyも採用せず、branch対角重みをever-entry確率とは呼ばない。
+
+古典Wigner 4096軌道ではA条件付きever-B頻度0.998729、ds=.01/.005一致。量子対角重みと確率比較しない。
+
+次はfinite-clock CAPを負の対照として固定し、timeless WDW constraintと可換なcomplex-potential S-matrix class operatorを実装する。必要ならCAP reflectionをfluxで独立診断する。
