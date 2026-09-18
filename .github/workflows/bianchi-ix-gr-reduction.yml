@@ -2,6 +2,7 @@ name: Bianchi IX GR reduction CAS
 on:
   push:
     branches:
+      - main
       - audit/bianchi-ix-gr-reduction
     paths:
       - 'cas/bianchi_ix_reference.json'
