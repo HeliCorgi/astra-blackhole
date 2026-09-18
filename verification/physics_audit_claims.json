@@ -13,7 +13,7 @@
     "PHYSICAL INTERPRETATION NOT IDENTIFIED"
   ],
   "gate_status": {
-    "GR_REDUCTION": "PARTIAL",
+    "GR_REDUCTION": "PASS",
     "LEAN_SEMANTIC": "PASS",
     "CLOCK": "PENDING",
     "INNER_PRODUCT_DOMAIN": "PENDING",
@@ -24,25 +24,25 @@
     "CLAIM_COMPILER": "PASS"
   },
   "promotion_blockers": [
-    "gr_reduction.independent_cas",
     "clock.internal_s_minus_alpha",
     "inner_product.timeless_domain",
     "factor_ordering.timeless_constraint",
     "regulator.timeless_scattering",
     "known_limits.timeless",
+    "known_limits.schwarzschild_ks_bridge",
     "known_limits.semiclassical"
   ],
   "failed_obligations": [
     "regulator.timeless_scattering"
   ],
   "partial_obligations": [
-    "gr_reduction.independent_cas",
     "known_limits.timeless"
   ],
   "pending_obligations": [
     "clock.internal_s_minus_alpha",
     "inner_product.timeless_domain",
     "factor_ordering.timeless_constraint",
+    "known_limits.schwarzschild_ks_bridge",
     "known_limits.semiclassical"
   ],
   "interpretation_rule": "Labels describe only passed scoped gates. A blocking PENDING/PARTIAL/FAIL forces PHYSICAL INTERPRETATION NOT IDENTIFIED."
