@@ -34,41 +34,59 @@
     {
       "id": "lean.factorization_residual",
       "gate": "LEAN_SEMANTIC",
-      "status": "PENDING",
+      "status": "PASS",
       "blocking": false,
       "requirement": "Prove the abstract time-dependent factorization residual theorem and pass Lean build/axiom audit.",
       "evidence": [
         {
           "path": "lean/AstraBlackhole/PhysicsAudit.lean"
+        },
+        {
+          "path": "verification/physics_audit_lean_verified_run.json",
+          "expect": {
+            "ci.conclusion": "success"
+          }
         }
       ],
-      "note": "Source implemented; remains PENDING until CI build and axiom report are recorded."
+      "note": "Lean 4.19.0 build and explicit axiom audit succeeded; theorem scope remains semantic only."
     },
     {
       "id": "lean.branch_recombination",
       "gate": "LEAN_SEMANTIC",
-      "status": "PENDING",
+      "status": "PASS",
       "blocking": false,
       "requirement": "Prove that recombination equality is preserved when all branches receive the same operator.",
       "evidence": [
         {
           "path": "lean/AstraBlackhole/PhysicsAudit.lean"
+        },
+        {
+          "path": "verification/physics_audit_lean_verified_run.json",
+          "expect": {
+            "ci.conclusion": "success"
+          }
         }
       ],
-      "note": "Source implemented; remains PENDING until CI build and axiom report are recorded."
+      "note": "Lean 4.19.0 build and explicit axiom audit succeeded; theorem scope remains semantic only."
     },
     {
       "id": "lean.constraint_kernel",
       "gate": "LEAN_SEMANTIC",
-      "status": "PENDING",
+      "status": "PASS",
       "blocking": false,
       "requirement": "Prove that a commuting zero-preserving operator maps the constraint kernel to itself.",
       "evidence": [
         {
           "path": "lean/AstraBlackhole/PhysicsAudit.lean"
+        },
+        {
+          "path": "verification/physics_audit_lean_verified_run.json",
+          "expect": {
+            "ci.conclusion": "success"
+          }
         }
       ],
-      "note": "Source implemented; remains PENDING until CI build and axiom report are recorded."
+      "note": "Lean 4.19.0 build and explicit axiom audit succeeded; theorem scope remains semantic only."
     },
     {
       "id": "clock.internal_s_minus_alpha",
