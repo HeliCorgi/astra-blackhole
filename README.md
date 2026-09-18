@@ -23,6 +23,17 @@ python -m unittest discover -s tests -p 'test_bianchi_ix_classical_histories.py'
 python research/run_bianchi_ix_classical_histories.py --out artifacts/bianchi-ix-classical-histories
 ```
 
+### 履歴を粗視化するとどうなるか
+
+[第二壁の全5粗視化](docs/BIANCHI_IX_HISTORY_COARSE_AUDIT_ja.md) / [結果](research/bianchi_ix_history_coarse_results/summary.json)
+
+第二壁の3択を A と {B+,B-} の二分割へまとめると max |D_off| は 0.019418→0.004799 に低下する。ただし102→114の数値対照差を二項和へ保守的に伝播した尺度0.003809の約1.26倍なので、厳密デコヒーレンス成立とは判定しない。B+単独・B-単独の二分割は干渉が対照尺度の5倍以上残る。第二壁を完全に無視した3履歴が対角になるのは最終射影の直交性による代数的結果で、動的デコヒーレンスの証拠ではない。
+
+```sh
+python -m unittest discover -s tests -p 'test_bianchi_ix_history_coarse.py' -v
+python research/bianchi_ix_history_coarse.py --input research/bianchi_ix_history_coarse_input.json --out artifacts/bianchi-ix-history-coarse/summary.json --check-against research/bianchi_ix_history_coarse_results/summary.json
+```
+
 ## 文献再現：同じ初期状態・時計・内積で比較
 
 [ChibaらのSchwarzschildセクターを再計算](docs/CHIBA_REPRODUCTION_ja.md)。同じGaussian境界データとKG期待値で、κ=.01,.05,.1,1の四条件を二つの数値法で照合しました。同じ解・同じ切片を以前の座標へ移すとKG流束と期待値は一致します。一方、スカラー解を以前のL2(dx)状態と同一視できない定数の裾を確認しました。原著の数値列との点ごとの再現、特異点回避の証明ではありません。
