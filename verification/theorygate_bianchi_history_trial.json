@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "date": "2026-09-19",
+  "theorygate": {
+    "repository": "HeliCorgi/theorygate",
+    "version": "0.4.0",
+    "commit": "cb33044551f2f98a03ab813e20c4caf8fe9f9743"
+  },
+  "astra_branch": "experiment/theorygate-history-probability",
+  "astra_head": "1d88e6ccb46de26ca0875f17021c28761f27de19",
+  "workflow": {
+    "name": "TheoryGate Bianchi IX history-probability trial",
+    "run_id": 35389840066,
+    "job_id": 105745359311,
+    "conclusion": "success",
+    "artifact_id": 10566075329,
+    "artifact_sha256": "73f66296342c4ec21a2821c565243d23b48bb05a7c16e984241cb9e22732e97a"
+  },
+  "author_starter_command": {
+    "command": "theorygate template init HISTORY_PROBABILITY --model-id astra-bianchi-ix --output <temp>/generated-history-template.yaml",
+    "status": "PASS"
+  },
+  "adapter_results": {
+    "lean": {
+      "status": "PASS",
+      "obligation": "LEAN_HISTORY_ALGEBRA",
+      "theorems": [
+        "AstraBlackhole.time_dependent_factorization_residual",
+        "AstraBlackhole.common_operator_preserves_recombination"
+      ],
+      "policy": "--no-axioms and --require-pass"
+    },
+    "sympy": {
+      "status": "PASS",
+      "obligation": "REDUCED_DYNAMICS_ALGEBRA",
+      "checks": [
+        "wall-exponential-decomposition",
+        "constraint-rescaling"
+      ]
+    },
+    "regulator": {
+      "status": "FAIL",
+      "obligation": "REGULATOR_STABILITY",
+      "reason": "successive relative drift increases toward the requested limit",
+      "threshold_policy": "No max_absolute/max_relative tolerance invented; failure comes from the pre-existing non-monotone regulator decision encoded via require_nonincreasing_successive_drift."
+    },
+    "boundary": {
+      "status": "PARTIAL",
+      "obligation": "BOUNDARY_ROBUSTNESS",
+      "reason": "No preregistered absolute/relative tolerance; diagnostic-only scan.",
+      "max_symmetric_relative_difference": 0.050791926738166786
+    }
+  },
+  "inline_obligations": {
+    "FINITE_CLOCK_CAP_CLASS_OPERATOR_DEFINED": "PASS",
+    "HISTORY_PARTITION_DEFINED": "PASS",
+    "PHYSICAL_INNER_PRODUCT": "OPEN",
+    "DECOHERENCE": "FAIL",
+    "CLOCK_ROBUSTNESS": "OPEN",
+    "ORDERING_ROBUSTNESS": "OPEN"
+  },
+  "claims": {
+    "MODEL_INTERNAL_EVER_ENTERED_WEIGHT": "SUPPORTED",
+    "HISTORY_PROBABILITY": "BLOCKED"
+  },
+  "strongest_supported_claim": "MODEL_INTERNAL_EVER_ENTERED_WEIGHT",
+  "history_probability_blockers": [
+    "PHYSICAL_INNER_PRODUCT=OPEN",
+    "DECOHERENCE=FAIL",
+    "REGULATOR_STABILITY=FAIL",
+    "BOUNDARY_ROBUSTNESS=PARTIAL",
+    "CLOCK_ROBUSTNESS=OPEN",
+    "ORDERING_ROBUSTNESS=OPEN"
+  ],
+  "observations": [
+    "TheoryGate correctly treats negative evidence as evidence rather than a CI crash.",
+    "The raw HISTORY_PROBABILITY template requires model-specific rewriting for canonical gravity; clock and factor-ordering robustness were added as blocking obligations.",
+    "The robustness adapter encoded the existing no-broad-plateau decision without inventing a numerical tolerance.",
+    "The boundary scan correctly remained PARTIAL when no preregistered tolerance existed.",
+    "TheoryGate v0.4 has no Maxima/ctensor CAS adapter, although astra-blackhole now uses Maxima as an independent second GR-reduction backend."
+  ],
+  "scope_note": "This trial validates TheoryGate integration behavior against existing astra-blackhole evidence. It does not create new physical evidence or change the existing negative history-probability conclusion."
+}
