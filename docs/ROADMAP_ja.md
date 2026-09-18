@@ -168,3 +168,20 @@ induced physical inner productとdecoherence functionalは実装しない。
 `PHYSICS_AUDIT.md` と `audit/physics_obligations.json` をsource of truthとし、blocking gateにPENDING/PARTIAL/FAILが残れば物理解釈の昇格を禁止する。現在はregulator gateがFAIL、known-limitがPARTIAL、CAS/clock/domain/orderingがPENDING。
 
 Leanには3つの抽象意味論定理を追加するが、continuous operatorのdomain/self-adjointnessや量子化の物理的正しさは証明対象外。xAct/Cadabraによる独立GR reductionはCAS gateの次段階としてPENDINGのまま残す。
+
+
+### 6i. Bianchi IX GR reduction CAS：Cadabra実行済み、第二backend待ち
+
+数値実装が採用するBianchi IXの古典縮約を、SU(2) Euler角の3-metricから独立再導出するcheckerを追加した。Cadabra 2.5.14を公開SHA-256で固定し、Cadabraプロセス内のSymPy scalar backendで明示的3×3 Christoffel/Ricci計算を行った。
+
+確認済み:
+- ({}^{(3)}R=-12e^{-2\alpha}V)
+- (K_{ij}K^{ij}-K^2=6N^{-2}(-\dot\alpha^2+\dot\beta_+^2+\dot\beta_-^2))
+- repo規約のnormalized Lagrangian / canonical momenta
+- (C=\frac12e^{-3\alpha}(-p_\alpha^2+p_+^2+p_-^2)+e^\alpha V)
+- (W=2e^{-4s}V), (G_s=-\sqrt{p_+^2+p_-^2+W})
+- classical/quantum wall実装とgradient、reduced Hamilton equations
+
+Cadabra backendはPASS。一方、xAct/xCoba sourceは用意したがlicensed Wolfram runtimeがCIにないため未実行。したがって physics audit のGR_REDUCTIONはPENDINGからPARTIALへ進めるが、完全PASSにはしない。
+
+次はxActを実際に走らせる実行環境を接続するか、同等に独立した第二CAS/解析certificateを追加する。その後もclock/domain/ordering/regulatorの各gateは別に残る。
