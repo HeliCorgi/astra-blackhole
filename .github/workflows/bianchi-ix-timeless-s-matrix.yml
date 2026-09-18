@@ -2,12 +2,14 @@ name: Bianchi IX timeless S-matrix pilot
 on:
   push:
     branches:
+      - main
       - research/bianchi-ix-timeless-s-matrix
     paths:
       - 'research/bianchi_ix_timeless_smatrix.py'
       - 'research/run_bianchi_ix_timeless_smatrix.py'
       - 'tests/test_bianchi_ix_timeless_smatrix.py'
       - 'docs/BIANCHI_IX_TIMELESS_SMATRIX_ja.md'
+      - 'research/bianchi_ix_timeless_smatrix_results/**'
       - '.github/workflows/bianchi-ix-timeless-s-matrix.yml'
   pull_request:
     paths:
@@ -35,7 +37,7 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install -r requirements.txt
       - run: python -m unittest discover -s tests -p 'test_bianchi_ix_timeless_smatrix.py' -v
-      - run: python research/run_bianchi_ix_timeless_smatrix.py --out artifacts/timeless-smatrix
+      - run: python research/run_bianchi_ix_timeless_smatrix.py --out artifacts/timeless-smatrix --check-against research/bianchi_ix_timeless_smatrix_results/summary.json
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:

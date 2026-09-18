@@ -53,3 +53,29 @@ Halliwell型の正しいtimeless class operatorはT→∞のscattering limitでc
 Euclidean grid normは数値診断だけ。
 
 このpilotが収束しなければ、有限Dirichlet boxでscattering S-matrixを近似する設計自体を負の対照として保存し、absorbing/outgoing boundaryまたは直接resolvent法へ切り替える。
+
+
+## Pilot実行結果
+
+最初のnear-zero固有modeは境界1セルに約27.9%の質量を持ったため、そのままの判定を棄却した。20個のnear-zero modeの部分空間で境界projectorを対角化し、edge massを最小化したlow-energy packetへ変更した。採用packetは：
+
+- edge mass (1 cell): 0.07652
+- capped-region mass: 1.78e-5
+- constraint energy mean: -0.01049
+- constraint energy spread: 0.00581
+
+V0=0では S_T=I の誤差4.4e-14以下、commutator relative 1.2e-12以下で負の対照は通った。
+
+しかしV0>0ではTを増やしてもconstraint可換性へ近づかない。例としてV0=.025：
+
+| T | norm² | constraint spread | commutator relative |
+|---:|---:|---:|---:|
+| .25 | .9259 | .00935 | .2799 |
+| .50 | .8597 | .01147 | .3562 |
+| 1.00 | .7458 | .01434 | .4336 |
+
+さらにS_Tのsuccessive window差も .25→.5 で0.0467、.5→1.0で0.0906へ増える。V0=.05/.10では悪化はさらに大きい。
+
+**結論：この有限Dirichlet箱によるscattering S-matrix近似はHalliwellのT→∞ limitへ収束している証拠がなく、constraint-compatible class operatorとして不採用。**
+
+これはHalliwell formalism自体の否定ではない。有限箱が反射境界を持つため、無限scattering問題の数値近似として不適切である可能性が高い。次はoutgoing/absorbing outer boundary、またはresolvent/scattering formulationへ変更し、このpilotを負の対照として保持する。
