@@ -84,22 +84,27 @@ def propagate_linear(model, v, s0, s1, ds, krylov_dim):
     return v
 
 
-def _initial_span(V, tol=1e-13):
+def _orth_span(V, tol=1e-13, maxcols=None):
     U,sv,_=np.linalg.svd(np.asarray(V,complex),full_matrices=False)
     if len(sv)==0 or sv[0]==0:
         return np.empty((V.shape[0],0),complex)
     rank=int(np.sum(sv > tol*sv[0]))
+    if maxcols is not None:
+        rank=min(rank,int(maxcols))
     return U[:,:rank]
 
 
-def block_krylov_step(model, V, s_mid, ds, maxdim=54, tol=1e-12):
-    """Apply one common projected exp(+i ds sqrt(A)/hbar) to all columns.
+def _apply_columns(model,Q,s):
+    if Q.shape[1]==0:
+        return np.empty_like(Q)
+    return np.column_stack([model.apply_A(Q[:,i],s) for i in range(Q.shape[1])])
 
-    The block-Krylov subspace is generated from the span of every branch column.
-    Once the projected Hermitian matrix H=Q^*AQ is built, the SAME matrix
-    function Q exp(+i ds sqrt(H)/hbar) Q^* acts on all columns.  This restores
-    linear recombination inside the represented branch span, unlike independent
-    per-branch Lanczos approximations.
+
+def block_krylov_step(model, V, s_mid, ds, maxdim=54, tol=1e-12):
+    """Common block-Arnoldi matrix-function step for every branch column.
+
+    Blocks are orthogonalized as matrices, and A(Q_j) is cached for the final
+    projected matrix H=Q^*AQ.  Each basis vector therefore needs one A action.
     """
     V=np.asarray(V,complex)
     if V.ndim!=2:
@@ -109,44 +114,37 @@ def block_krylov_step(model, V, s_mid, ds, maxdim=54, tol=1e-12):
     if np.linalg.norm(V)==0:
         return V.copy(),{"dimension":0,"min_eigenvalue":0.0,"gram_step_drift":0.0}
 
-    Q0=_initial_span(V)
-    basis=[Q0[:,i].copy() for i in range(Q0.shape[1])]
-    frontier=list(basis)
-    while frontier and len(basis)<maxdim:
-        new=[]
-        for q in frontier:
-            w=model.apply_A(q,s_mid)
-            if basis:
-                Q=np.column_stack(basis)
-                for _ in range(2):
-                    w-=Q@(Q.conj().T@w)
-            n=float(np.linalg.norm(w))
-            if n>tol:
-                w/=n
-                basis.append(w);new.append(w)
-            if len(basis)>=maxdim:
-                break
-        frontier=new
+    q0=_orth_span(V,tol,maxdim)
+    blocks=[q0];aq_blocks=[];current=q0;total=q0.shape[1]
+    while current.shape[1] and total < maxdim:
+        aq=_apply_columns(model,current,s_mid);aq_blocks.append(aq)
+        W=aq.copy()
+        for _ in range(2):
+            for qb in blocks:
+                W-=qb@(qb.conj().T@W)
+        qnext=_orth_span(W,tol,maxdim-total)
+        if qnext.shape[1]==0:
+            break
+        blocks.append(qnext);current=qnext;total+=qnext.shape[1]
 
-    Q=np.column_stack(basis)
-    AQ=np.column_stack([model.apply_A(Q[:,i],s_mid) for i in range(Q.shape[1])])
-    H=Q.conj().T@AQ
-    H=(H+H.conj().T)/2
+    if len(aq_blocks)<len(blocks):
+        aq_blocks.append(_apply_columns(model,blocks[-1],s_mid))
+    Q=np.column_stack(blocks);AQ=np.column_stack(aq_blocks)
+    if AQ.shape[1]!=Q.shape[1]:
+        raise RuntimeError("block Krylov cache dimension mismatch")
+    H=Q.conj().T@AQ;H=(H+H.conj().T)/2
     ev,U=np.linalg.eigh(H)
     if ev.min() < -1e-8:
         raise RuntimeError(f"negative block-Krylov Ritz value {ev.min()}")
     coords=Q.conj().T@V
     phase=np.exp(1j*ds*np.sqrt(np.maximum(ev,0))/model.hbar)
-    newcoords=U@(phase[:,None]*(U.conj().T@coords))
-    out=Q@newcoords
+    out=Q@(U@(phase[:,None]*(U.conj().T@coords)))
     g0=V.conj().T@V;g1=out.conj().T@out
-    den=max(float(np.linalg.norm(g0)),1e-30)
     return out,{
         "dimension":int(Q.shape[1]),
         "min_eigenvalue":float(ev.min()),
-        "gram_step_drift":float(np.linalg.norm(g1-g0)/den),
+        "gram_step_drift":float(np.linalg.norm(g1-g0)/max(float(np.linalg.norm(g0)),1e-30)),
     }
-
 
 def propagate_block(model, V, s0, s1, ds, maxdim=54):
     V=np.asarray(V,complex).copy()
