@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "date": "2026-09-19",
+  "branch_head": "2b6c063cc02302266a84c2c1dc59e22c92463984",
+  "backend": "Maxima/ctensor 5.46.0",
+  "workflow": {
+    "name": "Bianchi IX GR reduction CAS",
+    "run_id": 35387048247,
+    "job_id": 105736275544,
+    "conclusion": "success"
+  },
+  "artifact": {
+    "id": 10564665571,
+    "name": "bianchi-ix-gr-reduction-maxima",
+    "sha256": "0dbe0f4ff34b614b027d9a99ebcd16741b0c62e031a7d2ab3015d811bb9736ef",
+    "expires_at": "2026-10-02T19:38:55Z"
+  },
+  "package": {
+    "ubuntu": "24.04 noble",
+    "maxima": "5.46.0-11build3",
+    "source": "Ubuntu universe maxima + maxima-share"
+  },
+  "symbolic_zero_checks": {
+    "ASTRA_MAXIMA_R3_CLOSED_DELTA": "0",
+    "ASTRA_MAXIMA_R3_MISNER_DELTA": "0",
+    "ASTRA_MAXIMA_KINETIC_DELTA": "0",
+    "ASTRA_MAXIMA_PA_DELTA": "0",
+    "ASTRA_MAXIMA_PP_DELTA": "0",
+    "ASTRA_MAXIMA_PM_DELTA": "0",
+    "ASTRA_MAXIMA_CONSTRAINT_DELTA": "0"
+  },
+  "implementation_comparison": {
+    "status": "PASS",
+    "max_wall_relation_abs": 2.329340604949326e-21,
+    "max_classical_quantum_wall_gradient_abs": 0,
+    "max_reduced_hamilton_rhs_abs": 0
+  },
+  "independence_note": "Maxima ctensor is a separate CAS/tensor implementation from the executed Cadabra 2.5.14 path, whose scalar component backend used SymPy.",
+  "scope_note": "Agreement provides a second executed CAS backend independent of the Cadabra/SymPy path for the stated classical reduction convention. It does not establish unique quantization or black-hole singularity resolution.",
+  "license_files_changed": false,
+  "lean_changed": false
+}

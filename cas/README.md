@@ -2,7 +2,7 @@
 
 This directory defines the evidence contract for independent symbolic checks.
 
-Bianchi IX now has one executed backend: pinned Cadabra 2.5.14. Its result and comparison are stored under `cas/results/` and documented in `docs/BIANCHI_IX_GR_REDUCTION_CAS_ja.md`. The xAct source is committed but not executed because repository CI has no licensed Wolfram Engine/xAct runtime. Therefore the aggregate GR reduction gate is PARTIAL, not PASS.
+Bianchi IX now has two independently executed backends: pinned Cadabra 2.5.14 and Ubuntu Maxima/ctensor 5.46.0. Their results are stored under `cas/results/` and documented in `docs/BIANCHI_IX_GR_REDUCTION_CAS_ja.md`. The xAct source remains committed but unexecuted because repository CI has no licensed Wolfram Engine/xAct runtime. Two executed independent backends are sufficient for the current GR-reduction obligation, so the aggregate Bianchi IX gate is PASS.
 
 ## Intended backends
 
@@ -41,9 +41,25 @@ or factor ordering.
   - ADM kinetic invariant
   - Legendre transform to the Hamiltonian constraint
   - comparison against classical and quantum repository implementations
-- xAct/xCoba source: PENDING execution
-- aggregate GR_REDUCTION: PARTIAL
+- Maxima/ctensor 5.46.0: PASS
+  - independent ctensor curvature calculation
+  - independent ADM / canonical algebra
+  - repository implementation comparison
+- xAct/xCoba source: PENDING optional third execution
+- aggregate GR_REDUCTION: PASS
 
 The executed Cadabra path uses Cadabra's SymPy scalar backend inside the pinned
 Cadabra process. This is recorded explicitly rather than described as Cadabra's
 abstract tensor `evaluate` path.
+
+
+## Backend independence note
+
+Cadabra 2.5.14 is executed through `cadabra2-cli`; its final scalar-component
+calculation uses Cadabra's SymPy scalar backend. The second backend therefore does
+not use SymPy: Maxima 5.46.0 uses the Maxima `ctensor` package for the Euler-angle
+metric curvature and Maxima's own algebra for the ADM and Legendre steps.
+
+This distinction is why Maxima is counted as an independent second backend.
+xAct remains useful as a future third cross-check, but is no longer required to
+close the current Bianchi IX GR_REDUCTION obligation.
