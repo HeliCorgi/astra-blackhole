@@ -35,5 +35,29 @@
   ],
   "scope_note": "One executed independent CAS backend agrees with the repository reduction convention. The second xAct backend remains unexecuted, so GR_REDUCTION is PARTIAL rather than PASS. This does not validate the quantum clock, inner product, operator domain, factor ordering, regulator removal, or physical interpretation.",
   "license_files_changed": false,
-  "lean_changed": false
+  "lean_changed": false,
+  "pull_request": {
+    "number": 9,
+    "head_sha": "84e2b7133d78325408999c6521156c94238ab7a4",
+    "cas_run_id": 35385088316,
+    "conclusion": "success",
+    "artifact_id": 10563307637,
+    "artifact_sha256": "6fbf7f7e8e7d7e1a601dc1c7a93ed36f7be70327199b4b498be2ab77a4a73b0a",
+    "physics_audit_run_id": 35385088265,
+    "physics_audit_conclusion": "success",
+    "reproduce_run_id": 35385088129,
+    "reproduce_conclusion": "success",
+    "ever_entered_run_id": 35385088159,
+    "ever_entered_conclusion": "success"
+  },
+  "merge_commit": "60f6b10a54a763907c4b1ff5c4fda16278d38ef6",
+  "post_merge": {
+    "workflow_enable_commit": "ac54c93c25609fcd461d307edaf142cee53af437",
+    "cas_run_id": 35385470867,
+    "job_id": 105731240127,
+    "conclusion": "success",
+    "artifact_id": 10563268270,
+    "artifact_sha256": "ed67bfb97a55a327a2b730e41405f5b99f9020952228de32eeafd4b4b3f0b3c9"
+  },
+  "note": "Cadabra re-derived and compared the Bianchi IX reduction successfully on the research branch, PR head, and main. xAct remains unexecuted, so GR_REDUCTION stays PARTIAL. Reproducibility of the stated reduction convention is not a proof of unique physical quantization."
 }
