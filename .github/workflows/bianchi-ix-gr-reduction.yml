@@ -81,10 +81,12 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y maxima maxima-share
-          maxima --version
+          maxima --version | tee /tmp/maxima-version.txt
+          grep -q 'Maxima 5.46.0' /tmp/maxima-version.txt
       - name: Run independent Maxima Bianchi IX reduction
         run: |
           mkdir -p artifacts/gr-reduction-maxima
+          cp /tmp/maxima-version.txt artifacts/gr-reduction-maxima/version.txt
           maxima --very-quiet -b cas/maxima/bianchi_ix_reduction.mac | tee artifacts/gr-reduction-maxima/maxima.log
           grep -q ASTRA_MAXIMA_BIANCHI_IX_OK artifacts/gr-reduction-maxima/maxima.log
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
