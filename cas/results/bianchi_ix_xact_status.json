@@ -1,0 +1,5 @@
+{
+  "status": "PENDING",
+  "reason": "No licensed Wolfram Engine/xAct runner is configured in repository CI.",
+  "source": "cas/xact/bianchi_ix_reduction.wl"
+}

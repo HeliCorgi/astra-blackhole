@@ -1,7 +1,8 @@
 # CAS gate contract
 
 This directory defines the evidence contract for independent symbolic checks.
-No xAct or Cadabra result is committed yet, so the GR reduction gate remains PENDING.
+
+Bianchi IX now has one executed backend: pinned Cadabra 2.5.14. Its result and comparison are stored under `cas/results/` and documented in `docs/BIANCHI_IX_GR_REDUCTION_CAS_ja.md`. The xAct source is committed but not executed because repository CI has no licensed Wolfram Engine/xAct runtime. Therefore the aggregate GR reduction gate is PARTIAL, not PASS.
 
 ## Intended backends
 
@@ -30,3 +31,19 @@ should be used for high-confidence publication claims.
 
 CAS success does not establish a unique physical quantization, clock, inner product,
 or factor ordering.
+
+
+## Current Bianchi IX status
+
+- Cadabra 2.5.14: PASS
+  - independent Euler-angle SU(2) spatial metric
+  - component Christoffel/Ricci scalar
+  - ADM kinetic invariant
+  - Legendre transform to the Hamiltonian constraint
+  - comparison against classical and quantum repository implementations
+- xAct/xCoba source: PENDING execution
+- aggregate GR_REDUCTION: PARTIAL
+
+The executed Cadabra path uses Cadabra's SymPy scalar backend inside the pinned
+Cadabra process. This is recorded explicitly rather than described as Cadabra's
+abstract tensor `evaluate` path.

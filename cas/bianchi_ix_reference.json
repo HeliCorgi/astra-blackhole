@@ -1,0 +1,123 @@
+{
+  "schema": 1,
+  "target": "Bianchi IX vacuum Misner-variable GR reduction used by the classical and quantum models",
+  "source_files": [
+    "research/bianchi_ix_model.py",
+    "research/quantum_bianchi_ix_model.py"
+  ],
+  "conventions": {
+    "signature": "ADM (-,+,+,+); zero shift",
+    "variables": {
+      "volume": "alpha",
+      "anisotropy": [
+        "beta_plus",
+        "beta_minus"
+      ],
+      "internal_time": "s=-alpha"
+    },
+    "invariant_forms": "omega_i = sigma_i/2 with d sigma_i fixed by the standard SU(2) Euler-angle forms; isotropic spatial metric exp(2 alpha) sum omega_i^2 has scalar curvature 6 exp(-2 alpha)",
+    "extrinsic_curvature": "K_ij = +(1/(2N)) dot(h_ij); the opposite sign leaves K_ij K^ij-K^2 unchanged",
+    "overall_action_normalization": "Drop common spatial volume/(2 kappa) factor and divide the reduced ADM expression by 12; this fixes the canonical normalization used in the repository."
+  },
+  "expected": {
+    "misner_diagonal_beta": [
+      [
+        "beta_plus",
+        1,
+        "beta_minus",
+        "sqrt(3)"
+      ],
+      [
+        "beta_plus",
+        1,
+        "beta_minus",
+        "-sqrt(3)"
+      ],
+      [
+        "beta_plus",
+        -2
+      ]
+    ],
+    "spatial_curvature_relation": "R3 = -12*exp(-2*alpha)*V",
+    "kinetic_invariant": "KijKij-K^2 = 6/N^2*(-alpha_dot^2+beta_plus_dot^2+beta_minus_dot^2)",
+    "normalized_lagrangian": "L = exp(3*alpha)/(2*N)*(-alpha_dot^2+beta_plus_dot^2+beta_minus_dot^2)-N*exp(alpha)*V",
+    "momenta": {
+      "p_alpha": "-exp(3*alpha)*alpha_dot/N",
+      "p_plus": "exp(3*alpha)*beta_plus_dot/N",
+      "p_minus": "exp(3*alpha)*beta_minus_dot/N"
+    },
+    "constraint": "C = exp(-3*alpha)/2*(-p_alpha^2+p_plus^2+p_minus^2)+exp(alpha)*V",
+    "reduced_s_generator": "G_s = -sqrt(p_plus^2+p_minus^2+W), W=2*exp(-4*s)*V",
+    "potential_exponential_terms": [
+      {
+        "coefficient": "1/6",
+        "beta_plus": -8,
+        "sqrt3_beta_minus": 0
+      },
+      {
+        "coefficient": "1/6",
+        "beta_plus": 4,
+        "sqrt3_beta_minus": 4
+      },
+      {
+        "coefficient": "1/6",
+        "beta_plus": 4,
+        "sqrt3_beta_minus": -4
+      },
+      {
+        "coefficient": "-1/3",
+        "beta_plus": 4,
+        "sqrt3_beta_minus": 0
+      },
+      {
+        "coefficient": "-1/3",
+        "beta_plus": -2,
+        "sqrt3_beta_minus": 2
+      },
+      {
+        "coefficient": "-1/3",
+        "beta_plus": -2,
+        "sqrt3_beta_minus": -2
+      }
+    ],
+    "wall_exponential_terms": [
+      {
+        "coefficient": "1/3",
+        "s": -4,
+        "beta_plus": -8,
+        "sqrt3_beta_minus": 0
+      },
+      {
+        "coefficient": "1/3",
+        "s": -4,
+        "beta_plus": 4,
+        "sqrt3_beta_minus": 4
+      },
+      {
+        "coefficient": "1/3",
+        "s": -4,
+        "beta_plus": 4,
+        "sqrt3_beta_minus": -4
+      },
+      {
+        "coefficient": "-2/3",
+        "s": -4,
+        "beta_plus": 4,
+        "sqrt3_beta_minus": 0
+      },
+      {
+        "coefficient": "-2/3",
+        "s": -4,
+        "beta_plus": -2,
+        "sqrt3_beta_minus": 2
+      },
+      {
+        "coefficient": "-2/3",
+        "s": -4,
+        "beta_plus": -2,
+        "sqrt3_beta_minus": -2
+      }
+    ]
+  },
+  "scope_note": "This reference captures the convention implemented in the repository. Matching it is a consistency check, not evidence that the convention is unique or physically preferred."
+}

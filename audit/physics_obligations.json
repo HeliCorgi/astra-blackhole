@@ -17,19 +17,34 @@
     {
       "id": "gr_reduction.independent_cas",
       "gate": "GR_REDUCTION",
-      "status": "PENDING",
+      "status": "PARTIAL",
       "blocking": true,
-      "requirement": "Re-derive reduced Lagrangian/Hamiltonian/constraint and coefficient/sign conventions with an independent GR-capable CAS.",
+      "requirement": "Re-derive the Bianchi IX reduced curvature/Hamiltonian/constraint with at least one executed independent GR-capable CAS backend, and require a second independent backend or equivalent independent certificate before full PASS.",
       "evidence": [
         {
-          "path": "cas/README.md"
+          "path": "verification/bianchi_ix_gr_reduction_verified_run.json",
+          "expect": {
+            "cadabra.status": "PASS",
+            "cadabra.comparison": "PASS",
+            "xact.status": "PENDING",
+            "gate_decision": "PARTIAL"
+          }
+        },
+        {
+          "path": "cas/results/bianchi_ix_cadabra_result.json"
+        },
+        {
+          "path": "cas/results/bianchi_ix_comparison.json"
+        },
+        {
+          "path": "cas/results/bianchi_ix_xact_status.json"
         }
       ],
       "kill_if": [
-        "no_executed_cas_manifest",
+        "executed_backend_disagrees_with_repository",
         "coefficient_or_sign_mismatch_unresolved"
       ],
-      "note": "No xAct/Cadabra result has been executed and committed yet."
+      "note": "Cadabra 2.5.14 executed and agreed with the repository convention. xAct source is committed but has not been executed, so the gate is PARTIAL rather than PASS."
     },
     {
       "id": "lean.factorization_residual",

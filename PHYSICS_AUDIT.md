@@ -16,7 +16,7 @@ Lean が証明するのは、採用した定義・仮定から結論が論理的
 
 | gate | 現在 | promotion rule | kill / downgrade rule |
 |---|---|---|---|
-| GR reduction / CAS | PENDING | 独立CASで縮約Hamiltonian・constraint・符号・係数を再導出 | 未実行なら physical interpretation を昇格しない |
+| GR reduction / CAS | PARTIAL | 独立CASで縮約Hamiltonian・constraint・符号・係数を再導出 | 実行済みbackend不一致、または第二独立backend未確認なら完全PASSにしない |
 | Lean semantics | PASS | factorization residual / branch recombination / constraint-kernel preservationをLean build | build/axiom audit不合格なら ALGEBRAICALLY VERIFIED を出さない |
 | clock | PENDING | {T,C}、単調性、branch一意性、複数clock比較 | 結論がclockで変われば CLOCK-DEPENDENT |
 | inner product / domain | PENDING | 保存則、対称性、domain、extensionを明示 | 有限格子Hermiticityだけでは通さない |
@@ -62,7 +62,7 @@ Lean 4.19.0 のCI run 35381665961で `lake build` と `Audit.lean` が完了し�
 
 CAS gateをPASSにするには、少なくとも backend/version、入力action/metric/ADM convention、保持/削除自由度、reduced Lagrangian/Hamiltonian/constraint、boundary term、Poisson bracket、係数表、source/output hash、独立照合結果を保存する。
 
-CASが未導入・未実行なら gate はPENDINGのまま。
+Cadabra 2.5.14 backendは実行済みで、Bianchi IXの3-curvature、ADM kinetic term、Hamiltonian constraint、reduced generatorがrepo実装と一致した。xAct sourceは保存済みだがWolfram/xAct runtime未設定のため未実行。したがって aggregate gate はPARTIALとする。詳細は `docs/BIANCHI_IX_GR_REDUCTION_CAS_ja.md`。
 
 ## Numerical regulator checker
 

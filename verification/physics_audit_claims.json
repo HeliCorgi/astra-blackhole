@@ -13,7 +13,7 @@
     "PHYSICAL INTERPRETATION NOT IDENTIFIED"
   ],
   "gate_status": {
-    "GR_REDUCTION": "PENDING",
+    "GR_REDUCTION": "PARTIAL",
     "LEAN_SEMANTIC": "PASS",
     "CLOCK": "PENDING",
     "INNER_PRODUCT_DOMAIN": "PENDING",
@@ -36,10 +36,10 @@
     "regulator.timeless_scattering"
   ],
   "partial_obligations": [
+    "gr_reduction.independent_cas",
     "known_limits.timeless"
   ],
   "pending_obligations": [
-    "gr_reduction.independent_cas",
     "clock.internal_s_minus_alpha",
     "inner_product.timeless_domain",
     "factor_ordering.timeless_constraint",

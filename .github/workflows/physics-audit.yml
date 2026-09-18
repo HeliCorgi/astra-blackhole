@@ -7,6 +7,8 @@ on:
       - 'cas/**'
       - 'tools/check_physics_audit.py'
       - 'verification/bianchi_ix_timeless_*'
+      - 'verification/bianchi_ix_gr_reduction_verified_run.json'
+      - 'verification/bianchi_ix_gr_reduction_verified_run.json'
       - 'verification/physics_audit_*.json'
       - 'lean/AstraBlackhole/PhysicsAudit.lean'
       - 'verification/physics_audit_*.json'

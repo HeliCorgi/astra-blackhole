@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "backend": {
+    "name": "Cadabra",
+    "version": "2.5.14",
+    "mode": "cadabra2-cli with Cadabra SymPy scalar backend; explicit Euler-angle component GR calculation"
+  },
+  "checks": {
+    "cadabra_sympy_bridge_probe": "0",
+    "spatial_curvature_closed_form_zero": "0",
+    "spatial_curvature_misner_zero": "0",
+    "adm_kinetic_zero": "0",
+    "constraint_zero": "0"
+  },
+  "conventions": {
+    "omega_normalization": "omega_i=sigma_i/2",
+    "misner_scale_factors": [
+      "exp(alpha+beta_plus+sqrt(3)*beta_minus)",
+      "exp(alpha+beta_plus-sqrt(3)*beta_minus)",
+      "exp(alpha-2*beta_plus)"
+    ],
+    "extrinsic_curvature_sign": "K_ij=+(1/(2N))*dot(h_ij); quadratic invariant insensitive to global sign",
+    "normalized_adm_factor": "1/12 after dropping the common spatial-volume/(2 kappa) factor"
+  },
+  "derived": {
+    "spatial_curvature_closed": "-2*(a - b - c)*(a - b + c)*(a + b - c)*(a + b + c)/(a**2*b**2*c**2)",
+    "spatial_curvature_relation": "R3=-12*exp(-2*alpha)*V",
+    "adm_kinetic_invariant": "6/N**2*(-alpha_dot**2+beta_plus_dot**2+beta_minus_dot**2)",
+    "normalized_lagrangian": "-N*((cosh(4*sqrt(3)*beta_minus) - 1)*exp(4*beta_plus)/3 - 2*exp(-2*beta_plus)*cosh(2*sqrt(3)*beta_minus)/3 + exp(-8*beta_plus)/6)*exp(alpha) + (-alpha_dot**2 + beta_minus_dot**2 + beta_plus_dot**2)*exp(3*alpha)/(2*N)",
+    "momenta": {
+      "p_alpha": "-alpha_dot*exp(3*alpha)/N",
+      "p_minus": "beta_minus_dot*exp(3*alpha)/N",
+      "p_plus": "beta_plus_dot*exp(3*alpha)/N"
+    },
+    "constraint": "(3*(-p_alpha**2 + p_minus**2 + p_plus**2)*exp(3*alpha + 10*beta_plus) + (2*(cosh(4*sqrt(3)*beta_minus) - 1)*exp(12*beta_plus) - 4*exp(6*beta_plus)*cosh(2*sqrt(3)*beta_minus) + 1)*exp(7*alpha + 2*beta_plus))*exp(-6*alpha - 10*beta_plus)/6",
+    "reduced_s_generator": "-sqrt(p_plus**2+p_minus**2+W)",
+    "W": "(2*(cosh(4*sqrt(3)*beta_minus) - 1)*exp(12*beta_plus) - 4*exp(6*beta_plus)*cosh(2*sqrt(3)*beta_minus) + 1)*exp(-8*beta_plus - 4*s)/3",
+    "wall_terms": [
+      {
+        "beta_plus": -8,
+        "coefficient": "1/3",
+        "s": -4,
+        "sqrt3_beta_minus": 0
+      },
+      {
+        "beta_plus": 4,
+        "coefficient": "1/3",
+        "s": -4,
+        "sqrt3_beta_minus": 4
+      },
+      {
+        "beta_plus": 4,
+        "coefficient": "1/3",
+        "s": -4,
+        "sqrt3_beta_minus": -4
+      },
+      {
+        "beta_plus": 4,
+        "coefficient": "-2/3",
+        "s": -4,
+        "sqrt3_beta_minus": 0
+      },
+      {
+        "beta_plus": -2,
+        "coefficient": "-2/3",
+        "s": -4,
+        "sqrt3_beta_minus": 2
+      },
+      {
+        "beta_plus": -2,
+        "coefficient": "-2/3",
+        "s": -4,
+        "sqrt3_beta_minus": -2
+      }
+    ]
+  }
+}
