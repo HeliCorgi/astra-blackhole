@@ -118,16 +118,16 @@ constraint-compatible な scattering limit を確認した後に実装する。
 
 ## 再現
 
-\`\`\`sh
+```sh
 python -m unittest discover -s tests -p 'test_bianchi_ix_timeless_resolvent.py' -v
 python research/run_bianchi_ix_timeless_resolvent.py \
   --out artifacts/timeless-resolvent \
   --check-against research/bianchi_ix_timeless_resolvent_results/summary.json
-\`\`\`
+```
 
 採用 CI run 35377267600 では4テスト、pilot生成が成功した。artifact
-\`bianchi-ix-timeless-resolvent\` (ID 10560925377, SHA-256
-\`7dcce55c35bd89bc44a1f44208d78e84a3918d32de96f1157b42c4895f1622b8\`) を保存した。
+`bianchi-ix-timeless-resolvent` (ID 10560925377, SHA-256
+`7dcce55c35bd89bc44a1f44208d78e84a3918d32de96f1157b42c4895f1622b8`) を保存した。
 この成功は数値再現性の記録であり、物理的妥当性の証明ではない。
 
 ## 限界
