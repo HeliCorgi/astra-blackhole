@@ -25,7 +25,7 @@ metric := {
  h_{ps ph} = 1/4*c**2*\cos(th),
  h_{ps ps} = 1/4*c**2
 };
-complete(metric, $h^{i j}$);
+complete(metric, $h^{\mu\nu}$);
 
 ch := \Gamma^{\mu}_{\nu\rho} = 1/2 h^{\mu\sigma}(
        \partial_{\rho}{h_{\nu\sigma}} + \partial_{\nu}{h_{\rho\sigma}} - \partial_{\sigma}{h_{\nu\rho}}
