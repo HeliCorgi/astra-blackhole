@@ -16,7 +16,7 @@ Lean が証明するのは、採用した定義・仮定から結論が論理的
 
 | gate | 現在 | promotion rule | kill / downgrade rule |
 |---|---|---|---|
-| GR reduction / CAS | PARTIAL | 独立CASで縮約Hamiltonian・constraint・符号・係数を再導出 | 実行済みbackend不一致、または第二独立backend未確認なら完全PASSにしない |
+| GR reduction / CAS | PASS | 2独立CASで縮約Hamiltonian・constraint・符号・係数を再導出 | どちらかのbackend不一致ならFAILへ戻す |
 | Lean semantics | PASS | factorization residual / branch recombination / constraint-kernel preservationをLean build | build/axiom audit不合格なら ALGEBRAICALLY VERIFIED を出さない |
 | clock | PENDING | {T,C}、単調性、branch一意性、複数clock比較 | 結論がclockで変われば CLOCK-DEPENDENT |
 | inner product / domain | PENDING | 保存則、対称性、domain、extensionを明示 | 有限格子Hermiticityだけでは通さない |
@@ -62,7 +62,13 @@ Lean 4.19.0 のCI run 35381665961で `lake build` と `Audit.lean` が完了し�
 
 CAS gateをPASSにするには、少なくとも backend/version、入力action/metric/ADM convention、保持/削除自由度、reduced Lagrangian/Hamiltonian/constraint、boundary term、Poisson bracket、係数表、source/output hash、独立照合結果を保存する。
 
-Cadabra 2.5.14 backendは実行済みで、Bianchi IXの3-curvature、ADM kinetic term、Hamiltonian constraint、reduced generatorがrepo実装と一致した。xAct sourceは保存済みだがWolfram/xAct runtime未設定のため未実行。したがって aggregate gate はPARTIALとする。詳細は `docs/BIANCHI_IX_GR_REDUCTION_CAS_ja.md`。
+Cadabra 2.5.14 と Maxima/ctensor 5.46.0 の2独立backendを実行し、Bianchi IXの3-curvature、ADM kinetic term、Hamiltonian constraint、reduced generatorがrepo実装と一致した。したがって Bianchi IX の `GR_REDUCTION` gate はPASS。xAct sourceは保存済みだがWolfram/xAct runtime未設定のため、任意の第三cross-checkとして未実行のまま残す。詳細は `docs/BIANCHI_IX_GR_REDUCTION_CAS_ja.md`。
+
+## Black-hole return gate
+
+Bianchi IXはブラックホール内部そのものではない。BH singularity interpretationへ戻る経路を曖昧にしないため、`known_limits.schwarzschild_ks_bridge` をblocking obligationとして追加する。
+
+このgateではSchwarzschild内部からKantowski–Sachsへの古典写像、既存KS WDW constraintへの正準変換、同じ物理状態/内積、4次元曲率observableを明示する。通るまでBianchi IXの結果をBH特異点解消・持続の主張へ昇格しない。詳細は `docs/BLACK_HOLE_RETURN_GATE_ja.md`。
 
 ## Numerical regulator checker
 
@@ -93,7 +99,7 @@ lake env lean -DwarningAsError=true Audit.lean
 
 ## 現在未達
 
-- xAct/CadabraによるBianchi IX/KS縮約の独立再導出
+- Schwarzschild内部→Kantowski–Sachs bridge の独立CAS再導出と既存KS WDW変数への照合
 - clock Poisson bracket / monotonicity の機械監査
 - timeless induced physical inner product
 - continuum operator domain / self-adjoint extension監査
