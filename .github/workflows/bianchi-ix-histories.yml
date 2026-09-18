@@ -39,7 +39,7 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install -r requirements.txt
       - run: python -m unittest discover -s tests -p 'test_bianchi_ix_histories.py' -v
-      - run: python research/run_bianchi_ix_histories.py --out artifacts/bianchi-ix-histories --main-maxdim 54 --control-maxdim 66
+      - run: python research/run_bianchi_ix_histories.py --out artifacts/bianchi-ix-histories --main-maxdim 66 --control-maxdim 78
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
