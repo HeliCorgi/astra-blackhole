@@ -261,13 +261,15 @@ python verify_predictors.py
 
 ## Physics audit gates
 
-### GR reduction checker：Cadabra実行済み、xAct未実行
+### GR reduction checker：Cadabra + Maxima の2独立backendでPASS
 
-[Bianchi IX CAS縮約監査](docs/BIANCHI_IX_GR_REDUCTION_CAS_ja.md) / [Cadabra結果](cas/results/bianchi_ix_cadabra_result.json) / [実装比較](cas/results/bianchi_ix_comparison.json)
+[Bianchi IX CAS縮約監査](docs/BIANCHI_IX_GR_REDUCTION_CAS_ja.md) / [Cadabra結果](cas/results/bianchi_ix_cadabra_result.json) / [Maxima結果](cas/results/bianchi_ix_maxima_result.json) / [BH return gate](docs/BLACK_HOLE_RETURN_GATE_ja.md)
 
-SU(2) Euler角のBianchi IX空間metricから独立に3-curvatureを再計算し、ADM kinetic termとLegendre変換までCadabra 2.5.14で実行した。(^{(3)}R=-12e^{-2\alpha}V)、repoのHamiltonian constraint、(W=2e^{-4s}V)、`s=-alpha`後のgenerator符号が一致した。現行classical/quantum実装とのwall relation差は最大約2.22e-21、gradientとreduced Hamilton方程式の照合点差は0。
+SU(2) Euler角のBianchi IX空間metricから独立に3-curvatureを再計算し、ADM kinetic termとLegendre変換まで二系統で実行した。Cadabra 2.5.14 と Maxima/ctensor 5.46.0 はともに (^{(3)}R=-12e^{-2\alpha}V)、repoのHamiltonian constraint、(W=2e^{-4s}V)、`s=-alpha`後のgenerator符号を再取得した。
 
-ただし実行済みbackendはCadabra 1系統だけ。xAct/xCoba用Wolfram sourceは保存したがCIにlicensed Wolfram runtimeがないため未実行で、`GR_REDUCTION` gateは **PARTIAL**。量子化やfactor orderingの正しさまで確認したものではない。
+現行classical/quantum実装との照合では、Maxima側のwall relation差は最大約2.33e-21、gradientとreduced Hamilton方程式の照合点差は0。Cadabra側も同じ関係でPASSしている。したがって `GR_REDUCTION` gateは **PASS**。xAct sourceは第三cross-checkとして残すが、CI実行環境がないため未実行。
+
+Bianchi IXをブラックホール内部そのものとは扱わない。BH特異点の本筋へ戻るため、`known_limits.schwarzschild_ks_bridge` をblocking obligationとして追加した。次はSchwarzschild interior → Kantowski–Sachsの古典bridgeをCASで再導出し、既存KS WDW constraint・半径・4次元曲率observableへ戻す。
 
 
 [物理監査スタック](PHYSICS_AUDIT.md) / [machine-readable obligations](audit/physics_obligations.json)
