@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "target": {
+    "id": "bianchi_ix_timeless_class_operator",
+    "model": "Uniform vacuum Bianchi IX minisuperspace, second-order WDW constraint pilot",
+    "baseline_commit": "47455ced5d9da425a4e2c131cb397d6f341753a5",
+    "scope_note": "Audit the path from reduced classical model to a timeless complex-potential class operator without treating formal or numerical checks as a proof of physical quantum gravity."
+  },
+  "labels": [
+    "ALGEBRAICALLY VERIFIED",
+    "MODEL-INTERNAL NUMERICAL RESULT",
+    "REGULATOR-UNSTABLE",
+    "PHYSICAL INTERPRETATION NOT IDENTIFIED"
+  ],
+  "gate_status": {
+    "GR_REDUCTION": "PENDING",
+    "LEAN_SEMANTIC": "PASS",
+    "CLOCK": "PENDING",
+    "INNER_PRODUCT_DOMAIN": "PENDING",
+    "FACTOR_ORDERING": "PENDING",
+    "REGULATOR": "FAIL",
+    "KNOWN_LIMIT": "PENDING",
+    "NUMERICAL": "PASS",
+    "CLAIM_COMPILER": "PASS"
+  },
+  "promotion_blockers": [
+    "gr_reduction.independent_cas",
+    "clock.internal_s_minus_alpha",
+    "inner_product.timeless_domain",
+    "factor_ordering.timeless_constraint",
+    "regulator.timeless_scattering",
+    "known_limits.timeless",
+    "known_limits.semiclassical"
+  ],
+  "failed_obligations": [
+    "regulator.timeless_scattering"
+  ],
+  "partial_obligations": [
+    "known_limits.timeless"
+  ],
+  "pending_obligations": [
+    "gr_reduction.independent_cas",
+    "clock.internal_s_minus_alpha",
+    "inner_product.timeless_domain",
+    "factor_ordering.timeless_constraint",
+    "known_limits.semiclassical"
+  ],
+  "interpretation_rule": "Labels describe only passed scoped gates. A blocking PENDING/PARTIAL/FAIL forces PHYSICAL INTERPRETATION NOT IDENTIFIED."
+}
