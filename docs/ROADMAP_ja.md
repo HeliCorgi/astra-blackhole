@@ -118,3 +118,21 @@ V0=.025→.075でstrict off-diagonalは.1105→.0073へ低下するが、.085で
 near-zero固有modeの境界依存を下げるため、20個のnear-zero modeからedge mass最小packetを作成し、edge massを0.0765まで下げた。それでもV0=.025でcommutator relativeはT=.25/.5/1.0に対し0.280/0.356/0.434と増加し、successive S_T差も0.0467→0.0906へ増加。V0=.05/.10ではさらに悪化。
 
 よってこの有限Dirichlet scattering設計をHalliwellのT→∞ class operator近似として採用しない。次は外側境界をoutgoing/absorbing化するか、Green/resolventによるscattering operatorへ切り替える。induced physical inner productとdecoherence functionalはconstraint-compatibleなscattering収束を確認した後に実装する。
+
+
+### 6f. timeless stationary resolvent / T-operator pilot：有限Dirichlet resolventも不合格
+
+finite-window S-matrix の反射箱問題を避けるため、同じ二階constraint \(C=P_s^2-A(s)\) に対して
+\(G_0(z)=(z-C)^{-1}\), \(G_V(z)=(z-C+iV)^{-1}\), \(T=U+UG_VU\), \(U=-iV\) の
+stationary pilotへ切り替えた。20 near-zero modeからedge mass最小packetを作り、edge massは0.07652。
+
+Dyson identity residualは \(10^{-14}\) 級で通る一方、\(\eta=.10/.05/.025\) でfree resolvent normは
+9.93/19.47/36.42へ増大。T-action successive changeもV0=.025で0.137→0.211、V0=.05で
+0.234→0.331と増加した。response edge massは約0.078–0.081で急増しないが、
+\(\eta\to0^+\) の安定域は確認できない。
+
+よってこの有限Dirichlet resolvent/T-operatorをHalliwell型on-shell S-matrix/class operatorの
+近似として採用しない。finite-window S-matrixとstationary resolventの二つの負の対照を保存する。
+次はoutgoing/PML outer boundaryまたはcontinuum spectral densityを扱えるscattering discretizationを実装し、
+box/cap/boundary依存とconstraint commutationを先に監査する。induced physical inner productと
+decoherence functionalはその後。
