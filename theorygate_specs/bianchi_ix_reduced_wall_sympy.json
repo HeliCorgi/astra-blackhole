@@ -1,0 +1,39 @@
+{
+  "symbols": {
+    "s": {
+      "real": true
+    },
+    "bp": {
+      "real": true
+    },
+    "bm": {
+      "real": true
+    },
+    "ps": {
+      "real": true
+    },
+    "pp": {
+      "real": true
+    },
+    "pm": {
+      "real": true
+    },
+    "v": {
+      "real": true
+    }
+  },
+  "checks": [
+    {
+      "id": "wall-exponential-decomposition",
+      "lhs": "2*exp(-4*s)*(exp(-8*bp) + 2*exp(4*bp)*((exp(4*sqrt(3)*bm)+exp(-4*sqrt(3)*bm))/2 - 1) - 4*exp(-2*bp)*(exp(2*sqrt(3)*bm)+exp(-2*sqrt(3)*bm))/2)/6",
+      "rhs": "exp(-4*s-8*bp)/3 + exp(-4*s+4*bp+4*sqrt(3)*bm)/3 + exp(-4*s+4*bp-4*sqrt(3)*bm)/3 - 2*exp(-4*s+4*bp)/3 - 2*exp(-4*s-2*bp+2*sqrt(3)*bm)/3 - 2*exp(-4*s-2*bp-2*sqrt(3)*bm)/3",
+      "method": "simplify"
+    },
+    {
+      "id": "constraint-rescaling",
+      "lhs": "exp(3*s)*(-ps**2+pp**2+pm**2)/2 + exp(-s)*v",
+      "rhs": "exp(3*s)*(-ps**2+pp**2+pm**2+2*exp(-4*s)*v)/2",
+      "method": "simplify"
+    }
+  ]
+}

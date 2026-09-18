@@ -1,0 +1,104 @@
+name: TheoryGate Bianchi IX history-probability trial
+on:
+  push:
+    branches:
+      - experiment/theorygate-history-probability
+    paths:
+      - 'theorygate.yaml'
+      - 'theorygate_specs/**'
+      - '.github/workflows/theorygate-bianchi-history.yml'
+      - 'lean/**'
+      - 'research/bianchi_ix_ever_entered_results/summary.json'
+  pull_request:
+    paths:
+      - 'theorygate.yaml'
+      - 'theorygate_specs/**'
+      - '.github/workflows/theorygate-bianchi-history.yml'
+      - 'lean/**'
+      - 'research/bianchi_ix_ever_entered_results/summary.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Install pinned TheoryGate v0.4 source
+        run: |
+          python -m pip install "git+https://github.com/HeliCorgi/theorygate.git@cb33044551f2f98a03ab813e20c4caf8fe9f9743"
+          python - <<'PY'
+          import theorygate
+          print("TheoryGate", theorygate.__version__)
+          PY
+
+      - name: Run author's starter-template command
+        run: |
+          mkdir -p "$RUNNER_TEMP/theorygate-artifacts"
+          theorygate template init HISTORY_PROBABILITY             --model-id astra-bianchi-ix             --output "$RUNNER_TEMP/theorygate-artifacts/generated-history-template.yaml"
+          theorygate check "$RUNNER_TEMP/theorygate-artifacts/generated-history-template.yaml" --json             > "$RUNNER_TEMP/theorygate-artifacts/generated-template-report.json"
+
+      - name: Install pinned Lean and build project
+        uses: leanprover/lean-action@50fcf42d2e460296f1a34b402e990d1b24f8b596
+        with:
+          lake-package-directory: lean
+          auto-config: 'false'
+          build: 'true'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+
+      - name: Generate Lean evidence
+        run: |
+          theorygate evidence lean             --project lean             --id astra-history-lean             --obligation LEAN_HISTORY_ALGEBRA             --import AstraBlackhole             --theorem AstraBlackhole.time_dependent_factorization_residual             --theorem AstraBlackhole.common_operator_preserves_recombination             --no-axioms             --output "$RUNNER_TEMP/theorygate-artifacts/lean.json"             --require-pass
+
+      - name: Generate SymPy evidence
+        run: |
+          theorygate evidence cas sympy             --spec theorygate_specs/bianchi_ix_reduced_wall_sympy.json             --id astra-reduced-dynamics-sympy             --obligation REDUCED_DYNAMICS_ALGEBRA             --output "$RUNNER_TEMP/theorygate-artifacts/sympy.json"             --require-pass
+
+      - name: Generate regulator robustness evidence
+        run: |
+          theorygate evidence robustness             --spec theorygate_specs/ever_entered_regulator_scan.json             --id astra-ever-entered-regulator             --obligation REGULATOR_STABILITY             --output "$RUNNER_TEMP/theorygate-artifacts/regulator.json"
+          cat "$RUNNER_TEMP/theorygate-artifacts/regulator.json"
+
+      - name: Generate boundary robustness evidence
+        run: |
+          theorygate evidence robustness             --spec theorygate_specs/ever_entered_boundary_scan.json             --id astra-ever-entered-boundary             --obligation BOUNDARY_ROBUSTNESS             --output "$RUNNER_TEMP/theorygate-artifacts/boundary.json"
+          cat "$RUNNER_TEMP/theorygate-artifacts/boundary.json"
+
+      - name: Evaluate adapted history-probability model
+        run: |
+          theorygate check theorygate.yaml             --evidence "$RUNNER_TEMP/theorygate-artifacts/lean.json"             --evidence "$RUNNER_TEMP/theorygate-artifacts/sympy.json"             --evidence "$RUNNER_TEMP/theorygate-artifacts/regulator.json"             --evidence "$RUNNER_TEMP/theorygate-artifacts/boundary.json"             --json > "$RUNNER_TEMP/theorygate-artifacts/report.json"
+          cat "$RUNNER_TEMP/theorygate-artifacts/report.json"
+
+          theorygate check theorygate.yaml             --evidence "$RUNNER_TEMP/theorygate-artifacts/lean.json"             --evidence "$RUNNER_TEMP/theorygate-artifacts/sympy.json"             --evidence "$RUNNER_TEMP/theorygate-artifacts/regulator.json"             --evidence "$RUNNER_TEMP/theorygate-artifacts/boundary.json"             --require MODEL_INTERNAL_EVER_ENTERED_WEIGHT
+
+          if theorygate check theorygate.yaml             --evidence "$RUNNER_TEMP/theorygate-artifacts/lean.json"             --evidence "$RUNNER_TEMP/theorygate-artifacts/sympy.json"             --evidence "$RUNNER_TEMP/theorygate-artifacts/regulator.json"             --evidence "$RUNNER_TEMP/theorygate-artifacts/boundary.json"             --require HISTORY_PROBABILITY; then
+            echo "HISTORY_PROBABILITY unexpectedly promoted" >&2
+            exit 1
+          else
+            echo "Expected: HISTORY_PROBABILITY remains blocked."
+          fi
+
+      - name: Copy TheoryGate artifacts
+        if: always()
+        run: |
+          mkdir -p artifacts/theorygate
+          cp -a "$RUNNER_TEMP/theorygate-artifacts/." artifacts/theorygate/ || true
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: theorygate-bianchi-history
+          path: artifacts/theorygate/
+          retention-days: 14

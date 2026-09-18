@@ -1,0 +1,46 @@
+{
+  "kind": "regulator",
+  "observable": "finite-clock CAP offdiag_abs",
+  "comparison": "successive",
+  "minimum_cases": 7,
+  "require_nonincreasing_successive_drift": true,
+  "drift_monotonicity_slack": 0,
+  "cases": [
+    {
+      "label": "V0=.025",
+      "setting": 0.025,
+      "value": 0.11048199867370344
+    },
+    {
+      "label": "V0=.040",
+      "setting": 0.04,
+      "value": 0.053577191497268646
+    },
+    {
+      "label": "V0=.050",
+      "setting": 0.05,
+      "value": 0.03209749094982302
+    },
+    {
+      "label": "V0=.060",
+      "setting": 0.06,
+      "value": 0.016662924505548342
+    },
+    {
+      "label": "V0=.075",
+      "setting": 0.075,
+      "value": 0.007325433992383949
+    },
+    {
+      "label": "V0=.085",
+      "setting": 0.085,
+      "value": 0.013613635464115495
+    },
+    {
+      "label": "V0=.100",
+      "setting": 0.1,
+      "value": 0.023229272880997402
+    }
+  ],
+  "protocol_note": "No absolute/relative tolerance is invented. The published decision rule rejects the tuned minimum because the scan turns around; the monotonic-drift check is used only to encode that pre-existing negative decision."
+}
