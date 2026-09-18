@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "status": "PASS",
+  "backend": "Maxima/ctensor",
+  "version": "5.46.0",
+  "comparison": "PASS",
+  "symbolic_zero_markers": {
+    "ASTRA_MAXIMA_R3_CLOSED_DELTA": "0",
+    "ASTRA_MAXIMA_R3_MISNER_DELTA": "0",
+    "ASTRA_MAXIMA_KINETIC_DELTA": "0",
+    "ASTRA_MAXIMA_PA_DELTA": "0",
+    "ASTRA_MAXIMA_PP_DELTA": "0",
+    "ASTRA_MAXIMA_PM_DELTA": "0",
+    "ASTRA_MAXIMA_CONSTRAINT_DELTA": "0"
+  },
+  "max_wall_relation_abs": 2.329340604949326e-21,
+  "max_classical_quantum_wall_gradient_abs": 0,
+  "max_reduced_hamilton_rhs_abs": 0,
+  "source_sha256": {
+    "research/bianchi_ix_model.py": "92e4a56259d18ff58e5f18eaa93a621b0809ad0249f3b5ffcb117b6ce5535a30",
+    "research/quantum_bianchi_ix_model.py": "e18d5347b4428c28d8942aa5e25c04fb27b8a997e982dc30cf5d62103e257519"
+  },
+  "verified_relations": [
+    "R3=-12 exp(-2 alpha) V",
+    "KijKij-K^2=6/N^2(-alpha_dot^2+beta_plus_dot^2+beta_minus_dot^2)",
+    "C=1/2 exp(-3 alpha)(-p_alpha^2+p_plus^2+p_minus^2)+exp(alpha)V",
+    "W=2 exp(-4s)V",
+    "G_s=-sqrt(p_plus^2+p_minus^2+W)"
+  ],
+  "scope_note": "Agreement provides a second executed CAS backend independent of the Cadabra/SymPy path for the stated classical reduction convention. It does not establish unique quantization or black-hole singularity resolution."
+}
