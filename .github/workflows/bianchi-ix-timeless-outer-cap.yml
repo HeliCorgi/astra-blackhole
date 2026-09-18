@@ -7,6 +7,8 @@ on:
       - 'research/bianchi_ix_timeless_outer_cap.py'
       - 'research/run_bianchi_ix_timeless_outer_cap.py'
       - 'research/run_bianchi_ix_timeless_outer_cap_layer_scan.py'
+      - 'research/check_bianchi_ix_timeless_outer_cap_results.py'
+      - 'research/bianchi_ix_timeless_outer_cap_results/summary.json'
       - 'tests/test_bianchi_ix_timeless_outer_cap.py'
       - 'docs/BIANCHI_IX_TIMELESS_OUTER_CAP_ja.md'
       - '.github/workflows/bianchi-ix-timeless-outer-cap.yml'
@@ -14,6 +16,9 @@ on:
     paths:
       - 'research/bianchi_ix_timeless_outer_cap.py'
       - 'research/run_bianchi_ix_timeless_outer_cap.py'
+      - 'research/run_bianchi_ix_timeless_outer_cap_layer_scan.py'
+      - 'research/check_bianchi_ix_timeless_outer_cap_results.py'
+      - 'research/bianchi_ix_timeless_outer_cap_results/summary.json'
       - 'tests/test_bianchi_ix_timeless_outer_cap.py'
       - 'docs/BIANCHI_IX_TIMELESS_OUTER_CAP_ja.md'
       - '.github/workflows/bianchi-ix-timeless-outer-cap.yml'
@@ -38,6 +43,7 @@ jobs:
       - run: python -m unittest discover -s tests -p 'test_bianchi_ix_timeless_outer_cap.py' -v
       - run: python research/run_bianchi_ix_timeless_outer_cap.py --out artifacts/timeless-outer-cap
       - run: python research/run_bianchi_ix_timeless_outer_cap_layer_scan.py --out artifacts/timeless-outer-cap
+      - run: python research/check_bianchi_ix_timeless_outer_cap_results.py --artifact-dir artifacts/timeless-outer-cap --baseline research/bianchi_ix_timeless_outer_cap_results/summary.json
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:

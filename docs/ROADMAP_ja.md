@@ -136,3 +136,26 @@ Dyson identity residualは \(10^{-14}\) 級で通る一方、\(\eta=.10/.05/.025
 次はoutgoing/PML outer boundaryまたはcontinuum spectral densityを扱えるscattering discretizationを実装し、
 box/cap/boundary依存とconstraint commutationを先に監査する。induced physical inner productと
 decoherence functionalはその後。
+
+
+### 6g. outer absorbing-layer control：境界依存は改善するが未収束
+
+finite-window S-matrixとstationary Dirichlet resolventの負の対照を受け、
+B領域のclass-operator用complex potentialとは別に、有限箱外側の反射を抑える
+数値absorbing layer \(W_{out}\) をbackgroundへ共通に入れた。
+
+3-cell layerではouter strengthを0→.20とすると、V0=.025の \(\eta\) successive
+T-action changeが0.137/0.211→0.076/0.081へ低下し、\(\eta=.025\) のbackground
+one-cell edge massも0.0841→0.0244へ低下した。したがってDirichlet外壁が前段の
+不安定性へ寄与していた可能性は高い。
+
+一方、3-cell profileはreference packetの23.3%と重なる。1/2/3-cell対照では
+1-cellでも改善は残るが \(\eta\to0\) 方向でT-action差が再増大する。
+\(\eta=.025,\gamma=.20\) のlayer 1→2 / 2→3差はV0=.05で0.117/0.098、
+outer strength依存も約0.10以上残る。
+
+よってこのouter CAPを都合のよいstrength/layerへ固定してHalliwell型on-shell
+class operatorとはしない。次はtrue PML / exterior complex scaling / continuum
+spectral densityを扱うscattering discretizationへ進み、incoming/outgoing fluxなどで
+reflectionを独立測定する。constraint-compatibleなscattering limitを確認するまで
+induced physical inner productとdecoherence functionalは実装しない。
