@@ -11,7 +11,12 @@ def main(argv=None):
     ap.add_argument("--width",type=float,default=.30)
     ap.add_argument("--maxdim",type=int,default=66)
     ap.add_argument("--skip-classical",action="store_true")
+    ap.add_argument("--classical-only",action="store_true")
     a=ap.parse_args(argv);t=time.time()
+    if a.classical_only:
+        out={"schema":1,"scope":"Classical ever-entered-B Wigner control only.","classical_control":run_classical_control(),"elapsed_s":time.time()-t}
+        a.out.mkdir(parents=True,exist_ok=True);(a.out/"summary.json").write_text(json.dumps(out,ensure_ascii=False,indent=2)+"\\n")
+        print(json.dumps(out,ensure_ascii=False,indent=2));return
     q=run_quantum(CAPSpec(a.v0,a.width,a.maxdim))
     out={"schema":1,
       "scope":"Finite-clock CAP ever-entered-B audit, conditioned on A at s=4.6, in the existing reduced quantum Bianchi IX square-root model.",
