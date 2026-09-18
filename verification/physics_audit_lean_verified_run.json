@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "date": "2026-09-19",
+  "verified_commit": "c13e65a676fcbfb6f659a5bac4a8e4b822640979",
+  "ci": {
+    "name": "Lean certificates",
+    "run_id": 35381665961,
+    "job_id": 105719083717,
+    "conclusion": "success"
+  },
+  "toolchain": {
+    "lean": "4.19.0",
+    "lean_commit": "6caaee842e94"
+  },
+  "artifact": {
+    "id": 10562335828,
+    "name": "lean-certificates-c13e65a676fcbfb6f659a5bac4a8e4b822640979",
+    "sha256": "5139129e007f392762be7b82e7856550882faf8c5c3b9eda17daccc48604af87",
+    "expires_at": "2026-10-02T18:42:11Z"
+  },
+  "physics_audit_theorems": {
+    "AstraBlackhole.time_dependent_factorization_residual": [],
+    "AstraBlackhole.common_operator_preserves_recombination": [],
+    "AstraBlackhole.commuting_operator_preserves_constraint_kernel": []
+  },
+  "existing_axiom_policy": {
+    "finite_rational_certificates": "propext only",
+    "observation_lemmas": "no axioms"
+  },
+  "exact_checks": [
+    "python3 tools/check_lean_certificates.py --self-test",
+    "cd lean && lake build",
+    "cd lean && lake env lean -DwarningAsError=true Audit.lean",
+    "python3 tools/check_lean_certificates.py --axioms artifacts/lean/axioms.txt"
+  ],
+  "scope_note": "Semantic equalities only. This verifies neither a unique physical quantization nor self-adjointness, operator domains, clock validity, inner-product choice, factor ordering, regulator removal, or quantum-gravity phenomenology.",
+  "license_files_changed": false
+}

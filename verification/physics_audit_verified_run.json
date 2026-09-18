@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "date": "2026-09-19",
+  "scope": "Physics audit gate stack for the Bianchi IX timeless class-operator research line.",
+  "branch_head": "886b8b649ba6ade839e228f8bb0784542c098d40",
+  "physics_audit_ci": {
+    "name": "Physics audit gates",
+    "run_id": 35381955397,
+    "job_id": 105719964738,
+    "conclusion": "success",
+    "artifact_id": 10562016566,
+    "artifact_sha256": "5e077100b0f1c3abe4874e721b01bcb3a798ff72d14441cd7861047114c9edac",
+    "checks": [
+      "recomputed timeless outer-boundary regulator controls",
+      "checked finite-clock ever-entered publication summary",
+      "validated machine-readable obligations",
+      "self-tested claim compiler",
+      "regression-checked saved claim labels"
+    ]
+  },
+  "lean_ci": {
+    "name": "Lean certificates",
+    "run_id": 35381665961,
+    "job_id": 105719083717,
+    "conclusion": "success",
+    "verified_commit": "c13e65a676fcbfb6f659a5bac4a8e4b822640979",
+    "lean_version": "4.19.0",
+    "artifact_id": 10562335828,
+    "artifact_sha256": "5139129e007f392762be7b82e7856550882faf8c5c3b9eda17daccc48604af87",
+    "physics_audit_theorems_axioms": {
+      "time_dependent_factorization_residual": [],
+      "common_operator_preserves_recombination": [],
+      "commuting_operator_preserves_constraint_kernel": []
+    }
+  },
+  "generated_claim_labels": [
+    "ALGEBRAICALLY VERIFIED",
+    "MODEL-INTERNAL NUMERICAL RESULT",
+    "REGULATOR-UNSTABLE",
+    "PHYSICAL INTERPRETATION NOT IDENTIFIED"
+  ],
+  "pending_gates": [
+    "GR_REDUCTION",
+    "CLOCK",
+    "INNER_PRODUCT_DOMAIN",
+    "FACTOR_ORDERING",
+    "KNOWN_LIMIT"
+  ],
+  "scientific_rule": "No physical history probability or unique quantum-gravity interpretation is promoted while blocking gates remain pending/partial/failed.",
+  "cas_gate": "PENDING: xAct/Cadabra execution and result manifests are not yet committed.",
+  "license_files_changed": false,
+  "note": "CI success verifies reproducibility and scoped formal obligations only; it does not establish physical validity."
+}

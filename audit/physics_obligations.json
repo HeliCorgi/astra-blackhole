@@ -1,0 +1,218 @@
+{
+  "schema": 1,
+  "target": {
+    "id": "bianchi_ix_timeless_class_operator",
+    "model": "Uniform vacuum Bianchi IX minisuperspace, second-order WDW constraint pilot",
+    "baseline_commit": "47455ced5d9da425a4e2c131cb397d6f341753a5",
+    "scope_note": "Audit the path from reduced classical model to a timeless complex-potential class operator without treating formal or numerical checks as a proof of physical quantum gravity."
+  },
+  "allowed_statuses": [
+    "PASS",
+    "FAIL",
+    "PARTIAL",
+    "PENDING",
+    "N/A"
+  ],
+  "obligations": [
+    {
+      "id": "gr_reduction.independent_cas",
+      "gate": "GR_REDUCTION",
+      "status": "PENDING",
+      "blocking": true,
+      "requirement": "Re-derive reduced Lagrangian/Hamiltonian/constraint and coefficient/sign conventions with an independent GR-capable CAS.",
+      "evidence": [
+        {
+          "path": "cas/README.md"
+        }
+      ],
+      "kill_if": [
+        "no_executed_cas_manifest",
+        "coefficient_or_sign_mismatch_unresolved"
+      ],
+      "note": "No xAct/Cadabra result has been executed and committed yet."
+    },
+    {
+      "id": "lean.factorization_residual",
+      "gate": "LEAN_SEMANTIC",
+      "status": "PASS",
+      "blocking": false,
+      "requirement": "Prove the abstract time-dependent factorization residual theorem and pass Lean build/axiom audit.",
+      "evidence": [
+        {
+          "path": "lean/AstraBlackhole/PhysicsAudit.lean"
+        },
+        {
+          "path": "verification/physics_audit_lean_verified_run.json",
+          "expect": {
+            "ci.conclusion": "success"
+          }
+        }
+      ],
+      "note": "Lean 4.19.0 build and explicit axiom audit succeeded; theorem scope remains semantic only."
+    },
+    {
+      "id": "lean.branch_recombination",
+      "gate": "LEAN_SEMANTIC",
+      "status": "PASS",
+      "blocking": false,
+      "requirement": "Prove that recombination equality is preserved when all branches receive the same operator.",
+      "evidence": [
+        {
+          "path": "lean/AstraBlackhole/PhysicsAudit.lean"
+        },
+        {
+          "path": "verification/physics_audit_lean_verified_run.json",
+          "expect": {
+            "ci.conclusion": "success"
+          }
+        }
+      ],
+      "note": "Lean 4.19.0 build and explicit axiom audit succeeded; theorem scope remains semantic only."
+    },
+    {
+      "id": "lean.constraint_kernel",
+      "gate": "LEAN_SEMANTIC",
+      "status": "PASS",
+      "blocking": false,
+      "requirement": "Prove that a commuting zero-preserving operator maps the constraint kernel to itself.",
+      "evidence": [
+        {
+          "path": "lean/AstraBlackhole/PhysicsAudit.lean"
+        },
+        {
+          "path": "verification/physics_audit_lean_verified_run.json",
+          "expect": {
+            "ci.conclusion": "success"
+          }
+        }
+      ],
+      "note": "Lean 4.19.0 build and explicit axiom audit succeeded; theorem scope remains semantic only."
+    },
+    {
+      "id": "clock.internal_s_minus_alpha",
+      "gate": "CLOCK",
+      "status": "PENDING",
+      "blocking": true,
+      "requirement": "Check classical Poisson bracket {T,C}, monotonicity, branch uniqueness, and compare at least one alternative admissible clock.",
+      "evidence": [
+        {
+          "path": "docs/BIANCHI_IX_TIMELESS_BRIDGE_ja.md"
+        }
+      ],
+      "kill_if": [
+        "clock_not_monotone_on_target_region",
+        "physical_conclusion_changes_between_admissible_clocks"
+      ],
+      "note": "The existing bridge audit is not yet a multi-clock audit."
+    },
+    {
+      "id": "inner_product.timeless_domain",
+      "gate": "INNER_PRODUCT_DOMAIN",
+      "status": "PENDING",
+      "blocking": true,
+      "requirement": "Specify the physical/induced inner product, operator domains, boundary conditions, and extension choice before assigning probabilities.",
+      "evidence": [
+        {
+          "path": "docs/BIANCHI_IX_TIMELESS_SMATRIX_ja.md"
+        }
+      ],
+      "kill_if": [
+        "only_finite_matrix_hermiticity_checked",
+        "operator_domain_unspecified",
+        "physical_inner_product_unspecified"
+      ]
+    },
+    {
+      "id": "factor_ordering.timeless_constraint",
+      "gate": "FACTOR_ORDERING",
+      "status": "PENDING",
+      "blocking": true,
+      "requirement": "Enumerate an allowed ordering family and test principal symbol, formal symmetry/domain, semiclassical limit, and result sensitivity.",
+      "evidence": [],
+      "kill_if": [
+        "result_changes_materially_across_allowed_orderings"
+      ]
+    },
+    {
+      "id": "regulator.timeless_scattering",
+      "gate": "REGULATOR",
+      "status": "FAIL",
+      "blocking": true,
+      "finding": "unstable",
+      "requirement": "Demonstrate a non-tuned scattering regime stable under box/cap/grid/eta/boundary/Krylov changes.",
+      "evidence": [
+        {
+          "path": "verification/bianchi_ix_timeless_outer_cap_verified_run.json",
+          "expect": {
+            "publication_branch_run.conclusion": "success",
+            "pull_request_run.conclusion": "success"
+          }
+        },
+        {
+          "path": "research/bianchi_ix_timeless_outer_cap_results/summary.json"
+        }
+      ],
+      "kill_if": [
+        "eta_successive_change_not_stable",
+        "outer_strength_dependence_material",
+        "layer_width_dependence_material"
+      ],
+      "note": "Outer absorption improves diagnostics but no regulator-independent limit is established."
+    },
+    {
+      "id": "known_limits.timeless",
+      "gate": "KNOWN_LIMIT",
+      "status": "PARTIAL",
+      "blocking": true,
+      "requirement": "Pass free/zero-potential controls, conserved-current checks, exact soluble toy model, Schwarzschild/KS special case, and WKB/Hamilton–Jacobi limit.",
+      "evidence": [
+        {
+          "path": "verification/bianchi_ix_timeless_smatrix_verified_run.json",
+          "expect": {
+            "ci.conclusion": "success"
+          }
+        }
+      ],
+      "note": "Zero-complex-potential control exists; the full known-limit stack is incomplete."
+    },
+    {
+      "id": "known_limits.semiclassical",
+      "gate": "KNOWN_LIMIT",
+      "status": "PENDING",
+      "blocking": true,
+      "requirement": "Demonstrate the Hamilton–Jacobi/WKB limit for the same constraint, state sector, and observable definitions.",
+      "evidence": [],
+      "kill_if": [
+        "semiclassical_limit_mismatch"
+      ]
+    },
+    {
+      "id": "numerical.timeless_outer_cap",
+      "gate": "NUMERICAL",
+      "status": "PASS",
+      "blocking": false,
+      "requirement": "Reproduce the stored outer-boundary control results and regression checks.",
+      "evidence": [
+        {
+          "path": "verification/bianchi_ix_timeless_outer_cap_verified_run.json",
+          "expect": {
+            "publication_branch_run.conclusion": "success",
+            "publication_branch_run.regression.status": "ok"
+          }
+        }
+      ]
+    },
+    {
+      "id": "claim.compiler",
+      "gate": "CLAIM_COMPILER",
+      "status": "PASS",
+      "blocking": false,
+      "requirement": "Generate claim labels only from machine-readable obligations; never promote around a failed blocking gate.",
+      "evidence": [
+        {
+          "path": "tools/check_physics_audit.py"
+        }
+      ]
+    }
+  ]
+}

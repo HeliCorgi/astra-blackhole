@@ -19,6 +19,9 @@ EXPECTED_AXIOMS = {
     "p8_low_moments": {"propext"}, "p8_first_visible": {"propext"},
     "equal_observations_equal_predictions": set(),
     "no_exact_forecast_for_distinct_futures": set(),
+    "time_dependent_factorization_residual": set(),
+    "common_operator_preserves_recombination": set(),
+    "commuting_operator_preserves_constraint_kernel": set(),
 }
 
 
@@ -63,7 +66,7 @@ def check_axioms(path: Path, *, verbose: bool = True) -> None:
         if actual != expected:
             raise ValueError(f"Unexpected axioms for {full}: {actual}; expected {expected}")
     if verbose:
-        print("Eight reports verified: six use only standard propext; two use no axioms.")
+        print("Eleven reports verified: six use only standard propext; five use no axioms.")
 
 
 def self_test() -> None:

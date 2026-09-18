@@ -159,3 +159,12 @@ class operatorとはしない。次はtrue PML / exterior complex scaling / cont
 spectral densityを扱うscattering discretizationへ進み、incoming/outgoing fluxなどで
 reflectionを独立測定する。constraint-compatibleなscattering limitを確認するまで
 induced physical inner productとdecoherence functionalは実装しない。
+
+
+### 6h. physics audit gate / claim compiler：基盤を実装
+
+量子化選択の「正解」をLeanへ決めさせるのではなく、GR reduction、Lean semantics、clock、inner product/domain、factor ordering、regulator、known limit、claim compilerを別gateへ分解する。
+
+`PHYSICS_AUDIT.md` と `audit/physics_obligations.json` をsource of truthとし、blocking gateにPENDING/PARTIAL/FAILが残れば物理解釈の昇格を禁止する。現在はregulator gateがFAIL、known-limitがPARTIAL、CAS/clock/domain/orderingがPENDING。
+
+Leanには3つの抽象意味論定理を追加するが、continuous operatorのdomain/self-adjointnessや量子化の物理的正しさは証明対象外。xAct/Cadabraによる独立GR reductionはCAS gateの次段階としてPENDINGのまま残す。
