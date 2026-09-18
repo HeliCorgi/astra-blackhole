@@ -13,7 +13,7 @@ lake build
 lake env lean -DwarningAsError=true Audit.lean
 ```
 
-`lake build` の標準ターゲットは `AstraBlackhole`。`lean-toolchain` からバージョンが選ばれる。`Audit.lean` は8定理の依存公理を出力する。CIは6件の有限演算定理には標準公理 `propext` のみ、2件の観測補題には公理依存なし、という明示的な依存表を検査する。証明穴、独自の公理、`native_decide` は使用しない。
+`lake build` の標準ターゲットは `AstraBlackhole`。`lean-toolchain` からバージョンが選ばれる。`Audit.lean` は11定理の依存公理を出力する。CIは6件の有限演算定理には標準公理 `propext` のみ、2件の観測補題と3件のphysics-audit意味論補題には公理依存なし、という明示的な依存表を検査する。証明穴、独自の公理、`native_decide` は使用しない。
 
 ## 追加した証明ソース
 
@@ -61,3 +61,14 @@ PythonのFractionによる独立検算、Leanビルド、依存公理検査を�
 完全な公理非依存という当初の目標を訂正し、6件だけにLean標準の命題外延性 `propext` を明示的に許可する。これは論理的に同値な命題を等しいと扱う標準の基礎公理であり、物理仮説ではない。ただし公理依存なしとは呼ばない。任意の新公理、証明穴、native実行を信頼する公理を許可したものではない。依存表が変わればCIは失敗する。欠落・重複・禁止公理を含む合成ログを使った9つの負例も検査する。
 
 公式説明: https://lean-lang.org/theorem_proving_in_lean4/Axioms-and-Computation/
+
+
+### 物理監査の意味論：3定理
+
+`PhysicsAudit.lean` は、量子化の物理的正しさではなく、定義から必要になる意味論的な等式だけを証明する。
+
+- `time_dependent_factorization_residual`: branch equation、抽象product-rule補正、square relationから二階constraintのresidual形が従う。
+- `common_operator_preserves_recombination`: branch再結合が成立している状態へ同じoperatorを作用させれば等式が保存される。
+- `commuting_operator_preserves_constraint_kernel`: constraintと可換でzero stateを保つoperatorはconstraint kernelを保つ。
+
+State、operator、加法は抽象型・抽象写像として扱う。従って、微分可能性、Hilbert空間、self-adjointness、operator domain、WDW量子化、時計、factor ordering、regulatorの妥当性はこの3定理の結論ではない。
