@@ -41,7 +41,7 @@ class ResolventSpec:
     energy: float = 0.0
     etas: tuple = (0.10, 0.05, 0.025)
     v0s: tuple = (0.025, 0.05)
-    source_modes: int = 16
+    source_modes: int = 20
     shell_modes: int = 12
 
 
