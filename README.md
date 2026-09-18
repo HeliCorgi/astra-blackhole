@@ -76,6 +76,24 @@ python -m unittest discover -s tests -p 'test_bianchi_ix_timeless_resolvent.py' 
 python research/run_bianchi_ix_timeless_resolvent.py --out artifacts/timeless-resolvent --check-against research/bianchi_ix_timeless_resolvent_results/summary.json
 ```
 
+
+### timeless outer absorbing-layer control：改善するが未収束
+
+[outer absorbing-layer監査](docs/BIANCHI_IX_TIMELESS_OUTER_CAP_ja.md) / [保存要約](research/bianchi_ix_timeless_outer_cap_results/summary.json)
+
+finite Dirichlet壁の影響を切り分けるため、B領域の物理class-operator用complex potentialとは別に、外側だけの**数値**absorbing layerをbackgroundへ共通に入れた。3-cell layerでは \(\gamma=0\to.20\) により、V0=.025の \(\eta\) successive T-action changeが **0.137/0.211 → 0.076/0.081** まで低下し、\(\eta=.025\) のbackground edge massも **0.0841→0.0244** へ下がった。
+
+ただし3-cell layerはreference packetの23.3%と重なる。1/2/3-cell対照では、狭い1-cellでも改善は残るが \(\eta\) を下げると再び不安定化し、\(\eta=.025\) のlayer変更だけでT-actionが最大約11.7%変化した。outer strength依存も残る。
+
+したがって**境界吸収は有望な数値改善だが、regulator-independentなon-shell S-matrix/class operatorとは採用しない**。次はtrue PML / exterior complex scaling / continuum scatteringと独立なreflection/flux診断へ進む。physical inner product、decoherence functional、履歴確率は引き続き保留する。
+
+~~~sh
+python -m unittest discover -s tests -p 'test_bianchi_ix_timeless_outer_cap.py' -v
+python research/run_bianchi_ix_timeless_outer_cap.py --out artifacts/timeless-outer-cap
+python research/run_bianchi_ix_timeless_outer_cap_layer_scan.py --out artifacts/timeless-outer-cap
+python research/check_bianchi_ix_timeless_outer_cap_results.py --artifact-dir artifacts/timeless-outer-cap --baseline research/bianchi_ix_timeless_outer_cap_results/summary.json
+~~~
+
 ```sh
 python -m unittest discover -s tests -p 'test_bianchi_ix_timeless_bridge.py' -v
 python research/run_bianchi_ix_timeless_bridge.py --out artifacts/timeless-bridge --check-against research/bianchi_ix_timeless_bridge_results/summary.json
