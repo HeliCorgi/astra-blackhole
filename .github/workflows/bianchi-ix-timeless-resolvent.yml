@@ -6,6 +6,7 @@ on:
     paths:
       - 'research/bianchi_ix_timeless_resolvent.py'
       - 'research/run_bianchi_ix_timeless_resolvent.py'
+      - 'research/bianchi_ix_timeless_resolvent_results/summary.json'
       - 'tests/test_bianchi_ix_timeless_resolvent.py'
       - 'docs/BIANCHI_IX_TIMELESS_RESOLVENT_ja.md'
       - '.github/workflows/bianchi-ix-timeless-resolvent.yml'
@@ -13,6 +14,7 @@ on:
     paths:
       - 'research/bianchi_ix_timeless_resolvent.py'
       - 'research/run_bianchi_ix_timeless_resolvent.py'
+      - 'research/bianchi_ix_timeless_resolvent_results/summary.json'
       - 'tests/test_bianchi_ix_timeless_resolvent.py'
       - 'docs/BIANCHI_IX_TIMELESS_RESOLVENT_ja.md'
       - '.github/workflows/bianchi-ix-timeless-resolvent.yml'
@@ -35,7 +37,7 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install -r requirements.txt
       - run: python -m unittest discover -s tests -p 'test_bianchi_ix_timeless_resolvent.py' -v
-      - run: python research/run_bianchi_ix_timeless_resolvent.py --out artifacts/timeless-resolvent
+      - run: python research/run_bianchi_ix_timeless_resolvent.py --out artifacts/timeless-resolvent --check-against research/bianchi_ix_timeless_resolvent_results/summary.json
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:

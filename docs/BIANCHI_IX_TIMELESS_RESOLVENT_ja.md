@@ -3,108 +3,140 @@
 ## 目的
 
 直前の finite-window S-matrix pilot では、有限 Dirichlet 箱のまま
-unphysical parameter window を広げると、`[C,S_T]` と successive window 差が
-むしろ増大した。これは Halliwell の無限 scattering limit を有限反射箱で近似する
-設計が不適切である可能性を示す負の対照として保存する。
+unphysical parameter window を広げると、\([C,S_T]\) と successive window 差が
+むしろ増大した。この失敗を負の対照として保存し、時間窓を伸ばさない stationary
+resolvent へ切り替える。
 
-次段階では時間窓を伸ばさず、stationary resolvent へ切り替える。
+Halliwell の complex-potential class operator では、領域へ入らない class operator
+をその領域に局在した complex potential の S 行列として構成し、constraint と
+可換な量を得ることが要件になる（arXiv:0909.2597, 1108.5991）。
 
-Halliwell の complex-potential class operatorでは、領域へ入らない class operator
-はその領域に局在した complex potential の S 行列として構成され、constraint と
-可換であることが重要である（arXiv:0909.2597, 1108.5991）。
+本 pilot は **S 行列そのものをまだ構成しない**。有限箱上の outgoing-resolvent
+regulator を使って、T-operator の数値核に \(\eta\to0^+\) の安定化傾向があるかを
+先に監査する。
 
-本 pilot は **S 行列そのものをまだ構成しない**。まず有限箱上の outgoing
-resolvent / T-operator の数値核が安定化する見込みを検査する。
+## 模型と数値設定
 
-## 定義
+前段と同じ、新しい二階 WDW constraint 量子化
 
-前段と同じ新しい二階 constraint
-
-[
+\[
 C=P_s^2-A(s)
-]
+\]
 
-と、同じ B={B+,B-} 領域の非負関数 `V=V0 F_B` を使う。
+を \(q=(s,\beta_+,\beta_-)\) の有限3次元 minisuperspace に置く。変数は
+\(s,\beta_+,\beta_-\) の3つだけを保持し、物質、環境、空間非一様自由度は含めない。
+数値は既存模型の無次元化規約を継承し、実天体の SI 単位へ同定しない。
 
-[
-H_{eff}=C-iV,qquad
-G_0(z)=(z-C)^{-1},qquad
+主格子は：
+
+- \(s\in[2,6]\), \(\beta_+\in[-3.5,3.5]\), \(\beta_-\in[-4,4]\)
+- interior points: \(12\times14\times14=2352\)
+- \(\hbar=0.2\)
+- potential absolute cap = 8
+- B 境界 smooth width = 0.30
+
+B={B+,B-} 領域には従来と同じ \(V=V_0F_B\ge0\) を使う。
+
+\[
+H_{\mathrm{eff}}=C-iV,\qquad
+G_0(z)=(z-C)^{-1},\qquad
 G_V(z)=(z-C+iV)^{-1},
-]
+\]
 
-[
-z=E+ieta,qquad E=0,quad eta>0.
-]
+\[
+z=E+i\eta,\qquad E=0,\quad \eta>0.
+\]
 
-`eta` は outgoing resolvent を有限格子で正則化する数値 regulator であり、
+\(\eta\) は outgoing resolvent を有限格子で正則化する数値 regulator であり、
 物理パラメータではない。
 
-摂動 `U=-iV` に対し有限行列で
+摂動 \(U=-iV\) に対して有限行列で
 
-[
-G_V=G_0+G_0UG_V,
-]
-
-[
+\[
+G_V=G_0+G_0UG_V,\qquad
 T(z)=U+UG_VU
-]
+\]
 
-を使う。最初の式は実装の代数的 negative control として直接検査する。
+を使う。最初の Dyson identity は実装の代数的 negative control として直接検査する。
 
-## reference state
+## reference packet
 
-前段と同じ発想で、near-zero constraint mode の部分空間から有限箱 edge mass を
-小さくする packet を作る。これは物理状態の選択則ではなく、境界反射を診断から
-できるだけ分離するための数値 reference。
+20個の near-zero constraint mode の部分空間で、有限箱の outer one-cell projector
+を最小化する superposition を数値 reference とした。これは物理状態の選択則ではない。
+
+採用 packet:
+
+- edge mass (1 cell): 0.07652061
+- capped-region mass: \(1.78\times10^{-5}\)
+- constraint energy mean: -0.01048549
+- constraint energy spread: 0.00581048
+- \(\|C\psi\|/\|\psi\|\): 0.01198780
 
 ## scan
 
-主 grid は前段の `WDWGridSpec` を継承する。
+- \(E=0\)
+- \(\eta=.10,.05,.025\)
+- \(V_0=.025,.05\)
 
-- `E=0`
-- `eta = .10, .05, .025`
-- `V0 = .025, .05`
+各点で Dyson residual、free resolvent norm、\(\|T\psi\|\)、Born 項との比、
+near-zero shell 投影率、interacting response norm、response edge mass を保存した。
 
-各点で
+## 実行結果
 
-- Dyson identity residual
-- free resolvent norm
-- `||T psi||`
-- Born項 `||U psi||` に対する比
-- near-zero shellへの T-action 投影率
-- interacting resolvent response の norm
-- response の outer one-cell edge mass
+Dyson identity residual は全点で \(3.6\times10^{-15}\) から
+\(1.53\times10^{-14}\) で、有限行列実装の代数的対照は通った。\(V_0=0\) では
+T-action norm は0。
 
-を保存する。
+一方、\(\eta\) を小さくすると free resolvent norm は
+9.93 → 19.47 → 36.42 と増大し、T-action の successive change も減らない。
 
-さらに `eta` を半減したときの
+| V0 | eta .10→.05 | eta .05→.025 |
+|---:|---:|---:|
+| .025 | 0.13749 | 0.21063 |
+| .050 | 0.23375 | 0.33086 |
 
-[
-rac{|T_{eta/2}psi-T_etapsi|}{|T_{eta/2}psi|}
-]
+response の outer one-cell edge mass は約0.078–0.081で支配的には増えていないが、
+このことだけでは有限箱の離散 near-zero poles の影響を除外できない。T-action 自体も
+\(\eta\) 低下で安定値へ近づく傾向を示していない。
 
-を記録する。
+**結論：この finite-Dirichlet stationary resolvent/T-operator pilot でも、
+\(\eta\to0^+\) の採用可能な安定域を確認できなかった。Halliwell型の on-shell
+S-matrix / class operator として採用しない。**
 
-## 判定
+これは Halliwell formalism の否定ではない。現在の finite box、離散 spectrum、
+potential cap、および boundary 条件を含む数値設計の負の結果である。
 
-この pilot だけで class operator や履歴確率へ進まない。
+## 次
 
-次段階へ進む最低条件は：
+次は Dirichlet 箱を固定したまま regulator を増やすのではなく、outer boundary を
+outgoing/PML 型に変更するか、continuum spectral density を明示的に扱える scattering
+discretizationへ進む。そこで box / cap / boundary scan と on-shell constraint
+commutation を先に確認する。
 
-1. Dyson residual が数値丸めレベルである。
-2. `eta` を下げたとき T-action の successive change が低下する傾向を持つ。
-3. response の edge mass が支配的でない。
-4. その後、独立な box / potential-cap scan でも同じ傾向が残る。
+induced/Rieffel physical inner product、decoherence functional、履歴確率は、
+constraint-compatible な scattering limit を確認した後に実装する。
 
-条件2–4を満たさなければ、有限 Dirichlet resolvent も負の対照として固定し、
-outgoing/PML 型境界または別の continuum scattering discretization へ進む。
+## 再現
+
+\`\`\`sh
+python -m unittest discover -s tests -p 'test_bianchi_ix_timeless_resolvent.py' -v
+python research/run_bianchi_ix_timeless_resolvent.py \
+  --out artifacts/timeless-resolvent \
+  --check-against research/bianchi_ix_timeless_resolvent_results/summary.json
+\`\`\`
+
+採用 CI run 35377267600 では4テスト、pilot生成が成功した。artifact
+\`bianchi-ix-timeless-resolvent\` (ID 10560925377, SHA-256
+\`7dcce55c35bd89bc44a1f44208d78e84a3918d32de96f1157b42c4895f1622b8\`) を保存した。
+この成功は数値再現性の記録であり、物理的妥当性の証明ではない。
 
 ## 限界
 
 - 一様真空 Bianchi IX minisuperspace の新しい二階 WDW constraint 量子化。
 - 既存 finite-clock square-root 量子化とは同一視しない。
 - finite Dirichlet box と potential cap を継承。
-- `eta`, shell projection, Euclidean grid norm は数値診断。
+- \(\eta\), shell projection, Euclidean grid norm は数値診断。
+- reference packet は edge mass を小さくする数値選択で、物理状態処方ではない。
 - induced/Rieffel physical inner product は未実装。
 - decoherence functional と physical history probability は未計算。
 - 現実のブラックホール観測、特異点解消、量子重力検証ではない。

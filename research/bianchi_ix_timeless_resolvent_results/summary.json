@@ -1,0 +1,162 @@
+{
+  "schema": 1,
+  "method": "Stationary eta-regularized resolvent/T-operator pilot; not yet an on-shell S-matrix.",
+  "grid": {
+    "s_bounds": [
+      2,
+      6
+    ],
+    "bp_bounds": [
+      -3.5,
+      3.5
+    ],
+    "bm_bounds": [
+      -4,
+      4
+    ],
+    "ns": 12,
+    "nx": 14,
+    "ny": 14,
+    "hbar": 0.2,
+    "potential_abs_cap": 8,
+    "absorber_width": 0.3,
+    "dimension": 2352
+  },
+  "resolvent": {
+    "energy": 0,
+    "etas": [
+      0.1,
+      0.05,
+      0.025
+    ],
+    "v0s": [
+      0.025,
+      0.05
+    ],
+    "source_modes": 20,
+    "shell_modes": 12
+  },
+  "reference_packet": {
+    "edge_subspace_minimum": 0.07652060863199761,
+    "energy_mean": -0.010485494124512358,
+    "energy_spread": 0.005810476937164826,
+    "edge_mass_one_cell": 0.0765206086319974,
+    "capped_region_mass": 0.00001776929649081752,
+    "constraint_zero_residual": 0.011987795012949947,
+    "shell_eigenvalues": [
+      0.000013234826385796855,
+      0.001755009322273423,
+      -0.002230162122830166,
+      -0.0034309941973701963,
+      0.003520778279269253,
+      0.005356335682738789,
+      0.006990419281704667,
+      0.007630133138490947
+    ]
+  },
+  "negative_control": {
+    "v0_zero_t_norm": 0
+  },
+  "rows": [
+    {
+      "v0": 0.025,
+      "eta": 0.1,
+      "dyson_relative": 3.6027758110417355e-15,
+      "free_resolvent_norm": 9.929484898487205,
+      "t_norm": 0.016298055500668682,
+      "t_to_born_norm_ratio": 0.8368960681709191,
+      "t_shell_fraction": 0.31493773683906556,
+      "response_norm": 0.14509940261256613,
+      "response_edge_mass_one_cell": 0.07797670893589694
+    },
+    {
+      "v0": 0.025,
+      "eta": 0.05,
+      "dyson_relative": 7.611097018554745e-15,
+      "free_resolvent_norm": 19.46520907392974,
+      "t_norm": 0.014501283434585111,
+      "t_to_born_norm_ratio": 0.7446328237953563,
+      "t_shell_fraction": 0.30921236599876534,
+      "response_norm": 0.24118191560236496,
+      "response_edge_mass_one_cell": 0.0794282293129915
+    },
+    {
+      "v0": 0.025,
+      "eta": 0.025,
+      "dyson_relative": 1.1641936937215652e-14,
+      "free_resolvent_norm": 36.4217919432996,
+      "t_norm": 0.012343109662859083,
+      "t_to_born_norm_ratio": 0.6338118032194348,
+      "t_shell_fraction": 0.289541858738053,
+      "response_norm": 0.37041810103950656,
+      "response_edge_mass_one_cell": 0.08104007301971558
+    },
+    {
+      "v0": 0.05,
+      "eta": 0.1,
+      "dyson_relative": 3.7904957355714386e-15,
+      "free_resolvent_norm": 9.929484898487205,
+      "t_norm": 0.02804519185943484,
+      "t_to_born_norm_ratio": 0.7200524871601128,
+      "t_shell_fraction": 0.31403280335256384,
+      "response_norm": 0.2486036533410516,
+      "response_edge_mass_one_cell": 0.0775277251879374
+    },
+    {
+      "v0": 0.05,
+      "eta": 0.05,
+      "dyson_relative": 8.12323710674728e-15,
+      "free_resolvent_norm": 19.46520907392974,
+      "t_norm": 0.02310471526148433,
+      "t_to_born_norm_ratio": 0.5932071270020994,
+      "t_shell_fraction": 0.30445266630166573,
+      "response_norm": 0.38154942868180824,
+      "response_edge_mass_one_cell": 0.07877948895389968
+    },
+    {
+      "v0": 0.05,
+      "eta": 0.025,
+      "dyson_relative": 1.530118479710112e-14,
+      "free_resolvent_norm": 36.4217919432996,
+      "t_norm": 0.017991645885012054,
+      "t_to_born_norm_ratio": 0.4619304953425982,
+      "t_shell_fraction": 0.2767838480289532,
+      "response_norm": 0.533538858948628,
+      "response_edge_mass_one_cell": 0.07997473799681447
+    }
+  ],
+  "eta_change": [
+    {
+      "v0": 0.025,
+      "from_eta": 0.1,
+      "to_eta": 0.05,
+      "relative_t_change": 0.13748645828133466
+    },
+    {
+      "v0": 0.025,
+      "from_eta": 0.05,
+      "to_eta": 0.025,
+      "relative_t_change": 0.21062971904943245
+    },
+    {
+      "v0": 0.05,
+      "from_eta": 0.1,
+      "to_eta": 0.05,
+      "relative_t_change": 0.2337470286639952
+    },
+    {
+      "v0": 0.05,
+      "from_eta": 0.05,
+      "to_eta": 0.025,
+      "relative_t_change": 0.330857127790454
+    }
+  ],
+  "decision_rule": "Do not construct physical history probabilities. A next-stage scattering calculation requires an eta trend with decreasing T-action changes, small algebraic Dyson residuals, controlled response edge mass, and later independent box/cap scans.",
+  "limitations": [
+    "Same new second-order WDW constraint quantization as the preceding timeless pilot; not the finite-clock square-root model.",
+    "The finite Dirichlet box and absolute potential cap remain regulators.",
+    "eta is a stationary outgoing-resolvent regulator, not a physical parameter.",
+    "Euclidean grid norms and shell projections are numerical diagnostics, not the induced physical inner product.",
+    "No converged infinite-volume S-matrix, decoherence functional, history probability, black-hole observation, or singularity-resolution claim is made."
+  ]
+}

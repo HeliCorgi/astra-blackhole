@@ -60,6 +60,22 @@ python research/bianchi_ix_history_coarse.py --input research/bianchi_ix_history
 
 したがって有限Dirichlet箱のままT→∞ scattering limitを取る設計は不採用。次はoutgoing/absorbing outer boundaryまたはresolvent法へ進む。physical induced inner productや履歴確率はまだ計算しない。
 
+
+### timeless stationary resolvent pilot：Dirichlet resolventも不合格
+
+[stationary resolvent / T-operator監査](docs/BIANCHI_IX_TIMELESS_RESOLVENT_ja.md) / [結果](research/bianchi_ix_timeless_resolvent_results/summary.json)
+
+finite-window の反射問題を避けるため、同じ2352次元二階constraintで \(z=E+i\eta\) の stationary resolvent と T-operator を監査した。20 near-zero modeから edge mass 最小packetを作り edge を7.65%まで下げ、Dyson identity residual は全点で \(10^{-14}\) 級だった。
+
+しかし \(\eta=.10\to.05\to.025\) で free resolvent norm は **9.93→19.47→36.42** と増え、T-action successive change も V0=.025 で **0.137→0.211**、V0=.05で **0.234→0.331** と増加した。したがってこの finite-Dirichlet resolventも \(\eta\to0^+\) の安定した scattering kernel として採用しない。
+
+次は outer boundary を outgoing/PML 型にするか、continuum spectral density を扱う scattering discretizationへ進む。physical induced inner product、decoherence functional、履歴確率は引き続き保留する。
+
+\`\`\`sh
+python -m unittest discover -s tests -p 'test_bianchi_ix_timeless_resolvent.py' -v
+python research/run_bianchi_ix_timeless_resolvent.py --out artifacts/timeless-resolvent --check-against research/bianchi_ix_timeless_resolvent_results/summary.json
+\`\`\`
+
 ```sh
 python -m unittest discover -s tests -p 'test_bianchi_ix_timeless_bridge.py' -v
 python research/run_bianchi_ix_timeless_bridge.py --out artifacts/timeless-bridge --check-against research/bianchi_ix_timeless_bridge_results/summary.json
