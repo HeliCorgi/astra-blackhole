@@ -97,6 +97,13 @@ def main():
           "r_monotone_decreasing":bool(np.all(np.diff(rr)<0))
         })
 
+    # Canonical alternative-clock transform: Y=T+x, X=x,
+    # p_Y=p_T, p_X=p_x-p_T. The constraint becomes
+    # -p_X^2-2 p_X p_Y-exp(-2X)=0, hence
+    # p_Y=-(p_X^2+exp(-2X))/(2 p_X).
+    # On the target branch p_X=p_x+H>0 at finite x, but p_X->0 at the
+    # horizon limit. Quantizing Y-time therefore introduces an inverse-momentum
+    # domain that is absent in the T-clock square-root representation.
     result={
       "schema":1,
       "status":"PARTIAL",
@@ -114,6 +121,9 @@ def main():
       "alternative_clock":{
         "Y":"x+T=-log(4r)",
         "negative_branch_bracket":"{Y,C}=-2(H+p_x)<0 at finite x",
+        "canonical_transform":"Y=T+x, X=x, p_Y=p_T, p_X=p_x-p_T",
+        "deparametrized_constraint":"p_Y=-(p_X^2+exp(-2X))/(2 p_X)",
+        "quantum_domain_warning":"Y-time quantization requires an inverse p_X operator. On the Schwarzschild branch p_X>0 at finite radius but tends to zero at the horizon limit, so a physical domain/extension must be specified before a quantum clock-equivalence claim.",
         "interpretation":"Y is the logarithmic inverse areal radius and is classically monotone through the Schwarzschild interior."
       },
       "negative_control":"x is not a global clock because {x,C}=-2 p_x vanishes at the classical reflection point p_x=0.",
