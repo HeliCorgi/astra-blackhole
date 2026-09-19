@@ -171,8 +171,8 @@ def main():
         "mass_dressed_curvature":"Derivative/nonlocal mass factors can alter domains and cancellations, so failure of the bare r^-6 form is not by itself a theorem about every possible 48 mu^2/r^6 ordering."
       },
       "decision":{
-        "quantum_mass_operator_selected":false,
-        "quantum_kretschmann_operator_selected":false,
+        "quantum_mass_operator_selected":False,
+        "quantum_kretschmann_operator_selected":False,
         "reason":"The tested local orderings expose a constraint-symmetry/formal-symmetry conflict and finite-box ordering drift, while the continuum state domain is not controlled for the exponential factors."
       },
       "scope_note":"FAIL blocks promotion of a quantum mass/Kretschmann claim in the current representation. It does not prove that no acceptable physical-inner-product or nonlocal Dirac-observable quantization exists."
