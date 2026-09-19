@@ -153,7 +153,7 @@ def main():
 
     result={
       "schema":1,
-      "status":"FAIL",
+      "status":"PARTIAL",
       "finding":"no_selected_domain-safe_quantum_mass_or_curvature_operator",
       "classical_targets":{
         "mass":"mu=(1/4) exp(x-T) p_T(p_T-p_x)",
@@ -175,7 +175,7 @@ def main():
         "quantum_kretschmann_operator_selected":False,
         "reason":"The tested local orderings expose a constraint-symmetry/formal-symmetry conflict and finite-box ordering drift, while the continuum state domain is not controlled for the exponential factors."
       },
-      "scope_note":"FAIL blocks promotion of a quantum mass/Kretschmann claim in the current representation. It does not prove that no acceptable physical-inner-product or nonlocal Dirac-observable quantization exists."
+      "scope_note":"PARTIAL blocks promotion of a quantum mass/Kretschmann claim in the current representation. The finite-box expectation drift decreases with grid refinement and is not treated as a continuum no-go. The unresolved points are the physical-inner-product adjoint/domain, ordering selection, and exponential-tail domains. This does not prove that no acceptable nonlocal Dirac-observable quantization exists."
     }
     args.out.parent.mkdir(parents=True,exist_ok=True)
     args.out.write_text(json.dumps(result,indent=2,sort_keys=True)+"\n")
