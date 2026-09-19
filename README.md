@@ -261,6 +261,21 @@ python verify_predictors.py
 
 ## Physics audit gates
 
+### KS量子監査：clock / KG同一状態 / ordering / mass-curvature domain
+
+[詳細](docs/KS_QUANTUM_AUDIT_ja.md) / [machine-readable obligations](audit/ks_black_hole_obligations.json) / [保存要約](research/ks_black_hole_audit_results/summary.json)
+
+古典Schwarzschild→Kantowski–Sachs bridgeの次を、BH専用の量子gateとして分離した。
+
+- **clock = PARTIAL**：repoの (T) と (Y=x+T=-\log(4r)) は古典的に単調。xは反射点 (p_x=0) でglobal clockにならない。Y-clock量子化は (p_X^{-1}) を要求し、domainが未指定。
+- **same-state L2↔KG = PARTIAL**：finite boxのpositive-frequency sectorでは (Psi_{KG}=\sqrt{h/2},H^{-1/2}\chi_{L2}) によりKG norm・mapped x/r期待値が約1e-14で一致。ただしcontinuumのzero-energy thresholdで (H^{-1/2}) domainが未解決。
+- **factor ordering = FAIL / ORDERING-SENSITIVE**：明示したSturm–Liouville ordering familyで最大 (Delta\langle x\rangle\approx0.526)。既存box数値許容差3e-4を大きく超える。
+- **quantum mass/Kretschmann = PARTIAL**：constraint kernelを保つ局所mass ordering familyは構成できたが、flat kinematical L2のformal symmetryと両立するorderingをそのfamily内で選べず、continuum exponential-tail domainも未解決。
+- **inverse-radius regulator = FAIL**：既存q=2,4,6 tail監査の有限regulator removal不合格を保持。
+
+したがって現在のKS専用claimは `ORDERING-SENSITIVE`, `REGULATOR-UNSTABLE`, `PHYSICAL INTERPRETATION NOT IDENTIFIED`。有限箱の値からBH特異点解消／持続へ昇格しない。
+
+
 ### Schwarzschild interior → Kantowski–Sachs classical bridge：PASS
 
 [古典CAS bridge](docs/SCHWARZSCHILD_KS_BRIDGE_ja.md) / [BH return gate](docs/BLACK_HOLE_RETURN_GATE_ja.md)
