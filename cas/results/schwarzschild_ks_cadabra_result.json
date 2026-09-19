@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "backend": {
+    "name": "Cadabra",
+    "version": "2.5.14",
+    "mode": "cadabra2-cli scalar/component KS bridge"
+  },
+  "checks": {
+    "spatial_curvature_zero": "0",
+    "kinetic_zero": "0",
+    "hamiltonian_zero": "0",
+    "repo_constraint_zero": "0",
+    "schwarzschild_constraint_zero": "0",
+    "radius_zero": "0",
+    "mass_zero": "0",
+    "mass_poisson_zero": "0"
+  },
+  "derived": {
+    "R3": "2/R**2",
+    "misner_constraint": "P_Omega**2-P_beta**2+48*exp(-2*sqrt(3)*Omega)",
+    "repo_constraint": "p_T**2-p_x**2-exp(-2*x)",
+    "radius": "exp(-x-T)/4",
+    "mass_dirac": "exp(x-T)*p_T*(p_T-p_x)/4",
+    "mass_poisson": "-(p_T/2)*exp(x-T)*C_repo"
+  }
+}
