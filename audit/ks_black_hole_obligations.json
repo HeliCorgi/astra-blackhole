@@ -152,7 +152,7 @@
         "continuum_mass_form_not_closable",
         "mass_semiclassical_limit_fails"
       ],
-      "note": "A concrete finite-box candidate M_D(T)=U M0 U† is declared for downstream audits; continuum closure and unique ordering selection remain open."
+      "note": "A concrete finite-box candidate M_D(T)=U M0 U† is declared for downstream audits; its same-Wigner semiclassical error decreases over the audited h-family, while continuum closure and unique ordering selection remain open."
     },
     {
       "id": "inner_product.ks_mass_curvature_domain",
@@ -234,7 +234,7 @@
         "mass_semiclassical_trend_reverses",
         "selected_curvature_observable_has_no_semiclassical_domain"
       ],
-      "note": "The declared mass candidate approaches the classical packet-center mass under an h-scaled grid sequence, but the clock/domain/curvature parts of a common-state semiclassical limit remain incomplete."
+      "note": "The declared mass candidate approaches the classical mass expectation of the same Gaussian Wigner ensemble under the h-scaled grid sequence. The clock/domain/curvature parts of a common-state semiclassical limit remain incomplete."
     },
     {
       "id": "numerical.ks_quantum_audit",
