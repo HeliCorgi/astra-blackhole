@@ -15,16 +15,34 @@ from __future__ import annotations
 import argparse, json, math, sys
 from pathlib import Path
 import numpy as np
+import sympy as sp
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/"research"))
 from wdw_model import Packet,WDWModel
+
+def symbolic_family_check():
+    x,q,h=sp.symbols("x q h", real=True)
+    g=sp.Function("g")(x)
+    f=sp.exp(-q*x/2)*g
+    Aq=-h**2*sp.exp(-q*x)*sp.diff(sp.exp(q*x)*sp.diff(f,x),x)+sp.exp(-2*x)*f
+    flat=sp.simplify(sp.exp(q*x/2)*Aq)
+    target=-h**2*sp.diff(g,x,2)+(sp.exp(-2*x)+h**2*q**2/4)*g
+    residual=sp.simplify(sp.expand(flat-target))
+    if residual != 0:
+        raise RuntimeError(f"ordering-family unitary map failed: {residual}")
+    return {
+      "unitary_flat_form_residual":"0",
+      "unitary_map":"g=exp(qx/2) f",
+      "flat_form":"A_q^flat=A_0+h^2 q^2/4"
+    }
 
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--out",type=Path,required=True)
     args=ap.parse_args()
 
+    symbolic=symbolic_family_check()
     saved=json.loads((ROOT/"research/wdw_results/summary.json").read_text())
     detect_tol=float(saved["protocol"]["thresholds"]["box_mean_x"])
     qs=(-2.,-1.,0.,1.,2.)
@@ -67,6 +85,7 @@ def main():
       "finding":finding,
       "family":{
         "definition":"A_q=-h^2 exp(-q x) d_x(exp(q x)d_x)+exp(-2x)",
+        "symbolic_check":symbolic,
         "hilbert_measure":"L2(exp(q x) dx)",
         "unitary_flat_form":"A_q^flat=A_0+h^2 q^2/4",
         "q_values":list(qs),
