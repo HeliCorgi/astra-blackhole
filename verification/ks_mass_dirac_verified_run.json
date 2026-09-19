@@ -2,14 +2,14 @@
   "schema": 1,
   "date": "2026-09-20",
   "branch": "audit/ks-physical-mass",
-  "branch_head": "0162cf010c74f775c3f4bc9223ae496a48b5e639",
+  "branch_head": "388728fce607cbb85b9a07f0c1cf94683e207446",
   "workflow": {
     "name": "KS physical mass Dirac audit",
-    "run_id": 35452208465,
-    "job_id": 105921218917,
+    "run_id": 35456034126,
+    "job_id": 105931343550,
     "conclusion": "success",
-    "artifact_id": 10587092256,
-    "artifact_sha256": "7eceda6cd7a252acd64a1ebb1715aa4ec1cccc16833c1ca02c05284940d38f61"
+    "artifact_id": 10587838824,
+    "artifact_sha256": "af821e8f0716106b45ff4699dff7d72c494b2cf75fd69f787c4a920d36e303cd"
   },
   "mass_dirac": {
     "status": "PARTIAL",
@@ -19,6 +19,13 @@
     "continuum_quadratic_form_closure": "PENDING",
     "unique_ordering_selection": "PENDING",
     "semiclassical_relative_errors": [
+      0.20279024654958522,
+      0.05227108177767126,
+      0.01696508165110444,
+      0.008255523162455036
+    ],
+    "semiclassical_comparator": "same Gaussian Wigner ensemble under the classical mass Dirac observable",
+    "packet_center_relative_errors_diagnostic": [
       0.5076240982211744,
       0.17107819035859873,
       0.07198655854215263,
@@ -53,8 +60,8 @@
   "claim_boundary": "A finite-box positive-frequency/physical-KG mass Dirac candidate is declared for downstream audits, but no continuum-certified unique mass operator or domain-safe quantum Kretschmann operator is established.",
   "license_files_changed": false,
   "lean_changed": false,
-  "verified_scientific_head": "c3fd3fea21b57ed11280254576a616bdbe97602b",
+  "verified_scientific_head": "388728fce607cbb85b9a07f0c1cf94683e207446",
   "regression": "PASS",
   "claim_compiler": "PASS against verification/ks_black_hole_claims.json",
-  "note": "The combined mass/Y-clock/Kretschmann workflow reproduces the declared finite-box mass candidate, same-Dirac-state Y-slice consistency, inverse-p_X domain warning and scoped Kretschmann FAIL. CI success means the audit reproduced these PASS/PARTIAL/FAIL decisions; it does not promote a black-hole singularity claim."
+  "note": "The combined mass/Y-clock/Kretschmann workflow reproduces the finite-box mass candidate, same-Dirac-state Y-slice consistency, inverse-p_X domain warning and scoped Kretschmann FAIL. The mass semiclassical control now compares to the same Gaussian Wigner ensemble rather than only the packet center. CI success means the audit reproduced these PASS/PARTIAL/FAIL decisions; it does not promote a black-hole singularity claim."
 }
