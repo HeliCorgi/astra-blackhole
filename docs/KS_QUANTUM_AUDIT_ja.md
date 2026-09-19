@@ -419,3 +419,17 @@ nonlocal/relational mass candidateを構成し直した。
 **当時の局所ordering auditの結論**として残す。
 現在は「finite-box candidateは宣言済みだが、continuum-certified physical (widehatmu) は未確定」
 へ進んでいる。
+
+
+## 9. 2026-09-20 continuum threshold follow-up
+
+前節までの「continuumのzero-energy thresholdで H^(-1/2) domainが未解決」は、[KS continuum threshold/domain audit](KS_CONTINUUM_DOMAIN_AUDIT_ja.md) により切り分けを更新した。
+
+- exact Liouville continuum spectrum と normalized K_(ik) modesを固定
+- h=.2 reference Gaussian は threshold `c(k)=B0 k+O(k^3)`, `|B0|=0.0143884187466872`
+- このpacketはordinary-L2 `D(H^-1/2)` と `D(H^-1)` に入る
+- positive-frequency KG spaceをenergy norm completionとして定義すると `S=sqrt(h/2)H^-1/2` はL2から完成空間へのunitary mapへ延長できる
+
+従って **continuum positive-frequency KG completionはPASS** へ更新する。ordinary-L2上で `H^-1/2` がunboundedであること自体は変わらない。
+
+mass candidateについては `-I<=V<=I`, `I+V>=0` までcontinuumで進んだが、full weighted quadratic formのclosability / associated self-adjoint operatorはPENDING。factor-ordering sensitivityとselected-mass Kretschmann regulator FAILも変更しない。
