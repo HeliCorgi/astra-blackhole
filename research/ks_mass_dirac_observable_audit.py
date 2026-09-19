@@ -38,6 +38,7 @@ import sys
 from pathlib import Path
 
 import numpy as np
+from numpy.polynomial.hermite import hermgauss
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/"research"))
@@ -105,8 +106,19 @@ def velocity_matrix(model):
 
 
 def classical_mu(x,p):
-    E=math.sqrt(p*p+math.exp(-2*x))
-    return .25*math.exp(x)*E*(E+p)
+    E=np.sqrt(p*p+np.exp(-2*x))
+    return .25*np.exp(x)*E*(E+p)
+
+def classical_mass_ensemble(packet,order=120):
+    z,w=hermgauss(order)
+    z=np.sqrt(2.)*z
+    w=w/np.sqrt(np.pi)
+    x=packet.x0+packet.sigma*z[:,None]+np.zeros((1,order))
+    p=(packet.p0
+       +packet.chirp*packet.sigma*z[:,None]
+       +packet.h/(2*packet.sigma)*z[None,:])
+    weight=w[:,None]*w[None,:]
+    return float(np.sum(weight*classical_mu(x,p)))
 
 
 def run_case(h,right=16.,dx=.04,full_spectrum=False):
@@ -150,7 +162,8 @@ def run_case(h,right=16.,dx=.04,full_spectrum=False):
             raise RuntimeError(f"negative probed mass quadratic form: {min_q}")
 
     mu0=np.vdot(chi0,mass0_apply(model,chi0)).real
-    mu_cl=classical_mu(packet.x0,packet.p0)
+    mu_cl=float(classical_mu(packet.x0,packet.p0))
+    mu_ensemble=classical_mass_ensemble(packet)
 
     times=(0.,1.,2.,4.,6.)
     rows=[]
@@ -212,7 +225,9 @@ def run_case(h,right=16.,dx=.04,full_spectrum=False):
       "min_mass_matrix_eigenvalue":min_mass,
       "quantum_mass_initial":float(mu0),
       "classical_center_mass":float(mu_cl),
-      "relative_initial_semiclassical_error":float(abs(mu0/mu_cl-1)),
+      "classical_same_wigner_ensemble_mass":float(mu_ensemble),
+      "relative_error_vs_classical_center":float(abs(mu0/mu_cl-1)),
+      "relative_error_vs_classical_same_wigner_ensemble":float(abs(mu0/mu_ensemble-1)),
       "max_relative_mass_expectation_drift":max_drift,
       "max_positive_frequency_sector_roundtrip_residual":max_sector,
       "positive_frequency_sector_preservation":"EXACT_BY_UNITARY_TRANSPORT",
