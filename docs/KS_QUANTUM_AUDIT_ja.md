@@ -281,11 +281,38 @@ SymPyで厳密に
 
 - (d_x) coefficientから (operatorname{Im}d=1/4)
 - (d_T) coefficientから (operatorname{Im}d=3/4)
+- identity termから (operatorname{Re}d=0,\ operatorname{Im}d=1/2)
 
 が同時に要求され、解がない。
 
 これは重要だが、**physical KG inner productでのno-goではない**。
 flat kinematical L2をphysical inner productと同一視してはいけない。
+
+### constraint kernel と正周波数sectorは別
+
+さらに同じ物理状態のKG表現へ (\widehat M_d) を作用させ、
+
+[
+(\hat p_T+H)\widehat M_d\Psi
+]
+
+を直接測った。これは (widehat M_dPsi) が現在採用する
+(p_T=-H) のpositive-frequency sectorに残るかを見る検査。
+
+(d=0,,i/4,,i/2,,3i/4) を有限箱dx=.04で試すと、
+relative branch residualの最良値でも約
+
+[
+0.9913
+]
+
+だった。
+
+従って、**full WDW constraint kernelを保つことは、選択したpositive-frequency
+Hilbert sectorを保つことを意味しない**。現在の局所 (M_d) familyをそのまま
+T-clock量子理論のmass observableとして採用しない。
+
+これは非局所なDirac observableやphysical KG inner product上の別orderingを否定しない。
 
 ### finite-box candidates
 
@@ -355,10 +382,17 @@ langle r^{-6}angle
 
 ## 7. 次の狭い課題
 
-1. KG physical inner product上でmass symmetry operatorのadjointを直接解く。
+1. physical KG Hilbert spaceを保つmass Dirac observableを、局所family以外も含めて構成する。
 2. path-integral/symmetry principleからKS ordering familyを狭める。
 3. Y-clockの (p_X^{-1}) domainを定義し、同一Dirac stateをT/Y clockで比較する。
 4. 選ばれた (widehatmu) からpositive quadratic-form型Kretschmann候補を作る。
 5. tail domainとregulator removalをその**選ばれたoperator**で再監査する。
 
 この順番を飛ばして有限箱の曲率値を「量子ブラックホール特異点の答え」とはしない。
+
+
+## 背景文献
+
+- Ashtekar, Tate, Uggla, arXiv:gr-qc/9302026, 9302027 — minisuperspaceのDirac quantization、observable、deparametrizationの古典的背景。
+- Mostafazadeh, arXiv:gr-qc/0205049, 0306003 — Klein–Gordon型方程式のpositive-definite Hilbert-space structureとobservable表現の背景。
+- Franken et al., arXiv:2512.23656 — flat minisuperspaceでpath-integral measureとorderingを同時に扱い、許容orderingの物理的等価性を議論する最近の結果。今回のKS ordering stress testへその結論を自動適用したものではない。
