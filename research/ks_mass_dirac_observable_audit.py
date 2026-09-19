@@ -256,7 +256,7 @@ def main():
       run_case(.1,dx=.02),
       run_case(.05,dx=.01),
     ]
-    semi=[row["relative_initial_semiclassical_error"] for row in cases]
+    semi=[row["relative_error_vs_classical_same_wigner_ensemble"] for row in cases]
 
     # Regulator diagnostics on the h=.2 reference packet. These are recorded
     # rather than used to manufacture a physics tolerance after seeing data.
@@ -286,8 +286,9 @@ def main():
         "positivity_rule":"finite-box I+V >= 0 implies M0 is a positive quadratic-form matrix"
       },
       "cases":cases,
-      "semiclassical_error_sequence":semi,
+      "semiclassical_same_wigner_relative_error_sequence":semi,
       "semiclassical_error_decreases_with_h":bool(all(b<a for a,b in zip(semi,semi[1:]))),
+      "semiclassical_comparator":"same Gaussian Wigner ensemble under the classical mass Dirac observable; packet-center mass is retained only as a separate diagnostic",
       "grid_diagnostic":grid,
       "box_diagnostic":box,
       "continuum_domain":{
