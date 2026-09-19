@@ -192,12 +192,27 @@
     {
       "id": "known_limits.schwarzschild_ks_bridge",
       "gate": "KNOWN_LIMIT",
-      "status": "PENDING",
+      "status": "PASS",
       "blocking": true,
-      "requirement": "Return the research line to the black-hole singularity problem by deriving the Schwarzschild-interior to Kantowski–Sachs classical bridge, matching its canonical constraint to the existing KS WDW variables, and fixing a shared singularity observable before using Bianchi IX results for black-hole interpretation.",
+      "requirement": "Derive the Schwarzschild-interior to Kantowski-Sachs classical bridge, match the ADM/Misner constraint to the existing repository WDW variables by an explicit canonical transformation, and identify a shared classical singularity variable.",
       "evidence": [
         {
-          "path": "docs/BLACK_HOLE_RETURN_GATE_ja.md"
+          "path": "verification/schwarzschild_ks_bridge_verified_run.json",
+          "expect": {
+            "backends.maxima.status": "PASS",
+            "backends.cadabra.status": "PASS",
+            "repository_comparison.status": "PASS",
+            "bridge_decision": "PASS"
+          }
+        },
+        {
+          "path": "cas/results/schwarzschild_ks_cadabra_result.json"
+        },
+        {
+          "path": "cas/results/schwarzschild_ks_bridge_comparison.json"
+        },
+        {
+          "path": "docs/SCHWARZSCHILD_KS_BRIDGE_ja.md"
         }
       ],
       "kill_if": [
@@ -205,7 +220,7 @@
         "ks_constraint_or_normalization_mismatch",
         "singularity_observable_not_shared_across_classical_and_quantum_descriptions"
       ],
-      "note": "Bianchi IX is a stress test for anisotropic singularity dynamics, not the final black-hole interior model. This bridge is the explicit return gate to the BH singularity line."
+      "note": "PASS at the classical bridge scope: Schwarzschild interior maps to the KS ansatz, the normalized ADM reduction reproduces the Misner constraint, C_repo=-(1/3)C_Misner, and the repository areal radius r=(1/4)exp(-x-T) equals the Schwarzschild areal radius. Quantum clock/inner-product/ordering/curvature-operator questions remain separate."
     },
     {
       "id": "known_limits.semiclassical",
