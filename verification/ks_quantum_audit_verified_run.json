@@ -33,6 +33,34 @@
     "REGULATOR-UNSTABLE",
     "PHYSICAL INTERPRETATION NOT IDENTIFIED"
   ],
-  "note": "KS quantum audit successfully reproduces its intended PASS/PARTIAL/FAIL findings and the saved claim baseline. Classical T and Y clocks pass monotonicity tests but quantum Y-clock domain remains unresolved; the same-state L2/KG finite-box map passes but continuum H^(-1/2) domain remains unresolved; the declared ordering family is sensitive; no quantum mass/Kretschmann operator is selected.",
-  "claim_baseline": "verification/ks_black_hole_claims.json"
+  "note": "The KS black-hole quantum audit is reproducible on branch, PR, and main. CI success preserves the intended scientific blockers: classical T/Y clock admissibility but unresolved quantum multi-clock domain; finite-box same-state L2/KG isometry but unresolved continuum H^(-1/2) domain; resolved factor-ordering sensitivity in the declared family; no selected domain-safe quantum mass/Kretschmann operator; inverse-radius regulator failure.",
+  "claim_baseline": "verification/ks_black_hole_claims.json",
+  "pull_request": {
+    "number": 14,
+    "head_sha": "fb3a7359d6dbbce2f4d1b24cd79ee9eed299cc14",
+    "ks_quantum_run_id": 35432139349,
+    "ks_quantum_conclusion": "success",
+    "physics_audit_run_id": 35432139387,
+    "physics_audit_conclusion": "success",
+    "classical_reproduce_run_id": 35432139329,
+    "classical_reproduce_conclusion": "success",
+    "positive_closure_run_id": 35432139354,
+    "positive_closure_conclusion": "success",
+    "ever_entered_run_id": 35432139331,
+    "ever_entered_conclusion": "success"
+  },
+  "merge_commit": "207db84ae3655b4d2256dab7484cba7b93030948",
+  "post_merge": {
+    "ks_quantum_run_id": 35432376736,
+    "ks_quantum_job_id": 105869149066,
+    "ks_quantum_conclusion": "success",
+    "artifact_id": 10580924455,
+    "artifact_sha256": "8212a6461e20f31d78480234efe770cad41a4f7ac5007187587ddf6225646238",
+    "physics_audit_run_id": 35432376626,
+    "physics_audit_conclusion": "success",
+    "classical_reproduce_run_id": 35432376624,
+    "classical_reproduce_conclusion": "success",
+    "ever_entered_run_id": 35432376691,
+    "ever_entered_conclusion": "success"
+  }
 }
