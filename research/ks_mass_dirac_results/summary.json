@@ -1,0 +1,185 @@
+{
+  "schema": 1,
+  "date": "2026-09-20",
+  "target": "Schwarzschild/Kantowski-Sachs physical mass, Y-clock and Kretschmann follow-up",
+  "mass_dirac": {
+    "status": "PARTIAL",
+    "finite_box_positive_mass_dirac_candidate": "PASS",
+    "positive_frequency_sector_preservation": "PASS_BY_CONSTRUCTION_AND_CONSERVED_EVOLUTION",
+    "finite_box_physical_KG_adjointness": "PASS",
+    "continuum_quadratic_form_closure": "PENDING",
+    "unique_ordering_selection": "PENDING",
+    "construction": {
+      "velocity": "V=(i/h)[H,X]",
+      "reference_mass": "M0=(1/4) exp(X/2) H (I+V) H exp(X/2)",
+      "dirac_transport": "M_D(T)=U(T) M0 U(T)^dagger",
+      "KG_map": "M_KG(T)=S M_D(T) S^(-1), S=sqrt(h/2) H^(-1/2)",
+      "principal_symbol": "mu=(1/4) exp(x) H(H+p) at T=0"
+    },
+    "reference_h02": {
+      "min_I_plus_velocity_eigenvalue": 0.0000016730261839237315,
+      "min_mass_matrix_eigenvalue": 0.0003135970306903525,
+      "mass_matrix_hermiticity_relative": 3.1825508611616994e-13,
+      "max_KG_adjoint_bilinear_residual": 1.2532018988614116e-13,
+      "max_L2_KG_mass_expectation_difference": 5.8477886960871416e-15,
+      "max_relative_mass_expectation_drift": 1.3389289676979388e-13,
+      "quantum_mass_initial": 0.019900916374262258,
+      "classical_center_mass": 0.016993670053891404
+    },
+    "semiclassical_h": [
+      0.4,
+      0.2,
+      0.1,
+      0.05
+    ],
+    "semiclassical_dx": [
+      0.08,
+      0.04,
+      0.02,
+      0.01
+    ],
+    "relative_initial_semiclassical_error": [
+      0.5076240982211744,
+      0.17107819035859873,
+      0.07198655854215263,
+      0.03500838658248617
+    ],
+    "semiclassical_error_decreases_with_h": true,
+    "box_diagnostic": [
+      {
+        "right": 12,
+        "mass": 0.019900914161962383
+      },
+      {
+        "right": 16,
+        "mass": 0.019900916374262258
+      },
+      {
+        "right": 24,
+        "mass": 0.01990091711928245
+      }
+    ],
+    "continuum_note": "The finite-box candidate is declared for downstream audits, but closability/closedness and the continuum self-adjoint operator represented by the positive quadratic form are not proven."
+  },
+  "y_clock": {
+    "status": "PARTIAL",
+    "same_Dirac_state_null_flux": "PASS",
+    "same_mass_observable_null_flux": "PASS",
+    "classical_admissibility": "PASS",
+    "deparametrized_inverse_pX_domain": "PENDING",
+    "coordinate": {
+      "Y": "T+x=-log(4r)",
+      "X": "x",
+      "pY": "p_T",
+      "pX": "p_x-p_T",
+      "constraint": "-p_X^2-2 p_X p_Y-exp(-2X)=0",
+      "Y_Hamiltonian": "K_Y=(p_X^2+exp(-2X))/(2 p_X)"
+    },
+    "same_state_flux": {
+      "max_null_norm_difference": 0.0002926441588472217,
+      "max_null_mass_difference": 0.0000042856308530396734,
+      "max_flux_imaginary_part": 5.139599011225231e-7
+    },
+    "inverse_pX_threshold_diagnostic": [
+      {
+        "right": 12,
+        "min_pX_eigenvalue": 0.000019196338641267087,
+        "max_inverse_pX_eigenvalue": 52093.26729891411,
+        "state_norm_pX_inverse": 174.08272909218414
+      },
+      {
+        "right": 16,
+        "min_pX_eigenvalue": 0.000004236252933280871,
+        "max_inverse_pX_eigenvalue": 236057.67071739156,
+        "state_norm_pX_inverse": 174.48857244922868
+      },
+      {
+        "right": 24,
+        "min_pX_eigenvalue": 5.584748128688122e-7,
+        "max_inverse_pX_eigenvalue": 1790591.0471828273,
+        "state_norm_pX_inverse": 174.9833609812555
+      },
+      {
+        "right": 32,
+        "min_pX_eigenvalue": 1.4185713141386662e-7,
+        "max_inverse_pX_eigenvalue": 7049345.986579349,
+        "state_norm_pX_inverse": 175.35632942149007
+      }
+    ],
+    "interpretation": "Same-Dirac-state T- versus null-Y-slice observables are consistent on the finite box, but a standalone Y-time Schrödinger operator remains zero-mode/domain sensitive because p_X^-1 is unbounded at the horizon threshold."
+  },
+  "kretschmann": {
+    "status": "FAIL",
+    "finding": "selected_mass_candidate_does_not_cure_explicit_radius_domain",
+    "regulator_decision": "FAIL",
+    "classical_target": "K=48 mu^2/r^6",
+    "positive_orderings": {
+      "mass_then_radius": "48 ||r^-3 M_D psi||^2",
+      "radius_then_mass": "48 ||M_D r^-3 psi||^2",
+      "balanced": "48 ||r^-3/2 M_D r^-3/2 psi||^2"
+    },
+    "evolved_T2": {
+      "right": [
+        12,
+        16,
+        24,
+        32
+      ],
+      "log10_K_mass_then_radius": [
+        30.45605778042798,
+        41.587873231759076,
+        64.97589292391461,
+        92.58112467744331
+      ],
+      "log10_K_radius_then_mass": [
+        38.37584766496722,
+        51.136363446085106,
+        77.39504493549299,
+        104.1302070077155
+      ],
+      "log10_K_balanced": [
+        37.85824060423667,
+        50.62084065297282,
+        76.88084973900135,
+        103.61643409554162
+      ],
+      "total_log10_growth": {
+        "mass_then_radius": 62.12506689701533,
+        "radius_then_mass": 65.75435934274827,
+        "balanced": 65.75819349130495
+      }
+    },
+    "mass_applied_threshold_overlap": [
+      {
+        "right": 16,
+        "dx": 0.04,
+        "abs": 0.020760665732615424
+      },
+      {
+        "right": 24,
+        "dx": 0.04,
+        "abs": 0.37240777160968436
+      },
+      {
+        "right": 24,
+        "dx": 0.02,
+        "abs": 0.37304911403487556
+      }
+    ],
+    "mass_applied_threshold_overlap_status": "NONZERO_NUMERICALLY_RESOLVED",
+    "domain_decision": {
+      "mass_then_radius": "FAIL for the audited packet if the nonzero mass-applied threshold overlap persists in the continuum.",
+      "radius_then_mass": "FAIL because the explicit r^-3 state is outside the current mass-operator domain under the established tail asymptotic.",
+      "balanced": "FAIL because the explicit r^-3/2 intermediate state is outside the current form domain.",
+      "nonlocal_escape_hatch": "A genuinely nonlocal relational curvature observable could contain cancellations not represented by these explicit-radius positive forms; this audit does not rule that out."
+    }
+  },
+  "workflow": {
+    "run_id": 35451825888,
+    "job_id": 105920207480,
+    "artifact_id": 10586827102,
+    "artifact_sha256": "81c4ee03ad19f3bd4729cf69ec658acac07f3183bbcfd990d49a18bcd75cf45e",
+    "conclusion": "success"
+  },
+  "scope_note": "A concrete finite-box positive-frequency/physical-KG mass Dirac candidate is now declared, and the same Dirac state agrees across T and null-Y slices. Continuum mass closure and Y inverse-momentum domain remain open. The three audited positive Kretschmann forms fail regulator/domain removal; no black-hole singularity-resolution or persistence claim is promoted."
+}
