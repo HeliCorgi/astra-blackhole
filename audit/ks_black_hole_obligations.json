@@ -145,6 +145,13 @@
             "mass_dirac.continuum_quadratic_form_closure": "PENDING",
             "mass_dirac.semiclassical_error_decreases_with_h": true
           }
+        },
+        {
+          "path": "research/ks_affine_mass_obstruction_results/summary.json",
+          "expect": {
+            "quantum_affine_covariance_no_go.status": "PASS",
+            "mass_continuum_form.status": "PENDING"
+          }
         }
       ],
       "kill_if": [
@@ -152,7 +159,7 @@
         "continuum_mass_form_not_closable",
         "mass_semiclassical_limit_fails"
       ],
-      "note": "A concrete finite-box candidate M_D(T)=U M0 U† is declared for downstream audits; its same-Wigner semiclassical error decreases over the audited h-family, while continuum closure and unique ordering selection remain open."
+      "note": "A concrete finite-box candidate M_D(T)=U M0 U† is declared for downstream audits; its same-Wigner semiclassical error decreases over the audited h-family, while continuum closure and unique ordering selection remain open. Exact affine covariance is excluded as an ordering-uniqueness criterion on the semibounded positive-frequency sector; this does not settle q_M closability."
     },
     {
       "id": "inner_product.ks_mass_curvature_domain",
