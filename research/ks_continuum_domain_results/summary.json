@@ -1,0 +1,150 @@
+{
+  "Y_clock_implication": {
+    "finding": "The same null-channel degeneracy explains why inverse-p_X is unbounded in the continuum even though selected finite-box packet norms can remain finite.",
+    "status": "PENDING"
+  },
+  "continuum_velocity": {
+    "bound": "-I <= V <= I because |P|<=H and ker(H)=0",
+    "coercive_gap_decision": "NO_UNIFORM_POSITIVE_GAP_ESTABLISHED",
+    "consequence": "I+V is a bounded positive operator/form in the continuum; finite-box positivity is not the only evidence.",
+    "definition": "V=(i/h)[H,X] on a common core, equivalently the bounded Sylvester solution H V+V H=2P",
+    "finite_box_controls": [
+      {
+        "dx": 0.08,
+        "h": 0.2,
+        "left": -4.0,
+        "max_velocity_eigenvalue": 0.9997213835591899,
+        "min_I_plus_velocity_eigenvalue": 0.00027861644081117465,
+        "min_discrete_H2_minus_P2_eigenvalue": 7.257214216021143e-06,
+        "min_velocity_eigenvalue": -0.9997213835591888,
+        "n": 149,
+        "right": 8.0,
+        "sylvester_relative_residual": 5.666614783838682e-14
+      },
+      {
+        "dx": 0.08,
+        "h": 0.2,
+        "left": -4.0,
+        "max_velocity_eigenvalue": 0.999953149146799,
+        "min_I_plus_velocity_eigenvalue": 4.685085320044191e-05,
+        "min_discrete_H2_minus_P2_eigenvalue": 1.3670175135445181e-07,
+        "min_velocity_eigenvalue": -0.9999531491467996,
+        "n": 199,
+        "right": 12.0,
+        "sylvester_relative_residual": 8.99227191576397e-14
+      },
+      {
+        "dx": 0.08,
+        "h": 0.2,
+        "left": -4.0,
+        "max_velocity_eigenvalue": 0.9999863484417244,
+        "min_I_plus_velocity_eigenvalue": 1.3651558275262765e-05,
+        "min_discrete_H2_minus_P2_eigenvalue": 8.584092858715001e-09,
+        "min_velocity_eigenvalue": -0.9999863484417247,
+        "n": 249,
+        "right": 16.0,
+        "sylvester_relative_residual": 1.2888864723656835e-13
+      }
+    ],
+    "gap_decreases_with_box": true,
+    "semigroup_formula": "V=2 int_0^infinity exp(-tH) P exp(-tH) dt",
+    "status": "PASS"
+  },
+  "exact_continuum_spectral_representation": {
+    "energy": "E=h k",
+    "generalized_eigenfunction": "phi_k=sqrt(2 k sinh(pi k))/pi K_{i k}(exp(-x)/h), k>0",
+    "spectrum": "continuous [0,infinity), no L2 zero mode",
+    "status": "PASS",
+    "threshold": "phi_k/k -> sqrt(2/pi) K_0(exp(-x)/h)"
+  },
+  "limitations": [
+    "The normalized Liouville spectral representation and threshold expansion control the positive-frequency KS model only.",
+    "The finite matrices are numerical checks of the analytic commutator argument, not a proof of mass-form closability.",
+    "No quantum Kretschmann operator or black-hole singularity conclusion is promoted by this audit."
+  ],
+  "mass_continuum_form": {
+    "candidate": "q_M[psi]=(1/4)<H exp(X/2)psi,(I+V)H exp(X/2)psi>",
+    "dense_core": "C_c^infinity(R) gives finite q_M",
+    "status": "PENDING",
+    "what_is_not_proven": "Closability/closedness of the full weighted nonlocal form and the associated self-adjoint mass operator.",
+    "what_is_now_proven": "The middle factor I+V is continuum-positive and bounded by 2.",
+    "why_finite_box_gap_is_insufficient": "min spec(I+V) decreases toward zero under box expansion, consistent with the asymptotic null/left-moving channel; no coercive lower bound is available to transfer closure from an unweighted graph norm."
+  },
+  "model": "Vacuum KS positive-frequency Liouville Hamiltonian H=sqrt(-h^2 d_x^2+exp(-2x)) on L2(R,dx)",
+  "omitted_variables": [
+    "matter",
+    "inhomogeneous modes",
+    "environment"
+  ],
+  "positive_frequency_KG_completion": {
+    "ordinary_L2_warning": "H^(-1/2) is unbounded on L2; not every KG amplitude produced by the completion is an ordinary L2 function.",
+    "same_state_map": "S=sqrt(h/2) H^(-1/2) extends by completion to a unitary L2 -> H_KG^+ map",
+    "space": "completion of D(H^(1/2)) in ||Psi||_KG^2=(2/h)||H^(1/2)Psi||_2^2",
+    "spectral_domain_rule": "D(H^a)={f: integral (h k)^(2a)|f_tilde(k)|^2 dk < infinity}; negative a uses the same spectral rule.",
+    "status": "PASS"
+  },
+  "reference_packet_threshold": {
+    "B0_controls": [
+      {
+        "B0_imag": -0.014357940932256785,
+        "B0_real": 0.0009360161408040399,
+        "abs_B0": 0.014388418746687231,
+        "dx": 0.01,
+        "left": -4.0,
+        "right": 8.0
+      },
+      {
+        "B0_imag": -0.014357940932256799,
+        "B0_real": 0.0009360161408040607,
+        "abs_B0": 0.014388418746687245,
+        "dx": 0.005,
+        "left": -6.0,
+        "right": 10.0
+      },
+      {
+        "B0_imag": -0.014357940932256813,
+        "B0_real": 0.0009360161408040746,
+        "abs_B0": 0.01438841874668726,
+        "dx": 0.0025,
+        "left": -8.0,
+        "right": 12.0
+      }
+    ],
+    "B0_nonzero": true,
+    "H_minus_s_threshold_tests": [
+      {
+        "finite_at_zero_for_generic_nonzero_B0": true,
+        "integrand_power": 1.0,
+        "s": 0.5
+      },
+      {
+        "finite_at_zero_for_generic_nonzero_B0": true,
+        "integrand_power": 0.0,
+        "s": 1.0
+      },
+      {
+        "finite_at_zero_for_generic_nonzero_B0": false,
+        "integrand_power": -1.0,
+        "s": 1.5
+      },
+      {
+        "finite_at_zero_for_generic_nonzero_B0": false,
+        "integrand_power": -2.0,
+        "s": 2.0
+      }
+    ],
+    "decision": "The reference packet is in ordinary-L2 D(H^-1/2) and D(H^-1), while a generic nonzero-B0 state reaches a logarithmic threshold obstruction at H^-3/2.",
+    "h": 0.2,
+    "packet": "x0=2, p0=-1, sigma=sqrt(h), chirp=0",
+    "relative_abs_B0_spread": 2.0495858239040685e-15,
+    "spectral_amplitude": "c(k)=B0 k+O(k^3) at k->0"
+  },
+  "reproducible_command": "python research/ks_continuum_domain_audit.py --out artifacts/ks-continuum/summary.json",
+  "retained_variables": [
+    "x",
+    "positive-frequency T branch"
+  ],
+  "schema": 1,
+  "status": "PARTIAL",
+  "units": "dimensionless repository conventions"
+}
