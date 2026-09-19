@@ -68,7 +68,7 @@ Cadabra 2.5.14 と Maxima/ctensor 5.46.0 の2独立backendを実行し、Bianchi
 
 Bianchi IXはブラックホール内部そのものではない。BH singularity interpretationへ戻る経路を曖昧にしないため、`known_limits.schwarzschild_ks_bridge` をblocking obligationとして追加する。
 
-このgateではSchwarzschild内部からKantowski–Sachsへの古典写像、既存KS WDW constraintへの正準変換、同じ物理状態/内積、4次元曲率observableを明示する。通るまでBianchi IXの結果をBH特異点解消・持続の主張へ昇格しない。詳細は `docs/BLACK_HOLE_RETURN_GATE_ja.md`。
+Schwarzschild内部→Kantowski–Sachsの古典写像と既存KS WDW constraintへの正準変換はMaxima/ctensorとCadabraで再導出し、`known_limits.schwarzschild_ks_bridge` はPASSした。共有変数として areal radius `r=(1/4)exp(-x-T)` がSchwarzschildの面積半径そのものに一致し、classical mass Dirac observableも固定した。詳細は `docs/SCHWARZSCHILD_KS_BRIDGE_ja.md`。量子状態/内積・4次元曲率演算子・clock/order/domainは別gateとして残る。
 
 ## Numerical regulator checker
 
@@ -99,7 +99,6 @@ lake env lean -DwarningAsError=true Audit.lean
 
 ## 現在未達
 
-- Schwarzschild内部→Kantowski–Sachs bridge の独立CAS再導出と既存KS WDW変数への照合
 - clock Poisson bracket / monotonicity の機械監査
 - timeless induced physical inner product
 - continuum operator domain / self-adjoint extension監査
