@@ -22,7 +22,9 @@
     "existing_box_mean_x_tolerance": 0.0003,
     "finite_box_same_state_map_error_scale": "<1.3e-14",
     "mass_weyl6_dx02_relative_drift": 0.01691577704216439,
-    "mass_symmetric_dx02_relative_drift": 0.04789957536093952
+    "mass_symmetric_dx02_relative_drift": 0.04789957536093952,
+    "mass_kernel_family_best_positive_frequency_branch_residual": 0.9912981395738648,
+    "factor_ordering_symbolic_unitary_map_residual": "0"
   },
   "scope_note": "The CI success means the audit reproduced its intended PASS/PARTIAL/FAIL findings. It does not mean the blocked physical claims passed.",
   "branch_head": "04e9cb5b63c945512f1326b1e11ee1562b91091f",
@@ -33,7 +35,7 @@
     "REGULATOR-UNSTABLE",
     "PHYSICAL INTERPRETATION NOT IDENTIFIED"
   ],
-  "note": "The KS black-hole quantum audit is reproducible on branch, PR, and main. CI success preserves the intended scientific blockers: classical T/Y clock admissibility but unresolved quantum multi-clock domain; finite-box same-state L2/KG isometry but unresolved continuum H^(-1/2) domain; resolved factor-ordering sensitivity in the declared family; no selected domain-safe quantum mass/Kretschmann operator; inverse-radius regulator failure.",
+  "note": "Base KS quantum audit remains reproducible. Refinement adds a symbolic zero-check for the ordering-family unitary map and a positive-frequency-sector test for the local constraint-kernel mass family. The latter has best relative residual about 0.991, so those tested local orderings are not adopted as observables of the selected T-clock positive-frequency Hilbert sector. Physical interpretation remains blocked.",
   "claim_baseline": "verification/ks_black_hole_claims.json",
   "pull_request": {
     "number": 14,
@@ -62,5 +64,34 @@
     "classical_reproduce_conclusion": "success",
     "ever_entered_run_id": 35432376691,
     "ever_entered_conclusion": "success"
+  },
+  "refinement": {
+    "branch": "audit/ks-quantum-refinement",
+    "base_main": "239ea147ede4258454f31d0b6dae3e3969fa6a96",
+    "head_sha": "71cb63dda008f2e462389935b9e409653441d62d",
+    "ci": {
+      "run_id": 35435254012,
+      "job_id": 105876704605,
+      "conclusion": "success",
+      "artifact_id": 10581373210,
+      "artifact_sha256": "e94f7e546b884984539b1c2702f08a5abb5e4b830cb1e581d9c458c2f624ebc5"
+    },
+    "additions": {
+      "factor_ordering_symbolic_unitary_map_residual": "0",
+      "mass_kernel_family_best_positive_frequency_branch_residual": 0.9912981395738648,
+      "mass_branch_tested_d": [
+        "0",
+        "i/4",
+        "i/2",
+        "3i/4"
+      ],
+      "flat_L2_adjoint_conditions": [
+        "Im(d)=1/4 from d_x coefficient",
+        "Im(d)=3/4 from d_T coefficient",
+        "Re(d)=0 and Im(d)=1/2 from identity term"
+      ],
+      "regression_policy": "Preserve scientific classification and broad residual scale; do not pin platform-sensitive ~1e-9 tail digits."
+    },
+    "interpretation": "The refinement strengthens the negative mass-observable evidence: exact full-WDW constraint-kernel preservation does not preserve the selected positive-frequency sector for the tested local family. It does not turn that family into a universal no-go theorem."
   }
 }
