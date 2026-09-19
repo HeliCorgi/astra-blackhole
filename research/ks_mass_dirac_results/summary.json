@@ -24,7 +24,9 @@
       "max_L2_KG_mass_expectation_difference": 5.8477886960871416e-15,
       "max_relative_mass_expectation_drift": 1.3389289676979388e-13,
       "quantum_mass_initial": 0.019900916374262258,
-      "classical_center_mass": 0.016993670053891404
+      "classical_center_mass": 0.016993670053891404,
+      "classical_same_wigner_ensemble_mass": 0.018912347510911656,
+      "relative_error_vs_classical_same_wigner_ensemble": 0.05227108177767126
     },
     "semiclassical_h": [
       0.4,
@@ -37,12 +39,6 @@
       0.04,
       0.02,
       0.01
-    ],
-    "relative_initial_semiclassical_error": [
-      0.5076240982211744,
-      0.17107819035859873,
-      0.07198655854215263,
-      0.03500838658248617
     ],
     "semiclassical_error_decreases_with_h": true,
     "box_diagnostic": [
@@ -59,7 +55,20 @@
         "mass": 0.01990091711928245
       }
     ],
-    "continuum_note": "The finite-box candidate is declared for downstream audits, but closability/closedness and the continuum self-adjoint operator represented by the positive quadratic form are not proven."
+    "continuum_note": "The finite-box candidate is declared for downstream audits, but closability/closedness and the continuum self-adjoint operator represented by the positive quadratic form are not proven.",
+    "relative_error_vs_classical_center": [
+      0.5076240982211744,
+      0.17107819035859873,
+      0.07198655854215263,
+      0.03500838658248617
+    ],
+    "relative_error_vs_classical_same_wigner_ensemble": [
+      0.20279024654958522,
+      0.05227108177767126,
+      0.01696508165110444,
+      0.008255523162455036
+    ],
+    "semiclassical_comparator": "Same Gaussian Wigner ensemble under the classical mass Dirac observable; packet-center mass is retained only as a separate diagnostic."
   },
   "y_clock": {
     "status": "PARTIAL",
@@ -175,11 +184,11 @@
     }
   },
   "workflow": {
-    "run_id": 35451825888,
-    "job_id": 105920207480,
-    "artifact_id": 10586827102,
-    "artifact_sha256": "81c4ee03ad19f3bd4729cf69ec658acac07f3183bbcfd990d49a18bcd75cf45e",
+    "run_id": 35456034126,
+    "job_id": 105931343550,
+    "artifact_id": 10587838824,
+    "artifact_sha256": "af821e8f0716106b45ff4699dff7d72c494b2cf75fd69f787c4a920d36e303cd",
     "conclusion": "success"
   },
-  "scope_note": "A concrete finite-box positive-frequency/physical-KG mass Dirac candidate is now declared, and the same Dirac state agrees across T and null-Y slices. Continuum mass closure and Y inverse-momentum domain remain open. The three audited positive Kretschmann forms fail regulator/domain removal; no black-hole singularity-resolution or persistence claim is promoted."
+  "scope_note": "A concrete finite-box positive-frequency/physical-KG mass Dirac candidate is declared, with same-Wigner semiclassical error decreasing from about 20.3% to 0.83% over h=.4→.05 under the declared grid sequence. The same Dirac state agrees across T and null-Y slices. Continuum mass closure and Y inverse-momentum domain remain open. The three audited positive Kretschmann forms fail regulator/domain removal; no black-hole singularity-resolution or persistence claim is promoted."
 }
