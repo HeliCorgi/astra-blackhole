@@ -268,14 +268,14 @@ python verify_predictors.py
 古典Schwarzschild→Kantowski–Sachs bridgeの次を、BH専用の量子gateとして分離した。
 
 - **clock = PARTIAL**：repoの (T) と (Y=x+T=-\log(4r)) は古典的に単調。xは反射点 (p_x=0) でglobal clockにならない。Y-clock量子化は (p_X^{-1}) を要求し、domainが未指定。
-- **same-state L2↔KG = PARTIAL**：finite boxのpositive-frequency sectorでは (Psi_{KG}=\sqrt{h/2},H^{-1/2}\chi_{L2}) によりKG norm・mapped x/r期待値が約1e-14で一致。ただしcontinuumのzero-energy thresholdで (H^{-1/2}) domainが未解決。
+- **same-state L2↔KG = PASS**：finite boxのsame-state mapに加え、continuumでは positive-frequency KG space を energy norm の完成として定義し、`S=sqrt(h/2) H^(-1/2)` を L2 からその完成空間へのunitary mapとして延長できる。ordinary-L2上の `H^(-1/2)` 自体はunboundedだが、reference Gaussianはthreshold `c(k)=O(k)` によりそのordinary-L2 domainにも入る。
 - **factor ordering = FAIL / ORDERING-SENSITIVE**：明示したSturm–Liouville ordering familyで最大 (Delta\langle x\rangle\approx0.526)。既存box数値許容差3e-4を大きく超える。
 - **mass Dirac candidate = PARTIAL**：局所familyは棄却した後、positive-frequency sector内で `M0=(1/4)e^(X/2)H(1+V)He^(X/2)`, `M_D(T)=U M0 U†` を宣言。finite boxではpositive/Hermitian、physical-KG adjoint、mass expectation保存がPASSし、semiclassical errorは h=.4→.05 で 0.508→0.035へ低下。ただしcontinuum quadratic-form closureとordering uniquenessは未証明。
 - **Y-clock same-state = PASS / deparametrized domain = PENDING**：同じDirac stateと同じmass observableのKG fluxはT-sliceとnull Y-sliceで一致するが、standalone Y-time Hamiltonianの `p_X^-1` はbox拡大でzero-modeへ向かう。
 - **selected-mass Kretschmann = FAIL**：`48||r^-3 M_D ψ||²`, `48||M_D r^-3 ψ||²`, balanced formの3候補はright=12→32で60桁超のbox growthを示し、mass-applied threshold overlapも非零。explicit-radius positive formsではregulator/domain問題が残る。
 - **inverse-radius regulator = FAIL**：既存q=2,4,6 tail監査の有限regulator removal不合格を保持。
 
-したがって現在のKS専用claimは `MODEL-INTERNAL NUMERICAL RESULT`, `ORDERING-SENSITIVE`, `REGULATOR-UNSTABLE`, `PHYSICAL INTERPRETATION NOT IDENTIFIED` のまま。[mass/Y-clock/Kretschmann follow-up](docs/KS_PHYSICAL_MASS_Y_CLOCK_CURVATURE_AUDIT_ja.md)で詳細を管理する。有限箱の値からBH特異点解消／持続へ昇格しない。
+したがって現在のKS専用claimは `MODEL-INTERNAL NUMERICAL RESULT`, `ORDERING-SENSITIVE`, `REGULATOR-UNSTABLE`, `PHYSICAL INTERPRETATION NOT IDENTIFIED` のまま。 continuum threshold / KG completion の詳細は [KS continuum threshold/domain audit](docs/KS_CONTINUUM_DOMAIN_AUDIT_ja.md)。[mass/Y-clock/Kretschmann follow-up](docs/KS_PHYSICAL_MASS_Y_CLOCK_CURVATURE_AUDIT_ja.md)で詳細を管理する。有限箱の値からBH特異点解消／持続へ昇格しない。
 
 
 ### Schwarzschild interior → Kantowski–Sachs classical bridge：PASS
