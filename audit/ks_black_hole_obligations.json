@@ -34,43 +34,80 @@
     {
       "id": "clock.ks_T_and_areal",
       "gate": "CLOCK",
-      "status": "PARTIAL",
-      "blocking": true,
-      "requirement": "Verify clock Poisson brackets, branch monotonicity and at least one alternative clock, then identify the quantum-domain requirements of the alternative deparametrization.",
+      "status": "PASS",
+      "blocking": false,
+      "requirement": "Verify that T and the areal-radius variable Y=x+T are admissible classical clocks on the target branch and that the same Dirac state gives consistent KG flux on T=const and Y=const slices.",
       "evidence": [
         {
           "path": "research/ks_black_hole_audit_results/summary.json",
           "expect": {
-            "clock.status": "PARTIAL",
             "clock.classical_T_clock": "PASS",
             "clock.classical_areal_clock_Y": "PASS"
+          }
+        },
+        {
+          "path": "research/ks_mass_dirac_results/summary.json",
+          "expect": {
+            "y_clock.same_Dirac_state_null_flux": "PASS",
+            "y_clock.same_mass_observable_null_flux": "PASS"
+          }
+        }
+      ],
+      "note": "This closes classical/same-state slice admissibility, not an independently deparametrized Y-time quantum theory."
+    },
+    {
+      "id": "clock.ks_Y_inverse_pX_domain",
+      "gate": "CLOCK",
+      "status": "PENDING",
+      "blocking": true,
+      "requirement": "Define the continuum domain/zero-mode prescription for the deparametrized Y-clock Hamiltonian K_Y=(p_X^2+exp(-2X))/(2p_X) and compare the independently quantized Y-clock theory with the same Dirac state.",
+      "evidence": [
+        {
+          "path": "research/ks_mass_dirac_results/summary.json",
+          "expect": {
+            "y_clock.deparametrized_inverse_pX_domain": "PENDING"
           }
         }
       ],
       "kill_if": [
-        "T_clock_bracket_vanishes_on_target_branch",
-        "quantum_result_promoted_without_multi_clock_domain"
-      ]
+        "inverse_pX_zero_mode_has_no_physical_domain",
+        "independent_Y_clock_changes_same_Dirac_observables_materially"
+      ],
+      "note": "The finite-box p_X minimum approaches zero and ||p_X^-1|| grows rapidly under box expansion, although the audited packet-specific inverse norm remains finite."
     },
     {
       "id": "inner_product.ks_positive_frequency",
       "gate": "INNER_PRODUCT_DOMAIN",
-      "status": "PARTIAL",
-      "blocking": true,
-      "requirement": "Map the same positive-frequency state between the L2 and KG/induced-inner-product representations and state the continuum domain of H^(±1/2).",
+      "status": "PASS",
+      "blocking": false,
+      "requirement": "Map the same positive-frequency finite-box state and observables between the L2 and KG representations using the explicit H^(±1/2) isometry.",
       "evidence": [
         {
           "path": "research/ks_black_hole_audit_results/summary.json",
           "expect": {
-            "inner_product.status": "PARTIAL",
-            "inner_product.finite_box_positive_frequency_same_state_map": "PASS",
+            "inner_product.finite_box_positive_frequency_same_state_map": "PASS"
+          }
+        }
+      ],
+      "note": "Finite-box KG norm and mapped x/r observables agree to numerical precision."
+    },
+    {
+      "id": "inner_product.ks_continuum_completion",
+      "gate": "INNER_PRODUCT_DOMAIN",
+      "status": "PENDING",
+      "blocking": true,
+      "requirement": "Specify the continuum physical KG/induced Hilbert completion and domains of H^(±1/2) at the zero-energy threshold.",
+      "evidence": [
+        {
+          "path": "research/ks_black_hole_audit_results/summary.json",
+          "expect": {
             "inner_product.continuum_H_minus_half_domain": "PENDING"
           }
         }
       ],
       "kill_if": [
-        "same_scalar_field_used_as_L2_state_without_representation_map",
-        "H_minus_half_domain_unspecified"
+        "H_minus_half_domain_unspecified",
+        "same_state_map_not_defined_on_target_continuum_state"
       ]
     },
     {
@@ -94,25 +131,49 @@
       ]
     },
     {
-      "id": "inner_product.ks_mass_curvature_domain",
+      "id": "inner_product.ks_mass_dirac_candidate",
       "gate": "INNER_PRODUCT_DOMAIN",
       "status": "PARTIAL",
       "blocking": true,
-      "requirement": "Construct or reject candidate quantum mass/Kretschmann orderings by constraint-kernel preservation, physical adjointness and continuum operator/quadratic-form domains.",
+      "requirement": "Construct a positive-frequency-preserving mass Dirac observable that is symmetric in the physical KG representation, has the classical Schwarzschild mass principal symbol and a controlled continuum quadratic-form domain.",
       "evidence": [
         {
-          "path": "research/ks_black_hole_audit_results/summary.json",
+          "path": "research/ks_mass_dirac_results/summary.json",
           "expect": {
-            "mass_curvature_observable.status": "PARTIAL",
-            "mass_curvature_observable.selected_quantum_mass_operator": false,
-            "mass_curvature_observable.selected_quantum_kretschmann_operator": false
+            "mass_dirac.finite_box_positive_mass_dirac_candidate": "PASS",
+            "mass_dirac.finite_box_physical_KG_adjointness": "PASS",
+            "mass_dirac.continuum_quadratic_form_closure": "PENDING",
+            "mass_dirac.semiclassical_error_decreases_with_h": true
           }
         }
       ],
       "kill_if": [
-        "quantum_curvature_claim_without_selected_operator",
-        "operator_or_quadratic_form_domain_unspecified"
-      ]
+        "mass_candidate_loses_physical_KG_adjointness",
+        "continuum_mass_form_not_closable",
+        "mass_semiclassical_limit_fails"
+      ],
+      "note": "A concrete finite-box candidate M_D(T)=U M0 U† is declared for downstream audits; continuum closure and unique ordering selection remain open."
+    },
+    {
+      "id": "inner_product.ks_mass_curvature_domain",
+      "gate": "INNER_PRODUCT_DOMAIN",
+      "status": "FAIL",
+      "blocking": true,
+      "requirement": "Using the declared mass Dirac candidate, identify at least one domain-safe positive quantum Kretschmann ordering with regulator-stable quadratic form on the audited state.",
+      "evidence": [
+        {
+          "path": "research/ks_mass_dirac_results/summary.json",
+          "expect": {
+            "kretschmann.status": "FAIL",
+            "kretschmann.finding": "selected_mass_candidate_does_not_cure_explicit_radius_domain"
+          }
+        }
+      ],
+      "kill_if": [
+        "no_domain_safe_selected_Kretschmann_form",
+        "explicit_radius_form_diverges_under_box_removal"
+      ],
+      "note": "The three declared positive forms all grow monotonically by more than 60 log10 decades from right=12 to 32 at T=2. FAIL is scoped to these explicit-radius forms and is not a no-go theorem for every nonlocal relational curvature observable."
     },
     {
       "id": "regulator.ks_curvature_tail",
@@ -126,11 +187,19 @@
           "expect": {
             "full_unbounded_moment_finite_convergence": "FAILED for q=2,4,6 in this regulator study; no finite value reported"
           }
+        },
+        {
+          "path": "research/ks_mass_dirac_results/summary.json",
+          "expect": {
+            "kretschmann.regulator_decision": "FAIL",
+            "kretschmann.mass_applied_threshold_overlap_status": "NONZERO_NUMERICALLY_RESOLVED"
+          }
         }
       ],
       "kill_if": [
         "inverse_radius_moment_does_not_converge"
-      ]
+      ],
+      "note": "The original inverse-radius tail audit fails, and the selected mass candidate does not restore regulator stability for the three audited positive Kretschmann forms."
     },
     {
       "id": "known_limits.schwarzschild_ks_bridge",
@@ -150,13 +219,22 @@
     {
       "id": "known_limits.semiclassical",
       "gate": "KNOWN_LIMIT",
-      "status": "PENDING",
+      "status": "PARTIAL",
       "blocking": true,
-      "requirement": "Demonstrate a common-state semiclassical limit for the selected clock, inner product, ordering and mass/curvature observable.",
-      "evidence": [],
+      "requirement": "Demonstrate a common-state semiclassical limit for the selected clock, physical inner product, ordering and mass/curvature observables.",
+      "evidence": [
+        {
+          "path": "research/ks_mass_dirac_results/summary.json",
+          "expect": {
+            "mass_dirac.semiclassical_error_decreases_with_h": true
+          }
+        }
+      ],
       "kill_if": [
-        "semiclassical_limit_mismatch"
-      ]
+        "mass_semiclassical_trend_reverses",
+        "selected_curvature_observable_has_no_semiclassical_domain"
+      ],
+      "note": "The declared mass candidate approaches the classical packet-center mass under an h-scaled grid sequence, but the clock/domain/curvature parts of a common-state semiclassical limit remain incomplete."
     },
     {
       "id": "numerical.ks_quantum_audit",
@@ -169,6 +247,22 @@
           "path": "verification/ks_quantum_audit_verified_run.json",
           "expect": {
             "ci.conclusion": "success"
+          }
+        }
+      ]
+    },
+    {
+      "id": "numerical.ks_mass_followup",
+      "gate": "NUMERICAL",
+      "status": "PASS",
+      "blocking": false,
+      "requirement": "Reproduce the physical mass candidate, same-state Y-clock flux and selected-mass Kretschmann audit while preserving scoped PARTIAL/FAIL decisions.",
+      "evidence": [
+        {
+          "path": "verification/ks_mass_dirac_verified_run.json",
+          "expect": {
+            "workflow.conclusion": "success",
+            "kretschmann.status": "FAIL"
           }
         }
       ]
