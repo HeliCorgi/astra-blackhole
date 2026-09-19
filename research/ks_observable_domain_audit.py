@@ -143,7 +143,7 @@ def main():
 
     kernel=symbolic_kernel_check()
     symmetry=flat_l2_symmetry_no_solution()
-    scans=[finite_box_ordering_scan(.08),finite_box_ordering_scan(.04)]
+    scans=[finite_box_ordering_scan(.08),finite_box_ordering_scan(.04),finite_box_ordering_scan(.02)]
 
     tail=json.loads((ROOT/"research/wdw_tail_results/summary.json").read_text())
     if not tail["full_unbounded_moment_finite_convergence"].startswith("FAILED"):
