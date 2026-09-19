@@ -290,8 +290,9 @@ Schwarzschild/KS古典bridgeの後段を4 gateへ分けて実装した。
 
 4. **mass / Kretschmann**
    - classical (mu=\frac14e^{x-T}p_T(p_T-p_x)) からconstraint-kernel preserving local ordering familyを構成。
-   - そのfamily内ではflat kinematical L2 formal symmetry条件が衝突。
+   - そのfamily内ではflat kinematical L2 formal-adjoint条件が、d_x / d_T / identity coefficientからそれぞれ異なる Im(d) を要求して衝突。
+   - full WDW constraint kernelを保ってもpositive-frequency sectorは保たず、d=0,i/4,i/2,3i/4の最良branch residualは約0.991。
    - finite-box symmetric/Weyl candidateのmass expectation driftはdx=.02で約4.79% / 1.69%だが精密化で低下するためcontinuum no-goとはしない。
    - q=2,4,6 exponential-tail regulatorは既存監査で不合格。量子 (widehat\mu), (widehat K) は未選定。PARTIAL。
 
-次は、physical KG inner product上でmass observableのadjoint/domainを直接構成し、ordering原理を狭めた後、Y-clockのinverse-momentum domainとcommon-state semiclassical limitを監査する。
+次は、positive-frequency physical KG Hilbert spaceを保つnonlocal/Dirac mass observableを構成し、path-integral/symmetry原理でordering familyを狭めた後、Y-clockのinverse-momentum domainとcommon-state semiclassical limitを監査する。

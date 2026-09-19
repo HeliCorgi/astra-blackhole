@@ -26,7 +26,8 @@ sys.path.insert(0,str(ROOT/"research"))
 from wdw_model import Packet,WDWModel
 
 def symbolic_kernel_check():
-    T,x,h,d=sp.symbols("T x h d", real=True)
+    T,x,h=sp.symbols("T x h", real=True)
+    d=sp.symbols("d")
     psi=sp.Function("psi")(T,x)
     f=sp.exp(x-T)
     V=sp.exp(-2*x)
@@ -47,19 +48,19 @@ def symbolic_kernel_check():
     }
 
 def flat_l2_symmetry_no_solution():
-    # Formal-adjoint conditions for d=d_R+i d_I derived by integration by parts.
-    # Coefficients of d_x psi and d_T psi require d_I=1/4 and d_I=3/4.
-    dI_from_dx=.25
-    dI_from_dT=.75
+    # Write d=d_R+i d_I and expand the formal adjoint of
+    # f[-d_TT+d_Tx-2 i d d_T+2 i d d_x], f=exp(x-T).
+    # Independent derivative coefficients require mutually inconsistent values.
     return {
       "status":"NO_SOLUTION",
-      "ansatz":"same M_d family as the exact kernel-preserving identity",
+      "ansatz":"same M_d family as the exact constraint-kernel-preserving identity",
       "flat_L2_formal_adjoint_conditions":{
+        "from_d_T":"Im(d)=3/4",
         "from_d_x":"Im(d)=1/4",
-        "from_d_T":"Im(d)=3/4"
+        "from_identity_term":"Re(d)=0 and Im(d)=1/2"
       },
-      "contradiction":dI_from_dx!=dI_from_dT,
-      "interpretation":"Within this local O(h) ordering family, exact constraint-kernel preservation and formal symmetry in flat kinematical L2 cannot both hold. This is not a no-go theorem for the physical KG inner product or for nonlocal orderings."
+      "contradiction":True,
+      "interpretation":"No complex d satisfies all flat-kinematical-L2 formal-adjoint conditions within this local O(h) family. This is not a no-go theorem for the physical KG inner product or for nonlocal orderings."
     }
 
 def momentum_matrix(n,dx,h):
@@ -105,6 +106,44 @@ def mass_apply(m,P,T,v,ordering):
         return total/6
     raise ValueError(ordering)
 
+def kernel_mass_apply(m,P,T,v,d):
+    # Full-WDW local family restricted to negative-p_T initial data:
+    # p_T psi=-H psi and p_T p_x psi=-P H psi.
+    H_v=apply_H(m,v)
+    H2_v=m.U@(m.eigenvalues*(m.U.T@v))
+    PH_v=apply_P(m,P,H_v)
+    B=H2_v+PH_v-2*d*m.h*(H_v+apply_P(m,P,v))
+    return .25*np.exp(m.x-T)*B
+
+def kernel_family_branch_scan(dx=.04):
+    h=.2
+    m=WDWModel(h,left=-4.,right=16.,dx=dx)
+    P=momentum_matrix(len(m.x),m.dx,h)
+    chi0=Packet(h,.4).initial(m.x)
+    # Same-state KG scalar at the initial slice.
+    psi=math.sqrt(h/2)*(m.U@((m.U.T@chi0)/np.sqrt(m.energy)))
+    rows=[]
+    for b in (0.,.25,.5,.75):
+        d=1j*b
+        Bpsi=kernel_mass_apply(m,P,0.,psi,d)
+        # p_T(M psi): derivative of exp(-T) plus p_T acting on the
+        # T-independent operator B and on psi with p_T psi=-H psi.
+        Hpsi=apply_H(m,psi)
+        BHpsi=kernel_mass_apply(m,P,0.,Hpsi,d)
+        pT_M=1j*h*Bpsi-BHpsi
+        branch_res=pT_M+apply_H(m,Bpsi)
+        denom=max(np.linalg.norm(apply_H(m,Bpsi)),1e-30)
+        rows.append({
+          "d":f"{b}i",
+          "positive_frequency_branch_relative_residual":float(np.linalg.norm(branch_res)/denom)
+        })
+    return {
+      "dx":dx,
+      "rows":rows,
+      "best_relative_residual":min(x["positive_frequency_branch_relative_residual"] for x in rows),
+      "interpretation":"The exact constraint-kernel-preserving local family need not preserve the chosen negative-p_T/positive-frequency sector."
+    }
+
 def finite_box_ordering_scan(dx):
     h=.2
     m=WDWModel(h,left=-4.,right=16.,dx=dx)
@@ -144,6 +183,7 @@ def main():
     kernel=symbolic_kernel_check()
     symmetry=flat_l2_symmetry_no_solution()
     scans=[finite_box_ordering_scan(.08),finite_box_ordering_scan(.04),finite_box_ordering_scan(.02)]
+    branch_scan=kernel_family_branch_scan(.04)
 
     tail=json.loads((ROOT/"research/wdw_tail_results/summary.json").read_text())
     if not tail["full_unbounded_moment_finite_convergence"].startswith("FAILED"):
@@ -163,6 +203,7 @@ def main():
       "constraint_kernel_ordering_family":kernel,
       "flat_kinematical_L2_symmetry":symmetry,
       "finite_box_ordering_scan":scans,
+      "constraint_kernel_family_positive_frequency_scan":branch_scan,
       "continuum_domain":{
         "existing_tail_audit":q2,
         "continuum_tail_statement":continuum,
@@ -173,7 +214,7 @@ def main():
       "decision":{
         "quantum_mass_operator_selected":False,
         "quantum_kretschmann_operator_selected":False,
-        "reason":"The tested local orderings expose a constraint-symmetry/formal-symmetry conflict and finite-box ordering drift, while the continuum state domain is not controlled for the exponential factors."
+        "reason":"The tested local orderings expose a conflict with flat-L2 formal symmetry, do not automatically preserve the selected positive-frequency sector, show finite-box ordering drift, and still lack controlled continuum exponential-factor domains."
       },
       "scope_note":"PARTIAL blocks promotion of a quantum mass/Kretschmann claim in the current representation. The finite-box expectation drift decreases with grid refinement and is not treated as a continuum no-go. The unresolved points are the physical-inner-product adjoint/domain, ordering selection, and exponential-tail domains. This does not prove that no acceptable nonlocal Dirac-observable quantization exists."
     }
