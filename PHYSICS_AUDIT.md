@@ -120,7 +120,7 @@ Schwarzschild/Kantowski–Sachs側はBianchi IX timeless targetと別のmachine-
 - classical T / areal-radius clock admissibility: PASSだが、quantum multi-clock domainを含むclock gateはPARTIAL
 - finite-box positive-frequency L2 ↔ KG same-state map: PASSだがcontinuum (H^{-1/2}) domain未解決のためPARTIAL
 - explicit Sturm–Liouville factor-ordering family: FAIL / sensitive
-- quantum mass/Kretschmann ordering-domain: PARTIAL
+- quantum mass/Kretschmann ordering-domain: PARTIAL — local constraint-kernel family fails flat-L2 adjoint compatibility and does not preserve the selected positive-frequency sector in the tested finite-box realization
 - inverse-radius regulator removal: FAIL
 - common-state semiclassical limit: PENDING
 
