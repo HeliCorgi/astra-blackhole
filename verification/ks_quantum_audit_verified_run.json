@@ -4,11 +4,11 @@
   "target": "KS black-hole quantum audit",
   "branch": "audit/ks-quantum-gates",
   "ci": {
-    "run_id": 35431707894,
-    "job_id": 105867377340,
+    "run_id": 35431879924,
+    "job_id": 105867838086,
     "conclusion": "success",
-    "artifact_id": 10580259395,
-    "artifact_sha256": "15474089a90589dd777d4296313f97e4a448e710c23157af73fcfa39c74f34c0"
+    "artifact_id": 10580249531,
+    "artifact_sha256": "45aa77bde5dd4dbd6621b9767ecffa64bd339371c73b3276882c52fcec6b4d00"
   },
   "results": {
     "clock": "PARTIAL",
@@ -24,5 +24,14 @@
     "mass_weyl6_dx02_relative_drift": 0.01691577704216439,
     "mass_symmetric_dx02_relative_drift": 0.04789957536093952
   },
-  "scope_note": "The CI success means the audit reproduced its intended PASS/PARTIAL/FAIL findings. It does not mean the blocked physical claims passed."
+  "scope_note": "The CI success means the audit reproduced its intended PASS/PARTIAL/FAIL findings. It does not mean the blocked physical claims passed.",
+  "branch_head": "329a2caa5a0539dd4ab4d009a03eb412fc83e96c",
+  "regression": "PASS",
+  "claim_labels": [
+    "MODEL-INTERNAL NUMERICAL RESULT",
+    "ORDERING-SENSITIVE",
+    "REGULATOR-UNSTABLE",
+    "PHYSICAL INTERPRETATION NOT IDENTIFIED"
+  ],
+  "note": "The audit CI succeeded by reproducing the intended PARTIAL/FAIL findings. Classical T and Y clocks are admissible; finite-box same-state L2/KG mapping passes; the declared ordering family is sensitive; no physical-domain-safe quantum mass/Kretschmann operator is selected."
 }
