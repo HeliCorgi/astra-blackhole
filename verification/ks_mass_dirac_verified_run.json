@@ -5,11 +5,11 @@
   "branch_head": "0162cf010c74f775c3f4bc9223ae496a48b5e639",
   "workflow": {
     "name": "KS physical mass Dirac audit",
-    "run_id": 35451825888,
-    "job_id": 105920207480,
+    "run_id": 35452208465,
+    "job_id": 105921218917,
     "conclusion": "success",
-    "artifact_id": 10586827102,
-    "artifact_sha256": "81c4ee03ad19f3bd4729cf69ec658acac07f3183bbcfd990d49a18bcd75cf45e"
+    "artifact_id": 10587092256,
+    "artifact_sha256": "7eceda6cd7a252acd64a1ebb1715aa4ec1cccc16833c1ca02c05284940d38f61"
   },
   "mass_dirac": {
     "status": "PARTIAL",
@@ -52,5 +52,9 @@
   },
   "claim_boundary": "A finite-box positive-frequency/physical-KG mass Dirac candidate is declared for downstream audits, but no continuum-certified unique mass operator or domain-safe quantum Kretschmann operator is established.",
   "license_files_changed": false,
-  "lean_changed": false
+  "lean_changed": false,
+  "verified_scientific_head": "c3fd3fea21b57ed11280254576a616bdbe97602b",
+  "regression": "PASS",
+  "claim_compiler": "PASS against verification/ks_black_hole_claims.json",
+  "note": "The combined mass/Y-clock/Kretschmann workflow reproduces the declared finite-box mass candidate, same-Dirac-state Y-slice consistency, inverse-p_X domain warning and scoped Kretschmann FAIL. CI success means the audit reproduced these PASS/PARTIAL/FAIL decisions; it does not promote a black-hole singularity claim."
 }
