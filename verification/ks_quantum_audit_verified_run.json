@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "date": "2026-09-19",
+  "target": "KS black-hole quantum audit",
+  "branch": "audit/ks-quantum-gates",
+  "ci": {
+    "run_id": 35431707894,
+    "job_id": 105867377340,
+    "conclusion": "success",
+    "artifact_id": 10580259395,
+    "artifact_sha256": "15474089a90589dd777d4296313f97e4a448e710c23157af73fcfa39c74f34c0"
+  },
+  "results": {
+    "clock": "PARTIAL",
+    "inner_product": "PARTIAL",
+    "factor_ordering": "FAIL",
+    "factor_ordering_finding": "sensitive",
+    "mass_curvature_observable": "PARTIAL"
+  },
+  "headline_metrics": {
+    "factor_ordering_max_mean_x_spread": 0.5256305452623882,
+    "existing_box_mean_x_tolerance": 0.0003,
+    "finite_box_same_state_map_error_scale": "<1.3e-14",
+    "mass_weyl6_dx02_relative_drift": 0.01691577704216439,
+    "mass_symmetric_dx02_relative_drift": 0.04789957536093952
+  },
+  "scope_note": "The CI success means the audit reproduced its intended PASS/PARTIAL/FAIL findings. It does not mean the blocked physical claims passed."
+}
