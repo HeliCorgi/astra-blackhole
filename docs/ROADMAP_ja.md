@@ -357,3 +357,12 @@ positive-frequency Hilbert spaceでsemibounded \(H\ge0\) と非零positive self-
 現行finite-box \(M_0\) の [H,M0]=-ihM0 residualはright=8/12/16で約1.620842とO(1)のまま。これは負の対照で、mass closability FAILではない。Cavaglià–de Alfaro–Filippov (gr-qc/9508062) の別Schwarzschild量子化でもhalf-line supportがmass自己共役性を制約するが、そのdeficiency indicesをrepo operatorへ移植しない。
 
 **次は** \(T_M=(I+V)^{1/2}H e^{X/2}\) のclosability / adjoint-domainを直接解析する。mass_continuum_form=PENDING, Y-clock inverse-pX=PENDING, selected explicit-radius Kretschmann=FAILは変更しない。
+
+
+### 6q. hard scope ceiling: minisuperspaceはfull quantum GRではない
+
+KS/Bianchi IX/WDW系列に共通する最上位のscope制約をmachine-readable化した。現在の量子計算はfull field g_ij(x) を直接量子化せず、homogeneous symmetry reductionの後に有限自由度を量子化する。従ってlocal gravitational-wave modes、generic inhomogeneous modes、full local Hamiltonian/diffeomorphism constraints H_perp(x), H_i(x) とそのquantum algebra/anomaly closureはmodel外。
+
+これはordering/regulatorのような内部FAIL/PENDINGではなく、内部gateが全PASSでも消えない**hard scope ceiling**。claim compilerに `MINISUPERSPACE-SCOPED` を追加し、FULL QUANTUM GR / ANOMALY-FREE QUANTUM CONSTRAINT ALGEBRA / FULL LOCAL BLACK-HOLE QUANTUM DYNAMICSへの昇格を禁止する。
+
+full theoryへ近づける次段階は、minisuperspace内部の精密化だけではなく、inhomogeneous perturbative modesまたはmidi-superspaceを追加し、homogeneous sectorとのbackreactionとlocal constraintsを扱う別模型として進める。現在のmass/domain/history研究はreduced-model内部の問いとして継続する。
