@@ -275,7 +275,12 @@ python verify_predictors.py
 - **selected-mass Kretschmann = FAIL**：`48||r^-3 M_D ψ||²`, `48||M_D r^-3 ψ||²`, balanced formの3候補はright=12→32で60桁超のbox growthを示し、mass-applied threshold overlapも非零。explicit-radius positive formsではregulator/domain問題が残る。
 - **inverse-radius regulator = FAIL**：既存q=2,4,6 tail監査の有限regulator removal不合格を保持。
 
-したがって現在のKS専用claimは `MODEL-INTERNAL NUMERICAL RESULT`, `ORDERING-SENSITIVE`, `REGULATOR-UNSTABLE`, `PHYSICAL INTERPRETATION NOT IDENTIFIED` のまま。 continuum threshold / KG completion の詳細は [KS continuum threshold/domain audit](docs/KS_CONTINUUM_DOMAIN_AUDIT_ja.md)。[mass/Y-clock/Kretschmann follow-up](docs/KS_PHYSICAL_MASS_Y_CLOCK_CURVATURE_AUDIT_ja.md)で詳細を管理する。有限箱の値からBH特異点解消／持続へ昇格しない。
+したがって現在のKS専用claimは `MODEL-INTERNAL NUMERICAL RESULT`, `ORDERING-SENSITIVE`, `REGULATOR-UNSTABLE`, `PHYSICAL INTERPRETATION NOT IDENTIFIED` のまま。
+
+#### KS affine mass selection obstruction
+
+[詳細](docs/KS_AFFINE_MASS_OBSTRUCTION_AUDIT_ja.md)。classical reduced KSでは \(E=\sqrt{p_x^2+e^{-2x}}\), \(u=\operatorname{arsinh}(p_xe^x)\) が \(\{u,E\}=1\) を満たし、基準時計massは \(\mu_0=(E/4)e^u\), \(\{E,\mu_0\}=-\mu_0\)。しかしpositive-frequency sectorのsemibounded \(H\ge0\) 上で、非零positive self-adjoint massに U(t) M U(t)^dagger = exp(-t) M を全実時刻で厳密に要求すると、Q=log M がHのWeyl共役になり spec(H)=spec(H)+h s を全実sで要求して矛盾する。従って**exact affine covarianceはordering uniquenessの選択原理には使わない**。これはcurrent \(M_0\) の非closabilityを意味しないため、mass continuum formはPENDINGのまま。
+ continuum threshold / KG completion の詳細は [KS continuum threshold/domain audit](docs/KS_CONTINUUM_DOMAIN_AUDIT_ja.md)。[mass/Y-clock/Kretschmann follow-up](docs/KS_PHYSICAL_MASS_Y_CLOCK_CURVATURE_AUDIT_ja.md)で詳細を管理する。有限箱の値からBH特異点解消／持続へ昇格しない。
 
 
 ### Schwarzschild interior → Kantowski–Sachs classical bridge：PASS
