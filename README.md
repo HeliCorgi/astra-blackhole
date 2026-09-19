@@ -4,6 +4,8 @@
 
 **従来の物質研究は古典的モデル内の合成データによる試験です。追加したWDW研究も、時計と内積を限定した量子幾何学模型です。実在するブラックホール内部の観測、特異点の解消、量子重力の完成、新しい自然法則の発見を主張しません。**
 
+**Hard scope ceiling:** [minisuperspace scope audit](docs/MINISUPERSPACE_SCOPE_CEILING_ja.md)。KS/Bianchi IXはいずれも先にhomogeneous symmetry reductionを行った有限自由度模型であり、local gravitational waves、generic inhomogeneous modes、full H_perp(x), H_i(x) constraint algebraは含まない。従ってclock/order/domain/regulator等の内部gateが全てPASSしても、結果をfull quantum GRへ昇格しない。claim compilerはこの境界を `MINISUPERSPACE-SCOPED` として常時保持する。
+
 ## 最新：Bianchi IX の複数時刻履歴とデコヒーレンス
 
 [三時刻履歴・デコヒーレンス監査](docs/BIANCHI_IX_HISTORIES_AUDIT_ja.md) / [量子結果要約](research/bianchi_ix_histories_results/summary.json) / [古典履歴対照](research/bianchi_ix_classical_history_results/summary.json)

@@ -4,7 +4,7 @@
     "id": "ks_schwarzschild_quantum_singularity",
     "model": "Vacuum Schwarzschild interior via Kantowski-Sachs WDW minisuperspace",
     "baseline_commit": "51d0c8ccfb318832503080d6603f989ead8fb99c",
-    "scope_note": "Audit the path from the verified classical Schwarzschild/KS bridge to clock choice, physical inner product, factor ordering and mass/curvature observables without treating minisuperspace consistency as full quantum gravity."
+    "scope_note": "Audit the path from the verified classical Schwarzschild/KS bridge to clock choice, physical inner product, factor ordering and mass/curvature observables without treating minisuperspace consistency as full quantum gravity. This target is permanently minisuperspace-scoped and cannot be promoted to full quantum GR even if every internal gate passes."
   },
   "allowed_statuses": [
     "PASS",
@@ -286,5 +286,22 @@
         }
       ]
     }
-  ]
+  ],
+  "scope_ceiling": {
+    "kind": "MINISUPERSPACE",
+    "hard": true,
+    "omitted_degrees_of_freedom": [
+      "local gravitational-wave modes",
+      "generic inhomogeneous metric and matter modes",
+      "the full spatially local Hamiltonian constraints H_perp(x)",
+      "the full spatially local diffeomorphism constraints H_i(x)",
+      "the quantum Dirac/constraint algebra and its anomaly-closure problem"
+    ],
+    "promotion_forbidden": [
+      "FULL QUANTUM GR",
+      "ANOMALY-FREE QUANTUM CONSTRAINT ALGEBRA",
+      "FULL LOCAL BLACK-HOLE QUANTUM DYNAMICS"
+    ],
+    "note": "All internal gates may pass while this ceiling remains. The repository quantizes a symmetry-reduced homogeneous minisuperspace after discarding local field degrees of freedom; completion of the reduced theory cannot by itself establish full quantum general relativity."
+  }
 }

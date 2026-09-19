@@ -50,6 +50,18 @@ def load_and_validate(path: Path) -> dict:
     data = json.loads(path.read_text())
     if data.get("schema") != 1:
         raise ValueError("Unsupported physics audit schema")
+    ceiling = data.get("scope_ceiling")
+    if ceiling is not None:
+        if not isinstance(ceiling, dict):
+            raise ValueError("scope_ceiling must be an object")
+        if ceiling.get("hard") is not True:
+            raise ValueError("scope_ceiling.hard must be true when declared")
+        if ceiling.get("kind") != "MINISUPERSPACE":
+            raise ValueError("Unsupported scope_ceiling kind")
+        if not ceiling.get("omitted_degrees_of_freedom"):
+            raise ValueError("scope_ceiling must list omitted degrees of freedom")
+        if not ceiling.get("promotion_forbidden"):
+            raise ValueError("scope_ceiling must list forbidden promotions")
     obligations = data.get("obligations")
     if not isinstance(obligations, list) or not obligations:
         raise ValueError("No obligations declared")
@@ -90,6 +102,9 @@ def aggregate_gate_status(obligations: list[dict]) -> dict[str, str]:
 def compile_claims(data: dict) -> dict:
     obligations = data["obligations"]
     labels: list[str] = []
+    ceiling = data.get("scope_ceiling")
+    if ceiling and ceiling.get("hard") and ceiling.get("kind") == "MINISUPERSPACE":
+        labels.append("MINISUPERSPACE-SCOPED")
     lean = [x for x in obligations if x["gate"] == "LEAN_SEMANTIC"]
     if lean and all(x["status"] == "PASS" for x in lean):
         labels.append("ALGEBRAICALLY VERIFIED")
@@ -108,7 +123,7 @@ def compile_claims(data: dict) -> dict:
     if blockers:
         labels.append("PHYSICAL INTERPRETATION NOT IDENTIFIED")
     order = [
-        "ALGEBRAICALLY VERIFIED", "MODEL-INTERNAL NUMERICAL RESULT",
+        "MINISUPERSPACE-SCOPED", "ALGEBRAICALLY VERIFIED", "MODEL-INTERNAL NUMERICAL RESULT",
         "CLOCK-DEPENDENT", "ORDERING-SENSITIVE", "REGULATOR-UNSTABLE",
         "SEMICLASSICAL LIMIT PASSED", "PHYSICAL INTERPRETATION NOT IDENTIFIED",
     ]
@@ -116,18 +131,25 @@ def compile_claims(data: dict) -> dict:
     return {
         "schema": 1,
         "target": data["target"],
+        "scope_ceiling": ceiling,
         "labels": labels,
         "gate_status": aggregate_gate_status(obligations),
         "promotion_blockers": blockers,
         "failed_obligations": [x["id"] for x in obligations if x["status"] == "FAIL"],
         "partial_obligations": [x["id"] for x in obligations if x["status"] == "PARTIAL"],
         "pending_obligations": [x["id"] for x in obligations if x["status"] == "PENDING"],
-        "interpretation_rule": "Labels describe only passed scoped gates. A blocking PENDING/PARTIAL/FAIL forces PHYSICAL INTERPRETATION NOT IDENTIFIED.",
+        "interpretation_rule": "Labels describe only passed scoped gates. A blocking PENDING/PARTIAL/FAIL forces PHYSICAL INTERPRETATION NOT IDENTIFIED. A hard minisuperspace scope ceiling remains even if every internal gate passes and forbids promotion to full quantum GR.",
     }
 
 def self_test() -> None:
     base = {
         "target": {"id": "synthetic"},
+        "scope_ceiling": {
+            "kind": "MINISUPERSPACE",
+            "hard": True,
+            "omitted_degrees_of_freedom": ["local gravitational-wave modes"],
+            "promotion_forbidden": ["FULL QUANTUM GR"],
+        },
         "obligations": [
             {"id": "l1", "gate": "LEAN_SEMANTIC", "status": "PASS", "blocking": False},
             {"id": "n1", "gate": "NUMERICAL", "status": "PASS", "blocking": False},
@@ -137,7 +159,7 @@ def self_test() -> None:
     }
     claims = compile_claims(base)
     expected = {
-        "ALGEBRAICALLY VERIFIED", "MODEL-INTERNAL NUMERICAL RESULT",
+        "MINISUPERSPACE-SCOPED", "ALGEBRAICALLY VERIFIED", "MODEL-INTERNAL NUMERICAL RESULT",
         "REGULATOR-UNSTABLE", "PHYSICAL INTERPRETATION NOT IDENTIFIED",
     }
     if set(claims["labels"]) != expected:
@@ -147,6 +169,8 @@ def self_test() -> None:
     claims = compile_claims(base)
     if "PHYSICAL INTERPRETATION NOT IDENTIFIED" in claims["labels"]:
         raise AssertionError("cleared blockers still emitted physical-interpretation block")
+    if "MINISUPERSPACE-SCOPED" not in claims["labels"]:
+        raise AssertionError("hard scope ceiling disappeared when internal blockers cleared")
     with tempfile.TemporaryDirectory() as directory:
         bad = Path(directory) / "bad.json"
         bad.write_text(json.dumps({"schema": 1, "obligations": []}))
