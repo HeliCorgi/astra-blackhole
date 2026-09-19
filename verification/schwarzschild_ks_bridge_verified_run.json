@@ -48,5 +48,31 @@
   "classical_curvature_reference": "Kretschmann K=48*mu^2/r^6 for Schwarzschild; no quantum K operator is claimed here.",
   "scope_note": "PASS means the classical Schwarzschild/KS/canonical-variable bridge is closed. It does not promote the current L2 positive-frequency quantization, physical inner product, factor ordering, or singularity resolution.",
   "license_files_changed": false,
-  "lean_changed": false
+  "lean_changed": false,
+  "pull_request": {
+    "number": 13,
+    "head_sha": "fc0f11f049c537c4dbd0e5a27333d8e7c587453a",
+    "bridge_run_id": 35430309605,
+    "bridge_conclusion": "success",
+    "physics_audit_run_id": 35430309692,
+    "physics_audit_conclusion": "success",
+    "classical_reproduce_run_id": 35430309612,
+    "classical_reproduce_conclusion": "success",
+    "ever_entered_run_id": 35430309550,
+    "ever_entered_conclusion": "success"
+  },
+  "merge_commit": "b0e9fa2b1ca90fceb48251df268ce96fe913b92a",
+  "post_merge": {
+    "workflow_enable_commit": "abd6e6a3d51131c3ff1716216f512c8568895ecb",
+    "bridge_run_id": 35430485943,
+    "bridge_job_id": 105864032063,
+    "bridge_conclusion": "success",
+    "artifact_id": 10580003255,
+    "artifact_sha256": "1723a1e9af4d60f9dfd73c22a1de9a852a0e5e34f97b5303da6d9067e3e7219",
+    "maxima_runtime_seconds": 0.38,
+    "cadabra_runtime_seconds": 2.46,
+    "classical_reproduce_run_id": 35430485886,
+    "classical_reproduce_conclusion": "success"
+  },
+  "note": "The classical Schwarzschild-interior -> Kantowski-Sachs -> repository WDW-variable bridge is independently reproduced by Maxima/ctensor and Cadabra on branch, PR, and main. The repository areal-radius variable equals the Schwarzschild areal radius on this bridge, and the classical mass Dirac observable is fixed. Quantum clock, physical inner product, factor ordering, operator domain and quantum curvature remain separate blockers."
 }
