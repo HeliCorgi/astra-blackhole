@@ -260,3 +260,38 @@ R=ho
 4. mass observableと (K=48mu^2/r^6) の量子ordering/domain
 5. regulator/boundary/semiclassical gate
 6. その後にのみsingularity avoidance/persistenceを評価
+
+
+### 6m. KS black-hole quantum gates：clock PARTIAL / ordering sensitive / mass-curvature未選定
+
+Schwarzschild/KS古典bridgeの後段を4 gateへ分けて実装した。
+
+1. **clock**
+   - (\{T,C\}=2p_T)、repo branch (p_T=-H) では有限xで0にならずclassical T-clockはPASS。
+   - (Y=x+T=-\log(4r)) もclassicalには単調。
+   - xは (p_x=0) の反射点でglobal clockにならない。
+   - Y-clock deparametrizationは (p_X^{-1}) を要求するため量子domain未解決。aggregate PARTIAL。
+
+2. **same-state L2 ↔ KG**
+   - positive-frequency KG sectorで
+     [
+     \Psi_{KG}=\sqrt{h/2}\,H^{-1/2}\chi_{L2}
+     ]
+     を用いるとfinite boxでnorm・mapped x/r期待値が約1e-14で一致。
+   - 同じscalar fieldをそのまま (|\Psi|^2dx) と読むnegative controlは最大約0.297のx期待値差。
+   - continuum zero-energy thresholdで (H^{-1/2}) domain未解決。PARTIAL。
+
+3. **factor ordering**
+   - (A_q=-h^2e^{-qx}\partial_x(e^{qx}\partial_x)+e^{-2x}) を
+     (L^2(e^{qx}dx)) 上のformal-symmetric familyとして監査。
+   - flat representationでは (A_q=A_0+h^2q^2/4)、同じclassical principal symbol、差はO(h²)。
+   - q=-2..2で最大 (Delta\langle x\rangle\approx0.526)、既存box error threshold 3e-4を大幅に超える。
+   - **ORDERING-SENSITIVE** と判定。
+
+4. **mass / Kretschmann**
+   - classical (mu=\frac14e^{x-T}p_T(p_T-p_x)) からconstraint-kernel preserving local ordering familyを構成。
+   - そのfamily内ではflat kinematical L2 formal symmetry条件が衝突。
+   - finite-box symmetric/Weyl candidateのmass expectation driftはdx=.02で約4.79% / 1.69%だが精密化で低下するためcontinuum no-goとはしない。
+   - q=2,4,6 exponential-tail regulatorは既存監査で不合格。量子 (widehat\mu), (widehat K) は未選定。PARTIAL。
+
+次は、physical KG inner product上でmass observableのadjoint/domainを直接構成し、ordering原理を狭めた後、Y-clockのinverse-momentum domainとcommon-state semiclassical limitを監査する。
