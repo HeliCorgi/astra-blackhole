@@ -2,6 +2,7 @@ name: Schwarzschild to KS classical CAS bridge
 on:
   push:
     branches:
+      - main
       - audit/schwarzschild-ks-bridge
     paths:
       - 'cas/schwarzschild_ks_reference.json'
