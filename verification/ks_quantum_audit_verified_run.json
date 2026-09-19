@@ -4,11 +4,11 @@
   "target": "KS black-hole quantum audit",
   "branch": "audit/ks-quantum-gates",
   "ci": {
-    "run_id": 35432040562,
-    "job_id": 105868265853,
+    "run_id": 35434840307,
+    "job_id": 105875640153,
     "conclusion": "success",
-    "artifact_id": 10580014950,
-    "artifact_sha256": "40286e08caca09ad638a15d15fb7acb49984edf5464f435b79b69f02a161705e"
+    "artifact_id": 10581933353,
+    "artifact_sha256": "3b3bc1936226849f97eeeacf184e408cad7e4db63fd1db89f91c226b225abf6b"
   },
   "results": {
     "clock": "PARTIAL",
@@ -22,10 +22,12 @@
     "existing_box_mean_x_tolerance": 0.0003,
     "finite_box_same_state_map_error_scale": "<1.3e-14",
     "mass_weyl6_dx02_relative_drift": 0.01691577704216439,
-    "mass_symmetric_dx02_relative_drift": 0.04789957536093952
+    "mass_symmetric_dx02_relative_drift": 0.04789957536093952,
+    "mass_kernel_family_best_positive_frequency_branch_residual": 0.9912981395738648,
+    "ordering_family_symbolic_unitary_map_residual": "0"
   },
   "scope_note": "The CI success means the audit reproduced its intended PASS/PARTIAL/FAIL findings. It does not mean the blocked physical claims passed.",
-  "branch_head": "04e9cb5b63c945512f1326b1e11ee1562b91091f",
+  "branch_head": "46728cd9ab7dcbf7aaf12d395aa1db21c18b4e43",
   "regression": "PASS",
   "claim_labels": [
     "MODEL-INTERNAL NUMERICAL RESULT",
@@ -33,6 +35,18 @@
     "REGULATOR-UNSTABLE",
     "PHYSICAL INTERPRETATION NOT IDENTIFIED"
   ],
-  "note": "KS quantum audit successfully reproduces its intended PASS/PARTIAL/FAIL findings and the saved claim baseline. Classical T and Y clocks pass monotonicity tests but quantum Y-clock domain remains unresolved; the same-state L2/KG finite-box map passes but continuum H^(-1/2) domain remains unresolved; the declared ordering family is sensitive; no quantum mass/Kretschmann operator is selected.",
-  "claim_baseline": "verification/ks_black_hole_claims.json"
+  "note": "KS quantum audit reproduces its intended PASS/PARTIAL/FAIL findings and claim baseline. T and Y are admissible classical clocks but Y-time quantization introduces inverse-p_X domain requirements; the same-state finite-box L2/KG map passes while continuum H^(-1/2) remains unresolved; the declared Sturm-Liouville ordering family is materially sensitive; the local constraint-kernel mass-ordering family does not preserve the selected positive-frequency sector in the tested realization; no quantum mass/Kretschmann operator is selected.",
+  "claim_baseline": "verification/ks_black_hole_claims.json",
+  "nonphysics_failures": [
+    {
+      "run_id": 35431549143,
+      "cause": "Python result-serialization typo (`false` rather than `False`) after earlier audit stages completed.",
+      "disposition": "implementation bug corrected; not counted as a physics finding"
+    },
+    {
+      "run_id": 35434764076,
+      "cause": "Regression tolerance fixed the positive-frequency branch residual to platform-sensitive ~1e-9 tail digits; another runner differed by ~8e-9.",
+      "disposition": "regression changed to preserve the scientific condition (large residual >0.9) with a non-physics numerical tolerance"
+    }
+  ]
 }
