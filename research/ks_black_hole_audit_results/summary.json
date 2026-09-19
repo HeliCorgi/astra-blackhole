@@ -65,7 +65,8 @@
     "flat_L2_formal_symmetry_within_family": "NO_SOLUTION",
     "flat_L2_adjoint_conflict": [
       "Im(d)=1/4 from d_x coefficient",
-      "Im(d)=3/4 from d_T coefficient"
+      "Im(d)=3/4 from d_T coefficient",
+      "Re(d)=0 and Im(d)=1/2 from the identity coefficient"
     ],
     "finite_box_dx02": {
       "symmetric_mass_expectation_drift": 0.04789957536093952,
@@ -76,7 +77,18 @@
       "mass_warning": "Orderings requiring exp(x) psi in L2 encounter the q=2 domain problem.",
       "curvature_warning": "Bare r^-6 quadratic form is proportional to the q=6 exponential moment."
     },
-    "scope": "The flat-L2 conflict is not a no-go theorem for the physical KG inner product or nonlocal Dirac-observable orderings; finite-box drift is not extrapolated as a continuum theorem."
+    "scope": "The local constraint-kernel family is not a physical no-go theorem: its flat-L2 adjoint conditions are inconsistent and the tested members do not preserve the selected positive-frequency sector, but nonlocal/physical-KG constructions remain possible. Finite-box mass drift decreases with grid refinement and is not extrapolated as a continuum theorem.",
+    "positive_frequency_branch_preservation": {
+      "tested_d": [
+        "0.0i",
+        "0.25i",
+        "0.5i",
+        "0.75i"
+      ],
+      "best_relative_residual": 0.9912981395738648,
+      "result": "FAIL for the tested local constraint-kernel-preserving family on the finite-box same-state KG sector",
+      "interpretation": "Preserving the full WDW constraint kernel does not imply preserving the selected negative-p_T/positive-frequency sector."
+    }
   },
   "overall": {
     "physical_interpretation": "BLOCKED",
