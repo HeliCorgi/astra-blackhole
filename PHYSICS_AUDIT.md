@@ -1,6 +1,6 @@
 # PHYSICS_AUDIT — 物理主張の機械監査
 
-更新: 2026-09-19
+更新: 2026-09-20
 
 この文書は「どの量子化が自然界で正しいか」を自動決定するものではない。目的は、専門家が通常行う監査を **obligation / gate / kill 条件**へ分解し、数理証明・CAS・数値計算・物理解釈を混同しないようにすること。
 
@@ -11,6 +11,15 @@
 Lean が証明するのは、採用した定義・仮定から結論が論理的に従うこと。Lean build が通っても、量子化、時計、内積、operator domain、factor ordering、regulator、自然界への同定が正しいことは意味しない。
 
 有限行列が Hermitian であることと、連続作用素の self-adjointness は分ける。CI成功は再現性の証拠であり、物理的妥当性の証明ではない。
+
+## Hard scope ceiling: minisuperspace
+
+ordering / regulator / clock / domain はreduced quantum model内部のgateだが、その外側にさらに強い制約がある。このrepositoryは full metric field g_ij(x) を直接量子化せず、先にKantowski–SachsまたはBianchi IXのhomogeneous minisuperspaceへ縮約している。
+
+そのため local gravitational-wave modes、generic inhomogeneous modes、空間各点の H_perp(x), H_i(x) とそのfull quantum constraint algebra/anomaly-closure問題はmodel外である。
+
+従って**全内部gateが将来PASSしても full quantum GR へは昇格しない**。machine-readable obligationsの scope_ceiling はgate statusと独立なhard ceilingで、claim compilerは常に MINISUPERSPACE-SCOPED を付ける。詳細は docs/MINISUPERSPACE_SCOPE_CEILING_ja.md。
+
 
 ## Gate / kill ledger
 
@@ -31,6 +40,7 @@ Lean が証明するのは、採用した定義・仮定から結論が論理的
 
 claim compiler が扱うラベル:
 
+- `MINISUPERSPACE-SCOPED`
 - `ALGEBRAICALLY VERIFIED`
 - `MODEL-INTERNAL NUMERICAL RESULT`
 - `CLOCK-DEPENDENT`
@@ -38,6 +48,8 @@ claim compiler が扱うラベル:
 - `REGULATOR-UNSTABLE`
 - `SEMICLASSICAL LIMIT PASSED`
 - `PHYSICAL INTERPRETATION NOT IDENTIFIED`
+
+`MINISUPERSPACE-SCOPED` は内部gateの成否と独立なhard scope ceilingで、全gateがPASSしても消えない。full quantum GR、full local black-hole quantum dynamics、anomaly-free full constraint algebraへの昇格を禁止する。
 
 `ALGEBRAICALLY VERIFIED` は Lean semantic gate の範囲だけを指す。プロジェクト全体や量子重力の物理的正しさを指さない。
 
@@ -120,7 +132,7 @@ Schwarzschild/Kantowski–Sachs側はBianchi IX timeless targetと別のmachine-
 - T / areal-radius Y clock のclassical・same-Dirac-state slice比較: PASS
 - standalone Y-time inverse-p_X continuum domain: PENDING
 - finite-box positive-frequency L2 ↔ KG same-state map: PASS
-- continuum H^(-1/2) completion/domain: PENDING
+- continuum positive-frequency KG completion/domain: PASS（ordinary-L2上の H^(-1/2) 自体はunbounded）
 - explicit Sturm–Liouville factor-ordering family: FAIL / sensitive
 - positive-frequency physical-KG mass Dirac candidate: finite-box PASS、continuum quadratic-form closure / uniquenessはPARTIAL
 - declared selected-mass positive Kretschmann forms: FAIL
