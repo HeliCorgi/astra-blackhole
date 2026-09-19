@@ -38,7 +38,12 @@ jobs:
       - run: python -m pip install -r requirements.txt
       - name: Run positive-frequency mass Dirac audit
         run: |
-          python research/ks_mass_dirac_observable_audit.py             --out artifacts/ks-mass/mass_dirac.json
+          python research/ks_mass_dirac_observable_audit.py \
+            --out artifacts/ks-mass/mass_dirac.json
+      - name: Run same-Dirac-state Y-clock audit
+        run: |
+          python research/ks_y_clock_same_state_audit.py \
+            --out artifacts/ks-mass/y_clock.json
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
