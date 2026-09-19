@@ -63,5 +63,56 @@
   "verified_scientific_head": "388728fce607cbb85b9a07f0c1cf94683e207446",
   "regression": "PASS",
   "claim_compiler": "PASS against verification/ks_black_hole_claims.json",
-  "note": "The combined mass/Y-clock/Kretschmann workflow reproduces the finite-box mass candidate, same-Dirac-state Y-slice consistency, inverse-p_X domain warning and scoped Kretschmann FAIL. The mass semiclassical control now compares to the same Gaussian Wigner ensemble rather than only the packet center. CI success means the audit reproduced these PASS/PARTIAL/FAIL decisions; it does not promote a black-hole singularity claim."
+  "note": "PR #19 is merged and reproduced on main. The positive-frequency/physical-KG mass candidate remains a finite-box PARTIAL result with same-Wigner semiclassical improvement; same-Dirac-state T/Y slice consistency passes while standalone Y-time inverse-p_X domain remains pending; the three declared selected-mass explicit-radius Kretschmann forms fail domain/regulator removal. No black-hole singularity resolution or persistence claim is promoted.",
+  "post_merge": {
+    "pull_request": 19,
+    "merge_commit": "108fe6c8fb4ca8256558c5b683e678620c72c642",
+    "main_mass_y_k_audit": {
+      "run_id": 35456434594,
+      "job_id": 105932428556,
+      "conclusion": "success",
+      "artifact_id": 10588527651,
+      "artifact_sha256": "b11a1f0f80d336b26cef068f543a8d6b4d154f1fe2cc9e5048fefe40a4c0861b"
+    },
+    "main_ks_quantum_audit": {
+      "run_id": 35456434626,
+      "job_id": 105932428655,
+      "conclusion": "success"
+    },
+    "main_physics_audit": {
+      "run_id": 35456434655,
+      "job_id": 105932428636,
+      "conclusion": "success"
+    },
+    "main_classical_reproduce": {
+      "run_id": 35456434580,
+      "job_id": 105932428378,
+      "conclusion": "success"
+    },
+    "main_ever_entered_publication": {
+      "run_id": 35456434635,
+      "job_id": 105932428475,
+      "conclusion": "success"
+    },
+    "mass_same_wigner_relative_errors": [
+      0.20279024654958522,
+      0.05227108177767126,
+      0.01696508165110444,
+      0.008255523162455036
+    ],
+    "y_clock": {
+      "same_Dirac_state_null_flux": "PASS",
+      "same_mass_observable_null_flux": "PASS",
+      "inverse_pX_continuum_domain": "PENDING"
+    },
+    "kretschmann": {
+      "scoped_positive_forms": "FAIL",
+      "regulator_decision": "FAIL",
+      "growth_decades": {
+        "mass_then_radius": 62.12506689701533,
+        "radius_then_mass": 65.75435934274827,
+        "balanced": 65.75819349130495
+      }
+    }
+  }
 }
