@@ -29,7 +29,6 @@
     "factor_ordering.timeless_constraint",
     "regulator.timeless_scattering",
     "known_limits.timeless",
-    "known_limits.schwarzschild_ks_bridge",
     "known_limits.semiclassical"
   ],
   "failed_obligations": [
@@ -42,7 +41,6 @@
     "clock.internal_s_minus_alpha",
     "inner_product.timeless_domain",
     "factor_ordering.timeless_constraint",
-    "known_limits.schwarzschild_ks_bridge",
     "known_limits.semiclassical"
   ],
   "interpretation_rule": "Labels describe only passed scoped gates. A blocking PENDING/PARTIAL/FAIL forces PHYSICAL INTERPRETATION NOT IDENTIFIED."

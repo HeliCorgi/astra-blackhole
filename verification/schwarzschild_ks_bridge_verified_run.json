@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "date": "2026-09-19",
+  "target": "Schwarzschild interior -> Kantowski-Sachs -> existing WDW classical bridge",
+  "branch_head": "53e046709e619e300bde8a84da43d9f8a3efe720",
+  "workflow": {
+    "name": "Schwarzschild to KS classical CAS bridge",
+    "run_id": 35430090228,
+    "job_id": 105862991584,
+    "conclusion": "success",
+    "artifact_id": 10580970845,
+    "artifact_sha256": "90d15a1fe9feafa0cc7434ff67f6a8bba1c926edce77eae99d49a45fcc851271"
+  },
+  "backends": {
+    "maxima": {
+      "status": "PASS",
+      "version": "5.46.0",
+      "mode": "Maxima ctensor spatial curvature + Maxima ADM/canonical algebra",
+      "runtime_seconds": 0.37
+    },
+    "cadabra": {
+      "status": "PASS",
+      "version": "2.5.14",
+      "mode": "Cadabra scalar/component KS bridge",
+      "runtime_seconds": 2.5
+    }
+  },
+  "repository_comparison": {
+    "status": "PASS",
+    "wdw_model_sha256": "6a6b56c75ee6385cb3a415b3e741421798134c9b76fb5b9ab9b6d01da7ca8e37",
+    "max_classical_constraint_abs": 6.661338147750939e-16,
+    "max_mass_observable_drift_abs": 3.2786273695961654e-16,
+    "max_radius_identity_abs": 0,
+    "max_schwarzschild_radius_relation_abs": 4.440892098500626e-16
+  },
+  "bridge_decision": "PASS",
+  "shared_singularity_variable": {
+    "name": "areal radius r",
+    "repo_expression": "r=(1/4)*exp(-x-T)",
+    "schwarzschild_expression": "r=rho",
+    "singular_limit": "r -> 0"
+  },
+  "classical_mass": {
+    "geometric_mass": "mu=G*M_phys",
+    "dirac_observable": "mu_D=(1/4)*exp(x-T)*p_T*(p_T-p_x)",
+    "weak_poisson_relation": "{mu_D,C_repo}=-(p_T/2)*exp(x-T)*C_repo"
+  },
+  "classical_curvature_reference": "Kretschmann K=48*mu^2/r^6 for Schwarzschild; no quantum K operator is claimed here.",
+  "scope_note": "PASS means the classical Schwarzschild/KS/canonical-variable bridge is closed. It does not promote the current L2 positive-frequency quantization, physical inner product, factor ordering, or singularity resolution.",
+  "license_files_changed": false,
+  "lean_changed": false
+}

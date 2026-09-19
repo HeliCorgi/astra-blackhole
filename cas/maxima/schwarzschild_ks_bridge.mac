@@ -1,0 +1,109 @@
+/* Schwarzschild interior -> Kantowski-Sachs -> repo WDW bridge.
+   Independent Maxima/ctensor derivation. */
+
+display2d:false$
+ratfac:true$
+load(ctensor)$
+
+/* 3D KS spatial curvature for h=diag(A^2,R^2,R^2 sin^2 th). */
+dim:3$
+ct_coords:[chi,th,ph]$
+lg:matrix(
+ [A^2,0,0],
+ [0,R^2,0],
+ [0,0,R^2*sin(th)^2]
+)$
+cmetric()$
+christof(false)$
+ricci(false)$
+R3:radcan(trigsimp(scurvature()))$
+d_R3:radcan(R3-2/R^2)$
+printf(true,"ASTRA_KS_MAXIMA_R3_DELTA=~a~%",d_R3)$
+if d_R3 # 0 then quit(2)$
+
+sq3:sqrt(3)$
+
+/* ADM kinetic invariant in the homogeneous orthonormal frame. */
+HA:sq3*bd/N$
+HR:-sq3*(Od+bd)/N$
+Kinv:ratsimp(HA^2+2*HR^2-(HA+2*HR)^2)$
+Kexpected:6*(-Od^2+bd^2)/N^2$
+d_K:ratsimp(Kinv-Kexpected)$
+printf(true,"ASTRA_KS_MAXIMA_KINETIC_DELTA=~a~%",d_K)$
+if d_K # 0 then quit(3)$
+
+Q:exp(-2*sq3*Omega-sq3*beta)$
+Avec:exp(sq3*beta)$
+L:6*Q*(-Od^2+bd^2)/N+2*N*Avec$
+
+PO_def:diff(L,Od)$
+PB_def:diff(L,bd)$
+d_PO:ratsimp(PO_def+12*Q*Od/N)$
+d_PB:ratsimp(PB_def-12*Q*bd/N)$
+printf(true,"ASTRA_KS_MAXIMA_PO_DELTA=~a~%",d_PO)$
+printf(true,"ASTRA_KS_MAXIMA_PB_DELTA=~a~%",d_PB)$
+if d_PO # 0 or d_PB # 0 then quit(4)$
+
+H:PO*Od+PB*bd-L$
+H:subst(-N*PO/(12*Q),Od,H)$
+H:subst(N*PB/(12*Q),bd,H)$
+H:ratsimp(H)$
+Hexpected:-N*exp(2*sq3*Omega+sq3*beta)
+          *(PO^2-PB^2+48*exp(-2*sq3*Omega))/24$
+d_H:radcan(ratsimp(H-Hexpected))$
+printf(true,"ASTRA_KS_MAXIMA_HAMILTONIAN_DELTA=~a~%",d_H)$
+if d_H # 0 then quit(5)$
+
+CM:PO^2-PB^2+48*exp(-2*sq3*Omega)$
+CMxt:subst(sq3*pX,PO,CM)$
+CMxt:subst(sq3*pT,PB,CMxt)$
+CMxt:subst((x+log(4))/sq3,Omega,CMxt)$
+Crepo:pT^2-pX^2-exp(-2*x)$
+d_C:radcan(ratsimp(Crepo+CMxt/3))$
+printf(true,"ASTRA_KS_MAXIMA_REPO_CONSTRAINT_DELTA=~a~%",d_C)$
+if d_C # 0 then quit(6)$
+
+/* Canonical transformation checks. */
+pb_x:ratsimp(sq3*(1/sq3))$
+pb_T:ratsimp(sq3*(1/sq3))$
+printf(true,"ASTRA_KS_MAXIMA_PB_X_DELTA=~a~%",ratsimp(pb_x-1))$
+printf(true,"ASTRA_KS_MAXIMA_PB_T_DELTA=~a~%",ratsimp(pb_T-1))$
+
+/* Schwarzschild interior embedding with chi_S=lambda*chi. */
+F:2*mu/rho-1$
+Tsch:log(lambda)+log(F)/2$
+xsch:-log(4*rho)-Tsch$
+pt_s:-4*mu*lambda$
+px_s:4*lambda*(mu-rho)$
+
+d_constraint_s:radcan(ratsimp(
+ subst(pt_s,pT,subst(px_s,pX,subst(xsch,x,Crepo)))
+))$
+printf(true,"ASTRA_KS_MAXIMA_SCHWARZSCHILD_CONSTRAINT_DELTA=~a~%",d_constraint_s)$
+if d_constraint_s # 0 then quit(7)$
+
+radius:exp(-x-T)/4$
+d_radius:radcan(ratsimp(
+ subst(Tsch,T,subst(xsch,x,radius))-rho
+))$
+printf(true,"ASTRA_KS_MAXIMA_RADIUS_DELTA=~a~%",d_radius)$
+if d_radius # 0 then quit(8)$
+
+massD:exp(x-T)*pT*(pT-pX)/4$
+d_mass:radcan(ratsimp(
+ subst(Tsch,T,subst(xsch,x,subst(pt_s,pT,subst(px_s,pX,massD))))-mu
+))$
+printf(true,"ASTRA_KS_MAXIMA_MASS_DELTA=~a~%",d_mass)$
+if d_mass # 0 then quit(9)$
+
+/* Full canonical Poisson bracket: {massD,Crepo}. */
+PBmass:
+ diff(massD,T)*diff(Crepo,pT)-diff(massD,pT)*diff(Crepo,T)
+ +diff(massD,x)*diff(Crepo,pX)-diff(massD,pX)*diff(Crepo,x)$
+PBexpected:-(pT/2)*exp(x-T)*Crepo$
+d_mass_pb:radcan(ratsimp(PBmass-PBexpected))$
+printf(true,"ASTRA_KS_MAXIMA_MASS_PB_DELTA=~a~%",d_mass_pb)$
+if d_mass_pb # 0 then quit(10)$
+
+printf(true,"ASTRA_KS_MAXIMA_BRIDGE_OK~%")$
+quit()$

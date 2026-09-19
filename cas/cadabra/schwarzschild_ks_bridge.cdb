@@ -1,0 +1,125 @@
+# Schwarzschild interior -> Kantowski-Sachs -> repo WDW bridge.
+# Executed by Cadabra 2.5.14; independent scalar/component check.
+
+import json
+from pathlib import Path
+import sympy as sp
+
+{q}::Coordinate;
+probe := \sin(q)**2 + \cos(q)**2;
+map_sympy(probe, "simplify");
+if sp.simplify(SympyBridge(probe).to_sympy()) != 1:
+    raise RuntimeError("Cadabra scalar bridge probe failed")
+
+# Independent 3D coordinate-metric curvature for KS spatial slices.
+chi,th,ph=sp.symbols("chi th ph", real=True)
+A,R=sp.symbols("A R", positive=True, nonzero=True)
+coords=(chi,th,ph)
+h=sp.diag(A**2,R**2,R**2*sp.sin(th)**2)
+hi=sp.simplify(h.inv())
+n=3
+Gamma=[[[sp.Integer(0) for _ in range(n)] for _ in range(n)] for _ in range(n)]
+for i in range(n):
+    for j in range(n):
+        for k in range(n):
+            Gamma[i][j][k]=sp.simplify(sum(
+                hi[i,l]*(sp.diff(h[l,j],coords[k])+sp.diff(h[l,k],coords[j])-sp.diff(h[j,k],coords[l]))/2
+                for l in range(n)
+            ))
+Ric=sp.MutableDenseMatrix(n,n,[0]*(n*n))
+for j in range(n):
+    for l in range(n):
+        Ric[j,l]=sp.simplify(sum(
+            sp.diff(Gamma[i][j][l],coords[i])
+            -sp.diff(Gamma[i][j][i],coords[l])
+            +sum(Gamma[i][i][m]*Gamma[m][j][l]-Gamma[i][l][m]*Gamma[m][j][i] for m in range(n))
+            for i in range(n)
+        ))
+R3=sp.simplify(sum(hi[j,l]*Ric[j,l] for j in range(n) for l in range(n)))
+d_R3=sp.simplify(R3-2/R**2)
+if d_R3 != 0:
+    raise RuntimeError("KS spatial curvature mismatch: %s" % d_R3)
+
+sq3=sp.sqrt(3)
+N=sp.symbols("N", positive=True)
+Od,bd=sp.symbols("Omega_dot beta_dot", real=True)
+HA=sq3*bd/N
+HR=-sq3*(Od+bd)/N
+Kinv=sp.expand(HA**2+2*HR**2-(HA+2*HR)**2)
+d_K=sp.simplify(Kinv-6*(-Od**2+bd**2)/N**2)
+if d_K != 0:
+    raise RuntimeError("KS kinetic mismatch: %s" % d_K)
+
+Omega,beta=sp.symbols("Omega beta", real=True)
+Q=sp.exp(-2*sq3*Omega-sq3*beta)
+Avec=sp.exp(sq3*beta)
+L=6*Q*(-Od**2+bd**2)/N+2*N*Avec
+PO,PB=sp.symbols("P_Omega P_beta", real=True)
+vel={Od:-N*PO/(12*Q),bd:N*PB/(12*Q)}
+H=sp.simplify((PO*Od+PB*bd-L).subs(vel))
+CM=PO**2-PB**2+48*sp.exp(-2*sq3*Omega)
+Hexpected=-N*sp.exp(2*sq3*Omega+sq3*beta)*CM/24
+d_H=sp.simplify(sp.expand(H-Hexpected))
+if d_H != 0:
+    raise RuntimeError("KS Hamiltonian mismatch: %s" % d_H)
+
+x,T,pX,pT=sp.symbols("x T p_x p_T", real=True)
+CMxt=sp.simplify(CM.subs({
+    PO:sq3*pX,
+    PB:sq3*pT,
+    Omega:(x+sp.log(4))/sq3,
+}))
+Crepo=pT**2-pX**2-sp.exp(-2*x)
+d_C=sp.simplify(Crepo+CMxt/3)
+if d_C != 0:
+    raise RuntimeError("repo constraint mismatch: %s" % d_C)
+
+rho,mu,lam=sp.symbols("rho mu lambda", positive=True, nonzero=True)
+F=2*mu/rho-1
+Tsch=sp.log(lam)+sp.log(F)/2
+xsch=-sp.log(4*rho)-Tsch
+pt_s=-4*mu*lam
+px_s=4*lam*(mu-rho)
+
+d_sch=sp.simplify(Crepo.subs({T:Tsch,x:xsch,pT:pt_s,pX:px_s}))
+d_radius=sp.simplify((sp.exp(-x-T)/4).subs({T:Tsch,x:xsch})-rho)
+massD=sp.exp(x-T)*pT*(pT-pX)/4
+d_mass=sp.simplify(massD.subs({T:Tsch,x:xsch,pT:pt_s,pX:px_s})-mu)
+if any(v != 0 for v in (d_sch,d_radius,d_mass)):
+    raise RuntimeError("Schwarzschild embedding mismatch")
+
+PBmass=(
+    sp.diff(massD,T)*sp.diff(Crepo,pT)-sp.diff(massD,pT)*sp.diff(Crepo,T)
+    +sp.diff(massD,x)*sp.diff(Crepo,pX)-sp.diff(massD,pX)*sp.diff(Crepo,x)
+)
+d_mass_pb=sp.simplify(PBmass + (pT/2)*sp.exp(x-T)*Crepo)
+if d_mass_pb != 0:
+    raise RuntimeError("mass Poisson relation mismatch: %s" % d_mass_pb)
+
+result={
+  "schema":1,
+  "backend":{"name":"Cadabra","version":"2.5.14","mode":"cadabra2-cli scalar/component KS bridge"},
+  "checks":{
+    "spatial_curvature_zero":str(d_R3),
+    "kinetic_zero":str(d_K),
+    "hamiltonian_zero":str(d_H),
+    "repo_constraint_zero":str(d_C),
+    "schwarzschild_constraint_zero":str(d_sch),
+    "radius_zero":str(d_radius),
+    "mass_zero":str(d_mass),
+    "mass_poisson_zero":str(d_mass_pb)
+  },
+  "derived":{
+    "R3":"2/R**2",
+    "misner_constraint":"P_Omega**2-P_beta**2+48*exp(-2*sqrt(3)*Omega)",
+    "repo_constraint":"p_T**2-p_x**2-exp(-2*x)",
+    "radius":"exp(-x-T)/4",
+    "mass_dirac":"exp(x-T)*p_T*(p_T-p_x)/4",
+    "mass_poisson":"-(p_T/2)*exp(x-T)*C_repo"
+  }
+}
+out=Path("artifacts/schwarzschild-ks")
+out.mkdir(parents=True,exist_ok=True)
+(out/"cadabra_result.json").write_text(json.dumps(result,indent=2,sort_keys=True)+"\n")
+print("ASTRA_SCHWARZSCHILD_KS_CADABRA_OK")
+print(json.dumps(result,sort_keys=True))

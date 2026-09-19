@@ -261,6 +261,34 @@ python verify_predictors.py
 
 ## Physics audit gates
 
+### Schwarzschild interior → Kantowski–Sachs classical bridge：PASS
+
+[古典CAS bridge](docs/SCHWARZSCHILD_KS_BRIDGE_ja.md) / [BH return gate](docs/BLACK_HOLE_RETURN_GATE_ja.md)
+
+Schwarzschild内部metricをKantowski–Sachs ansatzへ写し、ADM+GHY縮約、Misner constraint、repoの `x,T` 変数への正準変換をMaxima/ctensorとCadabraで独立に再導出した。
+
+[
+P_\Omega^2-P_\beta^2+48e^{-2\sqrt3\Omega}=0
+]
+
+から
+
+[
+C_{repo}=p_T^2-p_x^2-e^{-2x}=-\frac13 C_M
+]
+
+を厳密に確認した。またrepoの
+
+[
+r=\frac14e^{-x-T}
+]
+
+はbridge上でSchwarzschildのareal radiusそのものに一致する。classical mass Dirac observable
+(mu_D=\tfrac14e^{x-T}p_T(p_T-p_x)) も固定し、constraint surface上でPoisson可換になることを確認した。
+
+これは古典bridgeのPASSであって、L2 positive-frequency branch、physical inner product、factor ordering、量子Kretschmann演算子、特異点解消のPASSではない。次のBH本筋はこれら量子側gate。
+
+
 ### GR reduction checker：Cadabra + Maxima の2独立backendでPASS
 
 [Bianchi IX CAS縮約監査](docs/BIANCHI_IX_GR_REDUCTION_CAS_ja.md) / [Cadabra結果](cas/results/bianchi_ix_cadabra_result.json) / [Maxima結果](cas/results/bianchi_ix_maxima_result.json) / [BH return gate](docs/BLACK_HOLE_RETURN_GATE_ja.md)

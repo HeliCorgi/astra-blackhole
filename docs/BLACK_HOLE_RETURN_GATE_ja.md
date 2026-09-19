@@ -175,11 +175,16 @@ BH singularity近傍を一般化したときに
 
 ## 次の実装順
 
-1. Bianchi IX GR reduction を2独立CAS backendで閉じる。
-2. **Schwarzschild interior → Kantowski–Sachs classical CAS bridge** を作る。
-3. 既存 `wdw_model.py` のconstraint変数へ正準変換を照合する。
+1. Bianchi IX GR reduction を2独立CAS backendで閉じる。**完了**
+2. **Schwarzschild interior → Kantowski–Sachs classical CAS bridge** を作る。**完了**
+3. 既存 `wdw_model.py` のconstraint変数へ正準変換を照合する。**完了**
 4. KS側 clock / inner-product / factor-ordering obligationsを具体化する。
 5. 質量を含む4次元曲率observableとdomainを定義する。
 6. その後にだけ、BH singularity avoidance / persistence を評価する。
 
 この順序により、Bianchi IX監査が自己目的化してブラックホール本筋から離れることを防ぐ。
+
+
+## Classical bridge status
+
+`docs/SCHWARZSCHILD_KS_BRIDGE_ja.md` でMaxima/ctensorとCadabraの二系統を実行し、Schwarzschild内部→KS→既存WDW constraintの古典bridgeをPASSした。共有singularity variableは面積半径 `r=(1/4)exp(-x-T)` で、Schwarzschildのareal radius `rho` と一致する。これで古典bridgeは閉じたが、量子内積・clock・ordering・operator domain・4D curvature operatorは未達のまま。
