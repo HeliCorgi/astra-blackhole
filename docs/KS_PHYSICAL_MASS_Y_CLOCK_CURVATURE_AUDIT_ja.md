@@ -212,20 +212,18 @@ finite boxでは
 
 ## 5. semiclassical check
 
-mass candidateのclassical packet-center massとのrelative errorを、
-\(h\) を下げると同時にgridも精密化して比較した。
+mass candidateのsemiclassical controlでは、packet中心だけではなく、量子packetと同じGaussian Wigner ensembleにclassical mass Dirac observableを作用させた平均を比較対象にする。packet中心massは有限\(h\)でspreadを無視するため、別diagnosticとして残す。\(h\) を下げると同時にgridも精密化して比較した。
 
-| h | dx | relative mass error |
+| h | dx | relative error vs same classical Wigner ensemble |
 |---:|---:|---:|
-| .4 | .08 | 0.5076 |
-| .2 | .04 | 0.1711 |
-| .1 | .02 | 0.0720 |
-| .05 | .01 | 0.0350 |
+| .4 | .08 | 0.2028 |
+| .2 | .04 | 0.05227 |
+| .1 | .02 | 0.01697 |
+| .05 | .01 | 0.00826 |
 
-単調に低下した。
+同一Wigner ensembleとの差は単調に低下した。packet-centerだけとの比較も 0.5076→0.1711→0.0720→0.0350 と低下するが、primary semiclassical comparatorには採用しない。
 
-従ってこのcandidateについては、
-**semiclassical correspondenceの一部に肯定的evidence**がある。
+従ってこのcandidateについては、**same-state semiclassical correspondenceの一部に肯定的evidence**がある。
 
 ただしcurvature observableまで含むcommon-state WKB/HJ gateではないため、
 project全体の `SEMICLASSICAL LIMIT PASSED` は出さない。
