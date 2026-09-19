@@ -1,0 +1,189 @@
+{
+  "schema": 1,
+  "target": {
+    "id": "ks_schwarzschild_quantum_singularity",
+    "model": "Vacuum Schwarzschild interior via Kantowski-Sachs WDW minisuperspace",
+    "baseline_commit": "51d0c8ccfb318832503080d6603f989ead8fb99c",
+    "scope_note": "Audit the path from the verified classical Schwarzschild/KS bridge to clock choice, physical inner product, factor ordering and mass/curvature observables without treating minisuperspace consistency as full quantum gravity."
+  },
+  "allowed_statuses": [
+    "PASS",
+    "FAIL",
+    "PARTIAL",
+    "PENDING",
+    "N/A"
+  ],
+  "obligations": [
+    {
+      "id": "gr_reduction.schwarzschild_ks",
+      "gate": "GR_REDUCTION",
+      "status": "PASS",
+      "blocking": true,
+      "requirement": "Independently derive the Schwarzschild-interior to KS classical bridge and match the canonical constraint to repository WDW variables.",
+      "evidence": [
+        {
+          "path": "verification/schwarzschild_ks_bridge_verified_run.json",
+          "expect": {
+            "bridge_decision": "PASS",
+            "backends.maxima.status": "PASS",
+            "backends.cadabra.status": "PASS"
+          }
+        }
+      ]
+    },
+    {
+      "id": "clock.ks_T_and_areal",
+      "gate": "CLOCK",
+      "status": "PARTIAL",
+      "blocking": true,
+      "requirement": "Verify clock Poisson brackets, branch monotonicity and at least one alternative clock, then identify the quantum-domain requirements of the alternative deparametrization.",
+      "evidence": [
+        {
+          "path": "research/ks_black_hole_audit_results/summary.json",
+          "expect": {
+            "clock.status": "PARTIAL",
+            "clock.classical_T_clock": "PASS",
+            "clock.classical_areal_clock_Y": "PASS"
+          }
+        }
+      ],
+      "kill_if": [
+        "T_clock_bracket_vanishes_on_target_branch",
+        "quantum_result_promoted_without_multi_clock_domain"
+      ]
+    },
+    {
+      "id": "inner_product.ks_positive_frequency",
+      "gate": "INNER_PRODUCT_DOMAIN",
+      "status": "PARTIAL",
+      "blocking": true,
+      "requirement": "Map the same positive-frequency state between the L2 and KG/induced-inner-product representations and state the continuum domain of H^(±1/2).",
+      "evidence": [
+        {
+          "path": "research/ks_black_hole_audit_results/summary.json",
+          "expect": {
+            "inner_product.status": "PARTIAL",
+            "inner_product.finite_box_positive_frequency_same_state_map": "PASS",
+            "inner_product.continuum_H_minus_half_domain": "PENDING"
+          }
+        }
+      ],
+      "kill_if": [
+        "same_scalar_field_used_as_L2_state_without_representation_map",
+        "H_minus_half_domain_unspecified"
+      ]
+    },
+    {
+      "id": "factor_ordering.ks_sturm_liouville",
+      "gate": "FACTOR_ORDERING",
+      "status": "FAIL",
+      "finding": "sensitive",
+      "blocking": true,
+      "requirement": "Test an explicit formally symmetric ordering/measure family with the same principal symbol using the same physical initial state identification.",
+      "evidence": [
+        {
+          "path": "research/ks_black_hole_audit_results/summary.json",
+          "expect": {
+            "factor_ordering.status": "FAIL",
+            "factor_ordering.finding": "sensitive"
+          }
+        }
+      ],
+      "kill_if": [
+        "ordering_effect_resolved_above_numerical_error"
+      ]
+    },
+    {
+      "id": "inner_product.ks_mass_curvature_domain",
+      "gate": "INNER_PRODUCT_DOMAIN",
+      "status": "PARTIAL",
+      "blocking": true,
+      "requirement": "Construct or reject candidate quantum mass/Kretschmann orderings by constraint-kernel preservation, physical adjointness and continuum operator/quadratic-form domains.",
+      "evidence": [
+        {
+          "path": "research/ks_black_hole_audit_results/summary.json",
+          "expect": {
+            "mass_curvature_observable.status": "PARTIAL",
+            "mass_curvature_observable.selected_quantum_mass_operator": false,
+            "mass_curvature_observable.selected_quantum_kretschmann_operator": false
+          }
+        }
+      ],
+      "kill_if": [
+        "quantum_curvature_claim_without_selected_operator",
+        "operator_or_quadratic_form_domain_unspecified"
+      ]
+    },
+    {
+      "id": "regulator.ks_curvature_tail",
+      "gate": "REGULATOR",
+      "status": "FAIL",
+      "blocking": true,
+      "requirement": "Show finite regulator removal for the inverse-radius moments needed by the chosen curvature quadratic form.",
+      "evidence": [
+        {
+          "path": "research/wdw_tail_results/summary.json",
+          "expect": {
+            "full_unbounded_moment_finite_convergence": "FAILED for q=2,4,6 in this regulator study; no finite value reported"
+          }
+        }
+      ],
+      "kill_if": [
+        "inverse_radius_moment_does_not_converge"
+      ]
+    },
+    {
+      "id": "known_limits.schwarzschild_ks_bridge",
+      "gate": "KNOWN_LIMIT",
+      "status": "PASS",
+      "blocking": true,
+      "requirement": "Recover the classical Schwarzschild interior, areal radius and mass observable.",
+      "evidence": [
+        {
+          "path": "verification/schwarzschild_ks_bridge_verified_run.json",
+          "expect": {
+            "bridge_decision": "PASS"
+          }
+        }
+      ]
+    },
+    {
+      "id": "known_limits.semiclassical",
+      "gate": "KNOWN_LIMIT",
+      "status": "PENDING",
+      "blocking": true,
+      "requirement": "Demonstrate a common-state semiclassical limit for the selected clock, inner product, ordering and mass/curvature observable.",
+      "evidence": [],
+      "kill_if": [
+        "semiclassical_limit_mismatch"
+      ]
+    },
+    {
+      "id": "numerical.ks_quantum_audit",
+      "gate": "NUMERICAL",
+      "status": "PASS",
+      "blocking": false,
+      "requirement": "Reproduce the stored KS quantum audit diagnostics and preserve negative/partial results.",
+      "evidence": [
+        {
+          "path": "verification/ks_quantum_audit_verified_run.json",
+          "expect": {
+            "ci.conclusion": "success"
+          }
+        }
+      ]
+    },
+    {
+      "id": "claim.compiler",
+      "gate": "CLAIM_COMPILER",
+      "status": "PASS",
+      "blocking": false,
+      "requirement": "Compile scoped labels from the KS obligations without promoting around partial/failed gates.",
+      "evidence": [
+        {
+          "path": "tools/check_physics_audit.py"
+        }
+      ]
+    }
+  ]
+}
