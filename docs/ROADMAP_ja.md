@@ -310,8 +310,8 @@ M_D(T)=U(T)M_0U(T)^dagger.
 ]
 
 finite boxではpositive/Hermitian、physical-KG adjointness、mass expectation保存がPASS。
-hとgridを同時精密化するとclassical packet-center massへのrelative errorは
-0.508→0.171→0.0720→0.0350 と低下した。
+hとgridを同時精密化し、同じGaussian Wigner ensembleのclassical mass平均と比較するとrelative errorは
+0.203→0.0523→0.0170→0.00826 と低下した。packet-center比較は別diagnosticとして保持する。
 
 ただしcontinuum quadratic-form closureとordering uniquenessは未証明なのでmass gateはPARTIAL。
 
