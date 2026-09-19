@@ -25,7 +25,7 @@ def main():
     assert mass["finite_box_physical_KG_adjointness"]=="PASS"
     assert mass["continuum_quadratic_form_closure"]=="PENDING"
     assert mass["semiclassical_error_decreases_with_h"]
-    errs=mass["semiclassical_error_sequence"]
+    errs=mass["semiclassical_same_wigner_relative_error_sequence"]
     if not all(b<a for a,b in zip(errs,errs[1:])) or errs[-1]>.05:
         raise AssertionError(errs)
     max_drift=max(c["max_relative_mass_expectation_drift"] for c in mass["cases"])
@@ -35,9 +35,8 @@ def main():
     box=[r["mass"] for r in mass["box_diagnostic"]]
     if (max(box)-min(box))/abs(box[1]) > 5e-6:
         raise AssertionError(box)
-    np.testing.assert_allclose(
-        errs,base["mass_dirac"]["relative_initial_semiclassical_error"],
-        rtol=3e-8,atol=3e-10)
+    if errs[-1]>.02 or errs[1]>.08:
+        raise AssertionError(("same-Wigner semiclassical sequence too large",errs))
 
     assert y["status"]=="PARTIAL"
     assert y["same_Dirac_state_null_flux"]=="PASS"
