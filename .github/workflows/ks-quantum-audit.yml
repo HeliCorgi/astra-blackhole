@@ -2,11 +2,13 @@ name: KS black-hole quantum audit
 on:
   push:
     branches:
+      - main
       - audit/ks-quantum-gates
     paths:
       - 'research/ks_*_audit.py'
       - 'audit/ks_black_hole_obligations.json'
       - 'verification/ks_black_hole_claims.json'
+      - 'verification/ks_quantum_audit_verified_run.json'
       - 'research/ks_black_hole_audit_results/**'
       - '.github/workflows/ks-quantum-audit.yml'
       - 'research/wdw_model.py'
@@ -18,6 +20,7 @@ on:
       - 'research/ks_*_audit.py'
       - 'audit/ks_black_hole_obligations.json'
       - 'verification/ks_black_hole_claims.json'
+      - 'verification/ks_quantum_audit_verified_run.json'
       - 'research/ks_black_hole_audit_results/**'
       - '.github/workflows/ks-quantum-audit.yml'
       - 'research/wdw_model.py'
