@@ -1,0 +1,110 @@
+{
+  "classical_affine_structure": {
+    "affine_bracket": "{E,mu0}=-mu0",
+    "canonical_variables": "E=sqrt(p_x^2+exp(-2x)), u=asinh(p_x exp(x)); {u,E}=1",
+    "reference_mass": "mu0=(1/4)exp(x)E(E+p_x)=(E/4)exp(u)",
+    "status": "PASS",
+    "symbolic": {
+      "poisson_E_mu_plus_mu": "0",
+      "poisson_mu_E_minus_mu": "0",
+      "poisson_u_E": "1"
+    }
+  },
+  "declared_mass_candidate_negative_control": {
+    "finite_box_controls": [
+      {
+        "commutator_antihermiticity_residual": 4.39667939217452e-13,
+        "dx": 0.08,
+        "h": 0.2,
+        "left": -4.0,
+        "n": 149,
+        "relative_residual_for_[H,M0]=-ihM0": 1.6208417247100266,
+        "right": 8.0
+      },
+      {
+        "commutator_antihermiticity_residual": 6.779025578076014e-13,
+        "dx": 0.08,
+        "h": 0.2,
+        "left": -4.0,
+        "n": 199,
+        "relative_residual_for_[H,M0]=-ihM0": 1.6208419878563711,
+        "right": 12.0
+      },
+      {
+        "commutator_antihermiticity_residual": 9.605279198193411e-13,
+        "dx": 0.08,
+        "h": 0.2,
+        "left": -4.0,
+        "n": 249,
+        "relative_residual_for_[H,M0]=-ihM0": 1.6208419863749297,
+        "right": 16.0
+      }
+    ],
+    "interpretation": "The O(1) residual is expected to remain nonzero because exact affine covariance is incompatible with the semibounded positive-frequency Hilbert-space assumptions used by the no-go. This is not a closability failure.",
+    "relation_tested": "[H,M0]=-i h M0",
+    "status": "NOT_EXACT_AFFINE_COVARIANT_ON_FINITE_BOX"
+  },
+  "limitations": [
+    "The Weyl no-go assumes exact covariance for all real clock shifts and self-adjointness/positivity of M; weaker semiclassical covariance is not excluded.",
+    "The Cavaglia et al. operator uses a different canonical representation and gauge-fixed Hilbert space; its deficiency indices are not transferred to M0.",
+    "Finite-box commutator residuals are negative controls only and are not continuum proofs.",
+    "No curvature or singularity claim follows from this audit."
+  ],
+  "literature_comparison": {
+    "Cavaglia_deAlfaro_Filippov_1995": "A different Schwarzschild minisuperspace/gauge-fixed quantization finds an affine invariant algebra and a Hermitian mass operator J that has no self-adjoint extension because its conjugate variable has half-line support, while J^2 admits self-adjoint realizations. This is a comparison/warning, not an identification with repository M0."
+  },
+  "mass_continuum_form": {
+    "reason": "The no-go excludes exact affine covariance as a selection principle but neither proves nor disproves closability of q_M=(1/4)<H exp(X/2)psi,(I+V)H exp(X/2)psi>.",
+    "status": "PENDING",
+    "unchanged": true
+  },
+  "model": "Vacuum Schwarzschild/Kantowski-Sachs positive-frequency WDW minisuperspace",
+  "null_coordinate_bridge": {
+    "constraint": "C=-4 U W (p_U p_W-4)",
+    "coordinates": "U=-exp(-x-T)/4, W=exp(-x+T)/4",
+    "mass": "mu=(1/8)p_T p_W; on shell mu=(W p_W^2-4U)/8",
+    "momenta": "p_T=-U p_U+W p_W, p_x=-U p_U-W p_W",
+    "status": "PASS",
+    "symbolic": {
+      "constraint_factor": "-4*U*W*(p_U*p_W - 4)",
+      "mass_on_shell": "-U/2 + W*p_W**2/8",
+      "mass_pT_pW_over_8": "p_W*(-U*p_U + W*p_W)/8",
+      "pT2_minus_px2": "-4*U*W*p_U*p_W"
+    }
+  },
+  "omitted_variables": [
+    "matter",
+    "inhomogeneous modes",
+    "environment"
+  ],
+  "ordering_selection": {
+    "finding": "Exact quantum preservation of the classical affine scaling law cannot be imposed together with semibounded H and nonzero positive self-adjoint mass in the selected sector.",
+    "status": "FAIL_FOR_EXACT_AFFINE_COVARIANCE_CRITERION"
+  },
+  "quantum_affine_covariance_no_go": {
+    "assumptions": [
+      "H is self-adjoint and semibounded (the selected positive-frequency sector has spectrum [0,infinity)).",
+      "M is a nonzero positive self-adjoint operator; restrict to its support so log(M) is defined by spectral calculus.",
+      "Exact covariance U(t) M U(t)^*=exp(-t) M holds for all real t, U(t)=exp(-iHt/h)."
+    ],
+    "conclusion": "No nonzero positive self-adjoint M on the selected semibounded positive-frequency Hilbert space can obey the full classical affine covariance exactly for all real t.",
+    "scope": "This blocks exact affine covariance as an ordering-uniqueness principle. It does not decide closability of the declared q_M form, which intentionally uses relational transport rather than an exact affine commutator law.",
+    "status": "PASS",
+    "steps": [
+      "Q=log(M) gives U(t) Q U(t)^*=Q-t I.",
+      "W(s)=exp(i s Q) therefore obeys U(t)W(s)=exp(-i s t)W(s)U(t).",
+      "Hence W(s)^* H W(s)=H+h s I for every real s.",
+      "Unitary conjugation preserves spectrum, so spec(H)=spec(H)+h s for every real s.",
+      "A nonempty semibounded spectrum cannot be invariant under all real translations."
+    ]
+  },
+  "reproducible_command": "python research/ks_affine_mass_obstruction_audit.py --out artifacts/ks-affine-mass/summary.json",
+  "retained_variables": [
+    "x",
+    "p_x",
+    "T positive-frequency branch"
+  ],
+  "schema": 1,
+  "status": "PARTIAL",
+  "units": "dimensionless repository conventions"
+}
