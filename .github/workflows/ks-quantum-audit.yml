@@ -4,6 +4,7 @@ on:
     branches:
       - main
       - audit/ks-quantum-gates
+      - audit/ks-quantum-refinement
     paths:
       - 'research/ks_*_audit.py'
       - 'tools/check_ks_quantum_audit_results.py'
