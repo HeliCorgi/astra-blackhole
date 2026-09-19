@@ -117,13 +117,16 @@ Schwarzschild/Kantowski–Sachs側はBianchi IX timeless targetと別のmachine-
 現在:
 
 - classical Schwarzschild/KS bridge: PASS
-- classical T / areal-radius clock admissibility: PASSだが、quantum multi-clock domainを含むclock gateはPARTIAL
-- finite-box positive-frequency L2 ↔ KG same-state map: PASSだがcontinuum (H^{-1/2}) domain未解決のためPARTIAL
+- T / areal-radius Y clock のclassical・same-Dirac-state slice比較: PASS
+- standalone Y-time inverse-p_X continuum domain: PENDING
+- finite-box positive-frequency L2 ↔ KG same-state map: PASS
+- continuum H^(-1/2) completion/domain: PENDING
 - explicit Sturm–Liouville factor-ordering family: FAIL / sensitive
-- quantum mass/Kretschmann ordering-domain: PARTIAL — local constraint-kernel family fails flat-L2 adjoint compatibility and does not preserve the selected positive-frequency sector in the tested finite-box realization
-- inverse-radius regulator removal: FAIL
-- common-state semiclassical limit: PENDING
+- positive-frequency physical-KG mass Dirac candidate: finite-box PASS、continuum quadratic-form closure / uniquenessはPARTIAL
+- declared selected-mass positive Kretschmann forms: FAIL
+- inverse-radius / selected-curvature regulator removal: FAIL
+- common-state semiclassical limit: PARTIAL（mass candidateのh-scaled sequenceのみ進展）
 
 したがってKS targetのclaim compilerは `ORDERING-SENSITIVE`,
 `REGULATOR-UNSTABLE`, `PHYSICAL INTERPRETATION NOT IDENTIFIED` を保持する。
-詳細は `docs/KS_QUANTUM_AUDIT_ja.md`。
+詳細は `docs/KS_QUANTUM_AUDIT_ja.md` と `docs/KS_PHYSICAL_MASS_Y_CLOCK_CURVATURE_AUDIT_ja.md`。
