@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "date": "2026-09-19",
+  "branch_head": "f4923b648279fd32e440c978a423ca54bafa7c00",
+  "workflow": {
+    "name": "KS black-hole quantum audit",
+    "run_id": 35431707894,
+    "job_id": 105867377340,
+    "conclusion": "success",
+    "artifact_id": 10580259395,
+    "artifact_sha256": "15474089a90589dd777d4296313f97e4a448e710c23157af73fcfa39c74f34c0"
+  },
+  "first_run": {
+    "run_id": 35431549143,
+    "conclusion": "failure",
+    "reason": "Implementation typo in result serialization (`false` instead of Python `False`) after the first three audits had completed; not a physics failure.",
+    "corrected_by_commit": "d37aa3ecfc6bff7728816917029a10268d07b891"
+  },
+  "decisions": {
+    "classical_T_clock": "PASS",
+    "classical_Y_clock": "PASS",
+    "quantum_multi_clock_equivalence": "PENDING",
+    "finite_box_same_state_L2_KG_map": "PASS",
+    "continuum_L2_KG_completion": "PENDING",
+    "factor_ordering": "FAIL / sensitive",
+    "quantum_mass_operator": "NOT SELECTED",
+    "quantum_kretschmann_operator": "NOT SELECTED",
+    "curvature_tail_regulator": "FAIL"
+  },
+  "claim_labels": [
+    "MODEL-INTERNAL NUMERICAL RESULT",
+    "ORDERING-SENSITIVE",
+    "REGULATOR-UNSTABLE",
+    "PHYSICAL INTERPRETATION NOT IDENTIFIED"
+  ],
+  "scope_note": "The classical T and areal-radius clocks are admissible and the finite-box positive-frequency L2/KG same-state map is explicit. The audit blocks stronger black-hole singularity claims because quantum multi-clock equivalence and the continuum inner-product completion remain open, an admissible ordering family changes finite-h predictions materially, and no domain-safe quantum mass/Kretschmann operator has been selected.",
+  "license_files_changed": false,
+  "lean_changed": false
+}
