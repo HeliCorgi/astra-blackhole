@@ -2,12 +2,16 @@ name: KS physical mass Dirac audit
 on:
   push:
     branches:
+      - main
       - audit/ks-physical-mass
     paths:
       - 'research/ks_mass_dirac_observable_audit.py'
       - 'research/ks_y_clock_same_state_audit.py'
       - 'research/ks_kretschmann_candidate_audit.py'
       - 'research/ks_mass_dirac_results/**'
+      - 'tools/check_ks_mass_dirac_results.py'
+      - 'audit/ks_black_hole_obligations.json'
+      - 'verification/ks_black_hole_claims.json'
       - 'verification/ks_mass_dirac_verified_run.json'
       - '.github/workflows/ks-mass-dirac-audit.yml'
       - 'research/wdw_model.py'
@@ -17,6 +21,9 @@ on:
       - 'research/ks_y_clock_same_state_audit.py'
       - 'research/ks_kretschmann_candidate_audit.py'
       - 'research/ks_mass_dirac_results/**'
+      - 'tools/check_ks_mass_dirac_results.py'
+      - 'audit/ks_black_hole_obligations.json'
+      - 'verification/ks_black_hole_claims.json'
       - 'verification/ks_mass_dirac_verified_run.json'
       - '.github/workflows/ks-mass-dirac-audit.yml'
       - 'research/wdw_model.py'
@@ -50,6 +57,17 @@ jobs:
         run: |
           python research/ks_kretschmann_candidate_audit.py \
             --out artifacts/ks-mass/kretschmann.json
+      - name: Check physical-mass follow-up regression
+        run: |
+          python tools/check_ks_mass_dirac_results.py \
+            --artifact-dir artifacts/ks-mass \
+            --baseline research/ks_mass_dirac_results/summary.json
+      - name: Compile KS claim ledger
+        run: |
+          python tools/check_physics_audit.py \
+            --obligations audit/ks_black_hole_obligations.json \
+            --claims-out artifacts/ks-mass/claims.json \
+            --check-against verification/ks_black_hole_claims.json
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
