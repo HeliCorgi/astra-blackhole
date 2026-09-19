@@ -5,6 +5,7 @@ on:
       - audit/ks-physical-mass
     paths:
       - 'research/ks_mass_dirac_observable_audit.py'
+      - 'research/ks_y_clock_same_state_audit.py'
       - 'research/ks_mass_dirac_results/**'
       - 'verification/ks_mass_dirac_verified_run.json'
       - '.github/workflows/ks-mass-dirac-audit.yml'
@@ -12,6 +13,7 @@ on:
   pull_request:
     paths:
       - 'research/ks_mass_dirac_observable_audit.py'
+      - 'research/ks_y_clock_same_state_audit.py'
       - 'research/ks_mass_dirac_results/**'
       - 'verification/ks_mass_dirac_verified_run.json'
       - '.github/workflows/ks-mass-dirac-audit.yml'
