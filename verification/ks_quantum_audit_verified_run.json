@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "date": "2026-09-19",
+  "target": "KS black-hole quantum audit",
+  "branch": "audit/ks-quantum-gates",
+  "ci": {
+    "run_id": 35432040562,
+    "job_id": 105868265853,
+    "conclusion": "success",
+    "artifact_id": 10580014950,
+    "artifact_sha256": "40286e08caca09ad638a15d15fb7acb49984edf5464f435b79b69f02a161705e"
+  },
+  "results": {
+    "clock": "PARTIAL",
+    "inner_product": "PARTIAL",
+    "factor_ordering": "FAIL",
+    "factor_ordering_finding": "sensitive",
+    "mass_curvature_observable": "PARTIAL"
+  },
+  "headline_metrics": {
+    "factor_ordering_max_mean_x_spread": 0.5256305452623882,
+    "existing_box_mean_x_tolerance": 0.0003,
+    "finite_box_same_state_map_error_scale": "<1.3e-14",
+    "mass_weyl6_dx02_relative_drift": 0.01691577704216439,
+    "mass_symmetric_dx02_relative_drift": 0.04789957536093952
+  },
+  "scope_note": "The CI success means the audit reproduced its intended PASS/PARTIAL/FAIL findings. It does not mean the blocked physical claims passed.",
+  "branch_head": "04e9cb5b63c945512f1326b1e11ee1562b91091f",
+  "regression": "PASS",
+  "claim_labels": [
+    "MODEL-INTERNAL NUMERICAL RESULT",
+    "ORDERING-SENSITIVE",
+    "REGULATOR-UNSTABLE",
+    "PHYSICAL INTERPRETATION NOT IDENTIFIED"
+  ],
+  "note": "KS quantum audit successfully reproduces its intended PASS/PARTIAL/FAIL findings and the saved claim baseline. Classical T and Y clocks pass monotonicity tests but quantum Y-clock domain remains unresolved; the same-state L2/KG finite-box map passes but continuum H^(-1/2) domain remains unresolved; the declared ordering family is sensitive; no quantum mass/Kretschmann operator is selected.",
+  "claim_baseline": "verification/ks_black_hole_claims.json"
+}

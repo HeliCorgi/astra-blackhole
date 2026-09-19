@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "target": {
+    "id": "ks_schwarzschild_quantum_singularity",
+    "model": "Vacuum Schwarzschild interior via Kantowski-Sachs WDW minisuperspace",
+    "baseline_commit": "51d0c8ccfb318832503080d6603f989ead8fb99c",
+    "scope_note": "Audit the path from the verified classical Schwarzschild/KS bridge to clock choice, physical inner product, factor ordering and mass/curvature observables without treating minisuperspace consistency as full quantum gravity."
+  },
+  "labels": [
+    "MODEL-INTERNAL NUMERICAL RESULT",
+    "ORDERING-SENSITIVE",
+    "REGULATOR-UNSTABLE",
+    "PHYSICAL INTERPRETATION NOT IDENTIFIED"
+  ],
+  "gate_status": {
+    "GR_REDUCTION": "PASS",
+    "CLOCK": "PARTIAL",
+    "INNER_PRODUCT_DOMAIN": "PARTIAL",
+    "FACTOR_ORDERING": "FAIL",
+    "REGULATOR": "FAIL",
+    "KNOWN_LIMIT": "PENDING",
+    "NUMERICAL": "PASS",
+    "CLAIM_COMPILER": "PASS"
+  },
+  "promotion_blockers": [
+    "clock.ks_T_and_areal",
+    "inner_product.ks_positive_frequency",
+    "factor_ordering.ks_sturm_liouville",
+    "inner_product.ks_mass_curvature_domain",
+    "regulator.ks_curvature_tail",
+    "known_limits.semiclassical"
+  ],
+  "failed_obligations": [
+    "factor_ordering.ks_sturm_liouville",
+    "regulator.ks_curvature_tail"
+  ],
+  "partial_obligations": [
+    "clock.ks_T_and_areal",
+    "inner_product.ks_positive_frequency",
+    "inner_product.ks_mass_curvature_domain"
+  ],
+  "pending_obligations": [
+    "known_limits.semiclassical"
+  ],
+  "interpretation_rule": "Labels describe only passed scoped gates. A blocking PENDING/PARTIAL/FAIL forces PHYSICAL INTERPRETATION NOT IDENTIFIED."
+}

@@ -107,3 +107,23 @@ lake env lean -DwarningAsError=true Audit.lean
 - true PML / exterior complex scaling / continuum scattering limit
 
 従って、現時点で timeless Bianchi IX class operator に物理履歴確率を割り当てない。
+
+
+## KS black-hole quantum target
+
+Schwarzschild/Kantowski–Sachs側はBianchi IX timeless targetと別のmachine-readable targetとして
+`audit/ks_black_hole_obligations.json` に分離した。
+
+現在:
+
+- classical Schwarzschild/KS bridge: PASS
+- classical T / areal-radius clock admissibility: PASSだが、quantum multi-clock domainを含むclock gateはPARTIAL
+- finite-box positive-frequency L2 ↔ KG same-state map: PASSだがcontinuum (H^{-1/2}) domain未解決のためPARTIAL
+- explicit Sturm–Liouville factor-ordering family: FAIL / sensitive
+- quantum mass/Kretschmann ordering-domain: PARTIAL
+- inverse-radius regulator removal: FAIL
+- common-state semiclassical limit: PENDING
+
+したがってKS targetのclaim compilerは `ORDERING-SENSITIVE`,
+`REGULATOR-UNSTABLE`, `PHYSICAL INTERPRETATION NOT IDENTIFIED` を保持する。
+詳細は `docs/KS_QUANTUM_AUDIT_ja.md`。

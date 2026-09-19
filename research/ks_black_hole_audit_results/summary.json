@@ -1,0 +1,90 @@
+{
+  "schema": 1,
+  "target": "Schwarzschild/Kantowski-Sachs quantum singularity audit",
+  "clock": {
+    "status": "PARTIAL",
+    "classical_T_clock": "PASS",
+    "classical_areal_clock_Y": "PASS",
+    "x_as_global_clock": "FAIL",
+    "quantum_multi_clock_equivalence": "PENDING",
+    "exact": {
+      "T": "{T,C}=2 p_T",
+      "x": "{x,C}=-2 p_x",
+      "Y": "{Y,C}=2(p_T-p_x)"
+    },
+    "alternative_quantum_issue": "Y=x+T gives p_Y=-(p_X^2+exp(-2X))/(2p_X), so inverse-p_X domain is required."
+  },
+  "inner_product": {
+    "status": "PARTIAL",
+    "finite_box_positive_frequency_same_state_map": "PASS",
+    "continuum_H_minus_half_domain": "PENDING",
+    "map": "psi_KG=sqrt(h/2) H^(-1/2) chi_L2; chi_L2=sqrt(2/h) H^(1/2) psi_KG",
+    "positive_frequency_KG_inner_product": "(psi,phi)_KG=(2/h)<psi,H phi>_L2",
+    "finite_box_error_bound_observed": 1.3e-14,
+    "naive_same_field_x_difference_max_observed": 0.29746288521199427,
+    "threshold_diagnostic": {
+      "right": [
+        16,
+        24,
+        32
+      ],
+      "min_energy": [
+        0.043258329153775296,
+        0.027907633203519664,
+        0.020593370440400344
+      ],
+      "inverse_sqrt_min_energy": [
+        4.808007423773393,
+        5.986024594097609,
+        6.96845153811682
+      ]
+    }
+  },
+  "factor_ordering": {
+    "status": "FAIL",
+    "finding": "sensitive",
+    "family": "A_q=-h^2 exp(-q x) d_x(exp(q x)d_x)+exp(-2x), q in {-2,-1,0,1,2}",
+    "weighted_measure": "L2(exp(qx) dx)",
+    "flat_form": "A_q^flat=A_0+h^2 q^2/4",
+    "same_principal_symbol": true,
+    "semiclassical_difference": "O(h^2)",
+    "existing_box_mean_x_tolerance": 0.0003,
+    "max_mean_x_ordering_spread": 0.5256305452623882,
+    "h02_q1_spread": 0.034439393257282624,
+    "h02_q2_spread": 0.13277227149532367,
+    "h01_q1_spread": 0.007892874640435643,
+    "h01_q2_spread": 0.03135835661364528,
+    "scope": "Sensitivity is established only within the declared ordering/measure stress-test family; it is not an exhaustive classification of physically admissible orderings."
+  },
+  "mass_curvature_observable": {
+    "status": "PARTIAL",
+    "selected_quantum_mass_operator": false,
+    "selected_quantum_kretschmann_operator": false,
+    "kernel_preserving_family": "M_d=(1/4)e^(x-T)[p_T^2-p_T p_x+2 d h(p_T-p_x)]",
+    "exact_commutator": "[M_d,C]=-(i h/2)e^(x-T)(p_T+2 d h) C",
+    "flat_L2_formal_symmetry_within_family": "NO_SOLUTION",
+    "flat_L2_adjoint_conflict": [
+      "Im(d)=1/4 from d_x coefficient",
+      "Im(d)=3/4 from d_T coefficient"
+    ],
+    "finite_box_dx02": {
+      "symmetric_mass_expectation_drift": 0.04789957536093952,
+      "weyl6_mass_expectation_drift": 0.01691577704216439
+    },
+    "continuum_domain": {
+      "exponential_moments": "Existing tail audit FAILED finite convergence for q=2,4,6.",
+      "mass_warning": "Orderings requiring exp(x) psi in L2 encounter the q=2 domain problem.",
+      "curvature_warning": "Bare r^-6 quadratic form is proportional to the q=6 exponential moment."
+    },
+    "scope": "The flat-L2 conflict is not a no-go theorem for the physical KG inner product or nonlocal Dirac-observable orderings; finite-box drift is not extrapolated as a continuum theorem."
+  },
+  "overall": {
+    "physical_interpretation": "BLOCKED",
+    "main_findings": [
+      "Classical T and areal-radius clocks are admissible, but quantum multi-clock equivalence is unresolved.",
+      "Finite-box positive-frequency L2 and KG descriptions are isometric for the same state only after the H^(±1/2) map.",
+      "The declared factor-ordering family gives resolved ordering dependence.",
+      "No domain-safe quantum mass/Kretschmann operator has yet been selected."
+    ]
+  }
+}

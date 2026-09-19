@@ -1,0 +1,74 @@
+name: KS black-hole quantum audit
+on:
+  push:
+    branches:
+      - main
+      - audit/ks-quantum-gates
+    paths:
+      - 'research/ks_*_audit.py'
+      - 'audit/ks_black_hole_obligations.json'
+      - 'verification/ks_black_hole_claims.json'
+      - 'verification/ks_quantum_audit_verified_run.json'
+      - 'research/ks_black_hole_audit_results/**'
+      - '.github/workflows/ks-quantum-audit.yml'
+      - 'research/wdw_model.py'
+      - 'research/wdw_results/summary.json'
+      - 'research/wdw_tail_results/summary.json'
+      - 'research/chiba_results/summary.json'
+  pull_request:
+    paths:
+      - 'research/ks_*_audit.py'
+      - 'audit/ks_black_hole_obligations.json'
+      - 'verification/ks_black_hole_claims.json'
+      - 'verification/ks_quantum_audit_verified_run.json'
+      - 'research/ks_black_hole_audit_results/**'
+      - '.github/workflows/ks-quantum-audit.yml'
+      - 'research/wdw_model.py'
+      - 'research/wdw_results/summary.json'
+      - 'research/wdw_tail_results/summary.json'
+      - 'research/chiba_results/summary.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - name: Run KS clock audit
+        run: python research/ks_clock_audit.py --out artifacts/ks-quantum/clock.json
+      - name: Run same-state L2/KG audit
+        run: python research/ks_inner_product_audit.py --out artifacts/ks-quantum/inner_product.json
+      - name: Run factor-ordering audit
+        run: python research/ks_factor_ordering_audit.py --out artifacts/ks-quantum/factor_ordering.json
+      - name: Run mass/curvature ordering-domain audit
+        run: python research/ks_observable_domain_audit.py --out artifacts/ks-quantum/observable_domain.json
+      - name: Check KS audit regression
+        run: |
+          python tools/check_ks_quantum_audit_results.py \
+            --artifact-dir artifacts/ks-quantum \
+            --baseline research/ks_black_hole_audit_results/summary.json
+      - name: Compile KS claims when baseline is present
+        run: |
+          if test -f audit/ks_black_hole_obligations.json; then
+            python tools/check_physics_audit.py               --obligations audit/ks_black_hole_obligations.json               --claims-out artifacts/ks-quantum/claims.json
+            if test -f verification/ks_black_hole_claims.json; then
+              python tools/check_physics_audit.py                 --obligations audit/ks_black_hole_obligations.json                 --claims-out artifacts/ks-quantum/claims-check.json                 --check-against verification/ks_black_hole_claims.json
+            fi
+          fi
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: ks-black-hole-quantum-audit
+          path: artifacts/ks-quantum/
+          retention-days: 14
