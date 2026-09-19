@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "target": "Schwarzschild interior -> vacuum Kantowski-Sachs -> repository WDW classical bridge",
+  "conventions": {
+    "spacetime_signature": "(-,+,+,+)",
+    "schwarzschild_geometric_mass": "mu = G*M_phys; repo units may set G=1",
+    "interior_range": "0 < rho < 2*mu",
+    "spatial_coordinate_rescaling": "chi_S = lambda * chi, lambda>0",
+    "ks_metric": "ds^2=-N^2 dt^2+A^2 dchi^2+R^2 dOmega_2^2",
+    "misner_variables": [
+      "A=exp(sqrt(3)*beta)",
+      "R=exp(-sqrt(3)*(Omega+beta))"
+    ],
+    "normalized_action": "ADM+GHY time-boundary action divided by common fiducial factor L0/(4G)",
+    "canonical_brackets": [
+      "{Omega,P_Omega}=1",
+      "{beta,P_beta}=1"
+    ],
+    "repo_variables": [
+      "x=sqrt(3)*Omega-log(4)",
+      "T=sqrt(3)*beta",
+      "p_x=P_Omega/sqrt(3)",
+      "p_T=P_beta/sqrt(3)"
+    ]
+  },
+  "expected": {
+    "schwarzschild_interior": {
+      "F": "2*mu/rho-1",
+      "N": "1/sqrt(F)",
+      "A": "lambda*sqrt(F)",
+      "R": "rho"
+    },
+    "spatial_curvature": "R3=2/R^2",
+    "kinetic_invariant": "KijKij-K^2=6/N^2*(-Omega_dot^2+beta_dot^2)",
+    "normalized_lagrangian": "L=6*exp(-2*sqrt(3)*Omega-sqrt(3)*beta)/N*(-Omega_dot^2+beta_dot^2)+2*N*exp(sqrt(3)*beta)",
+    "momenta": {
+      "P_Omega": "-12*exp(-2*sqrt(3)*Omega-sqrt(3)*beta)*Omega_dot/N",
+      "P_beta": "12*exp(-2*sqrt(3)*Omega-sqrt(3)*beta)*beta_dot/N"
+    },
+    "misner_constraint": "P_Omega^2-P_beta^2+48*exp(-2*sqrt(3)*Omega)=0",
+    "repo_constraint": "p_T^2-p_x^2-exp(-2*x)=0",
+    "constraint_relation": "C_repo=-(1/3)*C_Misner",
+    "areal_radius": "r=(1/4)*exp(-x-T)",
+    "schwarzschild_solution_momenta": {
+      "p_T": "-4*mu*lambda",
+      "p_x": "4*lambda*(mu-rho)"
+    },
+    "mass_observable": "mu_D=(1/4)*exp(x-T)*p_T*(p_T-p_x)",
+    "mass_poisson_relation": "{mu_D,C_repo}=-(p_T/2)*exp(x-T)*C_repo",
+    "kretschmann_classical": "K=48*mu^2/r^6"
+  },
+  "scope_note": "This is a classical canonical bridge. It does not by itself justify the positive-frequency branch, L2 inner product, factor ordering, or a quantum curvature operator."
+}
