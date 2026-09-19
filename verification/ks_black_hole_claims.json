@@ -24,7 +24,6 @@
   },
   "promotion_blockers": [
     "clock.ks_Y_inverse_pX_domain",
-    "inner_product.ks_continuum_completion",
     "factor_ordering.ks_sturm_liouville",
     "inner_product.ks_mass_dirac_candidate",
     "inner_product.ks_mass_curvature_domain",
@@ -41,8 +40,7 @@
     "known_limits.semiclassical"
   ],
   "pending_obligations": [
-    "clock.ks_Y_inverse_pX_domain",
-    "inner_product.ks_continuum_completion"
+    "clock.ks_Y_inverse_pX_domain"
   ],
   "interpretation_rule": "Labels describe only passed scoped gates. A blocking PENDING/PARTIAL/FAIL forces PHYSICAL INTERPRETATION NOT IDENTIFIED."
 }

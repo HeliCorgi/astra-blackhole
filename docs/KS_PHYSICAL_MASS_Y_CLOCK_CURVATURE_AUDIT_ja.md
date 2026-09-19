@@ -549,3 +549,20 @@ claim labelsは変わらない:
 4. それでもdomain-safe \(K\) が得られなければ、このminisuperspace/quantizationでのcurvature singularity persistenceを「scoped negative result」として評価する。
 
 有限boxで巨大なKを得たことだけを、自然界のblack-hole singularityの証明とは扱わない。
+
+
+## 16. 2026-09-20 continuum threshold / KG completion follow-up
+
+[KS continuum threshold/domain audit](KS_CONTINUUM_DOMAIN_AUDIT_ja.md) で、positive-frequency Hamiltonianのcontinuum Liouville spectrumを明示した。
+
+- normalized continuum mode: `phi_k=pi^(-1)sqrt(2k sinh(pi k))K_(ik)(e^(-x)/h)`, `E=hk`
+- threshold: `phi_k/k -> sqrt(2/pi)K0(e^(-x)/h)`
+- h=.2 reference Gaussian: `|B0|=0.0143884187466872`, domain/grid control relative spread約2.05e-15
+- therefore `c(k)=B0 k+O(k^3)` and the packet lies in ordinary-L2 `D(H^-1/2)` and `D(H^-1)`; generic nonzero-B0 states reach the logarithmic threshold obstruction at `H^-3/2`
+- positive-frequency KG spaceをenergy norm completionとして定義すると、`S=sqrt(h/2)H^-1/2` はL2からその完成空間へのunitary mapへ延長できる
+
+従って **continuum positive-frequency KG completionはPASS** へ更新する。これはordinary-L2で `H^-1/2` がboundedになったという意味ではない。
+
+mass candidateについては、`HV+VH=2P` と `|P|<=H` から `-I<=V<=I`, `I+V>=0` をcontinuumで得た。しかしfinite-boxの min eig(I+V)はbox拡大で0へ向かうため、coercive gapはない。したがって `q_M` のclosability / associated self-adjoint operatorは引き続き **PENDING**。
+
+「次に残ったもの」の優先順位は変えず、まずmass form closabilityを解析し、その次にY-clock `p_X^-1` のstate-specific continuum domainへ進む。

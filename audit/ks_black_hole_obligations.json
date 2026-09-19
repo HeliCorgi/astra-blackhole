@@ -94,21 +94,21 @@
     {
       "id": "inner_product.ks_continuum_completion",
       "gate": "INNER_PRODUCT_DOMAIN",
-      "status": "PENDING",
-      "blocking": true,
-      "requirement": "Specify the continuum physical KG/induced Hilbert completion and domains of H^(±1/2) at the zero-energy threshold.",
+      "status": "PASS",
+      "blocking": false,
+      "requirement": "Specify the continuum positive-frequency physical-KG Hilbert completion and the zero-threshold domains relevant to the same-state L2↔KG map.",
       "evidence": [
         {
-          "path": "research/ks_black_hole_audit_results/summary.json",
+          "path": "research/ks_continuum_domain_results/summary.json",
           "expect": {
-            "inner_product.continuum_H_minus_half_domain": "PENDING"
+            "exact_continuum_spectral_representation.status": "PASS",
+            "positive_frequency_KG_completion.status": "PASS",
+            "reference_packet_threshold.B0_nonzero": true,
+            "reference_packet_threshold.H_minus_s_threshold_tests.0.finite_at_zero_for_generic_nonzero_B0": true
           }
         }
       ],
-      "kill_if": [
-        "H_minus_half_domain_unspecified",
-        "same_state_map_not_defined_on_target_continuum_state"
-      ]
+      "note": "The physical positive-frequency KG space is the energy-norm completion of D(H^(1/2)); S=sqrt(h/2)H^(-1/2) extends by completion to a unitary map from L2. H^(-1/2) remains unbounded as an ordinary-L2 operator, but the audited Gaussian has c(k)=O(k) and lies in its ordinary-L2 domain."
     },
     {
       "id": "factor_ordering.ks_sturm_liouville",

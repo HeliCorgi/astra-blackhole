@@ -334,3 +334,15 @@ mass-applied threshold overlapもright=24, dx=.04/.02で約0.3724/0.3730と非�
 これは全てのnonlocal relational curvature observableへのno-goではない。
 次はmass formのcontinuum closability / associated self-adjoint operator、
 Y-clock zero-mode domain、そして物理的に動機づけられたnonlocal curvature候補を狭く検討する。
+
+
+### 6o. KS continuum threshold / physical-KG completion：KG gateをPASSへ更新
+
+positive-frequency KS Hamiltonian `H^2=-h^2 d_x^2+e^(-2x)` を continuum Liouville spectrum で監査した。完全規格化一般化固有関数は `phi_k=pi^(-1)sqrt(2k sinh(pi k)) K_(ik)(e^(-x)/h)`, `E=hk`。
+zero thresholdでは `phi_k/k -> sqrt(2/pi) K0(e^(-x)/h)`。現行 h=.2 Gaussian のthreshold coefficientは `|B0|=0.0143884187466872` で3つのdomain/grid controlに相対約2.1e-15で安定し、`c(k)=B0 k+O(k^3)`。従ってreference packetは ordinary-L2 の `D(H^-1/2)` と `D(H^-1)` に入り、generic nonzero-B0 stateは `H^-3/2` でlog threshold obstructionへ達する。
+
+positive-frequency KG spaceは `D(H^1/2)` を `||Psi||_KG^2=(2/h)||H^1/2 Psi||^2` で完成して定義でき、`S=sqrt(h/2)H^-1/2` はL2からこの完成空間へのunitary mapへ延長できる。したがって `inner_product.ks_continuum_completion` は **PASS** へ更新。ordinary-L2上で `H^-1/2` がunboundedである事実は保持し、全KG amplitudeをordinary-L2関数とは扱わない。
+
+mass側では `V=(i/h)[H,X]` が `HV+VH=2P` を満たし、`|P|<=H` から `-I<=V<=I`、従って `I+V>=0` をcontinuumで得る。ただしfinite-boxの min eig(I+V)は right=8/12/16 で 2.79e-4 / 4.69e-5 / 1.37e-5 と0へ向かう。よってstrict positive gapを使ったmass form closureは採用しない。
+
+次の主課題は (1) `q_M=(1/4)<H e^(X/2)psi,(I+V)H e^(X/2)psi>` のclosability / closed form / associated self-adjoint operator、(2) same Dirac stateについてのY-clock `p_X^-1` continuum domain、(3) その後のnonlocal relational curvature候補。Kretschmann explicit-radius 3 formのFAILは変更しない。
