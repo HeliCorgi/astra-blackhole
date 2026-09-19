@@ -33,7 +33,7 @@
     "REGULATOR-UNSTABLE",
     "PHYSICAL INTERPRETATION NOT IDENTIFIED"
   ],
-  "note": "Base PR #14 post-merge verification is preserved. The incremental_hardening block records the later mass-sector and ordering checks; these strengthen blockers without promoting any black-hole singularity claim.",
+  "note": "PR #18 hardens the KS quantum audit without changing its claim labels. The q-ordering family identity is exact, while the tested local constraint-kernel mass family fails to preserve the selected positive-frequency sector. Main KS audit, global physics audit, classical reproduce and publication checks all pass; quantum mass/Kretschmann selection remains blocked.",
   "claim_baseline": "verification/ks_black_hole_claims.json",
   "pull_request": {
     "number": 14,
@@ -101,5 +101,33 @@
       }
     ],
     "note": "Incremental hardening adds an exact symbolic unitary-map check for the q-ordering family and shows that the tested local constraint-kernel mass family does not preserve the selected positive-frequency sector (best relative residual about 0.991). Claim labels remain unchanged."
+  },
+  "incremental_hardening_post_merge": {
+    "pull_request": 18,
+    "merge_commit": "9119b081e3f3a443996fd879cf9743c567f7fb8a",
+    "main_ks_audit": {
+      "run_id": 35447888838,
+      "job_id": 105909886848,
+      "conclusion": "success",
+      "artifact_id": 10586021621,
+      "artifact_sha256": "fd46b88a6c59541166225789ccea9cf780d8733e4cfb10d55989740f7bbeec7b"
+    },
+    "main_physics_audit": {
+      "run_id": 35447888830,
+      "conclusion": "success"
+    },
+    "main_classical_reproduce": {
+      "run_id": 35447888831,
+      "conclusion": "success"
+    },
+    "main_ever_entered_publication": {
+      "run_id": 35447888855,
+      "conclusion": "success"
+    },
+    "findings": {
+      "ordering_family_symbolic_unitary_map_residual": "0",
+      "mass_kernel_family_best_positive_frequency_branch_residual": 0.9912981395738648,
+      "claim_labels_unchanged": true
+    }
   }
 }
