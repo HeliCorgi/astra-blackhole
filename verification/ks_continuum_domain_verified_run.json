@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "date": "2026-09-20",
+  "branch": "audit/ks-continuum-domain",
+  "branch_head": "c9c4173e839a3c30c99664574f6637fbbe5d54ae",
+  "workflow": {
+    "name": "KS continuum threshold/domain audit",
+    "run_id": 35462835315,
+    "job_id": 105949668345,
+    "conclusion": "success",
+    "artifact_id": 10590716461,
+    "artifact_sha256": "52e8b2d40fbb5a075524ee5a0a7d5c8b020614dfeb4498f2b13968c85569ff71"
+  },
+  "continuum_spectrum": {
+    "status": "PASS",
+    "normalized_liouville_modes": "PASS",
+    "reference_packet_abs_B0": 0.014388418746687245,
+    "reference_packet_abs_B0_relative_spread": 2.0495858239040685e-15,
+    "reference_packet_H_minus_half_domain": "PASS",
+    "reference_packet_H_minus_one_domain": "PASS",
+    "generic_nonzero_B0_H_minus_three_halves_threshold": "LOG_OBSTRUCTION"
+  },
+  "physical_KG_completion": {
+    "status": "PASS",
+    "construction": "energy-norm completion of D(H^(1/2))",
+    "same_state_map": "S=sqrt(h/2)H^(-1/2) extends by completion to a unitary L2 -> H_KG^+ map",
+    "ordinary_L2_H_minus_half": "UNBOUNDED_OPERATOR"
+  },
+  "continuum_velocity": {
+    "status": "PASS",
+    "bound": "-I <= V <= I",
+    "I_plus_V": "POSITIVE",
+    "finite_box_min_I_plus_V": [
+      0.00027861644081117465,
+      0.00004685085320044191,
+      0.000013651558275262765
+    ],
+    "uniform_positive_gap": "NOT_ESTABLISHED"
+  },
+  "mass_continuum_form": {
+    "status": "PENDING",
+    "closability": "PENDING",
+    "associated_self_adjoint_operator": "PENDING"
+  },
+  "y_clock_inverse_pX_domain": "PENDING",
+  "selected_mass_kretschmann_status": "FAIL_UNCHANGED",
+  "claim_labels_changed": false,
+  "claim_compiler": "PASS against verification/ks_black_hole_claims.json",
+  "local_verification": {
+    "unit_tests": "3 passed",
+    "audit_run": "PASS",
+    "regression_checker": "PASS",
+    "full_reproduce_local": "NOT_RUN_DIRECT_GITHUB_CLONE_UNAVAILABLE"
+  },
+  "license_files_changed": false,
+  "lean_changed": false,
+  "verified_scientific_head": "c9c4173e839a3c30c99664574f6637fbbe5d54ae",
+  "note": "The continuum positive-frequency KG completion gate is promoted to PASS without claiming that H^(-1/2) is bounded on ordinary L2. The selected mass quadratic form remains PENDING for closability, standalone Y-time inverse-pX remains PENDING, and selected explicit-radius Kretschmann forms remain FAIL. No black-hole singularity avoidance or persistence claim is promoted."
+}
