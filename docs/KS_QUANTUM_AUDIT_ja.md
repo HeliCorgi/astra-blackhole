@@ -396,3 +396,26 @@ langle r^{-6}angle
 - Ashtekar, Tate, Uggla, arXiv:gr-qc/9302026, 9302027 — minisuperspaceのDirac quantization、observable、deparametrizationの古典的背景。
 - Mostafazadeh, arXiv:gr-qc/0205049, 0306003 — Klein–Gordon型方程式のpositive-definite Hilbert-space structureとobservable表現の背景。
 - Franken et al., arXiv:2512.23656 — flat minisuperspaceでpath-integral measureとorderingを同時に扱い、許容orderingの物理的等価性を議論する最近の結果。今回のKS ordering stress testへその結論を自動適用したものではない。
+
+
+## 8. 2026-09-20 follow-up
+
+この文書の局所mass-ordering負検査の後、positive-frequency Hilbert sector内部から
+nonlocal/relational mass candidateを構成し直した。
+
+結果のsource of truthは
+[KS physical mass / Y-clock / Kretschmann follow-up](KS_PHYSICAL_MASS_Y_CLOCK_CURVATURE_AUDIT_ja.md)。
+
+更新点:
+
+- finite-box positive-frequency / physical-KG mass Dirac candidate: PASS
+- continuum mass quadratic-form closure / unique ordering: PENDING
+- same-Dirac-state T↔Y null-slice flux: PASS
+- standalone Y-time inverse-p_X domain: PENDING
+- selected-mass explicit-radius Kretschmann positive forms: FAIL
+- curvature regulator removal: FAIL
+
+従って、この文書中の「selected (widehatmu): なし」は
+**当時の局所ordering auditの結論**として残す。
+現在は「finite-box candidateは宣言済みだが、continuum-certified physical (widehatmu) は未確定」
+へ進んでいる。
