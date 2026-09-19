@@ -50,6 +50,11 @@ jobs:
         run: python research/ks_factor_ordering_audit.py --out artifacts/ks-quantum/factor_ordering.json
       - name: Run mass/curvature ordering-domain audit
         run: python research/ks_observable_domain_audit.py --out artifacts/ks-quantum/observable_domain.json
+      - name: Check KS audit regression
+        run: |
+          python tools/check_ks_quantum_audit_results.py \
+            --artifact-dir artifacts/ks-quantum \
+            --baseline research/ks_black_hole_audit_results/summary.json
       - name: Compile KS claims when baseline is present
         run: |
           if test -f audit/ks_black_hole_obligations.json; then
