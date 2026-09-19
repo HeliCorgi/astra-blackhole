@@ -41,6 +41,7 @@ def main():
 
     ordering=got["factor_ordering"]
     assert ordering["status"]=="FAIL" and ordering["finding"]=="sensitive"
+    assert ordering["family"]["symbolic_check"]["unitary_flat_form_residual"]=="0"
     if ordering["max_mean_x_ordering_spread"] <= 100*ordering["existing_numerical_detectability_threshold"]:
         raise AssertionError("ordering effect no longer resolved over numerical tolerance")
     np.testing.assert_allclose(
