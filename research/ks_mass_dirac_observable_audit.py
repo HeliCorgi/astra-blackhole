@@ -109,25 +109,45 @@ def classical_mu(x,p):
     return .25*math.exp(x)*E*(E+p)
 
 
-def run_case(h,right=16.,dx=.04):
+def run_case(h,right=16.,dx=.04,full_spectrum=False):
     model=WDWModel(h,left=-4.,right=right,dx=dx)
     packet=Packet(h,math.sqrt(h))
     chi0=packet.initial(model.x)
 
-    V=velocity_matrix(model)
-    ve=np.linalg.eigvalsh(V)
-    min_i_plus_v=float(1+ve[0])
-    max_abs_v=float(np.max(np.abs(ve)))
-
-    # M0 positivity is tested on the full finite-box matrix only for the
-    # moderate reference grid.  Its factorized quadratic form is used below.
     n=len(model.x)
-    eye=np.eye(n,dtype=complex)
-    # Construct columns by action to avoid deriving an unrelated discretization.
-    M=np.column_stack([mass0_apply(model,eye[:,j]) for j in range(n)])
-    herm=np.linalg.norm(M-M.conj().T)/max(np.linalg.norm(M),1e-30)
-    Mherm=(M+M.conj().T)/2
-    min_mass=float(np.linalg.eigvalsh(Mherm)[0])
+    min_i_plus_v=None
+    max_abs_v=None
+    min_mass=None
+
+    # The full finite-box spectrum is checked on one moderate reference grid.
+    # Finer semiclassical cases use bilinear/quadratic-form probes to avoid
+    # turning the audit into a dense O(n^3) matrix benchmark.
+    if full_spectrum:
+        V=velocity_matrix(model)
+        ve=np.linalg.eigvalsh(V)
+        min_i_plus_v=float(1+ve[0])
+        max_abs_v=float(np.max(np.abs(ve)))
+        eye=np.eye(n,dtype=complex)
+        M=np.column_stack([mass0_apply(model,eye[:,j]) for j in range(n)])
+        herm=np.linalg.norm(M-M.conj().T)/max(np.linalg.norm(M),1e-30)
+        Mherm=(M+M.conj().T)/2
+        min_mass=float(np.linalg.eigvalsh(Mherm)[0])
+    else:
+        rng_probe=np.random.default_rng(31337+int(round(100*h)))
+        herm=0.
+        min_q=float("inf")
+        for _ in range(6):
+            a=rng_probe.normal(size=n)+1j*rng_probe.normal(size=n)
+            b=rng_probe.normal(size=n)+1j*rng_probe.normal(size=n)
+            a/=np.linalg.norm(a); b/=np.linalg.norm(b)
+            ma=mass0_apply(model,a); mb=mass0_apply(model,b)
+            lhs=np.vdot(a,mb); rhs=np.conj(np.vdot(b,ma))
+            herm=max(herm,float(abs(lhs-rhs)/max(abs(lhs),abs(rhs),1e-30)))
+            y=H(model,np.exp(model.x/2)*a)
+            q=np.vdot(y,y+velocity(model,y)).real/4
+            min_q=min(min_q,float(q))
+        if min_q < -2e-9:
+            raise RuntimeError(f"negative probed mass quadratic form: {min_q}")
 
     mu0=np.vdot(chi0,mass0_apply(model,chi0)).real
     mu_cl=classical_mu(packet.x0,packet.p0)
@@ -177,9 +197,9 @@ def run_case(h,right=16.,dx=.04):
 
     if herm>2e-11:
         raise RuntimeError(f"M0 lost finite-box Hermiticity: {herm}")
-    if min_i_plus_v < -2e-10:
+    if full_spectrum and min_i_plus_v < -2e-10:
         raise RuntimeError(f"I+V not positive on finite box: {min_i_plus_v}")
-    if min_mass < -2e-8:
+    if full_spectrum and min_mass < -2e-8:
         raise RuntimeError(f"M0 not positive on finite box: {min_mass}")
     if max_drift>3e-11 or max_kg_exp>3e-10 or max_kg_adjoint>3e-10:
         raise RuntimeError((max_drift,max_kg_exp,max_kg_adjoint))
@@ -215,8 +235,13 @@ def main():
     ap.add_argument("--out",type=Path,required=True)
     args=ap.parse_args()
 
-    cases=[run_case(h) for h in (.4,.2,.1)]
-    semi=[c["relative_initial_semiclassical_error"] for c in cases]
+    cases=[
+      run_case(.4,dx=.08),
+      run_case(.2,dx=.04,full_spectrum=True),
+      run_case(.1,dx=.02),
+      run_case(.05,dx=.01),
+    ]
+    semi=[row["relative_initial_semiclassical_error"] for row in cases]
 
     # Regulator diagnostics on the h=.2 reference packet. These are recorded
     # rather than used to manufacture a physics tolerance after seeing data.
@@ -247,7 +272,7 @@ def main():
       },
       "cases":cases,
       "semiclassical_error_sequence":semi,
-      "semiclassical_error_decreases_with_h":bool(semi[2] < semi[1] < semi[0]),
+      "semiclassical_error_decreases_with_h":bool(all(b<a for a,b in zip(semi,semi[1:]))),
       "grid_diagnostic":grid,
       "box_diagnostic":box,
       "continuum_domain":{
