@@ -33,7 +33,7 @@
     "REGULATOR-UNSTABLE",
     "PHYSICAL INTERPRETATION NOT IDENTIFIED"
   ],
-  "note": "The KS black-hole quantum audit is reproducible on branch, PR, and main. CI success preserves the intended scientific blockers: classical T/Y clock admissibility but unresolved quantum multi-clock domain; finite-box same-state L2/KG isometry but unresolved continuum H^(-1/2) domain; resolved factor-ordering sensitivity in the declared family; no selected domain-safe quantum mass/Kretschmann operator; inverse-radius regulator failure.",
+  "note": "Base PR #14 post-merge verification is preserved. The incremental_hardening block records the later mass-sector and ordering checks; these strengthen blockers without promoting any black-hole singularity claim.",
   "claim_baseline": "verification/ks_black_hole_claims.json",
   "pull_request": {
     "number": 14,
@@ -62,5 +62,44 @@
     "classical_reproduce_conclusion": "success",
     "ever_entered_run_id": 35432376691,
     "ever_entered_conclusion": "success"
+  },
+  "incremental_hardening": {
+    "source_branch": "audit/ks-quantum-gates",
+    "source_branch_head": "0719a54f07eacf4ba9ce18fbf638e75165f41245",
+    "latest_ks_audit": {
+      "run_id": 35447470636,
+      "job_id": 105908783187,
+      "conclusion": "success",
+      "artifact_id": 10585690716,
+      "artifact_sha256": "05c37569b946a1afa3699b5cd1552366a66730ec38a15c2c8d0ee012ed88b240"
+    },
+    "previous_scientific_head": {
+      "head_sha": "79bcc19035e0674848e925995bb06c73ebc0bc6f",
+      "ks_audit_run_id": 35434927541,
+      "classical_reproduce_run_id": 35434927463,
+      "both_conclusion": "success"
+    },
+    "headline_metrics": {
+      "factor_ordering_max_mean_x_spread": 0.5256305452623882,
+      "existing_box_mean_x_tolerance": 0.0003,
+      "finite_box_same_state_map_error_scale": "<1.3e-14",
+      "mass_weyl6_dx02_relative_drift": 0.01691577704216439,
+      "mass_symmetric_dx02_relative_drift": 0.04789957536093952,
+      "mass_kernel_family_best_positive_frequency_branch_residual": 0.9912981395738648,
+      "ordering_family_symbolic_unitary_map_residual": "0"
+    },
+    "nonphysics_failures": [
+      {
+        "run_id": 35431549143,
+        "cause": "Python result-serialization typo (`false` rather than `False`) after earlier audit stages completed.",
+        "disposition": "implementation bug corrected; not counted as a physics finding"
+      },
+      {
+        "run_id": 35434764076,
+        "cause": "Regression tolerance fixed the positive-frequency branch residual to platform-sensitive ~1e-9 tail digits; another runner differed by ~8e-9.",
+        "disposition": "regression changed to preserve the scientific condition (large residual >0.9) with a non-physics numerical tolerance"
+      }
+    ],
+    "note": "Incremental hardening adds an exact symbolic unitary-map check for the q-ordering family and shows that the tested local constraint-kernel mass family does not preserve the selected positive-frequency sector (best relative residual about 0.991). Claim labels remain unchanged."
   }
 }

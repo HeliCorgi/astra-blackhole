@@ -41,6 +41,7 @@ def main():
 
     ordering=got["factor_ordering"]
     assert ordering["status"]=="FAIL" and ordering["finding"]=="sensitive"
+    assert ordering["family"]["symbolic_check"]["unitary_flat_form_residual"]=="0"
     if ordering["max_mean_x_ordering_spread"] <= 100*ordering["existing_numerical_detectability_threshold"]:
         raise AssertionError("ordering effect no longer resolved over numerical tolerance")
     np.testing.assert_allclose(
@@ -52,6 +53,16 @@ def main():
     assert obs["status"]=="PARTIAL"
     assert obs["constraint_kernel_ordering_family"]["residual"]=="0"
     assert obs["flat_kinematical_L2_symmetry"]["status"]=="NO_SOLUTION"
+    cond=obs["flat_kinematical_L2_symmetry"]["flat_L2_formal_adjoint_conditions"]
+    assert cond["from_d_T"]=="Im(d)=3/4"
+    assert cond["from_d_x"]=="Im(d)=1/4"
+    assert cond["from_identity_term"]=="Re(d)=0 and Im(d)=1/2"
+    branch=obs["constraint_kernel_family_positive_frequency_scan"]
+    if branch["best_relative_residual"] < .9:
+        raise AssertionError("local mass family unexpectedly began preserving the positive-frequency sector")
+    baseline_branch=base["mass_curvature_observable"]["positive_frequency_branch_preservation"]["best_relative_residual"]
+    if abs(branch["best_relative_residual"]-baseline_branch) > 2e-6:
+        raise AssertionError((branch["best_relative_residual"],baseline_branch))
     assert not obs["decision"]["quantum_mass_operator_selected"]
     assert not obs["decision"]["quantum_kretschmann_operator_selected"]
     fine=[row for row in obs["finite_box_ordering_scan"] if row["dx"]==.02][0]
