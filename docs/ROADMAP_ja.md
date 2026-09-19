@@ -346,3 +346,14 @@ positive-frequency KG spaceは `D(H^1/2)` を `||Psi||_KG^2=(2/h)||H^1/2 Psi||^2
 mass側では `V=(i/h)[H,X]` が `HV+VH=2P` を満たし、`|P|<=H` から `-I<=V<=I`、従って `I+V>=0` をcontinuumで得る。ただしfinite-boxの min eig(I+V)は right=8/12/16 で 2.79e-4 / 4.69e-5 / 1.37e-5 と0へ向かう。よってstrict positive gapを使ったmass form closureは採用しない。
 
 次の主課題は (1) `q_M=(1/4)<H e^(X/2)psi,(I+V)H e^(X/2)psi>` のclosability / closed form / associated self-adjoint operator、(2) same Dirac stateについてのY-clock `p_X^-1` continuum domain、(3) その後のnonlocal relational curvature候補。Kretschmann explicit-radius 3 formのFAILは変更しない。
+
+
+### 6p. KS mass affine-covariance selection obstruction
+
+PR #20後のmass form closability課題に対し、まずclassical massのaffine構造を固定した。\(E=\sqrt{p_x^2+e^{-2x}}\), \(u=\operatorname{arsinh}(p_xe^x)\) で \(\{u,E\}=1\)、\(\mu_0=(E/4)e^u\)、\(\{E,\mu_0\}=-\mu_0\)。null variables \(U=-e^{-x-T}/4, W=e^{-x+T}/4\) ではconstraintは \(C=-4UW(p_Up_W-4)\)、massは \(\mu=p_Tp_W/8\)。
+
+positive-frequency Hilbert spaceでsemibounded \(H\ge0\) と非零positive self-adjoint \(M\) に exact covariance \(e^{-iHt/h}Me^{iHt/h}=e^{-t}M\) を全実tで要求すると、\(Q=\log M\) からWeyl relationが生じ、unitary conjugationで \(H\mapsto H+hs\) を全実sについて要求する。これは \(\sigma(H)=[0,\infty)\) と両立しない。従ってexact affine covarianceをordering一意化の条件には採用しない。
+
+現行finite-box \(M_0\) の [H,M0]=-ihM0 residualはright=8/12/16で約1.620842とO(1)のまま。これは負の対照で、mass closability FAILではない。Cavaglià–de Alfaro–Filippov (gr-qc/9508062) の別Schwarzschild量子化でもhalf-line supportがmass自己共役性を制約するが、そのdeficiency indicesをrepo operatorへ移植しない。
+
+**次は** \(T_M=(I+V)^{1/2}H e^{X/2}\) のclosability / adjoint-domainを直接解析する。mass_continuum_form=PENDING, Y-clock inverse-pX=PENDING, selected explicit-radius Kretschmann=FAILは変更しない。
