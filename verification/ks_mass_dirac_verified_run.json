@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "date": "2026-09-20",
+  "branch": "audit/ks-physical-mass",
+  "branch_head": "388728fce607cbb85b9a07f0c1cf94683e207446",
+  "workflow": {
+    "name": "KS physical mass Dirac audit",
+    "run_id": 35456034126,
+    "job_id": 105931343550,
+    "conclusion": "success",
+    "artifact_id": 10587838824,
+    "artifact_sha256": "af821e8f0716106b45ff4699dff7d72c494b2cf75fd69f787c4a920d36e303cd"
+  },
+  "mass_dirac": {
+    "status": "PARTIAL",
+    "finite_box_candidate": "PASS",
+    "KG_adjointness": "PASS",
+    "positive_frequency_sector": "PASS_BY_CONSTRUCTION_AND_CONSERVED_EVOLUTION",
+    "continuum_quadratic_form_closure": "PENDING",
+    "unique_ordering_selection": "PENDING",
+    "semiclassical_relative_errors": [
+      0.20279024654958522,
+      0.05227108177767126,
+      0.01696508165110444,
+      0.008255523162455036
+    ],
+    "semiclassical_comparator": "same Gaussian Wigner ensemble under the classical mass Dirac observable",
+    "packet_center_relative_errors_diagnostic": [
+      0.5076240982211744,
+      0.17107819035859873,
+      0.07198655854215263,
+      0.03500838658248617
+    ]
+  },
+  "y_clock": {
+    "status": "PARTIAL",
+    "same_Dirac_state_null_flux": "PASS",
+    "same_mass_observable_null_flux": "PASS",
+    "inverse_pX_continuum_domain": "PENDING",
+    "max_null_norm_difference": 0.0002926441588472217,
+    "max_null_mass_difference": 0.0000042856308530396734
+  },
+  "kretschmann": {
+    "status": "FAIL",
+    "regulator_decision": "FAIL",
+    "finding": "selected_mass_candidate_does_not_cure_explicit_radius_domain",
+    "mass_applied_threshold_overlap_status": "NONZERO_NUMERICALLY_RESOLVED",
+    "T2_log10_growth_decades": {
+      "mass_then_radius": 62.12506689701533,
+      "radius_then_mass": 65.75435934274827,
+      "balanced": 65.75819349130495
+    }
+  },
+  "first_mass_run": {
+    "run_id": 35451242652,
+    "conclusion": "failure",
+    "reason": "A floating-point backward-evolution roundtrip diagnostic was incorrectly used as a hard gate after amplification by the unbounded exp(X/2) form. Conservation, KG adjointness and positivity were already passing; the structural sector-preservation identity is exact by unitary transport.",
+    "disposition": "Roundtrip residual retained as diagnostic, not a physics gate."
+  },
+  "claim_boundary": "A finite-box positive-frequency/physical-KG mass Dirac candidate is declared for downstream audits, but no continuum-certified unique mass operator or domain-safe quantum Kretschmann operator is established.",
+  "license_files_changed": false,
+  "lean_changed": false,
+  "verified_scientific_head": "388728fce607cbb85b9a07f0c1cf94683e207446",
+  "regression": "PASS",
+  "claim_compiler": "PASS against verification/ks_black_hole_claims.json",
+  "note": "The combined mass/Y-clock/Kretschmann workflow reproduces the finite-box mass candidate, same-Dirac-state Y-slice consistency, inverse-p_X domain warning and scoped Kretschmann FAIL. The mass semiclassical control now compares to the same Gaussian Wigner ensemble rather than only the packet center. CI success means the audit reproduced these PASS/PARTIAL/FAIL decisions; it does not promote a black-hole singularity claim."
+}

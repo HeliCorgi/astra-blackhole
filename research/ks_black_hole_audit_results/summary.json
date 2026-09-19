@@ -12,7 +12,9 @@
       "x": "{x,C}=-2 p_x",
       "Y": "{Y,C}=2(p_T-p_x)"
     },
-    "alternative_quantum_issue": "Y=x+T gives p_Y=-(p_X^2+exp(-2X))/(2p_X), so inverse-p_X domain is required."
+    "alternative_quantum_issue": "Y=x+T gives p_Y=-(p_X^2+exp(-2X))/(2p_X), so inverse-p_X domain is required.",
+    "same_Dirac_state_Y_slice_flux": "PASS",
+    "Y_deparametrized_inverse_pX_domain": "PENDING"
   },
   "inner_product": {
     "status": "PARTIAL",
@@ -88,15 +90,23 @@
       "best_relative_residual": 0.9912981395738648,
       "result": "FAIL for the tested local constraint-kernel-preserving family on the finite-box same-state KG sector",
       "interpretation": "Preserving the full WDW constraint kernel does not imply preserving the selected negative-p_T/positive-frequency sector."
-    }
+    },
+    "declared_finite_box_mass_Dirac_candidate": true,
+    "mass_candidate_status": "PARTIAL",
+    "mass_candidate": "M_D(T)=U(T) M0 U(T)^dagger with M0=(1/4)exp(X/2)H(I+V)Hexp(X/2)",
+    "mass_candidate_finite_box_KG_adjointness": "PASS",
+    "mass_candidate_continuum_closure": "PENDING",
+    "selected_mass_kretschmann_forms": "FAIL / regulator-unstable for three explicit positive quadratic forms",
+    "followup_summary": "research/ks_mass_dirac_results/summary.json"
   },
   "overall": {
     "physical_interpretation": "BLOCKED",
     "main_findings": [
-      "Classical T and areal-radius clocks are admissible, but quantum multi-clock equivalence is unresolved.",
-      "Finite-box positive-frequency L2 and KG descriptions are isometric for the same state only after the H^(±1/2) map.",
+      "Classical T and areal-radius clocks are admissible; the same Dirac state gives consistent finite-box KG flux on T and null Y slices, but standalone Y-time p_X^-1 domain remains unresolved.",
+      "Finite-box positive-frequency L2 and KG descriptions are isometric for the same state only after the H^(±1/2) map; continuum completion remains unresolved.",
       "The declared factor-ordering family gives resolved ordering dependence.",
-      "No domain-safe quantum mass/Kretschmann operator has yet been selected."
+      "A positive-frequency-preserving finite-box mass Dirac candidate now exists and has improving semiclassical behavior, but its continuum quadratic-form closure and uniqueness remain open.",
+      "Using that mass candidate, three explicit positive Kretschmann forms remain strongly regulator/domain unstable, so no physical quantum Kretschmann operator is selected."
     ]
   }
 }

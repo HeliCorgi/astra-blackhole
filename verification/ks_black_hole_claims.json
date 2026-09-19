@@ -14,33 +14,35 @@
   ],
   "gate_status": {
     "GR_REDUCTION": "PASS",
-    "CLOCK": "PARTIAL",
-    "INNER_PRODUCT_DOMAIN": "PARTIAL",
+    "CLOCK": "PENDING",
+    "INNER_PRODUCT_DOMAIN": "FAIL",
     "FACTOR_ORDERING": "FAIL",
     "REGULATOR": "FAIL",
-    "KNOWN_LIMIT": "PENDING",
+    "KNOWN_LIMIT": "PARTIAL",
     "NUMERICAL": "PASS",
     "CLAIM_COMPILER": "PASS"
   },
   "promotion_blockers": [
-    "clock.ks_T_and_areal",
-    "inner_product.ks_positive_frequency",
+    "clock.ks_Y_inverse_pX_domain",
+    "inner_product.ks_continuum_completion",
     "factor_ordering.ks_sturm_liouville",
+    "inner_product.ks_mass_dirac_candidate",
     "inner_product.ks_mass_curvature_domain",
     "regulator.ks_curvature_tail",
     "known_limits.semiclassical"
   ],
   "failed_obligations": [
     "factor_ordering.ks_sturm_liouville",
+    "inner_product.ks_mass_curvature_domain",
     "regulator.ks_curvature_tail"
   ],
   "partial_obligations": [
-    "clock.ks_T_and_areal",
-    "inner_product.ks_positive_frequency",
-    "inner_product.ks_mass_curvature_domain"
+    "inner_product.ks_mass_dirac_candidate",
+    "known_limits.semiclassical"
   ],
   "pending_obligations": [
-    "known_limits.semiclassical"
+    "clock.ks_Y_inverse_pX_domain",
+    "inner_product.ks_continuum_completion"
   ],
   "interpretation_rule": "Labels describe only passed scoped gates. A blocking PENDING/PARTIAL/FAIL forces PHYSICAL INTERPRETATION NOT IDENTIFIED."
 }

@@ -296,3 +296,41 @@ Schwarzschild/KS古典bridgeの後段を4 gateへ分けて実装した。
    - q=2,4,6 exponential-tail regulatorは既存監査で不合格。量子 (widehat\mu), (widehat K) は未選定。PARTIAL。
 
 次は、positive-frequency physical KG Hilbert spaceを保つnonlocal/Dirac mass observableを構成し、path-integral/symmetry原理でordering familyを狭めた後、Y-clockのinverse-momentum domainとcommon-state semiclassical limitを監査する。
+
+
+### 6n. positive-frequency mass Dirac candidate → Y-clock → Kretschmann
+
+局所 `M_d` familyがpositive-frequency sectorを保たなかったため、selected sector内部からmass observableを作り直した。
+
+[
+V=(i/h)[H,X],qquad
+M_0=rac14e^{X/2}H(1+V)He^{X/2},
+qquad
+M_D(T)=U(T)M_0U(T)^dagger.
+]
+
+finite boxではpositive/Hermitian、physical-KG adjointness、mass expectation保存がPASS。
+hとgridを同時精密化し、同じGaussian Wigner ensembleのclassical mass平均と比較するとrelative errorは
+0.203→0.0523→0.0170→0.00826 と低下した。packet-center比較は別diagnosticとして保持する。
+
+ただしcontinuum quadratic-form closureとordering uniquenessは未証明なのでmass gateはPARTIAL。
+
+同じDirac stateを (Y=x+T=-log(4r)) のnull sliceへpull backすると、
+KG norm差最大2.93e-4、same mass flux差最大4.29e-6で一致。
+一方deparametrized Y Hamiltonianは (p_X^{-1}) を含み、right=12→32で
+min p_X eigenvalueは1.92e-5→1.42e-7、inverse normはoperator levelで増大する。
+従ってsame-state slice比較はPASS、standalone Y-time domainはPENDING。
+
+最後に選んだmass candidateを
+
+- (48|r^{-3}M_Dpsi|^2)
+- (48|M_Dr^{-3}psi|^2)
+- (48|r^{-3/2}M_Dr^{-3/2}psi|^2)
+
+へ入れた。T=2、right=12→32で3 formともlog10値が約62–66 decades増え、
+mass-applied threshold overlapもright=24, dx=.04/.02で約0.3724/0.3730と非零にresolveされた。
+従って**この3つのexplicit-radius positive formではKretschmann regulator/domain gateはFAIL**。
+
+これは全てのnonlocal relational curvature observableへのno-goではない。
+次はmass formのcontinuum closability / associated self-adjoint operator、
+Y-clock zero-mode domain、そして物理的に動機づけられたnonlocal curvature候補を狭く検討する。
