@@ -220,3 +220,43 @@ Bianchi IXはSchwarzschild内部そのものではなく、異方性を増やし
 
 Bianchi IXのtimeless scattering regulator gateがFAILである事実は保持し、
 BH側で同じ数値設計を無条件に移植しない。
+
+
+### 6l. Schwarzschild interior → Kantowski–Sachs classical bridge：PASS
+
+Bianchi IXからBH特異点の本筋へ戻すblocking gateを実物化した。
+
+Schwarzschild内部
+[
+F=2mu/ho-1,quad
+N=F^{-1/2},quad
+A=lambdasqrt F,quad
+R=ho
+]
+をKS ansatzへ入れ、Maxima/ctensorとCadabraで独立にADM縮約した。
+
+確認済み:
+
+- (^{(3)}R=2/R^2)
+- (K_{ij}K^{ij}-K^2=6N^{-2}(-dotOmega^2+doteta^2))
+- normalized ADM Lagrangian / canonical momenta
+- (P_Omega^2-P_eta^2+48e^{-2sqrt3Omega}=0)
+- (x=sqrt3Omega-log4, T=sqrt3eta) がcanonical
+- repo constraint (p_T^2-p_x^2-e^{-2x}=0) はMisner constraintの (-1/3) 倍
+- repoの (r=rac14e^{-x-T}) はSchwarzschild areal radius (ho)
+- (mu_D=rac14e^{x-T}p_T(p_T-p_x)) はSchwarzschild massへ一致
+- ({mu_D,C}=-(p_T/2)e^{x-T}C) なのでconstraint surface上でDirac observable
+
+初回CAS run 35430090228 はMaxima約0.37s、Cadabra約2.50sでPASS。
+既存 `wdw_model.classical_path` との比較もconstraint/mass/radius/Schwarzschild relationが (10^{-15}) 級以下で一致。
+
+`known_limits.schwarzschild_ks_bridge` はPASSへ昇格。
+
+次のBH主線:
+
+1. KS clock audit — (T) の単調性、branch sector、代替clock
+2. L2 positive-frequency branch とKG/induced-inner-product sectorで同じ状態を対応付け
+3. factor-ordering family
+4. mass observableと (K=48mu^2/r^6) の量子ordering/domain
+5. regulator/boundary/semiclassical gate
+6. その後にのみsingularity avoidance/persistenceを評価
